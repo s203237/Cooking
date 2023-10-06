@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 
 @Composable
-fun RecipePageUI() {
+fun RecipeCard() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -137,5 +137,5 @@ fun CustomColumnWithText(
 @Preview
 @Composable
 fun PreviewRecipePage() {
-    RecipePageUI()
+    RecipeCard()
 }
