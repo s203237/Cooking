@@ -1,11 +1,11 @@
 package com.example.cooking.model
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 
 data class Recipe(
-    @StringRes val stringResourceId: Int,
-    @DrawableRes val imageResourceId: Int,
+    val title: String,
+    @DrawableRes val mainImage: Int,
+    val contentDescription: String,
     val ingredients: List<String>,
     val steps: List<String>
 )
