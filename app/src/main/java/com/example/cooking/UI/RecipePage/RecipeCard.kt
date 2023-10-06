@@ -35,7 +35,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
         Box() {
             Image(
                 painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.contentDescription,
+                contentDescription = recipe.imageDescription,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(360.dp),
@@ -94,58 +94,15 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     0.dp, (-1).dp
                 )
         ) {
-            CustomColumnWithTitle(title = "ingredients", body = recipe.ingredients)
-            CustomColumnWithTitle(title = "steps", body = recipe.steps)
+            CustomColumnWithTitle(title = "description", bodyString = recipe.recipeDescription)
+            CustomColumnWithTitle(title = "ingredients", bodyBulletList = recipe.ingredients)
+            CustomColumnWithTitle(title = "steps", bodyIndexList = recipe.steps)
         }
 
 
     }
 }
 
-@Composable
-fun CustomColumnWithTitle(
-    title: String,
-    body: List<String>
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(2.dp, Color.Black)
-    ) {
-        Text(
-            text = title.uppercase(),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(16.dp),
-        )
-
-        Column {
-            body.forEach { listItem ->
-                Text(
-                    text = "- $listItem",
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(16.dp),
-                )
-            }
-        }
-
-
-        /*Text(
-            text = body,
-            fontSize = 16.sp,
-            modifier = Modifier
-                .padding(
-                    start = 16.dp,
-                    top = 0.dp,
-                    end = 16.dp,
-                    bottom = 16.dp
-                )
-        )*/
-    }
-
-}
 
 @Composable
 fun CustomList(
@@ -168,8 +125,8 @@ fun CustomList(
 @Composable
 fun CustomBody( // note: the use of the ? means that the parameters can accept either their data type or null value
     text: String? = null,
-    bulletedItems: List<String>? = null,
-    titledItems: List<String>? = null,
+    bulletItems: List<String>? = null,
+    titleItems: List<String>? = null,
 ) {
     if(text != null){
         Text(
@@ -180,9 +137,9 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
         )
     }
 
-    if(bulletedItems != null){
+    if(bulletItems != null){
         CustomList(
-            items = bulletedItems,
+            items = bulletItems,
             useIndex = false,
             itemFormatter = { _, item ->
                 Text(text = "• $item",
@@ -193,9 +150,9 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
             })
     }
 
-    if(titledItems != null){
+    if(titleItems != null){
         CustomList(
-            items = titledItems,
+            items = titleItems,
             useIndex = true,
             itemFormatter = { index, item ->
                 Text(text = "Step $index\n $item",
@@ -208,15 +165,29 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
 }
 
 @Composable
-fun CustomListExample() {
-    val items = listOf("Item 1", "Item 2", "Item 3")
+fun CustomColumnWithTitle(
+    title: String,
+    bodyString: String? = null,
+    bodyBulletList: List<String>? = null,
+    bodyIndexList: List<String>? = null
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(2.dp, Color.Black)
+    ) {
+        Text(
+            text = title.uppercase(),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(16.dp),
+        )
 
-    CustomList(items = items, useIndex = false, itemFormatter = { index, item ->
-        Text(text = "• $item", fontSize = 16.sp, color = Color.Green)
-    })
+        CustomBody(bodyString, bodyBulletList, bodyIndexList)
+
+    }
 }
-
-
 
 @Preview
 @Composable
@@ -225,18 +196,19 @@ fun PreviewRecipePage() {
         Recipe(
             title = "Pear",
             mainImage = R.drawable.pear,
-            contentDescription = "3d rendering of a pear with a rainbow over it.",
+            imageDescription = "3d rendering of a pear with a rainbow over it.",
+            recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
             ingredients = listOf("Pear", "Rainbow", "Green paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
         ),
         Recipe(
             title = "Peach",
             mainImage = R.drawable.pear,
-            contentDescription = "3d rendering of a close-up of a peach with googly eyes",
+            imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+            recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
             ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
         )
     )
-
     RecipeCard(recipe = recipeList[0], modifier = Modifier)
 }
