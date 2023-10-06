@@ -5,7 +5,8 @@ import androidx.annotation.DrawableRes
 data class Recipe(
     val title: String,
     @DrawableRes val mainImage: Int,
-    val contentDescription: String,
+    val imageDescription: String,
+    val recipeDescription: String,
     val ingredients: List<String>,
     val steps: List<String>
 )
