@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -96,8 +94,8 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     0.dp, (-1).dp
                 )
         ) {
-            CustomColumnWithText(title = "ingredients", body = recipe.ingredients)
-            CustomColumnWithText(title = "steps", body = recipe.steps)
+            CustomColumnWithTitle(title = "ingredients", body = recipe.ingredients)
+            CustomColumnWithTitle(title = "steps", body = recipe.steps)
         }
 
 
@@ -105,7 +103,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 }
 
 @Composable
-fun CustomColumnWithText(
+fun CustomColumnWithTitle(
     title: String,
     body: List<String>
 ) {
