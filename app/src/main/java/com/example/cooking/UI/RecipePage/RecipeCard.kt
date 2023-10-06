@@ -147,6 +147,77 @@ fun CustomColumnWithTitle(
 
 }
 
+@Composable
+fun CustomList(
+    items: List<String>,
+    useIndex: Boolean,
+    itemFormatter: @Composable (Int, String) -> Unit
+) {
+    Column {
+        if(useIndex){
+            items.forEachIndexed { index, item ->
+                itemFormatter(index, item)
+            }
+        } else {
+            items.forEach { item ->
+                itemFormatter(-1, item)
+            }
+        }
+    }
+}
+@Composable
+fun CustomBody( // note: the use of the ? means that the parameters can accept either their data type or null value
+    text: String? = null,
+    bulletedItems: List<String>? = null,
+    titledItems: List<String>? = null,
+) {
+    if(text != null){
+        Text(
+            text = text,
+            fontSize = 16.sp,
+            modifier = Modifier
+                .padding(16.dp),
+        )
+    }
+
+    if(bulletedItems != null){
+        CustomList(
+            items = bulletedItems,
+            useIndex = false,
+            itemFormatter = { _, item ->
+                Text(text = "• $item",
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .padding(8.dp)
+                    )
+            })
+    }
+
+    if(titledItems != null){
+        CustomList(
+            items = titledItems,
+            useIndex = true,
+            itemFormatter = { index, item ->
+                Text(text = "Step $index\n $item",
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .padding(8.dp)
+                )
+            })
+    }
+}
+
+@Composable
+fun CustomListExample() {
+    val items = listOf("Item 1", "Item 2", "Item 3")
+
+    CustomList(items = items, useIndex = false, itemFormatter = { index, item ->
+        Text(text = "• $item", fontSize = 16.sp, color = Color.Green)
+    })
+}
+
+
+
 @Preview
 @Composable
 fun PreviewRecipePage() {
