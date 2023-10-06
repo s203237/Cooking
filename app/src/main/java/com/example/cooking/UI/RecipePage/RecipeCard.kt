@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,7 +45,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             )
 
             Text(
-                text = "My recipe title",
+                text = recipe.title,
                 fontSize = 24.sp,
                 modifier = Modifier
                     .align(Alignment.TopStart)
@@ -90,11 +92,12 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(0.dp, (-1).dp
+                .offset(
+                    0.dp, (-1).dp
                 )
         ) {
-            CustomColumnWithText(title = "ingredients", body = "These are my ingredients.")
-            CustomColumnWithText(title = "steps", body = "These are all the steps for my recipe.")
+            CustomColumnWithText(title = "ingredients", body = recipe.ingredients)
+            CustomColumnWithText(title = "steps", body = recipe.steps)
         }
 
 
@@ -104,7 +107,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 @Composable
 fun CustomColumnWithText(
     title: String,
-    body: String
+    body: List<String>
 ) {
     Column(
         modifier = Modifier
@@ -119,7 +122,19 @@ fun CustomColumnWithText(
                 .padding(16.dp),
         )
 
-        Text(
+        Column {
+            body.forEach { listItem ->
+                Text(
+                    text = "- $listItem",
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .padding(16.dp),
+                )
+            }
+        }
+
+
+        /*Text(
             text = body,
             fontSize = 16.sp,
             modifier = Modifier
@@ -129,7 +144,7 @@ fun CustomColumnWithText(
                     end = 16.dp,
                     bottom = 16.dp
                 )
-        )
+        )*/
     }
 
 }
@@ -153,4 +168,6 @@ fun PreviewRecipePage() {
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
         )
     )
+
+    RecipeCard(recipe = recipeList[0], modifier = Modifier)
 }
