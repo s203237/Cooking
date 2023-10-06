@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -85,7 +87,42 @@ fun RecipePageUI() {
             }
 
         }
+
+        CustomBoxWithText(title = "ingredients", body = "These are my ingredients.")
     }
+}
+
+@Composable
+fun CustomBoxWithText(
+    title: String,
+    body: String
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(2.dp, Color.Black)
+    ) {
+        Text(
+            text = title.uppercase(),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(16.dp),
+        )
+
+        Text(
+            text = body,
+            fontSize = 16.sp,
+            modifier = Modifier
+                .padding(
+                    start = 16.dp,
+                    top = 0.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
+                )
+        )
+    }
+
 }
 
 
