@@ -23,9 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
+import com.example.cooking.model.Recipe
 
 @Composable
-fun RecipeCard() {
+fun RecipeCard(recipe: Recipe, modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,8 +34,8 @@ fun RecipeCard() {
     ) {
         Box() {
             Image(
-                painter = painterResource(R.drawable.pear),
-                contentDescription = "A 3d rendered green pear with a rainbow on over it",
+                painter = painterResource(recipe.mainImage),
+                contentDescription = recipe.contentDescription,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(360.dp),
@@ -133,9 +134,23 @@ fun CustomColumnWithText(
 
 }
 
-
 @Preview
 @Composable
 fun PreviewRecipePage() {
-    RecipeCard()
+    val recipeList = listOf(
+        Recipe(
+            title = "Pear",
+            mainImage = R.drawable.pear,
+            contentDescription = "3d rendering of a pear with a rainbow over it.",
+            ingredients = listOf("Pear", "Rainbow", "Green paint"),
+            steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
+        ),
+        Recipe(
+            title = "Peach",
+            mainImage = R.drawable.pear,
+            contentDescription = "3d rendering of a close-up of a peach with googly eyes",
+            ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
+            steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
+        )
+    )
 }
