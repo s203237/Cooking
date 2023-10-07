@@ -73,12 +73,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             ) {
                 Row( modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        top = 22.dp,
-                        bottom = 16.dp,
-                        start = 22.dp,
-                        end = 22.dp
-                    ),
+                    .padding(22.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ){
@@ -120,7 +115,7 @@ fun DisplayFavButton() {
     var isFavorite by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
-            .fillMaxWidth(.5f)
+            .fillMaxWidth(.6f)
             .aspectRatio(1f)
             .background(
                 color = Color(0xFFC1DAE2),
