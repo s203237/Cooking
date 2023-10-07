@@ -50,7 +50,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                 fontSize = 24.sp,
                 modifier = Modifier
                     .align(Alignment.TopStart)
-                    .padding(16.dp)
+                    .padding(22.dp)
             )
         }
 
@@ -69,7 +69,12 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     text = "1 h 15",
                     fontSize = 16.sp,
                     modifier = Modifier
-                        .padding(10.dp)
+                        .padding(
+                            top = 8.dp,
+                            start = 16.dp,
+                            bottom = 8.dp,
+                            end = 16.dp
+                        )
                         .align(Alignment.Center)
                 )
             }
@@ -84,7 +89,12 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     text = "4 servings",
                     fontSize = 16.sp,
                     modifier = Modifier
-                        .padding(10.dp)
+                        .padding(
+                            top = 8.dp,
+                            start = 16.dp,
+                            bottom = 8.dp,
+                            end = 16.dp
+                        )
                         .align(Alignment.Center)
                 )
             }
@@ -135,8 +145,6 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
         Text(
             text = text,
             fontSize = 16.sp,
-            modifier = Modifier
-                .padding(16.dp),
         )
     }
 
@@ -147,8 +155,6 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
             itemFormatter = { _, item ->
                 Text(text = "• $item",
                     fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(8.dp)
                     )
             })
     }
@@ -161,8 +167,6 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
                 val displayVal = index + 1
                 Text(text = "Step $displayVal\n $item",
                     fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(8.dp)
                 )
             })
     }
@@ -179,13 +183,13 @@ fun CustomColumnWithTitle(
         modifier = Modifier
             .fillMaxWidth()
             .border(2.dp, Color.Black)
+            .padding(22.dp)
     ) {
         Text(
             text = title.uppercase(),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(16.dp),
+            modifier = Modifier.padding(bottom = 8.dp)
         )
 
         CustomBody(bodyString, bodyBulletList, bodyIndexList)
