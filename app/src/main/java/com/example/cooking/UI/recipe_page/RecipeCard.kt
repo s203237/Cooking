@@ -6,17 +6,20 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -41,17 +44,30 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                 contentDescription = recipe.imageDescription,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(360.dp),
+                    .aspectRatio(1f),
                 contentScale = ContentScale.Crop
             )
 
-            Text(
-                text = recipe.title,
-                fontSize = 24.sp,
+            Box(
                 modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(22.dp)
-            )
+                    .padding(top = 22.dp)
+                    .clip(
+                        shape = RoundedCornerShape(
+                            topEnd = 13.dp,
+                            bottomEnd = 13.dp
+                        )
+                    )
+                    .background(color = Color(0xFFC1DAE2))
+                    .fillMaxWidth(0.7f)
+
+            ) {
+                Text(
+                    text = recipe.title,
+                    fontSize = 30.sp,
+                    modifier = Modifier
+                        .padding(22.dp)
+                )
+            }
         }
 
         Row(
@@ -62,40 +78,28 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
-                    .height(100.dp)
-                    .border(2.dp, Color.Black),
+                    .height(75.dp)
+                    .border(2.dp, Color.Black)
+                    .padding(16.dp),
             ) {
                 Text(
                     text = "1 h 15",
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(
-                            top = 8.dp,
-                            start = 16.dp,
-                            bottom = 8.dp,
-                            end = 16.dp
-                        )
-                        .align(Alignment.Center)
+                    fontSize = 22.sp,
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(75.dp)
                     .border(2.dp, Color.Black)
+                    .padding(16.dp),
             ) {
                 Text(
                     text = "4 servings",
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(
-                            top = 8.dp,
-                            start = 16.dp,
-                            bottom = 8.dp,
-                            end = 16.dp
-                        )
-                        .align(Alignment.Center)
+                    fontSize = 22.sp,
+                    modifier = Modifier.align(Alignment.Center)
                 )
             }
 
@@ -165,8 +169,14 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
             useIndex = true,
             itemFormatter = { index, item ->
                 val displayVal = index + 1
-                Text(text = "Step $displayVal\n $item",
+                Text(text = "Step $displayVal",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                     )
+                Text(text = item,
                     fontSize = 16.sp,
+                    modifier = Modifier
+                        .padding(bottom = 16.dp)
                 )
             })
     }
