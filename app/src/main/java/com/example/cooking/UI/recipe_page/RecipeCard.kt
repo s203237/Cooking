@@ -256,10 +256,10 @@ fun PreviewRecipePage() {
         ),
         Recipe(
             title = "Peach",
-            mainImage = R.drawable.pear,
+            mainImage = R.drawable.peach,
             imageDescription = "3d rendering of a close-up of a peach with googly eyes",
-            cookingTime = 65,
-            servingSize = 4,
+            cookingTime = 610,
+            servingSize = 10,
             recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
             ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
