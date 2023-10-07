@@ -3,6 +3,7 @@ package com.example.cooking.UI.recipe_page
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,13 +14,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -62,18 +71,24 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     .align(Alignment.BottomStart)
 
             ) {
-                Text(
-                    text = recipe.title.uppercase(),
-                    fontSize = 30.sp,
-                    color = Color.White,
-                    modifier = Modifier
-                        .padding(
-                            top = 22.dp,
-                            bottom = 16.dp,
-                            start = 22.dp,
-                            end = 22.dp
-                        )
-                )
+                Row( modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 22.dp,
+                        bottom = 16.dp,
+                        start = 22.dp,
+                        end = 22.dp
+                    ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ){
+                    Text(
+                        text = recipe.title.uppercase(),
+                        fontSize = 30.sp,
+                        color = Color.White,
+                    )
+                    DisplayFavButton()
+                }
             }
         }
 
@@ -100,6 +115,29 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 
     }
 }
+@Composable
+fun DisplayFavButton() {
+    var isFavorite by remember { mutableStateOf(false) }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(.5f)
+            .aspectRatio(1f)
+            .background(
+                color = Color(0xFFC1DAE2),
+                shape = CircleShape
+            ),
+        contentAlignment = Alignment.Center,
+    ){
+        IconButton(
+        onClick = { isFavorite = !isFavorite }
+        ){
+        if(isFavorite)
+            Icon(Icons.Filled.Favorite, contentDescription = "Favourite Heart Filled")
+        else
+            Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Favourite Heart Outlined")
+        }
+    }
+}
 
 @Composable
 fun DisplayCookingTime(cookingTime: Int) {
@@ -119,7 +157,7 @@ fun DisplayCookingTime(cookingTime: Int) {
 
 }
 
-fun formatTime(minutes: Int): String {
+private fun formatTime(minutes: Int): String {
     val formattedTime: String = if(minutes < 2) {
         "$minutes minute"
     } else if (minutes < 60) {
