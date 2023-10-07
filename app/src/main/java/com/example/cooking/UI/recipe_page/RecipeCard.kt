@@ -82,34 +82,8 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .height(75.dp)
-                    .border(2.dp, Color.Black)
-                    .padding(16.dp),
-            ) {
-                Text(
-                    text = "1 h 15",
-                    fontSize = 22.sp,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(75.dp)
-                    .border(2.dp, Color.Black)
-                    .padding(16.dp),
-            ) {
-                Text(
-                    text = "4 servings",
-                    fontSize = 22.sp,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-
+            DisplayCookingTime(cookingTime = recipe.cookingTime)
+            DisplayServingSize(servingSize = recipe.servingSize)
         }
         Column(
             modifier = Modifier
@@ -127,6 +101,55 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
     }
 }
 
+@Composable
+fun DisplayCookingTime(cookingTime: Int) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(0.5f)
+            .height(75.dp)
+            .border(2.dp, Color.Black)
+            .padding(16.dp),
+    ) {
+        Text(
+            text = formatTime(cookingTime),
+            fontSize = 22.sp,
+            modifier = Modifier.align(Alignment.Center),
+        )
+    }
+
+}
+
+fun formatTime(minutes: Int): String {
+    val formattedTime: String = if(minutes < 2) {
+        "$minutes minute"
+    } else if (minutes < 60) {
+        "$minutes minutes"
+    } else {
+        val hrs = minutes / 60
+        val min = minutes % 60
+        val formattedMin = if (min < 10) "0$min" else min.toString()
+        "$hrs hr $formattedMin min"
+    }
+    return formattedTime
+}
+
+@Composable
+fun DisplayServingSize(servingSize: Int) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(75.dp)
+            .border(2.dp, Color.Black)
+            .padding(16.dp),
+    ) {
+        Text(
+            text = "$servingSize servings",
+            fontSize = 22.sp,
+            modifier = Modifier.align(Alignment.Center)
+        )
+    }
+
+}
 
 @Composable
 fun CustomList(
@@ -225,6 +248,8 @@ fun PreviewRecipePage() {
             title = "Pear And Rainbow",
             mainImage = R.drawable.pear,
             imageDescription = "3d rendering of a pear with a rainbow over it.",
+            cookingTime = 65,
+            servingSize = 4,
             recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
             ingredients = listOf("Pear", "Rainbow", "Green paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
@@ -233,6 +258,8 @@ fun PreviewRecipePage() {
             title = "Peach",
             mainImage = R.drawable.pear,
             imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+            cookingTime = 65,
+            servingSize = 4,
             recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
             ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
