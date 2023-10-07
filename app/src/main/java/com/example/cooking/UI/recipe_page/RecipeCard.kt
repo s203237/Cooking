@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -50,22 +51,28 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 
             Box(
                 modifier = Modifier
-                    .padding(top = 22.dp)
-                    .clip(
-                        shape = RoundedCornerShape(
-                            topEnd = 13.dp,
-                            bottomEnd = 13.dp
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color(0x00C1DAE2), Color(0x64000000)),
+                            startY = 5f,
+                            endY = 100f
                         )
                     )
-                    .background(color = Color(0xFFC1DAE2))
-                    .fillMaxWidth(0.7f)
+                    .fillMaxWidth()
+                    .align(Alignment.BottomStart)
 
             ) {
                 Text(
-                    text = recipe.title,
+                    text = recipe.title.uppercase(),
                     fontSize = 30.sp,
+                    color = Color.White,
                     modifier = Modifier
-                        .padding(22.dp)
+                        .padding(
+                            top = 22.dp,
+                            bottom = 16.dp,
+                            start = 22.dp,
+                            end = 22.dp
+                        )
                 )
             }
         }
@@ -85,7 +92,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                 Text(
                     text = "1 h 15",
                     fontSize = 22.sp,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
                 )
             }
 
@@ -176,7 +183,10 @@ fun CustomBody( // note: the use of the ? means that the parameters can accept e
                 Text(text = item,
                     fontSize = 16.sp,
                     modifier = Modifier
-                        .padding(bottom = 16.dp)
+                        .padding(
+                            top = 8.dp,
+                            bottom = 8.dp
+                        )
                 )
             })
     }
@@ -212,7 +222,7 @@ fun CustomColumnWithTitle(
 fun PreviewRecipePage() {
     val recipeList = listOf(
         Recipe(
-            title = "Pear",
+            title = "Pear And Rainbow",
             mainImage = R.drawable.pear,
             imageDescription = "3d rendering of a pear with a rainbow over it.",
             recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
