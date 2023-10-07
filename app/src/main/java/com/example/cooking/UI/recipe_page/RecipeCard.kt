@@ -129,12 +129,12 @@ fun DisplayFavButton() {
         contentAlignment = Alignment.Center,
     ){
         IconButton(
-        onClick = { isFavorite = !isFavorite }
+            onClick = { isFavorite = !isFavorite }
         ){
         if(isFavorite)
-            Icon(Icons.Filled.Favorite, contentDescription = "Favourite Heart Filled")
+            Icon(Icons.Filled.Favorite, contentDescription = "Favourite Heart Filled", tint = Color.White)
         else
-            Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Favourite Heart Outlined")
+            Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Favourite Heart Outlined", tint = Color.White)
         }
     }
 }
