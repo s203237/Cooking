@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
 
-class DisplayComponents {
+class Display {
     @Composable
     fun DisplayFavButton() {
         var isFavorite by remember { mutableStateOf(false) }
@@ -53,7 +53,7 @@ class DisplayComponents {
     }
 
     @Composable
-    fun DisplayImageWithFavIcon(recipe: Recipe) {
+    fun ImageWithFavIcon(recipe: Recipe) {
         Box (
             contentAlignment = Alignment.BottomEnd
         ){
@@ -91,7 +91,7 @@ class DisplayComponents {
             ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
         )
-        DisplayImageWithFavIcon(recipe = recipe)
+        ImageWithFavIcon(recipe = recipe)
     }
 }
 
