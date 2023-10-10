@@ -1,7 +1,11 @@
 package com.example.cooking.UI.Search
 
+import android.text.style.BackgroundColorSpan
+import android.widget.GridLayout
+import androidx.compose.animation.VectorConverter
 import androidx.compose.foundation.MutatePriority
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -28,6 +32,7 @@ import androidx.compose.material3.*
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
@@ -39,63 +44,21 @@ import androidx.compose.ui.res.painterResource
 import com.example.cooking.R
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchBar(
-    //search: String ,
-   // onSearchChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    //onSearchSubmit: () ->Unit ={}
-){
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-
-        var search by remember { mutableStateOf(TextFieldValue()) }
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            contentAlignment = Alignment.TopCenter
-
-        ) {
 
 
-            TextField(
-                value = search,
-                onValueChange = { text -> search = text },
-                singleLine = true,
-                textStyle = TextStyle(fontSize = 16.sp),
-                placeholder = {
-                    Text(
-                        text = "Search here...",
-                        color = Color.DarkGray
-                    )
-                },
-                shape = RoundedCornerShape(30),
 
-                     leadingIcon = {
-                          
-                     
-                    Icon(
-                        Icons.Outlined.Search,
-                        contentDescription = null,
-                        tint = Color.DarkGray
-                    )
-                
-            
-                     }  )
-        }
-    }
-}
 
 @Preview
 @Composable
 fun PreviewSearchBar(){
 
-    SearchBar(modifier = Modifier.fillMaxSize()) 
-//
-    
+    SearchBar(modifier = Modifier.fillMaxSize())
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 70.dp) // Add padding from the top of the screen
+    ) {
+        DisplayTextBoxes()
+    }
+
 }
