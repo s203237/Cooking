@@ -87,14 +87,15 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             }
         }
 
-        Row(
+        DisplayRecipeInfo(recipe = recipe)
+        /*Row(
             modifier = Modifier
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             DisplayCookingTime(cookingTime = recipe.cookingTime)
             DisplayServingSize(servingSize = recipe.servingSize)
-        }
+        }*/
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -182,6 +183,32 @@ fun DisplayServingSize(servingSize: Int) {
         )
     }
 
+}
+@Composable
+fun DisplayRecipeInfo(recipe: Recipe) {
+    val tableData = listOf(
+        formatTime(recipe.prepTime),
+        formatTime(recipe.cookingTime),
+        recipe.servingSize.toString(),
+        recipe.difficulty,
+    )
+    Column(
+        modifier = Modifier
+            .padding(16.dp)) {
+        val rowCount = 2
+        val colCount = 2
+        for(rowIndex in 0 until rowCount) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                for(colIndex in 0 until colCount){
+                    val cellIndex = rowIndex * 2 + colIndex
+                    Text(text = tableData[cellIndex])
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -281,8 +308,10 @@ fun PreviewRecipePage() {
             title = "Pear And Rainbow",
             mainImage = R.drawable.pear,
             imageDescription = "3d rendering of a pear with a rainbow over it.",
+            prepTime = 20,
             cookingTime = 65,
             servingSize = 4,
+            difficulty = "Medium",
             recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
             ingredients = listOf("Pear", "Rainbow", "Green paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
@@ -291,8 +320,10 @@ fun PreviewRecipePage() {
             title = "Peach",
             mainImage = R.drawable.peach,
             imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+            prepTime = 10,
             cookingTime = 610,
             servingSize = 10,
+            difficulty = "Easy",
             recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
             ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
             steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
