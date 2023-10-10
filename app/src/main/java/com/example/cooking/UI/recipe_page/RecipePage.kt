@@ -10,23 +10,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -39,63 +28,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
+import com.example.cooking.UI.sharedComponents.DisplayComponents
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
+    val displayComponents = DisplayComponents()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
             .verticalScroll(rememberScrollState())
-    ) {
-        Box {
-            Image(
-                painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.imageDescription,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop
-            )
-
-            Box(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0x00C1DAE2), Color(0x64000000)),
-                            startY = 5f,
-                            endY = 100f
-                        )
-                    )
-                    .fillMaxWidth()
-                    .align(Alignment.BottomStart)
-
-            ) {
-                Row( modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(22.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ){
-                    Text(
-                        text = recipe.title.uppercase(),
-                        fontSize = 30.sp,
-                        color = Color.White,
-                    )
-                    DisplayFavButton()
-                }
-            }
-        }
+    ) {displayComponents.DisplayImageWithFavIcon(recipe = recipe)
 
         DisplayRecipeInfo(recipe = recipe)
-        /*Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            DisplayCookingTime(cookingTime = recipe.cookingTime)
-            DisplayServingSize(servingSize = recipe.servingSize)
-        }*/
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -111,29 +57,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 
     }
 }
-@Composable
-fun DisplayFavButton() {
-    var isFavorite by remember { mutableStateOf(false) }
-    Box(
-        modifier = Modifier
-            .fillMaxWidth(.6f)
-            .aspectRatio(1f)
-            .background(
-                color = Color(0xFFC1DAE2),
-                shape = CircleShape
-            ),
-        contentAlignment = Alignment.Center,
-    ){
-        IconButton(
-            onClick = { isFavorite = !isFavorite }
-        ){
-        if(isFavorite)
-            Icon(Icons.Filled.Favorite, contentDescription = "Favourite Heart Filled", tint = Color.White)
-        else
-            Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Favourite Heart Outlined", tint = Color.White)
-        }
-    }
-}
+
 
 private fun formatTime(minutes: Int): String {
     val formattedTime: String = if(minutes < 2) {
