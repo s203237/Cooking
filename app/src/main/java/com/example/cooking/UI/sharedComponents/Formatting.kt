@@ -15,7 +15,11 @@ class Formatting {
             text = heading.uppercase(),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier
+                .padding(
+                    bottom = 8.dp,
+                    top = 16.dp
+                )
         )
     }
 
