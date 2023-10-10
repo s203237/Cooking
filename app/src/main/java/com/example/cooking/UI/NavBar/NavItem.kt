@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.cooking.UI.Homepage.Homepage
+import com.example.cooking.UI.NavBar.navigation.Screens
 
 data class NavItem(
     val label : String,
@@ -30,13 +31,13 @@ val listOfNavItem: List<NavItem> = listOf(
     NavItem(
         label="Favorites",
         icon= Icons.Default.Favorite,
-        route= Screens.FavoriteScreen.name
+        route= Screens.Favorites.name
 
     ),
     NavItem(
-        label="Profile",
+        label="Login",
         icon= Icons.Default.Person,
-        route= Screens.ProfileScreen.name
+        route= Screens.Login.name
 
     )
 )
