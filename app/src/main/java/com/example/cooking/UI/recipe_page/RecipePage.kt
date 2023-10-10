@@ -135,24 +135,6 @@ fun DisplayFavButton() {
     }
 }
 
-@Composable
-fun DisplayCookingTime(cookingTime: Int) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth(0.5f)
-            .height(75.dp)
-            .border(2.dp, Color.Black)
-            .padding(16.dp),
-    ) {
-        Text(
-            text = formatTime(cookingTime),
-            fontSize = 22.sp,
-            modifier = Modifier.align(Alignment.Center),
-        )
-    }
-
-}
-
 private fun formatTime(minutes: Int): String {
     val formattedTime: String = if(minutes < 2) {
         "$minutes minute"
@@ -167,23 +149,6 @@ private fun formatTime(minutes: Int): String {
     return formattedTime
 }
 
-@Composable
-fun DisplayServingSize(servingSize: Int) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(75.dp)
-            .border(2.dp, Color.Black)
-            .padding(16.dp),
-    ) {
-        Text(
-            text = "$servingSize servings",
-            fontSize = 22.sp,
-            modifier = Modifier.align(Alignment.Center)
-        )
-    }
-
-}
 @Composable
 fun DisplayRecipeInfo(recipe: Recipe) {
     val tableData = listOf(
