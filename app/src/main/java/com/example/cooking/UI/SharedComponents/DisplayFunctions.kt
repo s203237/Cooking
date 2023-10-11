@@ -26,6 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
+
+class DisplayFunctions {
     @Composable
     fun DisplayFavButton() {
         var isFavorite by remember { mutableStateOf(false) }
@@ -38,23 +40,31 @@ import com.example.cooking.model.Recipe
                     shape = CircleShape
                 ),
             contentAlignment = Alignment.Center,
-        ){
+        ) {
             IconButton(
                 onClick = { isFavorite = !isFavorite }
-            ){
-                if(isFavorite)
-                    Icon(Icons.Filled.Favorite, contentDescription = "Favourite Heart Filled", tint = Color.White)
+            ) {
+                if (isFavorite)
+                    Icon(
+                        Icons.Filled.Favorite,
+                        contentDescription = "Favourite Heart Filled",
+                        tint = Color.White
+                    )
                 else
-                    Icon(Icons.Outlined.FavoriteBorder, contentDescription = "Favourite Heart Outlined", tint = Color.White)
+                    Icon(
+                        Icons.Outlined.FavoriteBorder,
+                        contentDescription = "Favourite Heart Outlined",
+                        tint = Color.White
+                    )
             }
         }
     }
 
     @Composable
     fun ImageWithFavIcon(recipe: Recipe) {
-        Box (
+        Box(
             contentAlignment = Alignment.BottomEnd
-        ){
+        ) {
             Image(
                 painter = painterResource(recipe.mainImage),
                 contentDescription = recipe.imageDescription,
@@ -63,11 +73,11 @@ import com.example.cooking.model.Recipe
                     .aspectRatio(1f),
                 contentScale = ContentScale.Crop,
 
-            )
+                )
             Box(
                 modifier = Modifier
                     .padding(22.dp)
-            ){
+            ) {
                 DisplayFavButton()
             }
 
@@ -92,3 +102,4 @@ import com.example.cooking.model.Recipe
         ImageWithFavIcon(recipe = recipe)
     }
 
+}

@@ -22,9 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.model.Recipe
-import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.Heading
-import com.example.cooking.UI.SharedComponents.Title
+import com.example.cooking.UI.SharedComponents.DisplayFunctions
+import com.example.cooking.UI.SharedComponents.FormatFunctions
 import com.example.cooking.data.RecipeData
 
 @Composable
@@ -35,7 +34,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             .background(Color.White)
             .verticalScroll(rememberScrollState())
     ) {
-        ImageWithFavIcon(recipe = recipe)
+        DisplayFunctions().ImageWithFavIcon(recipe = recipe)
 
         Column(
             modifier = Modifier
@@ -46,20 +45,20 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     bottom = 22.dp
                 )
         ) {
-            Title(title = recipe.title)
+            FormatFunctions().Title(title = recipe.title)
             DisplayRecipeInfo(recipe = recipe)
 
-            Heading(heading = "description")
+            FormatFunctions().Heading(heading = "description")
             Text(
                 text = recipe.recipeDescription,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
 
-            Heading(heading = "ingredients")
+            FormatFunctions().Heading(heading = "ingredients")
             BulletList(list = recipe.ingredients)
 
-            Heading(heading = "steps")
+            FormatFunctions().Heading(heading = "steps")
             StepsList(list = recipe.steps)
         }
 

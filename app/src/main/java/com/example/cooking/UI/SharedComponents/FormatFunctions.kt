@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+class FormatFunctions {
     @Composable
     fun Title(title: String) {
         Text(
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.sp
                 )
         )
     }
+
     @Composable
     fun Heading(heading: String) {
         Text(
@@ -33,3 +35,4 @@ import androidx.compose.ui.unit.sp
                 )
         )
     }
+}
