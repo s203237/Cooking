@@ -10,6 +10,18 @@ import androidx.compose.ui.unit.sp
 
 class Formatting {
     @Composable
+    fun Title(title: String) {
+        Text(
+            text = title,
+            fontSize = 30.sp,
+            modifier = Modifier
+                .padding(
+                    bottom = 8.dp,
+                    top = 16.dp
+                )
+        )
+    }
+    @Composable
     fun Heading(heading: String) {
         Text(
             text = heading.uppercase(),
