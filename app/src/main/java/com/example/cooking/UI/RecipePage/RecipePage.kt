@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
-import com.example.cooking.UI.sharedComponents.Display
-import com.example.cooking.UI.sharedComponents.Formatting
+import com.example.cooking.UI.SharedComponents.Display
+import com.example.cooking.UI.SharedComponents.Formatting
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {

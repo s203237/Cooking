@@ -1,4 +1,4 @@
-package com.example.cooking.UI.sharedComponents
+package com.example.cooking.UI.SharedComponents
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
