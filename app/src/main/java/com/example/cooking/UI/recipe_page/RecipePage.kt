@@ -46,13 +46,15 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             format.Heading(heading = "description")
             Text(
                 text = recipe.recipeDescription,
+                fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
 
             format.Heading(heading = "ingredients")
-
+            BulletList(list = recipe.ingredients)
 
             format.Heading(heading = "steps")
+            StepsList(list = recipe.steps)
         }
 
 
@@ -103,6 +105,33 @@ fun DisplayRecipeInfo(recipe: Recipe) {
     }
 }
 
+@Composable
+fun BulletList(list: List<String>) {
+    list.forEach { item ->
+        Text(text =  "• $item",
+            fontSize = 16.sp,
+        )
+    }
+}
+
+@Composable
+fun StepsList(list: List<String>) {
+    list.forEachIndexed { index, item ->
+        val stepCount = index + 1
+        Text(
+            text = "Step $stepCount" ,
+            fontSize = 22.sp,
+        )
+        Text(
+            text = item,
+            fontSize = 16.sp,
+            modifier = Modifier
+                .padding(
+                    bottom = 16.dp
+                )
+        )
+    }
+}
 
 @Composable
 fun CustomList(
