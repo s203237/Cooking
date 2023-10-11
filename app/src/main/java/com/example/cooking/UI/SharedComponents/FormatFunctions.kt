@@ -30,7 +30,7 @@ class FormatFunctions {
             modifier = Modifier
                 .padding(
                     bottom = 8.dp,
-                    top = 16.dp
+                    top = 22.dp
                 )
         )
     }

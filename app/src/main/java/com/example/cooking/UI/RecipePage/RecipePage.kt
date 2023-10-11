@@ -37,9 +37,9 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 16.dp
+                    start = 22.dp,
+                    end = 22.dp,
+                    bottom = 22.dp
                 )
         ) {
             format.Title(title = recipe.title)
@@ -74,13 +74,30 @@ fun DisplayRecipeInfo(recipe: Recipe) {
             Text(
                 text = "PREP: $prep",
                 modifier = Modifier
-                    .weight(0.3f)
+                    .fillMaxWidth(0.5f)
             )
 
             val cook = formatTime(recipe.cookingTime)
             Text(
                 text = "COOK: $cook",
             )
+    }
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start
+    ) {
+        val diff = recipe.difficulty
+        Text(
+            text = "DIFFICULTY: $diff",
+            modifier = Modifier
+                .fillMaxWidth(0.5f)
+        )
+
+        val serv = recipe.servingSize
+        Text(
+            text = "SERVING SIZE: $serv",
+        )
     }
     /*
     val tableData = listOf(
