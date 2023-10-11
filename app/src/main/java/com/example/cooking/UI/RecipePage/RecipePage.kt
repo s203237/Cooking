@@ -19,12 +19,12 @@ import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
 import com.example.cooking.UI.SharedComponents.Display
-import com.example.cooking.UI.SharedComponents.Formatting
+import com.example.cooking.UI.SharedComponents.Format
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
     val display = Display()
-    val format = Formatting()
+    val format = Format()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44,6 +44,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
         ) {
             format.Title(title = recipe.title)
             DisplayRecipeInfo(recipe = recipe)
+
             format.Heading(heading = "description")
             Text(
                 text = recipe.recipeDescription,
@@ -65,6 +66,23 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 
 @Composable
 fun DisplayRecipeInfo(recipe: Recipe) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Column {
+            val prep = formatTime(recipe.prepTime)
+            Text(
+                text = "PREP: $prep",
+            )
+
+            val cook = formatTime(recipe.cookingTime)
+            Text(
+                text = "COOK: $cook",
+            )
+        }
+    }
+    /*
     val tableData = listOf(
         formatTime(recipe.prepTime),
         formatTime(recipe.cookingTime),
@@ -86,6 +104,8 @@ fun DisplayRecipeInfo(recipe: Recipe) {
             }
         }
     }
+
+     */
 }
 
 private fun formatTime(minutes: Int): String {
