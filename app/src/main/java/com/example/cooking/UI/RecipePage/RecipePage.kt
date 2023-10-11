@@ -8,30 +8,34 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cooking.R
 import com.example.cooking.model.Recipe
-import com.example.cooking.UI.SharedComponents.DisplayFunctions
-import com.example.cooking.UI.SharedComponents.FormatFunctions
+import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
+import com.example.cooking.UI.SharedComponents.Heading
+import com.example.cooking.UI.SharedComponents.Title
+import com.example.cooking.data.RecipeData
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
-    val display = DisplayFunctions()
-    val format = FormatFunctions()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
             .verticalScroll(rememberScrollState())
     ) {
-        display.ImageWithFavIcon(recipe = recipe)
+        ImageWithFavIcon(recipe = recipe)
 
         Column(
             modifier = Modifier
@@ -42,20 +46,20 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     bottom = 22.dp
                 )
         ) {
-            format.Title(title = recipe.title)
+            Title(title = recipe.title)
             DisplayRecipeInfo(recipe = recipe)
 
-            format.Heading(heading = "description")
+            Heading(heading = "description")
             Text(
                 text = recipe.recipeDescription,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
 
-            format.Heading(heading = "ingredients")
+            Heading(heading = "ingredients")
             BulletList(list = recipe.ingredients)
 
-            format.Heading(heading = "steps")
+            Heading(heading = "steps")
             StepsList(list = recipe.steps)
         }
 
@@ -70,16 +74,16 @@ fun DisplayRecipeInfo(recipe: Recipe) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start
     ) {
-            val prep = formatTime(recipe.prepTime)
-            Text(
-                text = "PREP: $prep",
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-            )
+        val prep = formatTime(recipe.prepTime)
+        Text(
+            text = "PREP: $prep",
+            modifier = Modifier
+                .fillMaxWidth(0.5f)
+        )
 
-            val cook = formatTime(recipe.cookingTime)
-            Text(
-                text = "COOK: $cook",
+        val cook = formatTime(recipe.cookingTime)
+        Text(
+            text = "COOK: $cook",
             )
     }
 
@@ -98,6 +102,11 @@ fun DisplayRecipeInfo(recipe: Recipe) {
         Text(
             text = "SERVING SIZE: $serv",
         )
+    }
+
+    Row {
+        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
+
     }
     /*
     val tableData = listOf(
@@ -154,7 +163,8 @@ private fun StepsList(list: List<String>) {
         val stepCount = index + 1
         Text(
             text = "Step $stepCount" ,
-            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
         )
         Text(
             text = item,
@@ -170,31 +180,6 @@ private fun StepsList(list: List<String>) {
 @Preview
 @Composable
 fun PreviewRecipePage() {
-    val recipeList = listOf(
-        Recipe(
-            title = "Pear And Rainbow",
-            mainImage = R.drawable.pear,
-            imageDescription = "3d rendering of a pear with a rainbow over it.",
-            prepTime = 20,
-            cookingTime = 65,
-            servingSize = 4,
-            difficulty = "Medium",
-            recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
-            ingredients = listOf("Pear", "Rainbow", "Green paint"),
-            steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-        ),
-        Recipe(
-            title = "Peach",
-            mainImage = R.drawable.peach,
-            imageDescription = "3d rendering of a close-up of a peach with googly eyes",
-            prepTime = 10,
-            cookingTime = 610,
-            servingSize = 10,
-            difficulty = "Easy",
-            recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
-            ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
-            steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-        )
-    )
+    val recipeList = RecipeData().loadRecipes()
     RecipeCard(recipe = recipeList[0], modifier = Modifier)
 }

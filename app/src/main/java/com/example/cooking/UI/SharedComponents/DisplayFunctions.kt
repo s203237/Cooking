@@ -26,8 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
-
-class DisplayFunctions {
     @Composable
     fun DisplayFavButton() {
         var isFavorite by remember { mutableStateOf(false) }
@@ -93,5 +91,4 @@ class DisplayFunctions {
         )
         ImageWithFavIcon(recipe = recipe)
     }
-}
 
