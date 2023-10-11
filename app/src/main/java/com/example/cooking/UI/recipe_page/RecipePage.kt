@@ -67,21 +67,6 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
     }
 }
 
-
-private fun formatTime(minutes: Int): String {
-    val formattedTime: String = if(minutes < 2) {
-        "$minutes minute"
-    } else if (minutes < 60) {
-        "$minutes minutes"
-    } else {
-        val hrs = minutes / 60
-        val min = minutes % 60
-        val formattedMin = if (min < 10) "0$min" else min.toString()
-        "$hrs hr $formattedMin min"
-    }
-    return formattedTime
-}
-
 @Composable
 fun DisplayRecipeInfo(recipe: Recipe) {
     val tableData = listOf(
@@ -107,8 +92,22 @@ fun DisplayRecipeInfo(recipe: Recipe) {
     }
 }
 
+private fun formatTime(minutes: Int): String {
+    val formattedTime: String = if(minutes < 2) {
+        "$minutes minute"
+    } else if (minutes < 60) {
+        "$minutes minutes"
+    } else {
+        val hrs = minutes / 60
+        val min = minutes % 60
+        val formattedMin = if (min < 10) "0$min" else min.toString()
+        "$hrs hr $formattedMin min"
+    }
+    return formattedTime
+}
+
 @Composable
-fun BulletList(list: List<String>) {
+private fun BulletList(list: List<String>) {
     list.forEach { item ->
         Text(text =  "• $item",
             fontSize = 16.sp,
@@ -117,7 +116,7 @@ fun BulletList(list: List<String>) {
 }
 
 @Composable
-fun StepsList(list: List<String>) {
+private fun StepsList(list: List<String>) {
     list.forEachIndexed { index, item ->
         val stepCount = index + 1
         Text(
@@ -132,95 +131,6 @@ fun StepsList(list: List<String>) {
                     bottom = 16.dp
                 )
         )
-    }
-}
-
-@Composable
-fun CustomList(
-    items: List<String>,
-    useIndex: Boolean,
-    itemFormatter: @Composable (Int, String) -> Unit
-) {
-    Column {
-        if(useIndex){
-            items.forEachIndexed { index, item ->
-                itemFormatter(index, item)
-            }
-        } else {
-            items.forEach { item ->
-                itemFormatter(-1, item)
-            }
-        }
-    }
-}
-@Composable
-fun CustomBody( // note: the use of the ? means that the parameters can accept either their data type or null value
-    text: String? = null,
-    bulletItems: List<String>? = null,
-    titleItems: List<String>? = null,
-) {
-    if(text != null){
-        Text(
-            text = text,
-            fontSize = 16.sp,
-        )
-    }
-
-    if(bulletItems != null){
-        CustomList(
-            items = bulletItems,
-            useIndex = false,
-            itemFormatter = { _, item ->
-                Text(text = "• $item",
-                    fontSize = 16.sp,
-                    )
-            })
-    }
-
-    if(titleItems != null){
-        CustomList(
-            items = titleItems,
-            useIndex = true,
-            itemFormatter = { index, item ->
-                val displayVal = index + 1
-                Text(text = "Step $displayVal",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold,
-                     )
-                Text(text = item,
-                    fontSize = 16.sp,
-                    modifier = Modifier
-                        .padding(
-                            top = 8.dp,
-                            bottom = 8.dp
-                        )
-                )
-            })
-    }
-}
-
-@Composable
-fun CustomColumnWithTitle(
-    title: String,
-    bodyString: String? = null,
-    bodyBulletList: List<String>? = null,
-    bodyIndexList: List<String>? = null
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(2.dp, Color.Black)
-            .padding(22.dp)
-    ) {
-        Text(
-            text = title.uppercase(),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        CustomBody(bodyString, bodyBulletList, bodyIndexList)
-
     }
 }
 
