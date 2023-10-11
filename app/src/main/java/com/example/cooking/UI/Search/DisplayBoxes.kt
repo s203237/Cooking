@@ -29,7 +29,7 @@ fun  DisplayTextBoxes(){
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
-                    .background(Color.White)
+                    .background(Color.LightGray)
                     .border(1.dp, Color.Gray, RoundedCornerShape(50.dp))
 
             ) {
