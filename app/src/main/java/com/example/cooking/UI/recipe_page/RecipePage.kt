@@ -36,13 +36,18 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             .verticalScroll(rememberScrollState())
     ) {
         display.ImageWithFavIcon(recipe = recipe)
-        DisplayRecipeInfo(recipe = recipe)
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
+                )
         ) {
+            format.Title(title = recipe.title)
+            DisplayRecipeInfo(recipe = recipe)
             format.Heading(heading = "description")
             Text(
                 text = recipe.recipeDescription,
@@ -85,10 +90,7 @@ fun DisplayRecipeInfo(recipe: Recipe) {
         recipe.servingSize.toString(),
         recipe.difficulty,
     )
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-    ) {
+    Column {
         val rowCount = 2
         val colCount = 2
         for(rowIndex in 0 until rowCount) {
