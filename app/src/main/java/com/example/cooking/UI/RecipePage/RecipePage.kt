@@ -1,4 +1,4 @@
-package com.example.cooking.UI.recipe_page
+package com.example.cooking.UI.RecipePage
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
