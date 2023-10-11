@@ -18,13 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
-import com.example.cooking.UI.SharedComponents.Display
-import com.example.cooking.UI.SharedComponents.Format
+import com.example.cooking.UI.SharedComponents.DisplayFunctions
+import com.example.cooking.UI.SharedComponents.FormatFunctions
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
-    val display = Display()
-    val format = Format()
+    val display = DisplayFunctions()
+    val format = FormatFunctions()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -70,17 +70,17 @@ fun DisplayRecipeInfo(recipe: Recipe) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start
     ) {
-        Column {
             val prep = formatTime(recipe.prepTime)
             Text(
                 text = "PREP: $prep",
+                modifier = Modifier
+                    .weight(0.3f)
             )
 
             val cook = formatTime(recipe.cookingTime)
             Text(
                 text = "COOK: $cook",
             )
-        }
     }
     /*
     val tableData = listOf(
@@ -110,9 +110,9 @@ fun DisplayRecipeInfo(recipe: Recipe) {
 
 private fun formatTime(minutes: Int): String {
     val formattedTime: String = if(minutes < 2) {
-        "$minutes minute"
+        "$minutes min"
     } else if (minutes < 60) {
-        "$minutes minutes"
+        "$minutes mins"
     } else {
         val hrs = minutes / 60
         val min = minutes % 60

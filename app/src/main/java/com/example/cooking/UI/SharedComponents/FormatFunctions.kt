@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class Format {
+class FormatFunctions {
     @Composable
     fun Title(title: String) {
         Text(

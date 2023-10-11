@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
 
-class Display {
+class DisplayFunctions {
     @Composable
     fun DisplayFavButton() {
         var isFavorite by remember { mutableStateOf(false) }
