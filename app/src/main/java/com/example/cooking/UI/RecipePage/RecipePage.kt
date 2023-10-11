@@ -106,32 +106,12 @@ fun DisplayRecipeInfo(recipe: Recipe) {
 
     Row {
         Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
+        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
+        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
+        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
+        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
 
     }
-    /*
-    val tableData = listOf(
-        formatTime(recipe.prepTime),
-        formatTime(recipe.cookingTime),
-        recipe.servingSize.toString(),
-        recipe.difficulty,
-    )
-    Column {
-        val rowCount = 2
-        val colCount = 2
-        for(rowIndex in 0 until rowCount) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                for(colIndex in 0 until colCount){
-                    val cellIndex = rowIndex * 2 + colIndex
-                    Text(text = tableData[cellIndex])
-                }
-            }
-        }
-    }
-
-     */
 }
 
 private fun formatTime(minutes: Int): String {
