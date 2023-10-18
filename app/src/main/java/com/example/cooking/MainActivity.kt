@@ -13,13 +13,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.cooking.UI.Homepage.Homepage
 import com.example.cooking.UI.Homepage.scrollableList
 import com.example.cooking.UI.RecipeList.RecipeList
+import com.example.cooking.data.TestDataFrontPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             //RecipeList()
-            scrollableList()
+            
         }
     }
 }
