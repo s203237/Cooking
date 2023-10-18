@@ -3,7 +3,7 @@ package com.example.cooking.data
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
 
-class TestDataFrontPage {
+
 
     fun dailyRecipe(): Recipe{
         return Recipe(
@@ -344,4 +344,3 @@ class TestDataFrontPage {
             )
         )
     }
-}

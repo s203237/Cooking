@@ -21,9 +21,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 //import com.example.cooking.Data.Recipe
 import com.example.cooking.R
+import com.example.cooking.data.dailyRecipe
+import com.example.cooking.data.loadCat1Recipes
+import com.example.cooking.data.loadCat2Recipes
+import com.example.cooking.data.loadCat3Recipes
+import com.example.cooking.data.loadCat4Recipes
+import com.example.cooking.data.loadCat5Recipes
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.Recipe
-import com.example.cooking.data.TestDataFrontPage
+
 
 
 //val testRecipes = listOf(
@@ -205,12 +211,12 @@ fun scrollableList(
 @Composable
 fun PreviewscrollableList(){
 
-    val dailyRecipe = TestDataFrontPage.dailyRecipe()
-    val recipeList1 = TestDataFrontPage.loadCat1Recipes()
-    val recipeList2 = TestDataFrontPage.loadCat2Recipes()
-    val recipeList3 = TestDataFrontPage.loadCat3Recipes()
-    val recipeList4 = TestDataFrontPage.loadCat4Recipes()
-    val recipeList5 = TestDataFrontPage.loadCat5Recipes()
+    val dailyRecipe = dailyRecipe()
+    val recipeList1 = loadCat1Recipes()
+    val recipeList2 = loadCat2Recipes()
+    val recipeList3 = loadCat3Recipes()
+    val recipeList4 = loadCat4Recipes()
+    val recipeList5 = loadCat5Recipes()
 
     scrollableList(
         dailyRecipe = dailyRecipe,

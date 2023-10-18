@@ -14,3 +14,4 @@ data class Recipe(
     val ingredients: List<String>,
     val steps: List<String>
 )
+
