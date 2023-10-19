@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,9 +36,10 @@ fun OnBoardingPage() {
         Column(
             horizontalAlignment = Alignment.End,
             modifier = Modifier
-                .paint(painterResource(id = R.drawable.peach))
+                .paint(painterResource(id = R.drawable.onboardingpage))
                 .fillMaxWidth()
-                .padding(50.dp))
+               // .fillMaxHeight()
+                .padding(55.dp))
         {
             Text(
                modifier = Modifier.height(70.dp) ,
@@ -58,18 +60,20 @@ fun OnBoardingPage() {
             )
             Button(
                 onClick = {},
-                modifier = Modifier.height(30.dp),
+                modifier = Modifier
+                    //.height(40.dp)
+                    .padding(0.dp,30.dp,0.dp,0.dp
+                    ),
                 colors = ButtonDefaults.buttonColors(
 
                     containerColor = Color.White,
                     contentColor = Color.Red,
                 ),
-                shape = RoundedCornerShape(30),
+                shape = RoundedCornerShape(35.dp),
 
                 ) {
                 Text(
-                    text = "Get started",
-
+                    text = "get started",
                     )
 
 

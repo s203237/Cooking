@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.cooking.UI.AboutUsPage.AboutUsPage
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.Homepage
 import com.example.cooking.UI.Homepage.scrollableList
@@ -20,10 +21,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AccountCreationPage()
-           // OnBoardingPage()
-//RecipeList()
-            //scrollableList()
+           // AccountCreationPage()
+           //OnBoardingPage()
+            //RecipeList()
+           AboutUsPage()
         }
     }
 }
