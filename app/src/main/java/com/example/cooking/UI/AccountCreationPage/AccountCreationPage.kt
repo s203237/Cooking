@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,66 +37,75 @@ import com.example.cooking.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountCreationPage(){
-Column(
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.Start,
-    modifier = Modifier
-        .background(color = Color.LightGray)
-        .fillMaxWidth()
-        .padding(50.dp)
-    //modifier = Modifier.paint(painterResource(id = R.drawable.pear)).fillMaxWidth(),
+fun AccountCreationPage() {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start,
+        modifier = Modifier
+            .background(color = Color.LightGray)
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(50.dp)
+        //modifier = Modifier.paint(painterResource(id = R.drawable.pear)).fillMaxWidth(),
 
 
-){
-    Text(
-        //modifier = Modifier.padding(40.dp,60.dp,20.dp,5.dp),
-        text = "Let's create an account so that \n you can save your favourite recipes,\n plan your meals and much more!",
-        textAlign = TextAlign.Left,
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Normal
-    )
-    Text(
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                text ="name:",
-                textAlign = TextAlign.Left,
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold
-            )
-    OutlinedTextField(value = "Please enter your name!", onValueChange ={},shape = RoundedCornerShape(40) )
-    Text(
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                text ="e-mail:",
-                textAlign = TextAlign.Left,
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold
-            )
-    OutlinedTextField(value = "Please enter your e-mail!", onValueChange ={},shape = RoundedCornerShape(40) )
-
-    Button(
-        onClick = {},
-       // Spacer(modifier = Modifier.height(50.dp))
-        modifier = Modifier.padding(horizontal = 10.dp, vertical = 50.dp).align(Alignment.End),
-        colors = ButtonDefaults.buttonColors(
-
-            containerColor = Color.White,
-            contentColor = Color.Red,
-        ),
-        shape = RoundedCornerShape(40),
-
-        ) {
+    ) {
         Text(
-            text = "submit",
+            //modifier = Modifier.padding(40.dp,60.dp,20.dp,5.dp),
+            text = "Let's create an account so that \n you can save your favourite recipes,\n plan your meals and much more!",
+            textAlign = TextAlign.Left,
+            fontSize = 17.sp,
+            fontWeight = FontWeight.Normal
+        )
+        Text(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+            text = "name:",
+            textAlign = TextAlign.Left,
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold
+        )
+        OutlinedTextField(
+            value = "Please enter your name!",
+            onValueChange = {},
+            shape = RoundedCornerShape(40)
+        )
+        Text(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+            text = "e-mail:",
+            textAlign = TextAlign.Left,
+            fontSize = 40.sp,
+            fontWeight = FontWeight.Bold
+        )
+        OutlinedTextField(
+            value = "Please enter your e-mail!",
+            onValueChange = {},
+            shape = RoundedCornerShape(40)
+        )
 
-            )
+        Button(
+            onClick = {},
+            // Spacer(modifier = Modifier.height(50.dp))
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 50.dp).align(Alignment.End),
+            colors = ButtonDefaults.buttonColors(
+
+                containerColor = Color.White,
+                contentColor = Color.Red,
+            ),
+            shape = RoundedCornerShape(40),
+
+            ) {
+            Text(
+                text = "submit",
+
+                )
 
 
+        }
+    }
 
 }
-}
 
-//@Preview
-//@Composable
-//fun PreviewAccountCreation() { AccountCreationPage()
+@Preview
+@Composable
+fun PreviewAccountCreation() { AccountCreationPage()
 }
-
