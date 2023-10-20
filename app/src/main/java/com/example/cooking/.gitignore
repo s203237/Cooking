@@ -3,7 +3,6 @@
 build/
 
 # Android Studio files
-.idea/
 *.iml
 *.ipr
 *.iws
