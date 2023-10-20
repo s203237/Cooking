@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
-import com.example.cooking.UI.SharedComponents.CustomHeading
+import com.example.cooking.UI.SharedComponents.CustomHeading1
 import com.example.cooking.model.Recipe
 
 
@@ -55,7 +55,7 @@ fun PrepTab(recipe: Recipe) {
                     )
                     .padding(16.dp)
             ) {
-                CustomHeading(heading = "steps")
+                CustomHeading1(heading = "steps")
                 StepsList(list = recipe.steps)
             }
 

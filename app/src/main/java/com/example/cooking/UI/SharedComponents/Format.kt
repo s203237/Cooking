@@ -26,13 +26,28 @@ fun CustomTitle(title: String, textAlign: TextAlign = TextAlign.Start) {
 }
 
 @Composable
-fun CustomHeading(heading: String, textAlign: TextAlign = TextAlign.Start) {
+fun CustomHeading1(heading: String, textAlign: TextAlign = TextAlign.Start) {
     Text(
         text = heading.uppercase(),
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         textAlign = textAlign,
         modifier = Modifier
+            .padding(
+                bottom = 8.dp,
+                top = 22.dp
+            )
+    )
+}
+
+@Composable
+fun CustomHeading2(heading: String, textAlign: TextAlign = TextAlign.Start) {
+    Text(
+        text = heading.uppercase(),
+        fontSize = 12.sp,
+        textAlign = textAlign,
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(
                 bottom = 8.dp,
                 top = 22.dp
