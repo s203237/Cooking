@@ -35,7 +35,7 @@ fun CustomHeading1(heading: String, textAlign: TextAlign = TextAlign.Start) {
         modifier = Modifier
             .padding(
                 bottom = 8.dp,
-                top = 22.dp
+                top = 8.dp
             )
     )
 }
@@ -50,7 +50,7 @@ fun CustomHeading2(heading: String, textAlign: TextAlign = TextAlign.Start) {
             .fillMaxWidth()
             .padding(
                 bottom = 8.dp,
-                top = 22.dp
+                top = 8.dp
             )
     )
 }
