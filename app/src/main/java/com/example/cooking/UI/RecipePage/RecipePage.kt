@@ -10,7 +10,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,9 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.model.Recipe
-import com.example.cooking.UI.SharedComponents.DisplayFunctions
-import com.example.cooking.UI.SharedComponents.FormatFunctions
 import com.example.cooking.data.RecipeData
+import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
+import com.example.cooking.UI.SharedComponents.Title
+import com.example.cooking.UI.SharedComponents.Heading
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
@@ -34,7 +34,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             .background(Color.White)
             .verticalScroll(rememberScrollState())
     ) {
-        DisplayFunctions().ImageWithFavIcon(recipe = recipe)
+        ImageWithFavIcon(recipe = recipe)
 
         Column(
             modifier = Modifier
@@ -45,20 +45,20 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     bottom = 22.dp
                 )
         ) {
-            FormatFunctions().Title(title = recipe.title)
+            Title(title = recipe.title)
             DisplayRecipeInfo(recipe = recipe)
 
-            FormatFunctions().Heading(heading = "description")
+            Heading(heading = "description")
             Text(
                 text = recipe.recipeDescription,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
 
-            FormatFunctions().Heading(heading = "ingredients")
+            Heading(heading = "ingredients")
             BulletList(list = recipe.ingredients)
 
-            FormatFunctions().Heading(heading = "steps")
+            Heading(heading = "steps")
             StepsList(list = recipe.steps)
         }
 
