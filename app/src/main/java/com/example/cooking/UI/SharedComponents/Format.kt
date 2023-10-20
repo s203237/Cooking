@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Title(title: String) {
+fun CustomTitle(title: String) {
     Text(
         text = title,
         fontSize = 30.sp,
@@ -22,7 +22,7 @@ fun Title(title: String) {
 }
 
 @Composable
-fun Heading(heading: String) {
+fun CustomHeading(heading: String) {
     Text(
         text = heading.uppercase(),
         fontSize = 16.sp,

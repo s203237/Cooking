@@ -29,8 +29,8 @@ import androidx.compose.ui.unit.sp
 import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.Title
-import com.example.cooking.UI.SharedComponents.Heading
+import com.example.cooking.UI.SharedComponents.CustomTitle
+import com.example.cooking.UI.SharedComponents.CustomHeading
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
@@ -160,24 +160,24 @@ fun InfoTab(recipe: Recipe) {
                 bottom = 22.dp
             )
     ) {
-        Title(title = recipe.title)
+        CustomTitle(title = recipe.title)
         DisplayRecipeInfo(recipe = recipe)
 
-        Heading(heading = "description")
+        CustomHeading(heading = "description")
         Text(
             text = recipe.recipeDescription,
             fontSize = 16.sp,
             textAlign = TextAlign.Justify
         )
 
-        Heading(heading = "ingredients")
+        CustomHeading(heading = "ingredients")
         BulletList(list = recipe.ingredients)
     }
 }
 
 @Composable
 fun PrepTab(recipe: Recipe) {
-    Heading(heading = "steps")
+    CustomHeading(heading = "steps")
     StepsList(list = recipe.steps)
 }
 
@@ -189,12 +189,12 @@ fun TabLayout(recipe: Recipe) {
         modifier = Modifier.fillMaxWidth()
     ) {
         Tab(
-            text = { Heading(heading = "information") },
+            text = { CustomHeading(heading = "information") },
             selected = selectedTabIndex == 0,
             onClick = { selectedTabIndex = 0 }
         )
         Tab(
-            text = { Heading(heading = "preparation") },
+            text = { CustomHeading(heading = "preparation") },
             selected = selectedTabIndex == 1,
             onClick = { selectedTabIndex = 1 }
         )
