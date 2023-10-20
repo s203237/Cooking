@@ -310,5 +310,5 @@ fun TabLayout(recipe: Recipe) {
 @Composable
 fun PreviewRecipePage() {
     val recipeList = RecipeData().loadRecipes()
-    RecipeCard(recipe = recipeList[0], modifier = Modifier)
+    RecipeCard(recipe = recipeList[2], modifier = Modifier)
 }
