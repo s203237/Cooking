@@ -1,6 +1,8 @@
 package com.example.cooking.UI.RecipePage
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,11 +23,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.ImageShader
+import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cooking.R
 import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
@@ -37,7 +45,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(color = Color(0xFFF2ECE3))
             .verticalScroll(rememberScrollState())
     ) {
         ImageWithFavIcon(recipe = recipe)
@@ -184,20 +192,28 @@ fun PrepTab(recipe: Recipe) {
 @Composable
 fun TabLayout(recipe: Recipe) {
     var selectedTabIndex by remember { mutableStateOf(0) }
-    TabRow(
-        selectedTabIndex = selectedTabIndex,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Tab(
-            text = { CustomHeading(heading = "information") },
-            selected = selectedTabIndex == 0,
-            onClick = { selectedTabIndex = 0 }
+    Box {
+        Image(
+            painter = painterResource(id = R.drawable.tab_left),
+            contentDescription = "Left tab to view recipe information"
         )
-        Tab(
-            text = { CustomHeading(heading = "preparation") },
-            selected = selectedTabIndex == 1,
-            onClick = { selectedTabIndex = 1 }
-        )
+        TabRow(
+            selectedTabIndex = selectedTabIndex,
+            modifier = Modifier.fillMaxWidth(),
+            containerColor = Color(0x00F2ECE3),
+
+        ) {
+            Tab(
+                text = { CustomHeading(heading = "information") },
+                selected = selectedTabIndex == 0,
+                onClick = { selectedTabIndex = 0 },
+            )
+            Tab(
+                text = { CustomHeading(heading = "preparation") },
+                selected = selectedTabIndex == 1,
+                onClick = { selectedTabIndex = 1 }
+            )
+        }
     }
     when (selectedTabIndex) {
         0 -> InfoTab(recipe = recipe)
