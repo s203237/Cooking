@@ -11,8 +11,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -45,27 +51,14 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
                     bottom = 22.dp
                 )
         ) {
-            Title(title = recipe.title)
-            DisplayRecipeInfo(recipe = recipe)
-
-            Heading(heading = "description")
-            Text(
-                text = recipe.recipeDescription,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Justify
-            )
-
-            Heading(heading = "ingredients")
-            BulletList(list = recipe.ingredients)
-
-            Heading(heading = "steps")
-            StepsList(list = recipe.steps)
+            TabLayout(recipe = recipe)
         }
 
 
 
     }
 }
+
 
 @Composable
 fun DisplayRecipeInfo(recipe: Recipe) {
@@ -153,6 +146,62 @@ private fun StepsList(list: List<String>) {
                     bottom = 16.dp
                 )
         )
+    }
+}
+
+@Composable
+fun InfoTab(recipe: Recipe) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = 22.dp,
+                end = 22.dp,
+                bottom = 22.dp
+            )
+    ) {
+        Title(title = recipe.title)
+        DisplayRecipeInfo(recipe = recipe)
+
+        Heading(heading = "description")
+        Text(
+            text = recipe.recipeDescription,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Justify
+        )
+
+        Heading(heading = "ingredients")
+        BulletList(list = recipe.ingredients)
+    }
+}
+
+@Composable
+fun PrepTab(recipe: Recipe) {
+    Heading(heading = "steps")
+    StepsList(list = recipe.steps)
+}
+
+@Composable
+fun TabLayout(recipe: Recipe) {
+    var selectedTabIndex by remember { mutableStateOf(0) }
+    TabRow(
+        selectedTabIndex = selectedTabIndex,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Tab(
+            text = { Heading(heading = "information") },
+            selected = selectedTabIndex == 0,
+            onClick = { selectedTabIndex = 0 }
+        )
+        Tab(
+            text = { Heading(heading = "preparation") },
+            selected = selectedTabIndex == 1,
+            onClick = { selectedTabIndex = 1 }
+        )
+    }
+    when (selectedTabIndex) {
+        0 -> InfoTab(recipe = recipe)
+        1 -> PrepTab(recipe = recipe)
     }
 }
 
