@@ -55,11 +55,6 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    start = 22.dp,
-                    end = 22.dp,
-                    bottom = 22.dp
-                )
         ) {
             TabLayout(recipe = recipe)
         }
@@ -165,21 +160,18 @@ fun InfoTab(recipe: Recipe) {
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Box() {
+        Box {
             Image(
                 painter = painterResource(id = R.drawable.tab_right),
                 contentDescription = "Right tab to view recipe information",
                 modifier = Modifier
                     .fillMaxWidth(),
                 alignment = Alignment.CenterEnd,
-
-                //modifier = Modifier.fillMaxWidth()
             )
             Image(
                 painter = painterResource(id = R.drawable.tab_left),
                 contentDescription = "Left tab to view recipe information",
-                alignment = Alignment.CenterStart
-                //modifier = Modifier.fillMaxWidth()
+                alignment = Alignment.CenterStart,
             )
         }
 
@@ -188,9 +180,9 @@ fun InfoTab(recipe: Recipe) {
                 .fillMaxWidth()
                 .background(color = Color(0xFFF2ECE3))
                 .padding(
-                    start = 22.dp,
-                    end = 22.dp,
-                    bottom = 22.dp
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = 16.dp
                 )
         ) {
             CustomTitle(title = recipe.title)
@@ -211,13 +203,57 @@ fun InfoTab(recipe: Recipe) {
 
 @Composable
 fun PrepTab(recipe: Recipe) {
-    CustomHeading(heading = "steps")
-    StepsList(list = recipe.steps)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Box {
+            Image(
+                painter = painterResource(id = R.drawable.tab_left),
+                contentDescription = "Left tab to view recipe information",
+                alignment = Alignment.CenterStart,
+            )
+            Image(
+                painter = painterResource(id = R.drawable.tab_right),
+                contentDescription = "Right tab to view recipe information",
+                modifier = Modifier
+                    .fillMaxWidth(),
+                alignment = Alignment.CenterEnd,
+            )
+
+        }
+
+        Box (
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        color = Color(0xFFF2ECE3)
+                    )
+                    .padding(16.dp)
+            ) {
+                CustomHeading(heading = "steps")
+                StepsList(list = recipe.steps)
+            }
+
+            Image(
+                painter = painterResource(id = R.drawable.tab_right_ext),
+                contentDescription = "Extension of the right tab",
+                modifier = Modifier
+                    .fillMaxWidth(),
+            )
+        }
+
+
+    }
 }
 
 @Composable
 fun TabLayout(recipe: Recipe) {
-    var selectedTabIndex by remember { mutableStateOf(0) }
+    var selectedTabIndex by remember { mutableStateOf(1) }
     Box (
         modifier = Modifier.fillMaxWidth()
     ){
@@ -233,7 +269,8 @@ fun TabLayout(recipe: Recipe) {
                 modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .clickable { selectedTabIndex = 0 },
-                contentAlignment = Alignment.CenterStart
+                contentAlignment = Alignment.Center
+
             )
             {
                 CustomHeading(heading = "information")
@@ -242,7 +279,7 @@ fun TabLayout(recipe: Recipe) {
                 modifier = Modifier
                 .fillMaxWidth()
                 .clickable { selectedTabIndex = 1 },
-                contentAlignment = Alignment.CenterEnd
+                contentAlignment = Alignment.Center
             )
             {
                 CustomHeading(heading = "preparation")
