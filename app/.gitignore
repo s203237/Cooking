@@ -1,13 +1,1 @@
-# Gradle files
-.gradle/
-build/
-
-# Android Studio files
-.idea/
-*.iml
-*.ipr
-*.iws
-
-# Emulator-related files
-*.lock
-avd/
+/build
