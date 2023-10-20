@@ -1,10 +1,12 @@
 package com.example.cooking.UI.RecipePage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
@@ -45,7 +48,6 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFFF2ECE3))
             .verticalScroll(rememberScrollState())
     ) {
         ImageWithFavIcon(recipe = recipe)
@@ -162,24 +164,48 @@ fun InfoTab(recipe: Recipe) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(
-                start = 22.dp,
-                end = 22.dp,
-                bottom = 22.dp
-            )
     ) {
-        CustomTitle(title = recipe.title)
-        DisplayRecipeInfo(recipe = recipe)
+        Box() {
+            Image(
+                painter = painterResource(id = R.drawable.tab_right),
+                contentDescription = "Right tab to view recipe information",
+                modifier = Modifier
+                    .fillMaxWidth(),
+                alignment = Alignment.CenterEnd,
 
-        CustomHeading(heading = "description")
-        Text(
-            text = recipe.recipeDescription,
-            fontSize = 16.sp,
-            textAlign = TextAlign.Justify
-        )
+                //modifier = Modifier.fillMaxWidth()
+            )
+            Image(
+                painter = painterResource(id = R.drawable.tab_left),
+                contentDescription = "Left tab to view recipe information",
+                alignment = Alignment.CenterStart
+                //modifier = Modifier.fillMaxWidth()
+            )
+        }
 
-        CustomHeading(heading = "ingredients")
-        BulletList(list = recipe.ingredients)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color(0xFFF2ECE3))
+                .padding(
+                    start = 22.dp,
+                    end = 22.dp,
+                    bottom = 22.dp
+                )
+        ) {
+            CustomTitle(title = recipe.title)
+            DisplayRecipeInfo(recipe = recipe)
+
+            CustomHeading(heading = "description")
+            Text(
+                text = recipe.recipeDescription,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Justify
+            )
+
+            CustomHeading(heading = "ingredients")
+            BulletList(list = recipe.ingredients)
+        }
     }
 }
 
@@ -192,12 +218,38 @@ fun PrepTab(recipe: Recipe) {
 @Composable
 fun TabLayout(recipe: Recipe) {
     var selectedTabIndex by remember { mutableStateOf(0) }
-    Box {
-        Image(
-            painter = painterResource(id = R.drawable.tab_left),
-            contentDescription = "Left tab to view recipe information"
-        )
-        TabRow(
+    Box (
+        modifier = Modifier.fillMaxWidth()
+    ){
+        when (selectedTabIndex) {
+            0 -> InfoTab(recipe = recipe)
+            1 -> PrepTab(recipe = recipe)
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .clickable { selectedTabIndex = 0 },
+                contentAlignment = Alignment.CenterStart
+            )
+            {
+                CustomHeading(heading = "information")
+            }
+            Box(
+                modifier = Modifier
+                .fillMaxWidth()
+                .clickable { selectedTabIndex = 1 },
+                contentAlignment = Alignment.CenterEnd
+            )
+            {
+                CustomHeading(heading = "preparation")
+            }
+        }
+
+        /*TabRow(
             selectedTabIndex = selectedTabIndex,
             modifier = Modifier.fillMaxWidth(),
             containerColor = Color(0x00F2ECE3),
@@ -213,11 +265,7 @@ fun TabLayout(recipe: Recipe) {
                 selected = selectedTabIndex == 1,
                 onClick = { selectedTabIndex = 1 }
             )
-        }
-    }
-    when (selectedTabIndex) {
-        0 -> InfoTab(recipe = recipe)
-        1 -> PrepTab(recipe = recipe)
+        }*/
     }
 }
 
