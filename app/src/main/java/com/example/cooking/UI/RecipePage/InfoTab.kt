@@ -1,5 +1,6 @@
 package com.example.cooking.UI.RecipePage
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,12 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -75,47 +79,86 @@ fun InfoTab(recipe: Recipe) {
 }
 @Composable
 private fun DisplayRecipeInfo(recipe: Recipe) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start
+    Column(
+        modifier = Modifier
+            .padding(
+                top = 16.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
     ) {
-        val prep = formatTime(recipe.prepTime)
-        Text(
-            text = "PREP: $prep",
-            modifier = Modifier
-                .fillMaxWidth(0.5f)
-        )
+        val prepTime =  formatTime(recipe.prepTime)
+        val cookingTime = formatTime(recipe.cookingTime)
 
-        val cook = formatTime(recipe.cookingTime)
-        Text(
-            text = "COOK: $cook",
-        )
-    }
+        InfoRowWithIcons(icon1 = Icons.Outlined.AccountCircle,infoType1 = "PREP", infoVal1 = prepTime, icon2 = Icons.Outlined.Info, infoType2 = "COOK", infoVal2 = cookingTime)
 
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Start
-    ) {
         val diff = recipe.difficulty
+        val serv = recipe.servingSize.toString()
+        InfoRowWithIcons(icon1 = Icons.Outlined.Info, infoType1 = "DIFFICULTY", infoVal1 = diff, icon2 = Icons.Outlined.Info, infoType2 = "SERVING SIZE", infoVal2 = serv)
+
+
+        Row {
+            Icon(
+                Icons.Filled.Star,
+                contentDescription = "Favourite Heart Outlined",
+                tint = Color(0xFFF6CF00)
+            )
+            Icon(
+                Icons.Filled.Star,
+                contentDescription = "Favourite Heart Outlined",
+                tint = Color(0xFFF6CF00)
+            )
+            Icon(
+                Icons.Filled.Star,
+                contentDescription = "Favourite Heart Outlined",
+                tint = Color(0xFFF6CF00)
+            )
+            Icon(
+                Icons.Filled.Star,
+                contentDescription = "Favourite Heart Outlined",
+                tint = Color(0xFFF6CF00)
+            )
+            Icon(
+                Icons.Filled.Star,
+                contentDescription = "Favourite Heart Outlined",
+                tint = Color(0xFFF6CF00)
+            )
+
+        }
+    }
+}
+@Composable
+private fun InfoRowWithIcons(icon1: ImageVector, infoType1: String, infoVal1: String, icon2: ImageVector? = null, infoType2: String? = null, infoVal2: String? = null) {
+    Row (
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ){
+        Icon(
+            icon1,
+            contentDescription = "$infoType1 icon",
+        )
         Text(
-            text = "DIFFICULTY: $diff",
+            text =  "$infoType1: $infoVal1",
             modifier = Modifier
                 .fillMaxWidth(0.5f)
+                .padding(start = 16.dp)
         )
 
-        val serv = recipe.servingSize
-        Text(
-            text = "SERVING SIZE: $serv",
-        )
-    }
-
-    Row {
-        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
-        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
-        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
-        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
-        Icon(Icons.Filled.Star, contentDescription = "Favourite Heart Outlined", tint = Color(0xFFF6CF00))
-
+        if(icon2 != null) {
+            Icon(
+            icon2,
+            contentDescription = "$infoType2 icon",
+            )
+        }
+        if(infoType2 != null) {
+            Text(
+                text = "$infoType2: $infoVal2",
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
     }
 }
 

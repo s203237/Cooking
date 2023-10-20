@@ -90,6 +90,7 @@ fun previewImageWithFavIcon() {
         title = "Peach",
         mainImage = R.drawable.peach,
         imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+        author = "Melissa Woo",
         prepTime = 10,
         cookingTime = 610,
         servingSize = 10,
