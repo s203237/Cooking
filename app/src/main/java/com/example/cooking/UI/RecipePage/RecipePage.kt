@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.CustomHeading
+import com.example.cooking.UI.SharedComponents.CustomHeading1
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
@@ -64,7 +64,7 @@ fun TabLayout(recipe: Recipe) {
 
             )
             {
-                CustomHeading(heading = "information")
+                CustomHeading1(heading = "information")
             }
             Box(
                 modifier = Modifier
@@ -73,7 +73,7 @@ fun TabLayout(recipe: Recipe) {
                 contentAlignment = Alignment.Center
             )
             {
-                CustomHeading(heading = "preparation")
+                CustomHeading1(heading = "preparation")
             }
         }
     }
