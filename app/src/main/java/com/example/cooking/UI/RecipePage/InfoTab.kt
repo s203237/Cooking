@@ -97,7 +97,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
         val serv = recipe.servingSize.toString()
         InfoRowWithIcons(icon1 = Icons.Outlined.Info, infoType1 = "DIFFICULTY", infoVal1 = diff, icon2 = Icons.Outlined.Info, infoType2 = "SERVING SIZE", infoVal2 = serv)
 
-        DisplayRating(4.45f);
+        DisplayRating(recipe.rating);
     }
 }
 @Composable
