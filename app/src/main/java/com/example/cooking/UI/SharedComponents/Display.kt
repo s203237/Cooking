@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cooking.R
+import com.example.cooking.data.RecipeData
 import com.example.cooking.model.Recipe
 
 @Composable
@@ -86,18 +87,6 @@ fun ImageWithFavIcon(recipe: Recipe) {
 @Preview
 @Composable
 fun previewImageWithFavIcon() {
-    val recipe = Recipe(
-        title = "Peach",
-        mainImage = R.drawable.peach,
-        imageDescription = "3d rendering of a close-up of a peach with googly eyes",
-        author = "Melissa Woo",
-        prepTime = 10,
-        cookingTime = 610,
-        servingSize = 10,
-        difficulty = "Easy",
-        recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
-        ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
-        steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-    )
-    ImageWithFavIcon(recipe = recipe)
+    val recipeList = RecipeData().loadRecipes()
+    ImageWithFavIcon(recipe = recipeList[0])
 }
