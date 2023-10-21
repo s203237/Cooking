@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -20,6 +21,9 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.CustomHeading1
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun RecipeCard(recipe: Recipe, modifier: Modifier) {
@@ -28,14 +32,21 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        ImageWithFavIcon(recipe = recipe)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            ImageWithFavIcon(recipe = recipe)
+            TabLayout(recipe = recipe)
+        }
+       /* ImageWithFavIcon(recipe = recipe)
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
             TabLayout(recipe = recipe)
-        }
+        }*/
 
 
 
@@ -44,9 +55,14 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 
 @Composable
 fun TabLayout(recipe: Recipe) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
     var selectedTabIndex by remember { mutableStateOf(0) }
     Box (
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding( top = screenWidth)
+
     ){
         when (selectedTabIndex) {
             0 -> InfoTab(recipe = recipe)
