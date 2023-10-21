@@ -1,6 +1,5 @@
 package com.example.cooking.UI.RecipePage
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
@@ -19,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -31,6 +30,8 @@ import com.example.cooking.UI.SharedComponents.CustomHeading2
 import com.example.cooking.UI.SharedComponents.CustomTitle
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.Recipe
+import kotlin.math.roundToInt
+
 @Composable
 fun InfoTab(recipe: Recipe) {
     Column(
@@ -96,35 +97,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
         val serv = recipe.servingSize.toString()
         InfoRowWithIcons(icon1 = Icons.Outlined.Info, infoType1 = "DIFFICULTY", infoVal1 = diff, icon2 = Icons.Outlined.Info, infoType2 = "SERVING SIZE", infoVal2 = serv)
 
-
-        Row {
-            Icon(
-                Icons.Filled.Star,
-                contentDescription = "Favourite Heart Outlined",
-                tint = Color(0xFFF6CF00)
-            )
-            Icon(
-                Icons.Filled.Star,
-                contentDescription = "Favourite Heart Outlined",
-                tint = Color(0xFFF6CF00)
-            )
-            Icon(
-                Icons.Filled.Star,
-                contentDescription = "Favourite Heart Outlined",
-                tint = Color(0xFFF6CF00)
-            )
-            Icon(
-                Icons.Filled.Star,
-                contentDescription = "Favourite Heart Outlined",
-                tint = Color(0xFFF6CF00)
-            )
-            Icon(
-                Icons.Filled.Star,
-                contentDescription = "Favourite Heart Outlined",
-                tint = Color(0xFFF6CF00)
-            )
-
-        }
+        DisplayRating(4.45f);
     }
 }
 @Composable
@@ -147,13 +120,11 @@ private fun InfoRowWithIcons(icon1: ImageVector, infoType1: String, infoVal1: St
                 .padding(start = 16.dp)
         )
 
-        if(icon2 != null) {
+        if(icon2 != null && infoType2 != null && infoVal2 != null) {
             Icon(
-            icon2,
-            contentDescription = "$infoType2 icon",
+                icon2,
+                contentDescription = "$infoType2 icon",
             )
-        }
-        if(infoType2 != null) {
             Text(
                 text = "$infoType2: $infoVal2",
                 modifier = Modifier.padding(start = 16.dp)
@@ -174,6 +145,35 @@ private fun formatTime(minutes: Int): String {
         "$hrs hr $formattedMin min"
     }
     return formattedTime
+}
+@Composable
+private fun DisplayRating(rating: Float) {
+    val starCount = 5
+    val filledStar: Painter = painterResource(id = R.drawable.baseline_star_24)
+    val halfStar: Painter = painterResource(id = R.drawable.baseline_star_half_24)
+    val borderStar: Painter = painterResource(id = R.drawable.baseline_star_border_24)
+    val halfStarIndex = rating.roundToInt()
+
+    Row( modifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        var currentStar: Painter = filledStar
+        for(i in 1..starCount) {
+            if (i == halfStarIndex)
+                currentStar = halfStar
+            else if (i > halfStarIndex)
+                currentStar = borderStar
+
+            Icon(
+                currentStar,
+                contentDescription = "rating star"
+            )
+        }
+
+    }
 }
 
 @Composable
