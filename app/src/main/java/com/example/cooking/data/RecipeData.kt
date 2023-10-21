@@ -15,6 +15,7 @@ class RecipeData {
                 cookingTime = 65,
                 servingSize = 4,
                 difficulty = "Medium",
+                rating = 4.6f,
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
                 ingredients = listOf("Pear", "Rainbow", "Green paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
@@ -28,6 +29,7 @@ class RecipeData {
                 cookingTime = 610,
                 servingSize = 10,
                 difficulty = "Easy",
+                rating = 4.4f,
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
                 ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
@@ -41,6 +43,7 @@ class RecipeData {
                 cookingTime = 30,
                 servingSize = 4,
                 difficulty = "Easy",
+                rating = 4.4f,
                 recipeDescription = "This Sichuan boiled tofu, or shuǐzhǔ dòufu gān (水煮豆腐干) is an adapted version of Sichuan boiled beef that's vegetarian, vegan, and very tasty!",
                 ingredients = listOf("10-11 ounces tofu", "4 tbsp vegetable oil", "1 cup soybean sprouts", "7 ounces enoki mushrooms", "1 slice ginger", "2 tsp Sichuan peppercorns", "2 scallions", "2 tbsp spicy bean paste", "1 tbsp tomate pasta", "1 1/2 cups water", "2 tsp sugar", "2 tsp light soy sauce", "1 tbsp garlic", "1/4 tsp dried Sichuan chili flakes", "1/4 tsp Sichuan peppercorn powder", "1 tbsp cilantro"),
                 steps = listOf("Bring a medium pot of water to a boil. Add the tofu slices and blanch them for 30 seconds. Drain and set aside.",

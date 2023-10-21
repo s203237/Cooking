@@ -11,6 +11,7 @@ data class Recipe(
     val cookingTime: Int,
     val servingSize: Int,
     val difficulty: String,
+    val rating: Float,
     val recipeDescription: String,
     val ingredients: List<String>,
     val steps: List<String>
