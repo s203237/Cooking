@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,19 +62,34 @@ fun DisplayFavButton() {
 }
 
 @Composable
-fun ImageWithFavIcon(recipe: Recipe) {
+fun ImageWithFavIcon(recipe: Recipe, isSquare: Boolean) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
     Box(
         contentAlignment = Alignment.BottomEnd
     ) {
-        Image(
-            painter = painterResource(recipe.mainImage),
-            contentDescription = recipe.imageDescription,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            contentScale = ContentScale.Crop,
+        if(isSquare) {
+            Image(
+                painter = painterResource(recipe.mainImage),
+                contentDescription = recipe.imageDescription,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+                contentScale = ContentScale.Crop,
 
-            )
+                )
+        } else {
+            Image(
+                painter = painterResource(recipe.mainImage),
+                contentDescription = recipe.imageDescription,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(0.9f),
+                contentScale = ContentScale.Crop,
+
+                )
+        }
+
         Box(
             modifier = Modifier
                 .padding(22.dp)
@@ -88,5 +104,5 @@ fun ImageWithFavIcon(recipe: Recipe) {
 @Composable
 fun previewImageWithFavIcon() {
     val recipeList = RecipeData().loadRecipes()
-    ImageWithFavIcon(recipe = recipeList[0])
+    ImageWithFavIcon(recipe = recipeList[0], false)
 }
