@@ -91,17 +91,27 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
         val prepTime =  formatTime(recipe.prepTime)
         val cookingTime = formatTime(recipe.cookingTime)
 
-        InfoRowWithIcons(icon1 = Icons.Outlined.AccountCircle,infoType1 = "PREP", infoVal1 = prepTime, icon2 = Icons.Outlined.Info, infoType2 = "COOK", infoVal2 = cookingTime)
+        InfoRowWithIcons(
+            icon1 = painterResource(id = R.drawable.outline_timer_24),
+            infoType1 = "PREP", infoVal1 = prepTime,
+            icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
+            infoType2 = "COOK", infoVal2 = cookingTime
+        )
 
         val diff = recipe.difficulty
         val serv = recipe.servingSize.toString()
-        InfoRowWithIcons(icon1 = Icons.Outlined.Info, infoType1 = "DIFFICULTY", infoVal1 = diff, icon2 = Icons.Outlined.Info, infoType2 = "SERVING SIZE", infoVal2 = serv)
+        InfoRowWithIcons(
+            icon1 = painterResource(id = R.drawable.outline_thermostat_24),
+            infoType1 = "DIFFICULTY", infoVal1 = diff,
+            icon2 = painterResource(id = R.drawable.outline_groups_24),
+            infoType2 = "SERVING SIZE", infoVal2 = serv
+        )
 
         DisplayRating(recipe.rating);
     }
 }
 @Composable
-private fun InfoRowWithIcons(icon1: ImageVector, infoType1: String, infoVal1: String, icon2: ImageVector? = null, infoType2: String? = null, infoVal2: String? = null) {
+private fun InfoRowWithIcons(icon1: Painter, infoType1: String, infoVal1: String, icon2: Painter? = null, infoType2: String? = null, infoVal2: String? = null) {
     Row (
         modifier = Modifier
             .fillMaxWidth()
