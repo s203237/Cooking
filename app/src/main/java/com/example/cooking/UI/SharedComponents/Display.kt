@@ -66,7 +66,7 @@ fun ImageWithFavIcon(recipe: Recipe, isSquare: Boolean) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     Box(
-        contentAlignment = Alignment.BottomEnd
+       // contentAlignment = Alignment.BottomEnd
     ) {
         if(isSquare) {
             Image(
@@ -84,15 +84,18 @@ fun ImageWithFavIcon(recipe: Recipe, isSquare: Boolean) {
                 contentDescription = recipe.imageDescription,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(0.9f),
+                    .aspectRatio(0.92f),
                 contentScale = ContentScale.Crop,
 
                 )
         }
 
         Box(
+            contentAlignment = Alignment.BottomEnd,
             modifier = Modifier
-                .padding(22.dp)
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .padding(16.dp)
         ) {
             DisplayFavButton()
         }
@@ -102,7 +105,14 @@ fun ImageWithFavIcon(recipe: Recipe, isSquare: Boolean) {
 
 @Preview
 @Composable
-fun previewImageWithFavIcon() {
+fun previewImageWithFavIconRect() {
     val recipeList = RecipeData().loadRecipes()
     ImageWithFavIcon(recipe = recipeList[0], false)
+}
+
+@Preview
+@Composable
+fun previewImageWithFavIconSqr() {
+    val recipeList = RecipeData().loadRecipes()
+    ImageWithFavIcon(recipe = recipeList[0], true)
 }
