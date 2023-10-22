@@ -53,7 +53,11 @@ fun PrepTab(recipe: Recipe) {
                     .background(
                         color = Color(0xFFF2ECE3)
                     )
-                    .padding(16.dp)
+                    .padding(
+                            top = 36.dp,
+                            start = 16.dp,
+                            end = 16.dp,
+                            bottom = 16.dp)
             ) {
                 CustomHeading1(heading = "steps")
                 StepsList(list = recipe.steps)

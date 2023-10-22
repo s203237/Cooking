@@ -36,7 +36,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            ImageWithFavIcon(recipe = recipe)
+            ImageWithFavIcon(recipe = recipe, false)
             TabLayout(recipe = recipe)
         }
        /* ImageWithFavIcon(recipe = recipe)
@@ -57,7 +57,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 fun TabLayout(recipe: Recipe) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
-    var selectedTabIndex by remember { mutableStateOf(0) }
+    var selectedTabIndex by remember { mutableStateOf(1) }
     Box (
         modifier = Modifier
             .fillMaxWidth()
@@ -75,6 +75,7 @@ fun TabLayout(recipe: Recipe) {
             Box(
                 modifier = Modifier
                 .fillMaxWidth(0.5f)
+                .padding(top = 8.dp)
                 .clickable { selectedTabIndex = 0 },
                 contentAlignment = Alignment.Center
 
@@ -85,6 +86,7 @@ fun TabLayout(recipe: Recipe) {
             Box(
                 modifier = Modifier
                 .fillMaxWidth()
+                .padding(top = 8.dp)
                 .clickable { selectedTabIndex = 1 },
                 contentAlignment = Alignment.Center
             )
