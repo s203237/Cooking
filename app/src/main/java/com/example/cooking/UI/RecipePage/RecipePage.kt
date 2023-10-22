@@ -57,7 +57,7 @@ fun RecipeCard(recipe: Recipe, modifier: Modifier) {
 fun TabLayout(recipe: Recipe) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
-    var selectedTabIndex by remember { mutableStateOf(1) }
+    var selectedTabIndex by remember { mutableStateOf(0) }
     Box (
         modifier = Modifier
             .fillMaxWidth()
