@@ -17,6 +17,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cooking.UI.Homepage.PreviewscrollableList
+import com.example.cooking.UI.Homepage.scrollableList
 import com.example.cooking.UI.NavBar.Screens.FavoritesScreen
 import com.example.cooking.UI.NavBar.Screens.HomeScreen
 import com.example.cooking.UI.NavBar.Screens.LoginScreen
@@ -67,7 +69,7 @@ fun AppNavigation(){
                 .padding(paddingValues)
         ){
             composable(route=Screens.HomeScreen.name){
-                HomeScreen()
+                PreviewscrollableList()
             }
             composable(route=Screens.SearchScreen.name){
                 SearchScreen()
