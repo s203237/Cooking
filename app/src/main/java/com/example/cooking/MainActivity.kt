@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
             //OnBoardingPage()
             //RecipeList()
             //scrollableList()
-            AboutUsPage()
+            //AboutUsPage()
+            AppNavigation()
 
         }
     }
