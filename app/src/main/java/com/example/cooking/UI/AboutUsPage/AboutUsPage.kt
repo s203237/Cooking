@@ -57,7 +57,7 @@ fun AboutUsPage() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(40.dp)
+            .padding(35.dp)
     )
     {
         Text(
@@ -69,7 +69,7 @@ fun AboutUsPage() {
         Text(
             modifier = Modifier.height(40.dp),
             text = "About us",
-            fontSize = 20.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
@@ -78,7 +78,7 @@ fun AboutUsPage() {
                     " of plant-based cuisine! At Vegelicious, we're on a mission" +
                     " to make a healthy and sustainable lifestyle as easy " +
                     "and delicious as possible.",
-            fontSize = 20.sp,
+            fontSize = 21.sp,
             fontWeight = FontWeight.Normal
         )
         Text(
@@ -86,7 +86,7 @@ fun AboutUsPage() {
                 .align(Alignment.Start)
                 .padding(0.dp, 20.dp, 0.dp, 0.dp),
             text = "Our Story",
-            fontSize = 20.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
@@ -96,14 +96,14 @@ fun AboutUsPage() {
                     " but also for the environment. Our journey began in a small kitchen " +
                     "with a vision to create an app that inspires and empowers people " +
                     "to make mindful food choices.",
-            fontSize = 20.sp,
+            fontSize = 21.sp,
             fontWeight = FontWeight.Normal
         )
         Button(
             onClick = {},
             // Spacer(modifier = Modifier.height(50.dp))
             modifier = Modifier
-                .padding(horizontal = 15.dp, vertical = 25.dp)
+                .padding(horizontal = 35.dp, vertical = 45.dp)
                 .align(Alignment.CenterHorizontally),
             colors = ButtonDefaults.buttonColors(
 
