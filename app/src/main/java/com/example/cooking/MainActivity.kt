@@ -24,7 +24,8 @@ class MainActivity : ComponentActivity() {
            // AccountCreationPage()
            //OnBoardingPage()
             //RecipeList()
-           AboutUsPage()
+            //scrollableList()
+           //AboutUsPage()
         }
     }
 }
