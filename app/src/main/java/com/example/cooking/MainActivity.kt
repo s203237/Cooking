@@ -50,18 +50,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberAsyncImagePainter
+import com.example.cooking.UI.Login.ProfileBox
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProfileScreen()
-            MyHelp()
-            MyPrivacy()
-            CommentImage()
-            FavouriteImage()
-            CreateImage()
+            ProfileBox()
                 }
 
             }
@@ -70,38 +66,23 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyPrivacy() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .absolutePadding(50.dp, 200.dp, 10.dp, 220.dp)
-            .height(200.dp)
-            .width(200.dp)
-    ){
         Button(
-            modifier = Modifier.align(Alignment.CenterStart),
+            modifier = Modifier.padding(),
             onClick = {}
         ) {
             Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
         }
     }
-}
 
 @Composable
 fun MyHelp() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .absolutePadding(50.dp, 200.dp, 10.dp, 80.dp)
-            .height(200.dp)
-            .width(200.dp)
-    ){
-        Button(
-            modifier = Modifier.align(Alignment.CenterStart),
-            onClick = {}
-        ) {
-            Text("Help", fontSize = 30.sp, fontWeight = FontWeight.Bold)
-        }
+    Button(
+        modifier = Modifier.padding(top = 15.dp),
+        onClick = {}
+    ) {
+        Text("Help", fontSize = 30.sp, fontWeight = FontWeight.Bold)
     }
+
 }
 
 
@@ -126,7 +107,7 @@ fun ProfileScreen(){
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
         .padding(8.dp)
-        .background(color = Color (0xFFF2ECE3))
+        .background(color = Color(0xFFF2ECE3))
     ){
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -160,12 +141,15 @@ fun ProfileScreen(){
         }
 
         Row(
-            modifier = Modifier. fillMaxWidth().padding(8.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
         ){
         CommentImage()
         CreateImage()
         FavouriteImage()
         }
+
     }
 
 }

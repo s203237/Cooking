@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,45 +48,31 @@ import com.example.cooking.R
 
 @Composable
 fun MyPrivacy() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .absolutePadding(50.dp, 200.dp, 10.dp, 220.dp)
-            .height(200.dp)
-            .width(200.dp)
-    ){
         Button(
-            modifier = Modifier.align(Alignment.CenterStart),
+            modifier = Modifier.padding(70.dp),
             onClick = {}
         ) {
             Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
         }
     }
-}
+
 
 @Composable
 fun MyHelp() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .absolutePadding(50.dp, 200.dp, 10.dp, 80.dp)
-            .height(200.dp)
-            .width(200.dp)
-    ){
         Button(
-            modifier = Modifier.align(Alignment.CenterStart),
+            modifier = Modifier.padding(10.dp),
             onClick = {}
         ) {
             Text("Help", fontSize = 30.sp, fontWeight = FontWeight.Bold)
         }
     }
-}
+
 
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(){
+fun ProfileBox(){
 
 
 
@@ -101,9 +88,9 @@ fun ProfileScreen(){
 
 
     Column(modifier = Modifier
+        .fillMaxSize()
         .verticalScroll(rememberScrollState())
-        .padding(8.dp)
-        .background(color = Color (0xFFF2ECE3))
+        .background(color = Color(0xB8C75E))
     ){
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -137,20 +124,52 @@ fun ProfileScreen(){
         }
 
         Row(
-            modifier = Modifier. fillMaxWidth().padding(8.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
         ){
+
+            FavouriteImage()
             CommentImage()
             CreateImage()
-            FavouriteImage()
+
+
         }
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(2.dp),
+            verticalArrangement = Arrangement.SpaceEvenly) {
+            com.example.cooking.MyHelp()
+            Spacer(modifier = Modifier.height(10.dp))
+            com.example.cooking.MyPrivacy()
+        }
+
+
     }
 
 }
+@Composable
+fun ProfileButtons(){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(60.dp)
+
+    ){
+        Spacer(modifier = Modifier.height(20.dp))
+        MyHelp()
+        Spacer(modifier = Modifier.height(20.dp))
+        MyPrivacy()}
+}
+
+
+
 
 @Preview
 @Composable
-fun PreviewScreen(){
-    ProfileScreen()
+fun PreviewBox(){
+    ProfileBox()
 }
 
 
@@ -214,11 +233,11 @@ fun CommentImage() {
     }
 
     Column(
-        modifier = Modifier
+        //modifier = Modifier
             //.padding(80.dp)
-            .fillMaxWidth(0.33f),
-        // horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom
+            //.fillMaxWidth(0.33f),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        //verticalArrangement = Arrangement.Bottom
     ) {
         Card(
             shape = CircleShape,
@@ -257,11 +276,11 @@ fun FavouriteImage() {
     }
 
     Column(
-        modifier = Modifier
+        //modifier = Modifier
             //.padding(80.dp)
-            .fillMaxWidth(0.33f),
-        //horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.Bottom
+            //.fillMaxWidth(0.33f),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        //verticalArrangement = Arrangement.Bottom
     ) {
         Card(
             shape = CircleShape,
@@ -300,11 +319,11 @@ fun CreateImage() {
     }
 
     Column(
-        modifier = Modifier
+       //modifier = Modifier
             //.padding(80.dp)
-            .fillMaxWidth(),
-        //horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.Bottom
+            //.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+       // verticalArrangement = Arrangement.Bottom
     ) {
         Card(
             shape = CircleShape,
