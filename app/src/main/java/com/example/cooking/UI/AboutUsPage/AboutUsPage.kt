@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
+import com.example.cooking.R.drawable.apple
 
 @Composable
 fun AboutUsPage() {
@@ -32,21 +33,26 @@ fun AboutUsPage() {
 
     Box (
 
-        modifier=Modifier
+        modifier= Modifier
             .fillMaxSize()
             .background(color = Color(0xFFB8C75E))
     ){
 
-
         Image(
-            painter = painterResource(id = R.drawable.apple),
-            contentDescription =null,
+            painter = painterResource(id = apple),
+            contentDescription ="apple icon",
             modifier = Modifier
                 .size(230.dp)
-                .offset(220.dp,150.dp)
+                .offset(250.dp,150.dp)
                 .rotate(-45f)
-
             )
+        Image(
+            painter = painterResource(id = R.drawable.lyn),
+            contentDescription ="lyn icon",
+            modifier = Modifier
+                .size(175.dp)
+                .offset(-(50).dp,-(50).dp)
+        )
         Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
