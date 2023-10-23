@@ -1,9 +1,15 @@
 package com.example.cooking.UI.AboutUsPage
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -11,7 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,10 +28,28 @@ import com.example.cooking.R
 
 @Composable
 fun AboutUsPage() {
-    Column(
+
+
+    Box (
+
+        modifier=Modifier
+            .fillMaxSize()
+            .background(color = Color(0xFFB8C75E))
+    ){
+
+
+        Image(
+            painter = painterResource(id = R.drawable.apple),
+            contentDescription =null,
+            modifier = Modifier
+                .size(230.dp)
+                .offset(220.dp,150.dp)
+                .rotate(-45f)
+
+            )
+        Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .paint(painterResource(id = R.drawable.aboutus))
             .fillMaxWidth()
             .padding(40.dp)
     )
@@ -43,22 +67,24 @@ fun AboutUsPage() {
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = "Welcome to Vegelicious, your" +
+            text = "Welcome to Vegelicious, your " +
                     "ultimate destination for exploring the wonderful world" +
-                    " of plant-based cuisine! At Veglicious, we're on a mission" +
+                    " of plant-based cuisine! At Vegelicious, we're on a mission" +
                     " to make a healthy and sustainable lifestyle as easy " +
                     "and delicious as possible.",
             fontSize = 20.sp,
             fontWeight = FontWeight.Normal
         )
         Text(
-            modifier = Modifier.align(Alignment.Start).padding(0.dp,20.dp,0.dp,0.dp),
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(0.dp, 20.dp, 0.dp, 0.dp),
             text = "Our Story",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = "Veglicious was born out of a shared passion for nutritious," +
+            text = "Vegelicious was born out of a shared passion for nutritious," +
                     " planet-friendly food. We believe that eating more vegetables " +
                     "and embracing a vegetarian lifestyle is not only good for your health" +
                     " but also for the environment. Our journey began in a small kitchen " +
@@ -82,12 +108,13 @@ fun AboutUsPage() {
 
             ) {
             Text(
-                text = "Our privacy policy",
+                text = "Our Privacy Policy",
 
                 )
 
         }
     }
+  }
 }
 @Preview
 @Composable
