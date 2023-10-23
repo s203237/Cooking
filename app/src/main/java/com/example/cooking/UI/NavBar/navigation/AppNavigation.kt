@@ -19,10 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.Homepage.scrollableList
-import com.example.cooking.UI.NavBar.Screens.FavoritesScreen
-import com.example.cooking.UI.NavBar.Screens.HomeScreen
-import com.example.cooking.UI.NavBar.Screens.LoginScreen
-import com.example.cooking.UI.NavBar.Screens.SearchScreen
+import com.example.cooking.UI.Login.TempLoginPage
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.RecipeList.RecipeList
@@ -79,7 +76,7 @@ fun AppNavigation(){
                 RecipeList()
             }
             composable(route=Screens.Login.name){
-                LoginScreen()
+                TempLoginPage()
             }
         }
 
