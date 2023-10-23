@@ -24,7 +24,8 @@ import com.example.cooking.UI.NavBar.Screens.HomeScreen
 import com.example.cooking.UI.NavBar.Screens.LoginScreen
 import com.example.cooking.UI.NavBar.Screens.SearchScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
-
+import com.example.cooking.UI.Search.PreviewSearchBar
+import com.example.cooking.UI.RecipeList.RecipeList
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -72,10 +73,10 @@ fun AppNavigation(){
                 PreviewscrollableList()
             }
             composable(route=Screens.SearchScreen.name){
-                SearchScreen()
+                PreviewSearchBar()
             }
             composable(route=Screens.Favorites.name){
-                FavoritesScreen()
+                RecipeList()
             }
             composable(route=Screens.Login.name){
                 LoginScreen()
