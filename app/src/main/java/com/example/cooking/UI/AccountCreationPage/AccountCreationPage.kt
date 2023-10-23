@@ -1,18 +1,20 @@
 package com.example.cooking.UI.AccountCreationPage
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -27,18 +29,21 @@ import com.example.cooking.R
 @Composable
 fun AccountCreationPage() {
     Column(
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .paint(painterResource(id = R.drawable.accountpage))
             .fillMaxWidth()
-            //.fillMaxHeight()
+            .fillMaxHeight()
             .padding(50.dp)
 
 
     ) {
+
+Spacer(modifier =Modifier.height(100.dp))
+
         Text(
-            modifier = Modifier.paddingFromBaseline(20.dp)
+            modifier = Modifier.padding()
                 ,
             text = "Let's create an account so that \n you can save your favourite recipes,\n plan your meals and much more!",
             fontSize = 17.sp,
