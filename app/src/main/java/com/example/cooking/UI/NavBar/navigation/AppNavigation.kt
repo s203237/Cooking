@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.Homepage.scrollableList
 import com.example.cooking.UI.Login.TempLoginPage
@@ -67,11 +68,26 @@ fun AppNavigation(){
             modifier= Modifier
                 .padding(paddingValues)
         ){
-            composable(route=Screens.Onboarding.name){
+            composable(route = Screens.Onboarding.name) {
                 OnBoardingPage(
-
+                    onNavigateToAccountCreation = {
+                        navController.navigate(
+                            route = Screens.AccountCreation.name
+                        )
+                    }
                 )
             }
+
+            composable(route = Screens.AccountCreation.name) {
+                AccountCreationPage(
+                    onNavigateToHomeScreen = {
+                        navController.navigate(
+                            route = Screens.HomeScreen.name
+                        )
+                    }
+                )
+            }
+
             composable(route=Screens.HomeScreen.name){
                 PreviewscrollableList()
             }
