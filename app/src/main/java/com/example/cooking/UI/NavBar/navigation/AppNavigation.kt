@@ -9,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -19,47 +20,51 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
-import com.example.cooking.UI.Homepage.scrollableList
 import com.example.cooking.UI.Login.TempLoginPage
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun AppNavigation(){
     val navController= rememberNavController()
-
+    var displayBottomBar by remember { mutableStateOf(false) }
     Scaffold (
         bottomBar = {
-        NavigationBar {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentDestination = navBackStackEntry?.destination
-
-            listOfNavItem.forEach {navItem ->
-                NavigationBarItem(
-                    selected =currentDestination?.hierarchy?.any{it.route ==navItem.route}==true ,
-                    onClick = {
-                              navController.navigate(navItem.route){
-                                  popUpTo(navController.graph.findStartDestination().id){
-                                      saveState=true
-                                  }
-                                  launchSingleTop=true
-                                  restoreState=true
-                              }
-                    },
-                    icon = {
-                           Icon(
-                               imageVector =navItem.icon ,
-                               contentDescription = null )
-                    },
-                    label={
-                        Text(text=navItem.label)
+            if (displayBottomBar) {
+                NavigationBar {
+                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    val currentDestination = navBackStackEntry?.destination
+                    listOfNavItem.forEach { navItem ->
+                        NavigationBarItem(
+                            selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
+                            onClick = {
+                                navController.navigate(navItem.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = navItem.icon,
+                                    contentDescription = null
+                                )
+                            },
+                            label = {
+                                Text(text = navItem.label)
+                            }
+                        )
                     }
-                )
+                }
             }
-        }
         }
     ){paddingValues ->
         NavHost(
@@ -89,6 +94,7 @@ fun AppNavigation(){
             }
 
             composable(route=Screens.HomeScreen.name){
+                displayBottomBar = true
                 PreviewscrollableList()
             }
             composable(route=Screens.SearchScreen.name){
