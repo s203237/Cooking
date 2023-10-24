@@ -23,6 +23,7 @@ import com.example.cooking.UI.Login.TempLoginPage
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.RecipeList.RecipeList
+import com.example.cooking.UI.Onboarding.OnBoardingPage
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -66,6 +67,11 @@ fun AppNavigation(){
             modifier= Modifier
                 .padding(paddingValues)
         ){
+            composable(route=Screens.Onboarding.name){
+                OnBoardingPage(
+
+                )
+            }
             composable(route=Screens.HomeScreen.name){
                 PreviewscrollableList()
             }
