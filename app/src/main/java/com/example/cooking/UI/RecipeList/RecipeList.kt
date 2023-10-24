@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
+import com.example.cooking.data.RecipeData
 
 @Composable
 fun RecipeList(recipes: List<Recipe> = testRecipes) {
@@ -77,13 +78,14 @@ Column(
 }
 
 }
-val testRecipes = listOf(
+val testRecipes = RecipeData().loadRecipes()
+/*val testRecipes = listOf(
     Recipe("test 1", R.drawable.image,"",10,2,2, "","",listOf(""),listOf("") ),
     Recipe("test 2", R.drawable.image2,"",10,2,2, "","",listOf(""),listOf("")),
     Recipe("test 3", R.drawable.images3,"",10,2,2, "","",listOf(""),listOf("")),
     Recipe("test 4", R.drawable.image4,"",10,2,2, "","",listOf(""),listOf("")),
 
-)
+)*/
 @Preview
 @Composable
 fun PreviewRecipeList(){

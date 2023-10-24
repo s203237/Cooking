@@ -32,10 +32,11 @@ fun AccountCreationPage() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            //.paint(painterResource(id = R.drawable.accountpage))
+            .background(color = Color.LightGray)
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(50.dp)
+        //modifier = Modifier.paint(painterResource(id = R.drawable.pear)).fillMaxWidth(),
 
 
     ) {
@@ -43,9 +44,8 @@ fun AccountCreationPage() {
 Spacer(modifier =Modifier.height(100.dp))
 
         Text(
-            modifier = Modifier.padding()
-                ,
             text = "Let's create an account so that \n you can save your favourite recipes,\n plan your meals and much more!",
+            textAlign = TextAlign.Left,
             fontSize = 17.sp,
             fontWeight = FontWeight.Normal
         )
@@ -77,9 +77,7 @@ Spacer(modifier =Modifier.height(100.dp))
         Button(
             onClick = {},
             // Spacer(modifier = Modifier.height(50.dp))
-            modifier = Modifier
-                .padding(horizontal = 10.dp, vertical = 50.dp)
-                .align(Alignment.End),
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 50.dp).align(Alignment.End),
             colors = ButtonDefaults.buttonColors(
 
                 containerColor = Color.White,
