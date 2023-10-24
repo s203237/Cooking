@@ -27,7 +27,7 @@ fun OnBoardingPage() {
         Column(
             horizontalAlignment = Alignment.End,
             modifier = Modifier
-                .paint(painterResource(id = R.drawable.onboardingpage))
+               // .paint(painterResource(id = R.drawable.onboardingpage))
                 .fillMaxWidth()
                // .fillMaxHeight()
                 .padding(55.dp))

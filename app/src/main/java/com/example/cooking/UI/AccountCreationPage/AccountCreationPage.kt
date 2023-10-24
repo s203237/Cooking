@@ -32,7 +32,7 @@ fun AccountCreationPage() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .paint(painterResource(id = R.drawable.accountpage))
+            //.paint(painterResource(id = R.drawable.accountpage))
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(50.dp)
