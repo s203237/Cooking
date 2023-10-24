@@ -122,6 +122,7 @@ fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
                     )
                 }
             }
+
         }
     }
 }
