@@ -1,4 +1,5 @@
 package com.example.cooking.UI.AccountCreationPage
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -121,6 +124,22 @@ fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
                         fontSize = 16.sp
                     )
                 }
+            }
+            Box(){
+                Image(
+                    painter = painterResource(id = R.drawable.apple),
+                    contentDescription ="apple vector graphic",
+                    modifier = Modifier
+                        .size(200.dp)
+                        .offset(110.dp, 120.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.turnip),
+                    contentDescription ="turnip vector graphic",
+                    modifier = Modifier
+                        .size(260.dp)
+                        .offset((-50).dp, 55.dp)
+                )
             }
 
         }
