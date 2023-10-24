@@ -1,34 +1,26 @@
 package com.example.cooking.UI.AccountCreationPage
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,23 +29,22 @@ import com.example.cooking.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountCreationPage() {
+fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
     Column(
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .background(color = Color.LightGray)
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(50.dp)
-        //modifier = Modifier.paint(painterResource(id = R.drawable.pear)).fillMaxWidth(),
-
+            .fillMaxSize()
+            .background(color = Color(0xFFB8C75E))
 
     ) {
+
+Spacer(modifier =Modifier.height(100.dp))
+
         Text(
-            //modifier = Modifier.padding(40.dp,60.dp,20.dp,5.dp),
+            modifier = Modifier.padding()
+                ,
             text = "Let's create an account so that \n you can save your favourite recipes,\n plan your meals and much more!",
-            textAlign = TextAlign.Left,
             fontSize = 17.sp,
             fontWeight = FontWeight.Normal
         )
@@ -83,23 +74,13 @@ fun AccountCreationPage() {
         )
 
         Button(
-            onClick = {},
-            // Spacer(modifier = Modifier.height(50.dp))
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 50.dp).align(Alignment.End),
+            onClick = onNavigateToHomeScreen,
             colors = ButtonDefaults.buttonColors(
-
                 containerColor = Color.White,
-                contentColor = Color.Red,
-            ),
-            shape = RoundedCornerShape(40),
-
-            ) {
-            Text(
-                text = "submit",
-
-                )
-
-
+                contentColor = Color.Red
+            )
+        ) {
+            Text(text = "submit")
         }
     }
 
@@ -107,5 +88,5 @@ fun AccountCreationPage() {
 
 @Preview
 @Composable
-fun PreviewAccountCreation() { AccountCreationPage()
+fun PreviewAccountCreation() { AccountCreationPage(onNavigateToHomeScreen = {})
 }
