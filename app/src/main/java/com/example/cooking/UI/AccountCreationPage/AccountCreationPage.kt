@@ -130,15 +130,15 @@ fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
                     painter = painterResource(id = R.drawable.apple),
                     contentDescription ="apple vector graphic",
                     modifier = Modifier
-                        .size(200.dp)
-                        .offset(110.dp, 120.dp)
+                        .size(180.dp)
+                        .offset(110.dp, 75.dp)
                 )
                 Image(
                     painter = painterResource(id = R.drawable.turnip),
                     contentDescription ="turnip vector graphic",
                     modifier = Modifier
-                        .size(260.dp)
-                        .offset((-50).dp, 55.dp)
+                        .size(230.dp)
+                        .offset((-50).dp, 10.dp)
                 )
             }
 
