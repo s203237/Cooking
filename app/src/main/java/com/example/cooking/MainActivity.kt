@@ -18,6 +18,7 @@ import com.example.cooking.UI.Homepage.scrollableList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.NavBar.navigation.AppNavigation
+import com.example.cooking.UI.Search.SearchPage
 
 
 class MainActivity : ComponentActivity() {
@@ -29,8 +30,10 @@ class MainActivity : ComponentActivity() {
             //OnBoardingPage()
             //RecipeList()
             //scrollableList()
-            //AboutUsPage()
-            AppNavigation()
+
+ SearchPage()
+            //AppNavigation()
+
 
         }
     }
