@@ -22,11 +22,10 @@ import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.CustomHeading1
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RecipeCard(recipe: Recipe, modifier: Modifier) {
+fun RecipePage(recipe: Recipe) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -101,5 +100,5 @@ fun TabLayout(recipe: Recipe) {
 @Composable
 fun PreviewRecipePage() {
     val recipeList = RecipeData().loadRecipes()
-    RecipeCard(recipe = recipeList[2], modifier = Modifier)
+    RecipePage(recipe = recipeList[2])
 }
