@@ -27,6 +27,7 @@ import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.example.cooking.UI.Search.SearchPage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -98,7 +99,7 @@ fun AppNavigation(){
                 PreviewscrollableList()
             }
             composable(route=Screens.SearchScreen.name){
-                PreviewSearchBar()
+                SearchPage()
             }
             composable(route=Screens.Favorites.name){
                 RecipeList()

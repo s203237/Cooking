@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.UI.Homepage.Homepage
-import com.example.cooking.UI.SharedComponents.NavigationInComposeTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -115,14 +114,7 @@ Row(){
         }
     }
 }
-@Composable
-fun BackHomePage()  {
-    NavigationInComposeTheme {
-        Surface {
-            Homepage()
-        }
-    }
-}
+
 @Composable
 fun CreateButton(color:Color, text: String){
     Button(
