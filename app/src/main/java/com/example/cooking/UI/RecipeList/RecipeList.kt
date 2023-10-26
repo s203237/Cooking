@@ -71,7 +71,7 @@ Column(
         modifier = Modifier
             .height(height = 170.dp)
             .fillMaxWidth()
-            .clickable { onNavigateToRecipe(1) }
+            .clickable { onNavigateToRecipe(index) }
         )
     Text(
         text = recipe.title ,

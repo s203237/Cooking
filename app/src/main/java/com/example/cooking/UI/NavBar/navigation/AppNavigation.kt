@@ -109,9 +109,9 @@ fun AppNavigation(){
             }
             composable(route=Screens.Favorites.name){
                 RecipeList(
-                    onNavigateToRecipe = {
+                    onNavigateToRecipe = {index ->
                         navController.navigate(
-                            route = Screens.RecipeItem.name
+                            route = "Screens.RecipeItem.name/$index"
                         )
                     }
                 )
@@ -122,12 +122,11 @@ fun AppNavigation(){
 
 
             val recipeList = RecipeData().loadRecipes()
-            val recipeId = 1
             composable(
-                route = Screens.RecipeItem.name,
-               // arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+                route = "Screens.RecipeItem.name/{recipeId}",
+                arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
             ) { backStackEntry ->
-              //  val recipeId = backStackEntry.arguments?.getInt("recipeId")
+                val recipeId = backStackEntry.arguments?.getInt("recipeId")
                 if (recipeId != null) {
                     RecipePage(recipe = recipeList[recipeId])
                 } else {
