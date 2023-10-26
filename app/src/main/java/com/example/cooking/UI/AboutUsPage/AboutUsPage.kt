@@ -29,8 +29,6 @@ import com.example.cooking.R.drawable.apple
 
 @Composable
 fun AboutUsPage() {
-
-
     Box (
 
         modifier= Modifier
