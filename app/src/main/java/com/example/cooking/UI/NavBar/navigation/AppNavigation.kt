@@ -104,7 +104,7 @@ fun AppNavigation(){
             composable(route=Screens.Favorites.name){
                 RecipeList()
             }
-            composable(route=Screens.Login.name){
+            composable(route=Screens.Profile.name){
                 TempLoginPage()
             }
         }
