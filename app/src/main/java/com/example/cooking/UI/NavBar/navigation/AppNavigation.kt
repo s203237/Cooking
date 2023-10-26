@@ -27,8 +27,13 @@ import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
+import com.example.cooking.UI.RecipePage.RecipePage
 import com.example.cooking.UI.Search.SearchPage
+import com.example.cooking.data.RecipeData
+import com.example.cooking.model.RecipeCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -103,10 +108,31 @@ fun AppNavigation(){
                 SearchPage()
             }
             composable(route=Screens.Favorites.name){
-                RecipeList()
+                RecipeList(
+                    onNavigateToRecipe = {index ->
+                        navController.navigate(
+                            route = "Screens.RecipeItem.name/$index"
+                        )
+                    }
+                )
             }
             composable(route=Screens.Profile.name){
                 ProfileBox()
+            }
+
+
+            val recipeList = RecipeData().loadRecipes()
+            composable(
+                route = "Screens.RecipeItem.name/{recipeId}",
+                arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val recipeId = backStackEntry.arguments?.getInt("recipeId")
+                if (recipeId != null) {
+                    RecipePage(recipe = recipeList[recipeId])
+                } else {
+                    // Handle the case where the recipe doesn't exist
+                    Text("Recipe not found")
+                }
             }
         }
 
