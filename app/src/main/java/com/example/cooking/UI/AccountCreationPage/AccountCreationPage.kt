@@ -76,7 +76,7 @@ fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
                 shape = RoundedCornerShape(60),
                 colors = TextFieldDefaults.textFieldColors(
                     containerColor = Color(0xFFF2ECE3),
-                    textColor = Color.Black
+                    focusedTextColor = Color.Black
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -98,7 +98,7 @@ fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
                 shape = RoundedCornerShape(60),
                 colors = TextFieldDefaults.textFieldColors(
                     containerColor = Color(0xFFF2ECE3),
-                    textColor = Color.Black
+                    focusedTextColor = Color.Black
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
