@@ -43,8 +43,8 @@ fun SearchBar(
         Box(
             modifier = modifier
                 .fillMaxSize()
-                .padding(5.dp)
-                .background(Color.White),
+                .padding(30.dp)
+                .background(color = Color(0xffF2ECE3)),
             contentAlignment = Alignment.TopCenter
 
         ) {

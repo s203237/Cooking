@@ -50,15 +50,30 @@ import com.example.cooking.R
 
 @Preview
 @Composable
-fun PreviewSearchBar(){
+fun PreviewSearchBar() {
 
-    SearchBar(modifier = Modifier.fillMaxSize())
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 70.dp) // Add padding from the top of the screen
-    ) {
-        DisplayTextBoxes()
-    }
+            //.fillMaxSize()
+            .fillMaxWidth()
 
-}
+    ) {
+       /* SearchBar(
+            modifier = Modifier
+                .fillMaxSize()
+        )*/
+        // First Part (SearchBar)
+        SearchBar(modifier = Modifier.weight(1f))
+        // Spacer to create a division
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 100.dp) // Add padding from the top of the screen
+
+        ) {
+            DisplayTextBoxes()
+        }
+
+    }
