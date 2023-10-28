@@ -55,7 +55,6 @@ fun PreviewSearchBar() {
 
     Column(
         modifier = Modifier
-            //.fillMaxSize()
             .fillMaxWidth()
 
     ) {

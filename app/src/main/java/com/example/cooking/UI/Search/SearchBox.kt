@@ -56,40 +56,41 @@ fun SearchBox(
         mutableStateOf(false)
     }
     TextField(
-        value = text,
+        value = query,
+        onValueChange = {
+            onQueryChange(it)
+        },
+        //value = text,
         shape = RoundedCornerShape(20.dp),
-        onValueChange = { newValue ->
+        /*onValueChange = { newValue ->
             text = newValue
             onQueryChange(newValue)
-        },
+        },*/
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Search
+            //keyboardType = KeyboardType.Text
         ),
         keyboardActions = KeyboardActions(
             onSearch = {
                 onSearch()
             }
         ),
-        textStyle = TextStyle(color = Color.Black), // Adjust the text color as needed
+        textStyle = TextStyle(color = Color.Black , fontSize = 22.sp), // Adjust the text color as needed
         singleLine = true,
         leadingIcon = {
             Icon(
                 imageVector = leadingIcon,
                 contentDescription = null,
-                tint = Color.Gray
+                tint = Color.Black
             )
         },
        trailingIcon = {
-            /*Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = null,
-                tint = Color.Gray
-            )*/
+
            if (query.isNotEmpty()) {
                Icon(
                    imageVector = Icons.Default.Close,
                    contentDescription = null,
-                   tint = Color.Gray,
+                   tint = Color.Black,
                    modifier = Modifier.clickable {
                        onQueryChange("")
                    }
