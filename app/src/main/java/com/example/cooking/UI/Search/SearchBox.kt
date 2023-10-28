@@ -95,19 +95,8 @@ fun SearchBox(
                    }
                )
            }
-        }
-        /*trallingIcon = {
+        },
 
-                       if(active){
-                           Icon(
-                               modifier = Modifier.clickable {
-                                   text = ""
-                               },
-                               imageVector = Icons.Default.Close,
-                               contentDescription = "Close Icon"
-                           )
-                       }
-        }*/,
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)

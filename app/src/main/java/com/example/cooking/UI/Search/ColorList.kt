@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 fun ColorList(): List<String>{
     return listOf(
 
-        "#93BBCF", "#F3B144", "#F3B144",
-        "#B8C75E", "#FF614B", "#93BBCF",
-        "#93BBCF", "#F3B144", "#F3B144", "#FF614B"
+        "#FFF5DEB3", "#FFF0FFFF", "#FFFFEFD5",
+        "#FFE6E6FA", "#FFF5F5DC", "#FFFDF5E6",
+        "#FFFFF5EE", "#FFF0E68C", "#FFFFEBCD", "#FFEEE8AA"
 
         )
 
