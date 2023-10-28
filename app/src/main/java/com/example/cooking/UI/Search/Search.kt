@@ -51,6 +51,7 @@ import com.example.cooking.R
 @Preview
 @Composable
 fun PreviewSearchBar() {
+    val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -58,19 +59,24 @@ fun PreviewSearchBar() {
             .fillMaxWidth()
 
     ) {
-       /* SearchBar(
-            modifier = Modifier
-                .fillMaxSize()
-        )*/
         // First Part (SearchBar)
-        SearchBar(modifier = Modifier.weight(1f))
+        //SearchBar(modifier = Modifier.weight(1f))
         // Spacer to create a division
+        SearchBox(query = searchQuery, onQueryChange = { newQuery ->
+            setSearchQuery(newQuery)
+        } , onSearch = { /*TODO*/ },
+           // active = true, // Or false based on your needs
+            //onActiveChange = { isActive ->
+                // Handle active state change here
+            //}
+        )
         Spacer(modifier = Modifier.height(16.dp))
     }
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 100.dp) // Add padding from the top of the screen
+                .background(Color.White)
 
         ) {
             DisplayTextBoxes()

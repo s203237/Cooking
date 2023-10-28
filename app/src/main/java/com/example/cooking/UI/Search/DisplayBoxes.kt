@@ -83,7 +83,7 @@ fun CreateButton(color:Color, text: String){
         modifier = Modifier
             //.fillMaxWidth()
             .width(200.dp)
-            .height(100.dp)
+            .height(80.dp)
             .padding(horizontal = 10.dp, vertical = 10.dp)
         ,
 
