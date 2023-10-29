@@ -2,7 +2,7 @@ package com.example.cooking.data
 
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
-
+/*
 class testingClass {
 
     fun dailyRecipe(): Recipe {
@@ -10,6 +10,8 @@ class testingClass {
             title = "daily",
             mainImage = R.drawable.pear,
             imageDescription = "3d rendering of a pear with a rainbow over it.",
+            author = "test author",
+            rating = 1,
             prepTime = 20,
             cookingTime = 65,
             servingSize = 4,
@@ -26,6 +28,7 @@ class testingClass {
                 title = "category 1",
                 mainImage = R.drawable.pear,
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
+                author = "test author",
                 prepTime = 20,
                 cookingTime = 65,
                 servingSize = 4,
@@ -38,6 +41,7 @@ class testingClass {
                 title = "Peach",
                 mainImage = R.drawable.peach,
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+                author = "test author",
                 prepTime = 10,
                 cookingTime = 610,
                 servingSize = 10,
@@ -50,6 +54,7 @@ class testingClass {
                 title = "Pear And Rainbow",
                 mainImage = R.drawable.pear,
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
+                author = "test author",
                 prepTime = 20,
                 cookingTime = 65,
                 servingSize = 4,
@@ -62,6 +67,7 @@ class testingClass {
                 title = "Peach",
                 mainImage = R.drawable.peach,
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+                author = "test author",
                 prepTime = 10,
                 cookingTime = 610,
                 servingSize = 10,
@@ -74,6 +80,7 @@ class testingClass {
                 title = "Pear And Rainbow",
                 mainImage = R.drawable.pear,
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
+                author = "test author",
                 prepTime = 20,
                 cookingTime = 65,
                 servingSize = 4,
@@ -91,6 +98,7 @@ class testingClass {
                 title = "Pear And Rainbow",
                 mainImage = R.drawable.pear,
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
+                author = "test author",
                 prepTime = 20,
                 cookingTime = 65,
                 servingSize = 4,
@@ -103,6 +111,7 @@ class testingClass {
                 title = "Peach",
                 mainImage = R.drawable.peach,
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+                author = "test author",
                 prepTime = 10,
                 cookingTime = 610,
                 servingSize = 10,
@@ -115,6 +124,7 @@ class testingClass {
                 title = "Pear And Rainbow",
                 mainImage = R.drawable.pear,
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
+                author = "test author",
                 prepTime = 20,
                 cookingTime = 65,
                 servingSize = 4,
@@ -386,3 +396,5 @@ class testingClass {
         )
     }
 }
+
+ */
