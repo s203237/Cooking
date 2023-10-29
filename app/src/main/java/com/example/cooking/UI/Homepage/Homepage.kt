@@ -1,26 +1,26 @@
 package com.example.cooking.UI.Homepage
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 //import com.example.cooking.Data.Recipe
-import com.example.cooking.R
+import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.data.dailyRecipe
 import com.example.cooking.data.loadCat1Recipes
 import com.example.cooking.data.loadCat2Recipes
@@ -118,6 +118,7 @@ import com.example.cooking.model.Recipe
 
 @Composable
 fun scrollableList(
+    modifier: Modifier,
     dailyRecipe: Recipe,
     cat1Recipe: List<Recipe>,
     cat2Recipe: List<Recipe>,
@@ -125,8 +126,21 @@ fun scrollableList(
     cat4Recipe: List<Recipe>,
     cat5Recipe: List<Recipe>
 ){
+
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+    val showButton by remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex > 0
+        }
+    }
+
+
     Surface {
-        LazyColumn {
+        LazyColumn(
+            modifier = modifier,
+            state = listState
+        ) {
             item {
 //                    DailyRecipeItem(recipe = dailyrecipe)
                 RecipeCard(recipe = dailyRecipe)
@@ -205,6 +219,11 @@ fun scrollableList(
             }
         }
     }
+
+    AnimatedVisibility(visible = showButton, enter = fadeIn(), exit = fadeOut()) {
+        BackToTop(listState, coroutineScope) { }
+    }
+
 }
 
 @Preview
@@ -219,6 +238,7 @@ fun PreviewscrollableList(){
     val recipeList5 = loadCat5Recipes()
 
     scrollableList(
+        Modifier,
         dailyRecipe = dailyRecipe,
         cat1Recipe = recipeList1,
         cat2Recipe = recipeList2,
