@@ -16,12 +16,14 @@
 package com.example.cooking.UI.RecipeList
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -37,7 +39,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 
 @Composable
-fun RecipeList(recipes: List<Recipe> = testRecipes) {
+fun RecipeList(recipes: List<Recipe> = testRecipes, onNavigateToRecipe: (Int) -> Unit) {
     Column  {
 
         Text(
@@ -48,27 +50,28 @@ fun RecipeList(recipes: List<Recipe> = testRecipes) {
 
         )
         LazyColumn {
-            items(recipes) { recipe ->
-                RecipeItem(recipe)
+            itemsIndexed(recipes) { index, recipe ->
+                RecipeItem(recipe, index, onNavigateToRecipe)
 
             }
         }
     }
 }
 @Composable
-fun RecipeItem(recipe: Recipe, index: Int =0){
+fun RecipeItem(recipe: Recipe, index: Int, onNavigateToRecipe: (Int) -> Unit){
 
 Column(
     modifier = Modifier
         .fillMaxWidth()
-        .padding(10.dp)
+        .padding(10.dp),
 ){
     Image(painter = painterResource(id= recipe.mainImage),
         contentDescription = recipe.title,
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .height(height = 170.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onNavigateToRecipe(index) }
         )
     Text(
         text = recipe.title ,
@@ -89,7 +92,7 @@ val testRecipes = RecipeData().loadRecipes()
 @Preview
 @Composable
 fun PreviewRecipeList(){
-RecipeList()
+RecipeList(onNavigateToRecipe = {})
 }
 
 

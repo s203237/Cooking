@@ -6,5 +6,6 @@ enum class Screens {
     HomeScreen,
     Favorites,
     SearchScreen,
-    Login
+    Profile,
+    RecipeItem
 }
