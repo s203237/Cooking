@@ -83,6 +83,8 @@ fun PreviewRecipeCard(){
         cookingTime = 610,
         servingSize = 10,
         difficulty = "Easy",
+        rating = 3.4f,
+        author = "Hej Med Dig",
         recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
         ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
         steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
