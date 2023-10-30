@@ -140,9 +140,9 @@ fun ProfileBox(){
             .fillMaxWidth()
             .padding(2.dp),
             verticalArrangement = Arrangement.SpaceEvenly) {
-            com.example.cooking.MyHelp()
+            MyHelp()
             Spacer(modifier = Modifier.height(10.dp))
-            com.example.cooking.MyPrivacy()
+            MyPrivacy()
         }
 
 
