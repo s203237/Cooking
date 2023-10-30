@@ -90,7 +90,7 @@ fun ProfileBox(){
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
-        .background(color = Color(0xB8C75E))
+        .background(color = Color(0xffB8C75E))
     ){
         Row(modifier = Modifier
             .fillMaxWidth()
