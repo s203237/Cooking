@@ -32,33 +32,45 @@ import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 
 @Composable
-fun RecipeCard(recipe: Recipe) =
-    Card(
-        modifier = Modifier.fillMaxWidth().padding(10.dp)
-    ) {
-        Box(
-            contentAlignment = Alignment.BottomEnd
+fun RecipeCard(recipe: Recipe, subTitle: String ="") =
+    Column {
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(10.dp)
         ) {
-            Image(
-                painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.imageDescription,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop,
-
-                )
             Box(
-                modifier = Modifier
-                    .padding(22.dp)
+                contentAlignment = Alignment.BottomEnd
             ) {
-                DisplayFavButton()
+                Image(
+                    painter = painterResource(recipe.mainImage),
+                    contentDescription = recipe.imageDescription,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f),
+                    contentScale = ContentScale.Crop,
+
+                    )
+                Box(
+                    modifier = Modifier
+                        .padding(22.dp)
+                ) {
+                    DisplayFavButton()
+                }
             }
-
         }
-
-
+        if(!subTitle.equals("")) {
+            Text(
+                text = subTitle,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(10.dp)
+            )
+        }
+        Text(
+            text = recipe.title,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(10.dp)
+        )
     }
+
 
 @Preview
 @Composable
