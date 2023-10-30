@@ -1,5 +1,6 @@
 package com.example.cooking.UI.NavBar.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,6 +28,7 @@ import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
@@ -44,7 +46,7 @@ fun AppNavigation(){
     Scaffold (
         bottomBar = {
             if (displayBottomBar) {
-                NavigationBar {
+                NavigationBar() {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentDestination = navBackStackEntry?.destination
                     listOfNavItem.forEach { navItem ->
@@ -67,7 +69,8 @@ fun AppNavigation(){
                             },
                             label = {
                                 Text(text = navItem.label)
-                            }
+                            },
+                            //modifier = Modifier.background(color = Color(0xFF93BBCF))
                         )
                     }
                 }
