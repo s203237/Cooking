@@ -48,9 +48,9 @@ import com.example.cooking.R
 
 
 
-@Preview
+
 @Composable
-fun PreviewSearchBar() {
+fun SearchBar() {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
 
     Column(
@@ -82,3 +82,8 @@ fun PreviewSearchBar() {
         }
 
     }
+@Preview
+@Composable
+fun PreviewSearchBar(){
+    SearchBar()
+}
