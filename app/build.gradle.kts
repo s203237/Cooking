@@ -66,7 +66,7 @@ dependencies {
     implementation("com.google.ar.sceneform:sceneform-base:1.17.1")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.4")
     implementation("androidx.navigation:navigation-compose:2.7.4")
-   // implementation ("androidx.compose.material:compose-material:1.4.2")
+    // implementation ("androidx.compose.material:compose-material:1.4.2")
     implementation("androidx.navigation:navigation-compose:2.7.4")
 
 
