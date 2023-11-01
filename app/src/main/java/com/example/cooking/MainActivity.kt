@@ -314,7 +314,7 @@ class MainActivity : ComponentActivity() {
                 }
                 Text(text = "Comments")
             }
-RecipeList()
+//RecipeList()
 
         }
 
