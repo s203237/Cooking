@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
             //RecipeList()
             //scrollableList()
 
- 
+
             AppNavigation()
 
 
@@ -314,6 +314,8 @@ class MainActivity : ComponentActivity() {
                 }
                 Text(text = "Comments")
             }
+RecipeList()
+
         }
 
         @Composable
@@ -361,6 +363,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 
 
