@@ -1,6 +1,7 @@
 package com.example.cooking.UI.NavBar.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -58,6 +60,7 @@ fun AppNavigation() {
         "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
         "Appetizers", "Seasonal"
     )
+    val commonRoute = Screens.Favorites.name
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -88,16 +91,24 @@ fun AppNavigation() {
                                 contentDescription = "Menu Icon"
                             )
                         }
+
                         DropdownMenu(
                             expanded =expanded,
-                            onDismissRequest ={expanded=false}) {
+                            onDismissRequest ={expanded=false},
+                            modifier=Modifier.fillMaxWidth(0.75f)){
                             menuItems.forEach { item ->
                                 DropdownMenuItem(
-                                    text = { Text(item) },
+                                    text = { Text(
+                                        text = item,
+                                        fontSize = 22.sp,
+                                        textAlign = TextAlign.Center) },
+
                                     onClick = {
                                         selectedItem = item
                                         expanded = false
+                                         navController.navigate(route = commonRoute)
                                     }
+
                                 )
                             }
                         }
