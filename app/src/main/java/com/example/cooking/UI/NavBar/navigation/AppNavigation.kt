@@ -138,21 +138,7 @@ fun AppNavigation() {
             }
         }
     ) { paddingValues ->
-      /*  if (expanded) {
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                // modifier = Modifier.size(200.dp)
-            ) {
-                menuItems.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(item) },
-                        onClick = {
-                            selectedItem = item
-                            expanded = false
-                        }
-                    )
-                }*/
+
                 NavHost(
                     navController = navController,
                     startDestination = Screens.Onboarding.name,
@@ -181,6 +167,7 @@ fun AppNavigation() {
 
                     composable(route = Screens.HomeScreen.name) {
                         displayBottomBar = true
+                        displayTopBar=true
                         displayTopBar=true
                         PreviewscrollableList()
                     }
@@ -219,5 +206,3 @@ fun AppNavigation() {
             }
 
         }
-  //  }
-//}
