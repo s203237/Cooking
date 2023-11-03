@@ -35,7 +35,7 @@ fun RecipePage(recipe: Recipe) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            ImageWithFavIcon(recipe = recipe, false)
+            //ImageWithFavIcon(recipe = recipe, false)
             TabLayout(recipe = recipe)
         }
        /* ImageWithFavIcon(recipe = recipe)

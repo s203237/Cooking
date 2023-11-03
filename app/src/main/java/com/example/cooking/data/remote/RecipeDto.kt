@@ -1,12 +1,12 @@
 package com.example.cooking.data.remote
 
-import kotlinx.serialization.SerialName
+/*import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 @Serializable
 data class RecipeDto(
     @SerialName("_id")
     val id: String
-)
+)*/
 
 
 /* NOTES ON DTO'S (DATA TRANSFER OBJECTS)
