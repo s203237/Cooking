@@ -1,12 +1,39 @@
 package com.example.cooking.data.remote
 
-/*import kotlinx.serialization.SerialName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 @Serializable
 data class RecipeDto(
-    @SerialName("_id")
-    val id: String
-)*/
+    @SerialName("name")
+    val title: String,
+
+    @SerialName("imageSrc")
+    val imageUrl: String,
+
+    val imageDescription: String,
+
+    @SerialName("recipeAuthor")
+    val author: String,
+
+    @SerialName("Prep")
+    val prepTime: Int,
+
+    @SerialName("Cook")
+    val cookingTime: Int,
+
+    @SerialName("portions")
+    val servingSize: Int,
+
+    val difficulty: String,
+
+    val rating: Float,
+
+    @SerialName("description")
+    val recipeDescription: String,
+
+    val ingredients: List<String>,
+    val steps: List<String>
+)
 
 
 /* NOTES ON DTO'S (DATA TRANSFER OBJECTS)

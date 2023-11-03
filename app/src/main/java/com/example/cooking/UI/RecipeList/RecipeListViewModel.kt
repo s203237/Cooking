@@ -18,6 +18,8 @@ class RecipeListViewModel: ViewModel() {
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val recipeCards = DependencyProvider.recipeDataSource.fetchRecipes()
+            Recipe()
+
 
         }
     }
