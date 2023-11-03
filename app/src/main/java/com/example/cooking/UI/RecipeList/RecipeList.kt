@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 package com.example.cooking.UI.RecipeList
 
 import androidx.compose.foundation.Image
@@ -39,7 +39,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 
 @Composable
-fun RecipeList(recipes: List<Recipe> = testRecipes, onNavigateToRecipe: (Int) -> Unit) {
+fun RecipeList(recipes: List<Recipe>, onNavigateToRecipe: (Int) -> Unit) {
     Column  {
 
         Text(
@@ -92,7 +92,7 @@ val testRecipes = RecipeData().loadRecipes()
 @Preview
 @Composable
 fun PreviewRecipeList(){
-RecipeList(onNavigateToRecipe = {})
+RecipeList(emptyList(), onNavigateToRecipe = {})
 }
 
 
