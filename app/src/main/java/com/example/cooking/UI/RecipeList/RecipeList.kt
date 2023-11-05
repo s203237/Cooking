@@ -44,7 +44,6 @@ import com.example.cooking.data.remote.RecipeCard
 @Composable
 fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
     Column  {
-        println("I'm about to print the title")
         Text(
             text = "Recipe List",
             textAlign = TextAlign.Left,
