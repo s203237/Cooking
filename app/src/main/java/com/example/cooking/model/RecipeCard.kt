@@ -41,7 +41,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
                 contentAlignment = Alignment.BottomEnd
             ) {
                 Image(
-                    painter = painterResource(recipe.mainImage),
+                    painter = painterResource(recipe.imageUrl),
                     contentDescription = recipe.imageDescription,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -77,7 +77,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
 fun PreviewRecipeCard(){
     val recipe = Recipe(
         title = "Peach",
-        mainImage = R.drawable.peach,
+        imageUrl = R.drawable.peach,
         imageDescription = "3d rendering of a close-up of a peach with googly eyes",
         prepTime = 10,
         cookingTime = 610,
