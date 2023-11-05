@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import kotlin.system.exitProcess
 
-class RemoteRecipeCardDataSource : RecipeDataSource<List<RecipeCard>> {
+class RemoteRecipeCardsDataSource : RecipeDataSource<List<RecipeCard>> {
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(
             Json {
