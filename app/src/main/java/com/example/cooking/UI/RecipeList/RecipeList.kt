@@ -86,6 +86,8 @@ Column(
             .fillMaxWidth()
             .clickable { onNavigateToRecipe(index) }
         )*/
+    val recipeTitle = recipe.title
+    println("this is the recipe title: $recipeTitle")
     Text(
         text = recipe.title ,
         fontSize = 20.sp,

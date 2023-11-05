@@ -10,9 +10,9 @@ data class RecipeCollection(
 )
 @Serializable
 data class RecipeCard(
-    val recipeId: String = "",
-    @SerialName("name")
-    val title: String = "",
+    val recipeId: String = "defaultId",
+    @SerialName("recipeName")
+    val title: String = "Default title",
     @SerialName("imageSrc")
     val imageUrl: String = "",
     //val imageDescription: String, TODO get image description
