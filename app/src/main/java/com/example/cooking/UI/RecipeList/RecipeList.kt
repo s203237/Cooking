@@ -18,6 +18,7 @@ package com.example.cooking.UI.RecipeList
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,12 +35,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
+import com.example.cooking.data.remote.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<Recipe>, onNavigateToRecipe: (Int) -> Unit) {
+fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
     Column  {
 
         Text(
@@ -58,21 +61,30 @@ fun RecipeList(recipes: List<Recipe>, onNavigateToRecipe: (Int) -> Unit) {
     }
 }
 @Composable
-fun RecipeItem(recipe: Recipe, index: Int, onNavigateToRecipe: (Int) -> Unit){
+fun RecipeItem(recipe: RecipeCard, index: Int, onNavigateToRecipe: (Int) -> Unit){
 
 Column(
     modifier = Modifier
         .fillMaxWidth()
         .padding(10.dp),
 ){
-    Image(painter = painterResource(id= recipe.mainImage),
+    AsyncImage(
+    model = recipe.imageUrl,
+    contentDescription = null, //TODO give content description
+    modifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(0.92f),
+    contentScale = ContentScale.Crop,
+
+    )
+    /*Image(painter = painterResource(id= recipe.imageUrl),
         contentDescription = recipe.title,
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .height(height = 170.dp)
             .fillMaxWidth()
             .clickable { onNavigateToRecipe(index) }
-        )
+        )*/
     Text(
         text = recipe.title ,
         fontSize = 20.sp,
