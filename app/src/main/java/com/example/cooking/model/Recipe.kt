@@ -1,6 +1,5 @@
 package com.example.cooking.model
 
-import androidx.annotation.DrawableRes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 @Serializable
@@ -16,16 +15,12 @@ data class Recipe(
     @SerialName("recipeAuthor")
     val author: String = "Default author",
 
-    @SerialName("timeToCook.Cook")
-    val cookingTime: Int = 0,
-
-    @SerialName("timeToCook.Prep")
-    val prepTime: Int = 0,
+    val timeToCook: TimeToCook = TimeToCook(),
 
     val difficulty: String = "Default difficulty",
 
     @SerialName("portions")
-    val servingSize: Int = 0,
+    val servingSize: String = "0",
 
     val rating: Float = 0f,
 
@@ -47,3 +42,13 @@ data class Recipe(
      val ingredients: List<String> = emptyList(),
      val steps: List<String> = emptyList()*/
 )
+
+@Serializable
+data class TimeToCook (
+    @SerialName("Cook")
+    val cookTime: String = "0 min",
+
+    @SerialName("Prep")
+    val prepTime: String = "0 min",
+
+    )
