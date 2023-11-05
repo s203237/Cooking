@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
+import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.RecipePage
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
@@ -111,13 +112,14 @@ fun AppNavigation(){
                 PreviewSearchBar()
             }
             composable(route=Screens.Favorites.name){
-                RecipeList(
+                ListAllRecipesScreen()
+            /* RecipeList(
                     onNavigateToRecipe = {index ->
                         navController.navigate(
                             route = "Screens.RecipeItem.name/$index"
                         )
                     }
-                )
+                )*/
             }
             composable(route=Screens.Profile.name){
                 ProfileBox()
