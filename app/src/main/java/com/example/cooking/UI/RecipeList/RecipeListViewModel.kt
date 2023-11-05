@@ -16,7 +16,7 @@ class RecipeListViewModel: ViewModel() {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCards = DependencyProvider.recipeCardDataSource.fetchData()
+            val recipeCards = DependencyProvider.recipeCardDataSource.fetchData("breakfast-recipes")
             //val recipeList = com.example.cooking.data.remote.getRecipeCardInstances(recipeCards)
             _recipeCards.value = recipeCards
             //_recipeCards.value = recipeList
