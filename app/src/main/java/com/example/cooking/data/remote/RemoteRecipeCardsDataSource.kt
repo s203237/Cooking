@@ -21,7 +21,7 @@ class RemoteRecipeCardsDataSource : RecipeDataSource<List<RecipeCard>> {
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
         println("Printing just before collection name ")
         try {
-            val recipeCollection = apiService.fetchRecipeCollection("breakfast-recipes")
+            val recipeCollection = apiService.fetchRecipeCollection()
             println("Printing collection name: " + recipeCollection.collectionName)
             return recipeCollection.results
         } catch (e : IOException) {
