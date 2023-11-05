@@ -8,7 +8,7 @@ class RecipeData {
         return listOf(
             Recipe(
                 title = "Pear And Rainbow",
-                mainImage = R.drawable.pear,
+                imageUrl = R.drawable.pear,
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
                 author = "Melissa Woo",
                 prepTime = 20,
@@ -22,7 +22,7 @@ class RecipeData {
             ),
             Recipe(
                 title = "Peach",
-                mainImage = R.drawable.peach,
+                imageUrl = R.drawable.peach,
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
                 author = "Melissa Woo",
                 prepTime = 10,
@@ -36,7 +36,7 @@ class RecipeData {
             ),
             Recipe(
                 title = "Spicy Sichuan Boiled Tofu",
-                mainImage = R.drawable.tofu,
+                imageUrl = R.drawable.tofu,
                 imageDescription = "Picture of shuizhu sichuan boiled tofu dish",
                 author = "Sarah (Woks of Life)",
                 prepTime = 40,
