@@ -28,6 +28,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -129,6 +130,8 @@ fun ProfileScreen(){
             Text(text = "Name", modifier = Modifier.width(100.dp))
             TextField(value = name, onValueChange = {name = it} )
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
 
         Row(
