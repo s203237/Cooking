@@ -1,5 +1,5 @@
 package com.example.cooking.data.remote
 
 interface RecipeDataSource {
-    suspend fun fetchRecipes(): List<String>
+    suspend fun fetchData(): List<String>
 }

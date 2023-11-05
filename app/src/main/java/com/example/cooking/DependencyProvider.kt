@@ -1,11 +1,12 @@
 package com.example.cooking
 
 import com.example.cooking.data.remote.MockRecipeCardDataSource
-//import com.example.cooking.data.remote.MockRecipeDataSource
+import com.example.cooking.data.remote.MockRecipeDataSource
 import com.example.cooking.data.remote.RecipeDataSource
 
 object DependencyProvider {
-    val recipeDataSource: RecipeDataSource = MockRecipeCardDataSource()
+    val recipeDataSource: RecipeDataSource = MockRecipeDataSource()
+    val recipeCardDataSource: RecipeDataSource = MockRecipeCardDataSource()
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

@@ -5,10 +5,14 @@ import com.example.cooking.model.Recipe
 
 class RecipeData {
     fun loadRecipes(): List<Recipe> {
+        val relativePath = "app/src/main/res/drawable"
+        val projectRoot = System.getProperty("user.dir")
+        val fileUrl = "$projectRoot/$relativePath"
+
         return listOf(
             Recipe(
                 title = "Pear And Rainbow",
-                imageUrl = R.drawable.pear,
+                imageUrl = "$fileUrl/peach.png",
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
                 author = "Melissa Woo",
                 prepTime = 20,
@@ -22,7 +26,7 @@ class RecipeData {
             ),
             Recipe(
                 title = "Peach",
-                imageUrl = R.drawable.peach,
+                imageUrl = "$fileUrl/pear.png",
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
                 author = "Melissa Woo",
                 prepTime = 10,
@@ -36,7 +40,7 @@ class RecipeData {
             ),
             Recipe(
                 title = "Spicy Sichuan Boiled Tofu",
-                imageUrl = R.drawable.tofu,
+                imageUrl = "$fileUrl/tofu.jpg",
                 imageDescription = "Picture of shuizhu sichuan boiled tofu dish",
                 author = "Sarah (Woks of Life)",
                 prepTime = 40,

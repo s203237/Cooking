@@ -33,9 +33,10 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
-import com.example.cooking.UI.RecipePage.RecipePage
+import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -79,7 +80,7 @@ fun AppNavigation(){
     ){paddingValues ->
         NavHost(
             navController =navController ,
-            startDestination = Screens.Onboarding.name,
+            startDestination = Screens.RecipeItem.name,
             modifier= Modifier
                 .padding(paddingValues)
         ){
@@ -126,18 +127,20 @@ fun AppNavigation(){
             }
 
 
-            val recipeList = RecipeData().loadRecipes()
+            //val recipeList = RecipeData().loadRecipes()
             composable(
-                route = "Screens.RecipeItem.name/{recipeId}",
-                arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+                route=Screens.RecipeItem.name) {
+                DisplayRecipeScreen()
+                /*route = "Screens.RecipeItem.name/{recipeId}",
+                arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
             ) { backStackEntry ->
-                val recipeId = backStackEntry.arguments?.getInt("recipeId")
+                val recipeId = backStackEntry.arguments?.getString("recipeId")
                 if (recipeId != null) {
-                    RecipePage(recipe = recipeList[recipeId])
+                   DisplayRecipeScreen()
                 } else {
                     // Handle the case where the recipe doesn't exist
                     Text("Recipe not found")
-                }
+                }*/
             }
         }
 

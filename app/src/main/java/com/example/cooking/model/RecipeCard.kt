@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.cooking.R
 
 @Composable
@@ -40,7 +41,16 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
             Box(
                 contentAlignment = Alignment.BottomEnd
             ) {
-                Image(
+                AsyncImage(
+                    model = recipe.imageUrl,
+                    contentDescription = null, //TODO give content description
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(0.92f),
+                    contentScale = ContentScale.Crop,
+
+                    )
+               /* Image(
                     painter = painterResource(recipe.imageUrl),
                     contentDescription = recipe.imageDescription,
                     modifier = Modifier
@@ -48,7 +58,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
                         .aspectRatio(1f),
                     contentScale = ContentScale.Crop,
 
-                    )
+                    )*/
                 Box(
                     modifier = Modifier
                         .padding(22.dp)
@@ -77,7 +87,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
 fun PreviewRecipeCard(){
     val recipe = Recipe(
         title = "Peach",
-        imageUrl = R.drawable.peach,
+        imageUrl = "app/src/main/res/drawable/peach.png",
         imageDescription = "3d rendering of a close-up of a peach with googly eyes",
         prepTime = 10,
         cookingTime = 610,
