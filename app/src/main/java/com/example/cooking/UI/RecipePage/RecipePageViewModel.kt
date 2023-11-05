@@ -17,8 +17,8 @@ class RecipePageViewModel: ViewModel() {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            println("Printing just before calling dependency provider")
             val recipeData = DependencyProvider.recipeDataSource.fetchData().joinToString()
-            Log.v("PrintString", recipeData)
             val recipeInstance = getRecipeInstance(recipeData)
             _recipe.value = recipeInstance
         }

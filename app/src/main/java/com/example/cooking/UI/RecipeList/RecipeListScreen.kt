@@ -8,7 +8,7 @@ import android.util.Log
 @Composable
 fun ListAllRecipesScreen() {
     val viewModel: RecipeListViewModel = viewModel()
-    val recipes by viewModel.recipes.collectAsState()
-    Log.v("Before", "In ListAllRecipesScreen")
+    val recipes by viewModel.recipeCards.collectAsState()
+    println("In ListAllRecipesScreen")
     RecipeList(recipes = recipes, onNavigateToRecipe = {}) //TODO implement onNavigateToRecipe
 }

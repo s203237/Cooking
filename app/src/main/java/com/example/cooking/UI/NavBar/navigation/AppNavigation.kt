@@ -79,8 +79,8 @@ fun AppNavigation(){
         }
     ){paddingValues ->
         NavHost(
-            navController =navController ,
-            startDestination = Screens.RecipeItem.name,
+            navController = navController ,
+            startDestination = Screens.Favorites.name,
             modifier= Modifier
                 .padding(paddingValues)
         ){
@@ -129,9 +129,9 @@ fun AppNavigation(){
 
             //val recipeList = RecipeData().loadRecipes()
             composable(
-                route=Screens.RecipeItem.name) {
-                DisplayRecipeScreen()
-                /*route = "Screens.RecipeItem.name/{recipeId}",
+                //route=Screens.RecipeItem.name
+                //DisplayRecipeScreen()
+                route = "Screens.RecipeItem.name/{recipeId}",
                 arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
             ) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")
@@ -140,7 +140,7 @@ fun AppNavigation(){
                 } else {
                     // Handle the case where the recipe doesn't exist
                     Text("Recipe not found")
-                }*/
+                }
             }
         }
 

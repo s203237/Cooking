@@ -4,11 +4,16 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class RecipeCollection(
+    val collectionName: String = "Default Collection",
+    val results: List<RecipeCard> = emptyList()
+)
+@Serializable
 data class RecipeCard(
-    val recipeId: String,
+    val recipeId: String = "",
     @SerialName("name")
-    val title: String,
+    val title: String = "",
     @SerialName("imageSrc")
-    val imageUrl: String,
+    val imageUrl: String = "",
     //val imageDescription: String, TODO get image description
 )

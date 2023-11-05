@@ -42,9 +42,9 @@ import com.example.cooking.data.RecipeData
 import com.example.cooking.data.remote.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
+fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
     Column  {
-
+        println("I'm about to print the title")
         Text(
             text = "Recipe List",
             textAlign = TextAlign.Left,
@@ -61,7 +61,7 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, index: Int, onNavigateToRecipe: (Int) -> Unit){
+fun RecipeItem(recipe: RecipeCard, index: Int, onNavigateToRecipe: (String) -> Unit){
 
 Column(
     modifier = Modifier
@@ -73,7 +73,8 @@ Column(
     contentDescription = null, //TODO give content description
     modifier = Modifier
         .fillMaxWidth()
-        .aspectRatio(0.92f),
+        .aspectRatio(0.92f)
+        .clickable { onNavigateToRecipe(recipe.recipeId) },
     contentScale = ContentScale.Crop,
 
     )

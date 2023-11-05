@@ -7,8 +7,6 @@ fun getRecipeInstance(recipeJson: String): Recipe {
 }
 
 fun getRecipeCardInstances(recipesListJson: List<String>): List<RecipeCard> {
-    //val recipeString = recipesListJson.joinToString() //TODO figure out how not to have to make it a single string
-    //return Json.decodeFromString(recipeString)
     val recipeCards = mutableListOf<RecipeCard>()
     for(recipe in recipesListJson)
         recipeCards.add(Json.decodeFromString(recipe))

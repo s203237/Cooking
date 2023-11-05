@@ -2,11 +2,15 @@ package com.example.cooking
 
 import com.example.cooking.data.remote.MockRecipeCardDataSource
 import com.example.cooking.data.remote.MockRecipeDataSource
+import com.example.cooking.data.remote.RecipeCard
+import com.example.cooking.data.remote.RecipeCollection
 import com.example.cooking.data.remote.RecipeDataSource
+import com.example.cooking.data.remote.RemoteRecipeCardDataSource
 
 object DependencyProvider {
-    val recipeDataSource: RecipeDataSource = MockRecipeDataSource()
-    val recipeCardDataSource: RecipeDataSource = MockRecipeCardDataSource()
+    val recipeDataSource: RecipeDataSource<List<String>> = MockRecipeDataSource()
+   // val recipeCardDataSource: RecipeDataSource<List<String>> = MockRecipeCardDataSource()
+    val recipeCardDataSource: RecipeDataSource<List<RecipeCard>> = RemoteRecipeCardDataSource()
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
