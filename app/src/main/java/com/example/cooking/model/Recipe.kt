@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 @Serializable
 data class Recipe(
+    val recipeId: String = "defaultId",
     @SerialName("name")
     val title: String = "Default title",
 
