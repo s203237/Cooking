@@ -4,7 +4,7 @@ enum class Screens {
     Onboarding,
     AccountCreation,
     HomeScreen,
-    Favorites,
+    RecipeList,
     SearchScreen,
     Profile,
     RecipeItem

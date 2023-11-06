@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun DisplayRecipeScreen() {
+fun DisplayRecipeScreen(/*recipeId: String*/) {
     val viewModel: RecipePageViewModel = viewModel()
     val recipe by viewModel.recipe.collectAsState()
     RecipePage(recipe = recipe)

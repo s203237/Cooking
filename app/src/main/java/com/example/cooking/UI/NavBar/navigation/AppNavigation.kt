@@ -1,6 +1,5 @@
 package com.example.cooking.UI.NavBar.navigation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -21,21 +20,16 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
-import com.example.cooking.UI.Login.TempLoginPage
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
-import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
-import com.example.cooking.data.RecipeData
-import com.example.cooking.model.RecipeCard
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,7 +74,7 @@ fun AppNavigation(){
     ){paddingValues ->
         NavHost(
             navController = navController ,
-            startDestination = Screens.Favorites.name,
+            startDestination = Screens.RecipeList.name,
             modifier= Modifier
                 .padding(paddingValues)
         ){
@@ -112,7 +106,7 @@ fun AppNavigation(){
                 //SearchPage()
                 PreviewSearchBar()
             }
-            composable(route=Screens.Favorites.name){
+            composable(route=Screens.RecipeList.name){
                 ListAllRecipesScreen()
             /* RecipeList(
                     onNavigateToRecipe = {index ->

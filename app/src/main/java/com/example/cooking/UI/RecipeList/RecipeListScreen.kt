@@ -10,5 +10,6 @@ fun ListAllRecipesScreen() {
     val viewModel: RecipeListViewModel = viewModel()
     val recipes by viewModel.recipeCards.collectAsState()
     println("In ListAllRecipesScreen")
-    RecipeList(recipes = recipes, onNavigateToRecipe = {}) //TODO implement onNavigateToRecipe
+    RecipeList(recipes = recipes, onNavigateToRecipe = {/*recipeId -> viewModel.getCollectionName()}, onRecipeFavored = viewModel::getCollectionName*/}) //TODO implement onNavigateToRecipe
+
 }

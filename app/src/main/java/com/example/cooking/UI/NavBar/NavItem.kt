@@ -30,7 +30,7 @@ val listOfNavItem: List<NavItem> = listOf(
     NavItem(
         label="Favorites",
         icon= Icons.Default.Favorite,
-        route= Screens.Favorites.name
+        route= Screens.RecipeList.name
 
     ),
     NavItem(
