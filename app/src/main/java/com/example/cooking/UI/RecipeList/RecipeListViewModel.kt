@@ -3,7 +3,7 @@ package com.example.cooking.UI.RecipeList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.data.remote.RecipeCard
+import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,7 +1,6 @@
 package com.example.cooking
 
-import com.example.cooking.data.remote.MockRecipeDataSource
-import com.example.cooking.data.remote.RecipeCard
+import com.example.cooking.model.RecipeCard
 import com.example.cooking.data.remote.RecipeDataSource
 import com.example.cooking.data.remote.RemoteRecipeCardsDataSource
 import com.example.cooking.data.remote.RemoteRecipeDataSource

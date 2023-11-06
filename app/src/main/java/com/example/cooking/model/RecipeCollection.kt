@@ -1,4 +1,4 @@
-package com.example.cooking.data.remote
+package com.example.cooking.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

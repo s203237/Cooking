@@ -1,5 +1,6 @@
 package com.example.cooking.data.remote
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCollection
 import retrofit2.http.GET
 import retrofit2.http.Path
 

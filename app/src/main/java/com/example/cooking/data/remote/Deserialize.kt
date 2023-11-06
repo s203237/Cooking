@@ -1,5 +1,6 @@
 package com.example.cooking.data.remote
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
 import kotlinx.serialization.json.Json
 
 fun getRecipeInstance(recipeJson: String): Recipe {
