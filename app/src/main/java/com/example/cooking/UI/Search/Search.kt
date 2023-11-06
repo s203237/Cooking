@@ -47,17 +47,42 @@ import com.example.cooking.R
 
 
 
+
+@Composable
+fun SearchBar() {
+    val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+
+    ) {
+        // First Part (SearchBar)
+        //SearchBar(modifier = Modifier.weight(1f))
+        // Spacer to create a division
+        SearchBox(query = searchQuery, onQueryChange = { newQuery ->
+            setSearchQuery(newQuery)
+        } , onSearch = { /*TODO*/ },
+           // active = true, // Or false based on your needs
+            //onActiveChange = { isActive ->
+                // Handle active state change here
+            //}
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 100.dp) // Add padding from the top of the screen
+                .background(Color.White)
+
+        ) {
+            DisplayTextBoxes()
+        }
+
+    }
 @Preview
 @Composable
 fun PreviewSearchBar(){
-
-    SearchBar(modifier = Modifier.fillMaxSize())
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 70.dp) // Add padding from the top of the screen
-    ) {
-        DisplayTextBoxes()
-    }
-
+    SearchBar()
 }

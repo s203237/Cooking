@@ -33,7 +33,6 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipePage.RecipePage
-import com.example.cooking.UI.Search.SearchPage
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
 
@@ -108,7 +107,8 @@ fun AppNavigation(){
                 PreviewscrollableList()
             }
             composable(route=Screens.SearchScreen.name){
-                SearchPage()
+                //SearchPage()
+                PreviewSearchBar()
             }
             composable(route=Screens.Favorites.name){
                 RecipeList(

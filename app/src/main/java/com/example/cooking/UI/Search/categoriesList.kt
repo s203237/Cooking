@@ -10,8 +10,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CategoriesList(): List<String>{
     return listOf(
-        "Salads" , "Desert" , "Dinner" ,
-        "Breakfast" , "Under 45 min" , "1 hour",
+        "Salads" , "Dessert" , "Dinner" ,
+        "Healthy" , "Pasta" , "Sides" ,
+        "Breakfast" , "Easy" , "Under 45 min" , "1 hour",
 
     )
 
