@@ -20,7 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
-import com.example.cooking.UI.Homepage.PreviewscrollableList
+//import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.Login.TempLoginPage
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
@@ -106,7 +107,8 @@ fun AppNavigation(){
 
             composable(route=Screens.HomeScreen.name){
                 displayBottomBar = true
-                PreviewscrollableList()
+                //PreviewscrollableList()
+                HomepageScreen()
             }
             composable(route=Screens.SearchScreen.name){
                 //SearchPage()
