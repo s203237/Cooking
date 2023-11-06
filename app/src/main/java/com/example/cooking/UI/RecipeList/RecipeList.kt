@@ -52,15 +52,15 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
 
         )
         LazyColumn {
-            itemsIndexed(recipes) { index, recipe ->
-                RecipeItem(recipe, index, onNavigateToRecipe)
+            items(recipes) { recipe ->
+                RecipeItem(recipe, onNavigateToRecipe)
 
             }
         }
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, index: Int, onNavigateToRecipe: (String) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
 
 Column(
     modifier = Modifier
