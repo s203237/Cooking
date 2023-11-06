@@ -29,7 +29,7 @@ data class Recipe(
     val recipeDescription: String = "Default description",
 
     val ingredients: List<String> = emptyList(),
-    val steps: List<String> = emptyList()
+    val steps: Map<String,String> = emptyMap()
     /* val title: String = "Default Title",
      @DrawableRes val imageUrl: Int = 0,
      val imageDescription: String = "",
@@ -42,6 +42,12 @@ data class Recipe(
      val recipeDescription: String = "Default Description",
      val ingredients: List<String> = emptyList(),
      val steps: List<String> = emptyList()*/
+)
+
+@Serializable
+data class Steps (
+    @SerialName("id")
+    val id: Int
 )
 
 @Serializable
