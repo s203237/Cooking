@@ -15,18 +15,15 @@ import kotlinx.coroutines.launch
 class RecipePageViewModel: ViewModel() {
     private val _recipe = MutableStateFlow(Recipe())
     val recipe = _recipe.asStateFlow()
+    val recipeId = "miso-butternut-soup"
     init {
         viewModelScope.launch(Dispatchers.IO) {
             println("Printing just before calling dependency provider")
-            val recipeData = DependencyProvider.recipeDataSource.fetchData("miso-butter-soup")
+            val recipeData = DependencyProvider.recipeDataSource.fetchData(recipeId)
             _recipe.value = recipeData
         //val recipeInstance = getRecipeInstance(recipeData)
             //_recipe.value = recipeInstance
         }
-    }
-
-    fun getRecipeId() {
-
     }
 
 

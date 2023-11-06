@@ -6,10 +6,15 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import android.util.Log
 @Composable
-fun ListAllRecipesScreen() {
+fun ListAllRecipesScreen(onNavigateToRecipe: (String) -> Unit) {
     val viewModel: RecipeListViewModel = viewModel()
     val recipes by viewModel.recipeCards.collectAsState()
     println("In ListAllRecipesScreen")
-    RecipeList(recipes = recipes, onNavigateToRecipe = {/*recipeId -> viewModel.getCollectionName()}, onRecipeFavored = viewModel::getCollectionName*/}) //TODO implement onNavigateToRecipe
+    RecipeList(
+        recipes = recipes,
+        onNavigateToRecipe = onNavigateToRecipe /*{recipeId -> viewModel.getCollectionName()},
+        onRecipeFavored = viewModel::getCollectionName*/
+
+    ) //TODO implement onNavigateToRecipe
 
 }

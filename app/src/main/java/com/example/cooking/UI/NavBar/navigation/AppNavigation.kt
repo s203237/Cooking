@@ -107,7 +107,11 @@ fun AppNavigation(){
                 PreviewSearchBar()
             }
             composable(route=Screens.RecipeList.name){
-                ListAllRecipesScreen()
+                ListAllRecipesScreen(onNavigateToRecipe = { recipeId ->
+                    navController.navigate(
+                        route = "Screens.RecipeItem.name/$recipeId"
+                    )
+                })
             /* RecipeList(
                     onNavigateToRecipe = {index ->
                         navController.navigate(
@@ -130,7 +134,7 @@ fun AppNavigation(){
             ) { backStackEntry ->
                 val recipeId = backStackEntry.arguments?.getString("recipeId")
                 if (recipeId != null) {
-                   DisplayRecipeScreen()
+                   DisplayRecipeScreen(recipeId)
                 } else {
                     // Handle the case where the recipe doesn't exist
                     Text("Recipe not found")

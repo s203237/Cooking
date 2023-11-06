@@ -73,7 +73,9 @@ Column(
     modifier = Modifier
         .fillMaxWidth()
         .aspectRatio(0.92f)
-        .clickable { onNavigateToRecipe(recipe.recipeId) },
+        .clickable {
+            onNavigateToRecipe(recipe.recipeId)
+                   },
     contentScale = ContentScale.Crop,
 
     )
