@@ -16,7 +16,6 @@
 package com.example.cooking.UI.RecipeList
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -63,7 +62,7 @@ Column(
         imageUrl = recipe.imageUrl,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = {},
-        cardFormat = CardFormats.RECT_LANDSCAPE
+        cardFormat = CardFormats.LANDSCAPE
     )
     Text(
         text = recipe.title ,

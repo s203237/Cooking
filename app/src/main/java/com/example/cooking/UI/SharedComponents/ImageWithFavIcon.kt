@@ -70,8 +70,8 @@ fun ImageWithFavIcon(
     ) {
         val aspectRatio: Float = when(cardFormat) {
             CardFormats.SQUARE -> 1f
-            CardFormats.RECT_LANDSCAPE -> 2f
-            CardFormats.RECT_PORTRAIT -> 0.92f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 0.92f
         }
 
         AsyncImage(
@@ -108,7 +108,7 @@ fun previewImageWithFavIconRectPort() {
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
-        CardFormats.RECT_PORTRAIT
+        CardFormats.PORTRAIT
     )
 }
 
@@ -120,7 +120,7 @@ fun previewImageWithFavIconRectLand() {
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
-        CardFormats.RECT_LANDSCAPE
+        CardFormats.LANDSCAPE
     )
 }
 

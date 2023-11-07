@@ -41,7 +41,7 @@ fun RecipePage(recipe: Recipe) {
                 imageUrl = recipe.imageUrl,
                 {},
                 {},
-                CardFormats.RECT_PORTRAIT
+                CardFormats.PORTRAIT
             )
             TabLayout(recipe = recipe)
         }
