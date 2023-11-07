@@ -112,7 +112,7 @@ fun AppNavigation(){
             ){//backStackEntry ->
                // val collectionName = backStackEntry.arguments?.getString("collectionName")
                // if(collectionName != null) {
-                    ListAllRecipesScreen("breakfast-recipes",
+                    ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                     })
