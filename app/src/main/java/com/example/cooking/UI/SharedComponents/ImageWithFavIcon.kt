@@ -63,51 +63,29 @@ fun ImageWithFavIcon(
     imageUrl: String,
     onNavigateToRecipe: (String) -> Unit,
     onFavoriteButtonClicked: (String) -> Unit,
-    isSquare: Boolean
+    cardFormat: CardFormats
 ) {
     Box(
        // contentAlignment = Alignment.BottomEnd
     ) {
-        if(isSquare) {
-            AsyncImage(
-                model = imageUrl,
-                contentDescription = null, //TODO give content description
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .clickable {
-                        onNavigateToRecipe(recipeId)
-                    },
-                contentScale = ContentScale.Crop,
-
-                )
-
-
-
-        } else {
-           /* AsyncImage(
-                model = imageUrl,
-                contentDescription = null, //TODO give content description
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(0.92f),
-                contentScale = ContentScale.Crop,
-
-                )*/
-
-            AsyncImage(
-                model = imageUrl,
-                contentDescription = null, //TODO give content description
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(0.92f)
-                    .clickable {
-                        onNavigateToRecipe(recipeId)
-                    },
-                contentScale = ContentScale.Crop,
-
-                )
+        val aspectRatio: Float = when(cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.RECT_LANDSCAPE -> 2f
+            CardFormats.RECT_PORTRAIT -> 0.92f
         }
+
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = null, //TODO give content description
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatio)
+                .clickable {
+                    onNavigateToRecipe(recipeId)
+                },
+            contentScale = ContentScale.Crop,
+
+            )
 
         Box(
             contentAlignment = Alignment.BottomEnd,
@@ -124,19 +102,37 @@ fun ImageWithFavIcon(
 
 @Preview
 @Composable
-fun previewImageWithFavIconRect() {
+fun previewImageWithFavIconRectPort() {
     ImageWithFavIcon(
         "spiced-lentil-spinach-pies",
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
-        false
+        CardFormats.RECT_PORTRAIT
     )
 }
 
-/*@Preview
+@Preview
+@Composable
+fun previewImageWithFavIconRectLand() {
+    ImageWithFavIcon(
+        "spiced-lentil-spinach-pies",
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        {},
+        {},
+        CardFormats.RECT_LANDSCAPE
+    )
+}
+
+@Preview
 @Composable
 fun previewImageWithFavIconSqr() {
-    val recipeList = RecipeData().loadRecipes()
-   // ImageWithFavIcon(recipe = recipeList[0], true)
-}*/
+    ImageWithFavIcon(
+        "spiced-lentil-spinach-pies",
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        {},
+        {},
+        CardFormats.SQUARE
+    )
+}
+

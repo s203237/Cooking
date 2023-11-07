@@ -23,6 +23,7 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.CustomHeading1
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.example.cooking.UI.SharedComponents.CardFormats
 
 @Composable
 fun RecipePage(recipe: Recipe) {
@@ -40,7 +41,7 @@ fun RecipePage(recipe: Recipe) {
                 imageUrl = recipe.imageUrl,
                 {},
                 {},
-                false
+                CardFormats.RECT_PORTRAIT
             )
             TabLayout(recipe = recipe)
         }

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
@@ -54,16 +55,15 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
 fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
 
 Column(
-    modifier = Modifier
-        .fillMaxWidth()
-        .padding(10.dp),
+   /* modifier = Modifier
+        .fillMaxWidth()*/
 ){
     ImageWithFavIcon(
         recipeId = recipe.recipeId,
         imageUrl = recipe.imageUrl,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = {},
-        isSquare = true
+        cardFormat = CardFormats.RECT_LANDSCAPE
     )
     Text(
         text = recipe.title ,
