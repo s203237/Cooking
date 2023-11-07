@@ -36,7 +36,8 @@ import com.example.cooking.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountCreationPage(onNavigateToHomeScreen: () -> Unit) {
+fun AccountCreationPage(
+    onNavigateToHomeScreen: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
