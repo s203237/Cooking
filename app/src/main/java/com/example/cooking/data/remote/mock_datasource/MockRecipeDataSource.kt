@@ -1,4 +1,6 @@
-package com.example.cooking.data.remote
+package com.example.cooking.data.remote.mock_datasource
+
+import com.example.cooking.data.remote.RecipeDataSource
 
 class MockRecipeDataSource: RecipeDataSource<List<String>> {
     override suspend fun fetchData(path: String) = listOf(

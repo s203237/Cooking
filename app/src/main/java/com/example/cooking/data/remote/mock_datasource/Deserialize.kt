@@ -1,4 +1,4 @@
-package com.example.cooking.data.remote
+package com.example.cooking.data.remote.mock_datasource
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import kotlinx.serialization.json.Json

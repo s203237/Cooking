@@ -5,7 +5,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.data.remote.getRecipeInstance
+import com.example.cooking.data.remote.mock_datasource.getRecipeInstance
 import com.example.cooking.model.Recipe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
