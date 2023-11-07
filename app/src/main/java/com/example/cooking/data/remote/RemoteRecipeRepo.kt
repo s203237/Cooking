@@ -8,17 +8,8 @@ import retrofit2.HttpException
 import retrofit2.Retrofit
 import java.io.IOException
 
-class RemoteRecipeDataSource: RecipeDataSource<Recipe> {
-    private val retrofit = Retrofit.Builder()
-        .addConverterFactory(
-            Json {
-               ignoreUnknownKeys = true
-            }.asConverterFactory("application/json".toMediaType())
-        )
-        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
-        .build()
-
-    private val apiService = retrofit.create(ApiService::class.java)
+class RemoteRecipeRepo(apiService: ApiService) : RecipeDataSource<Recipe> {
+    private val apiService = apiService
     override suspend fun fetchData(path: String): Recipe {
         try {
             return apiService.fetchRecipeById(path)

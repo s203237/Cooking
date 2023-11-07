@@ -8,17 +8,8 @@ import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 import java.io.IOException
 
-class RemoteRecipeCardsDataSource : RecipeDataSource<List<RecipeCard>> {
-    private val retrofit = Retrofit.Builder()
-        .addConverterFactory(
-            Json {
-                ignoreUnknownKeys = true
-            }.asConverterFactory("application/json".toMediaType())
-        )
-        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
-        .build()
-
-    private val apiService = retrofit.create(ApiService::class.java)
+class RemoteRecipeCardsRepo(apiService: ApiService) : RecipeDataSource<List<RecipeCard>> {
+    private val apiService = apiService
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
         println("Printing just before collection name ")
         try {
