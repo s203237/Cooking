@@ -91,7 +91,7 @@ fun ImageWithFavIcon(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .aspectRatio(aspectRatio)
                 .padding(16.dp)
         ) {
             DisplayFavButton()
@@ -102,7 +102,7 @@ fun ImageWithFavIcon(
 
 @Preview
 @Composable
-fun previewImageWithFavIconRectPort() {
+fun previewImageWithFavIconPortrait() {
     ImageWithFavIcon(
         "spiced-lentil-spinach-pies",
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
@@ -114,7 +114,7 @@ fun previewImageWithFavIconRectPort() {
 
 @Preview
 @Composable
-fun previewImageWithFavIconRectLand() {
+fun previewImageWithFavIconLandscape() {
     ImageWithFavIcon(
         "spiced-lentil-spinach-pies",
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
