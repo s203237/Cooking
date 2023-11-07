@@ -121,6 +121,19 @@ fun AppNavigation(){
                 }*/
             }
 
+            composable(
+                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+            ){backStackEntry ->
+                 val collectionName = backStackEntry.arguments?.getString("collectionName")
+                 if(collectionName != null) {
+                ListAllRecipesScreen(collectionName,
+                    onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    })
+                } else {
+                    Text("Collection not found")
+                }
+            }
 
             composable(route=Screens.Profile.name){
                 ProfileBox()
