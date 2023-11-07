@@ -2,8 +2,8 @@ package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
 import com.example.cooking.data.remote.RecipeDataSource
-import com.example.cooking.data.remote.RemoteRecipeCardsRepo
-import com.example.cooking.data.remote.RemoteRecipeRepo
+import com.example.cooking.data.remote.RecipeCardsRepo
+import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -23,10 +23,10 @@ object DependencyProvider {
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    val recipeDataSource: RecipeDataSource<Recipe> = RemoteRecipeRepo(apiService)
+    val recipeDataSource: RecipeDataSource<Recipe> = RecipesRepo(apiService)
    // val recipeDataSource: RecipeDataSource<List<String>> = MockRecipeDataSource()
    // val recipeCardDataSource: RecipeDataSource<List<String>> = MockRecipeCardDataSource()
-    val recipeCardDataSource: RecipeDataSource<List<RecipeCard>> = RemoteRecipeCardsRepo(apiService)
+    val recipeCardDataSource: RecipeDataSource<List<RecipeCard>> = RecipeCardsRepo(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
