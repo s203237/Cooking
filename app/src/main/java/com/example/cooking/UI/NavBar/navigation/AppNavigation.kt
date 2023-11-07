@@ -1,6 +1,5 @@
 package com.example.cooking.UI.NavBar.navigation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -21,28 +20,33 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
-import com.example.cooking.UI.Login.TempLoginPage
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.example.cooking.R
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipePage.RecipePage
 import com.example.cooking.data.RecipeData
-import com.example.cooking.model.RecipeCard
+import java.lang.Exception
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun AppNavigation(){
-    val navController= rememberNavController()
+fun AppNavigation() {
+    val navController = rememberNavController()
+    try {
+        Navigator.navController = navController
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
     var displayBottomBar by remember { mutableStateOf(false) }
-    Scaffold (
+    Scaffold(
         bottomBar = {
             if (displayBottomBar) {
                 NavigationBar() {
@@ -74,14 +78,15 @@ fun AppNavigation(){
                     }
                 }
             }
-        }
-    ){paddingValues ->
+        },
+
+    ) { paddingValues ->
         NavHost(
-            navController =navController ,
+            navController = navController,
             startDestination = Screens.Onboarding.name,
-            modifier= Modifier
+            modifier = Modifier
                 .padding(paddingValues)
-        ){
+        ) {
             composable(route = Screens.Onboarding.name) {
                 OnBoardingPage(
                     onNavigateToAccountCreation = {
@@ -94,6 +99,7 @@ fun AppNavigation(){
 
             composable(route = Screens.AccountCreation.name) {
                 AccountCreationPage(
+
                     onNavigateToHomeScreen = {
                         navController.navigate(
                             route = Screens.HomeScreen.name
@@ -101,29 +107,26 @@ fun AppNavigation(){
                     }
                 )
             }
-
-            composable(route=Screens.HomeScreen.name){
+            composable(route = Screens.HomeScreen.name) {
                 displayBottomBar = true
                 PreviewscrollableList()
             }
-            composable(route=Screens.SearchScreen.name){
+            composable(route = Screens.SearchScreen.name) {
                 //SearchPage()
                 PreviewSearchBar()
             }
-            composable(route=Screens.Favorites.name){
+            composable(route = Screens.Favorites.name) {
                 RecipeList(
-                    onNavigateToRecipe = {index ->
+                    onNavigateToRecipe = { index ->
                         navController.navigate(
                             route = "Screens.RecipeItem.name/$index"
                         )
                     }
                 )
             }
-            composable(route=Screens.Profile.name){
+            composable(route = Screens.Profile.name) {
                 ProfileBox()
             }
-
-
             val recipeList = RecipeData().loadRecipes()
             composable(
                 route = "Screens.RecipeItem.name/{recipeId}",
@@ -142,3 +145,9 @@ fun AppNavigation(){
     }
 
 }
+
+
+
+
+
+

@@ -26,6 +26,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -38,10 +40,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 //import coil.compose.rememberAsyncImagePainter
 import com.example.cooking.R
@@ -49,36 +53,31 @@ import com.example.cooking.R
 
 @Composable
 fun MyPrivacy() {
-        Button(
-            modifier = Modifier.padding(70.dp),
-            onClick = {}
-        ) {
-            Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
-        }
+    Button(
+        modifier = Modifier.padding(70.dp),
+        onClick = {}
+    ) {
+        Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
     }
+}
 
 
 @Composable
 fun MyHelp() {
-        Button(
-            modifier = Modifier.padding(10.dp),
-            onClick = {}
-        ) {
-            Text("Help", fontSize = 30.sp, fontWeight = FontWeight.Bold)
-        }
+    Button(
+        modifier = Modifier.padding(10.dp),
+        onClick = {}
+    ) {
+        Text("Help", fontSize = 30.sp, fontWeight = FontWeight.Bold)
     }
-
-
+}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileBox(){
-
-
-
-
-    val notification = rememberSaveable{ mutableStateOf("") }
+fun ProfileBox() {
+    val navController = rememberNavController()
+    val notification = rememberSaveable { mutableStateOf("") }
     if (notification.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
         notification.value = ""
@@ -88,18 +87,38 @@ fun ProfileBox(){
     var email by rememberSaveable { mutableStateOf("Default Email") }
 
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())
-        .background(color = Color(0xffB8C75E))
-    ){
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(color = Color(0xffB8C75E))
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Account Settings", fontSize = 20.sp)
-            Text(text = "Logout", modifier = Modifier.clickable { notification.value = "You logged out"  })
+            Column {
+                Row{
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.arrow_back),
+                        contentDescription = "",
+                        tint = Color.Black,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+                //Spacer(modifier = Modifier.width(10.dp))
+                Text(text = "Account Settings", fontSize = 20.sp)
+            }
+            }
+            Column {
+                Text(
+                    text = "Logout",
+                    modifier = Modifier.clickable { notification.value = "You logged out" })
+            }
 
 
         }
@@ -109,9 +128,9 @@ fun ProfileBox(){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 4.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Text(text = "Name", modifier = Modifier.width(100.dp))
-            TextField(value = name, onValueChange = {name = it} )
+            TextField(value = name, onValueChange = { name = it })
         }
 
 
@@ -119,9 +138,9 @@ fun ProfileBox(){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 4.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Text(text = "Email", modifier = Modifier.width(100.dp))
-            TextField(value = email, onValueChange = {email = it} )
+            TextField(value = email, onValueChange = { email = it })
         }
 
         Row(
@@ -129,7 +148,7 @@ fun ProfileBox(){
                 .fillMaxWidth()
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
-        ){
+        ) {
 
             FavouriteImage()
             CommentImage()
@@ -137,10 +156,12 @@ fun ProfileBox(){
 
 
         }
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .padding(2.dp),
-            verticalArrangement = Arrangement.SpaceEvenly) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(2.dp),
+            verticalArrangement = Arrangement.SpaceEvenly
+        ) {
             MyHelp()
             Spacer(modifier = Modifier.height(10.dp))
             MyPrivacy()
@@ -150,26 +171,26 @@ fun ProfileBox(){
     }
 
 }
+
 @Composable
-fun ProfileButtons(){
+fun ProfileButtons() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(60.dp)
 
-    ){
+    ) {
         Spacer(modifier = Modifier.height(20.dp))
         MyHelp()
         Spacer(modifier = Modifier.height(20.dp))
-        MyPrivacy()}
+        MyPrivacy()
+    }
 }
-
-
 
 
 @Preview
 @Composable
-fun PreviewBox(){
+fun PreviewBox() {
     ProfileBox()
 }
 
@@ -185,8 +206,8 @@ fun ProfileImage() {
     )
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ){ uri: Uri? ->
-        uri?.let{ imageUri.value = it.toString() }
+    ) { uri: Uri? ->
+        uri?.let { imageUri.value = it.toString() }
 
 
     }
@@ -209,7 +230,8 @@ fun ProfileImage() {
                 modifier = Modifier
                     .wrapContentSize()
                     .clickable { launcher.launch("image/*") },
-                contentScale = ContentScale.Crop)
+                contentScale = ContentScale.Crop
+            )
 
         }
         Text(text = "Change Profile Picture")
@@ -227,16 +249,16 @@ fun CommentImage() {
     )
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ){ uri: Uri? ->
-        uri?.let{ imageUri.value = it.toString() }
+    ) { uri: Uri? ->
+        uri?.let { imageUri.value = it.toString() }
 
 
     }
 
     Column(
         //modifier = Modifier
-            //.padding(80.dp)
-            //.fillMaxWidth(0.33f),
+        //.padding(80.dp)
+        //.fillMaxWidth(0.33f),
         horizontalAlignment = Alignment.CenterHorizontally,
         //verticalArrangement = Arrangement.Bottom
     ) {
@@ -252,7 +274,8 @@ fun CommentImage() {
                 modifier = Modifier
                     .wrapContentSize()
                     .clickable { launcher.launch("image/*") },
-                contentScale = ContentScale.Crop)
+                contentScale = ContentScale.Crop
+            )
 
         }
         Text(text = "Created")
@@ -270,16 +293,16 @@ fun FavouriteImage() {
     )
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ){ uri: Uri? ->
-        uri?.let{ imageUri.value = it.toString() }
+    ) { uri: Uri? ->
+        uri?.let { imageUri.value = it.toString() }
 
 
     }
 
     Column(
         //modifier = Modifier
-            //.padding(80.dp)
-            //.fillMaxWidth(0.33f),
+        //.padding(80.dp)
+        //.fillMaxWidth(0.33f),
         horizontalAlignment = Alignment.CenterHorizontally,
         //verticalArrangement = Arrangement.Bottom
     ) {
@@ -295,7 +318,8 @@ fun FavouriteImage() {
                 modifier = Modifier
                     .wrapContentSize()
                     .clickable { launcher.launch("image/*") },
-                contentScale = ContentScale.Crop)
+                contentScale = ContentScale.Crop
+            )
 
         }
         Text(text = "Comments")
@@ -313,18 +337,18 @@ fun CreateImage() {
     )
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
-    ){ uri: Uri? ->
-        uri?.let{ imageUri.value = it.toString() }
+    ) { uri: Uri? ->
+        uri?.let { imageUri.value = it.toString() }
 
 
     }
 
     Column(
-       //modifier = Modifier
-            //.padding(80.dp)
-            //.fillMaxWidth(),
+        //modifier = Modifier
+        //.padding(80.dp)
+        //.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-       // verticalArrangement = Arrangement.Bottom
+        // verticalArrangement = Arrangement.Bottom
     ) {
         Card(
             shape = CircleShape,
@@ -338,7 +362,8 @@ fun CreateImage() {
                 modifier = Modifier
                     .wrapContentSize()
                     .clickable { launcher.launch("image/*") },
-                contentScale = ContentScale.Crop)
+                contentScale = ContentScale.Crop
+            )
 
         }
         Text(text = "Favourite")
