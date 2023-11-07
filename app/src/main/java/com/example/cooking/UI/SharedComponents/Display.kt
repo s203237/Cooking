@@ -2,6 +2,7 @@ package com.example.cooking.UI.SharedComponents
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +28,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.cooking.model.RecipeCard
+
 @Composable
 fun DisplayFavButton() {
     var isFavorite by remember { mutableStateOf(false) }
@@ -60,9 +63,13 @@ fun DisplayFavButton() {
 }
 
 @Composable
-fun ImageWithFavIcon(imageUrl: String, onFavoriteButtonClicked: (String) -> Unit, isSquare: Boolean) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
+fun ImageWithFavIcon(
+    recipeId: String,
+    imageUrl: String,
+    onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit,
+    isSquare: Boolean
+) {
     Box(
        // contentAlignment = Alignment.BottomEnd
     ) {
@@ -72,21 +79,18 @@ fun ImageWithFavIcon(imageUrl: String, onFavoriteButtonClicked: (String) -> Unit
                 contentDescription = null, //TODO give content description
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f),
+                    .aspectRatio(1f)
+                    .clickable {
+                        onNavigateToRecipe(recipeId)
+                    },
                 contentScale = ContentScale.Crop,
 
                 )
-            /*Image(
-                painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.imageDescription,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop,
 
-                )*/
+
+
         } else {
-            AsyncImage(
+           /* AsyncImage(
                 model = imageUrl,
                 contentDescription = null, //TODO give content description
                 modifier = Modifier
@@ -94,16 +98,20 @@ fun ImageWithFavIcon(imageUrl: String, onFavoriteButtonClicked: (String) -> Unit
                     .aspectRatio(0.92f),
                 contentScale = ContentScale.Crop,
 
-                )
-           /* Image(
-                painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.imageDescription,
+                )*/
+
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = null, //TODO give content description
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(0.92f),
+                    .aspectRatio(0.92f)
+                    .clickable {
+                        onNavigateToRecipe(recipeId)
+                    },
                 contentScale = ContentScale.Crop,
 
-                )*/
+                )
         }
 
         Box(
@@ -122,8 +130,13 @@ fun ImageWithFavIcon(imageUrl: String, onFavoriteButtonClicked: (String) -> Unit
 @Preview
 @Composable
 fun previewImageWithFavIconRect() {
-    ImageWithFavIcon("https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
-        { }, false)
+    ImageWithFavIcon(
+        "spiced-lentil-spinach-pies",
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        {},
+        {},
+        false
+    )
 }
 
 /*@Preview
