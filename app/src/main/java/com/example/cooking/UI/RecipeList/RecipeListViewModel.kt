@@ -1,5 +1,6 @@
 package com.example.cooking.UI.RecipeList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -13,13 +14,21 @@ class RecipeListViewModel: ViewModel() {
 
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
-    private val collectionName = "easy-vegetarian-recipes"
+    private val _collectionName = MutableStateFlow("")
+
+    fun updateCollectionName(newCollectionName: String) {
+        _collectionName.value = newCollectionName
+        val printOutValue = _collectionName.value
+        Log.v("CollectionName Trace", "In updateCollectionName: $printOutValue")
+
+    }
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCards = DependencyProvider.recipeCardDataSource.fetchData(collectionName)
-            //val recipeList = com.example.cooking.data.remote.getRecipeCardInstances(recipeCards)
-            _recipeCards.value = recipeCards
-            //_recipeCards.value = recipeList
+            _collectionName.collect{newCollectionName ->
+                Log.v("CollectionName Trace", "CollectionName in viewModel.launch: $newCollectionName")
+                val recipeCards = DependencyProvider.recipeCardDataSource.fetchData(_collectionName.value)
+                _recipeCards.value = recipeCards
+            }
 
         }
     }

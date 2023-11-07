@@ -11,8 +11,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun DisplayRecipeScreen(recipeId: String) {
     val viewModel: RecipePageViewModel = viewModel()
     val recipe by viewModel.recipe.collectAsState()
-    println("Displaying Recipe Screen")
-    //TODO update viewModel recipeId with arguement passed to DisplayRecipeScreen
     LaunchedEffect(key1 = recipeId) {
         Log.v("RecipeId Trace","RecipeId in Launched effect: $recipeId")
         viewModel.updateRecipeId(recipeId)

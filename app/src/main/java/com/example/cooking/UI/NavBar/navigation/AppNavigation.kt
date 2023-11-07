@@ -74,7 +74,7 @@ fun AppNavigation(){
     ){paddingValues ->
         NavHost(
             navController = navController ,
-            startDestination = Screens.RecipeList.name,
+            startDestination = Screens.Favorites.name,
             modifier= Modifier
                 .padding(paddingValues)
         ){
@@ -106,29 +106,27 @@ fun AppNavigation(){
                 //SearchPage()
                 PreviewSearchBar()
             }
-            composable(route=Screens.RecipeList.name){
-                ListAllRecipesScreen(onNavigateToRecipe = { recipeId ->
-                    navController.navigate(
-                        route = "Screens.RecipeItem.name/$recipeId"
-                    )
-                })
-            /* RecipeList(
-                    onNavigateToRecipe = {index ->
-                        navController.navigate(
-                            route = "Screens.RecipeItem.name/$index"
-                        )
-                    }
-                )*/
+            composable(
+                route=Screens.Favorites.name,
+                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+            ){//backStackEntry ->
+               // val collectionName = backStackEntry.arguments?.getString("collectionName")
+               // if(collectionName != null) {
+                    ListAllRecipesScreen("breakfast-recipes",
+                        onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    })
+                /*} else {
+                    Text("Collection not found")
+                }*/
             }
+
+
             composable(route=Screens.Profile.name){
                 ProfileBox()
             }
 
-
-            //val recipeList = RecipeData().loadRecipes()
             composable(
-                //route=Screens.RecipeItem.name
-                //DisplayRecipeScreen()
                 route = "Screens.RecipeItem.name/{recipeId}",
                 arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
             ) { backStackEntry ->
@@ -136,7 +134,6 @@ fun AppNavigation(){
                 if (recipeId != null) {
                    DisplayRecipeScreen(recipeId)
                 } else {
-                    // Handle the case where the recipe doesn't exist
                     Text("Recipe not found")
                 }
             }
