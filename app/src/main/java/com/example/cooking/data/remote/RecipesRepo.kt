@@ -1,11 +1,7 @@
 package com.example.cooking.data.remote
 
 import com.example.cooking.model.Recipe
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.HttpException
-import retrofit2.Retrofit
 import java.io.IOException
 
 class RecipesRepo(apiService: ApiService) : RecipeDataSource<Recipe> {
