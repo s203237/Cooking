@@ -9,10 +9,10 @@ import android.util.Log
 fun ListAllRecipesScreen(onNavigateToRecipe: (String) -> Unit) {
     val viewModel: RecipeListViewModel = viewModel()
     val recipes by viewModel.recipeCards.collectAsState()
-    println("In ListAllRecipesScreen")
     RecipeList(
         recipes = recipes,
-        onNavigateToRecipe = onNavigateToRecipe /*{recipeId -> viewModel.getCollectionName()},
+        onNavigateToRecipe = onNavigateToRecipe,
+        /*{recipeId -> viewModel.getCollectionName()},
         onRecipeFavored = viewModel::getCollectionName*/
 
     ) //TODO implement onNavigateToRecipe
