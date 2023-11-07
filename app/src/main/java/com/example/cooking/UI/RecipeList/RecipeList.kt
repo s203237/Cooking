@@ -17,6 +17,7 @@ package com.example.cooking.UI.RecipeList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -37,8 +38,8 @@ import com.example.cooking.model.RecipeCard
 @Composable
 fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
     Column (
-        modifier = Modifier
-            .background(color = Color(0xFFFFFBEF))
+       /* modifier = Modifier
+            .background(color = Color(0xFFFFFBEF))*/
     ) {
         Text(
             text = "Recipe List",
@@ -51,7 +52,7 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
         LazyColumn {
             items(recipes) { recipe ->
                 RecipeItem(recipe, onNavigateToRecipe)
-
+                println("Composed recipe item")
             }
         }
     }
@@ -60,8 +61,8 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
 fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
 
 Column(
-   /* modifier = Modifier
-        .fillMaxWidth()*/
+    modifier = Modifier
+        .fillMaxWidth()
 ){
     ImageWithFavIcon(
         recipeId = recipe.recipeId,
