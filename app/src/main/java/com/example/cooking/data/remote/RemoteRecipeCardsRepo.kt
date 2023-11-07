@@ -11,10 +11,9 @@ import java.io.IOException
 class RemoteRecipeCardsRepo(apiService: ApiService) : RecipeDataSource<List<RecipeCard>> {
     private val apiService = apiService
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
-        println("Printing just before collection name ")
+
         try {
             val recipeCollection = apiService.fetchRecipeCollection(collectionName)
-            println("Printing collection name: " + recipeCollection.collectionName)
             return recipeCollection.results
         } catch (e : IOException) {
             println("It broke :((( ${e.message}")
