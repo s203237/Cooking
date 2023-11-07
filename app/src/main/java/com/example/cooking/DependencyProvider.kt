@@ -1,11 +1,11 @@
 package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
-import com.example.cooking.model.RecipeCard
 import com.example.cooking.data.remote.RecipeDataSource
 import com.example.cooking.data.remote.RemoteRecipeCardsRepo
 import com.example.cooking.data.remote.RemoteRecipeRepo
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

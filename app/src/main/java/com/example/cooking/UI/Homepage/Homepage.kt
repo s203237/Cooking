@@ -17,26 +17,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 //import com.example.cooking.Data.Recipe
-import com.example.cooking.R
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.data.RecipeData
-import com.example.cooking.data.dailyRecipe
-import com.example.cooking.data.loadCat1Recipes
-import com.example.cooking.data.loadCat2Recipes
-import com.example.cooking.data.loadCat3Recipes
-import com.example.cooking.data.loadCat4Recipes
-import com.example.cooking.data.loadCat5Recipes
-import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.Recipe
-import java.util.Objects
 
 @Composable
 fun scrollableList(

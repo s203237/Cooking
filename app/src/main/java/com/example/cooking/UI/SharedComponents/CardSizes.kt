@@ -1,4 +1,4 @@
-package com.example.cooking.model
+package com.example.cooking.UI.SharedComponents
 
 enum class CardSizes {
     LARGE,
