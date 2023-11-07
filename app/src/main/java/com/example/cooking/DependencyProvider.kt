@@ -1,16 +1,32 @@
 package com.example.cooking
 
+import com.example.cooking.data.remote.ApiService
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.data.remote.RecipeDataSource
-import com.example.cooking.data.remote.RemoteRecipeCardsDataSource
-import com.example.cooking.data.remote.RemoteRecipeDataSource
+import com.example.cooking.data.remote.RemoteRecipeCardsRepo
+import com.example.cooking.data.remote.RemoteRecipeRepo
 import com.example.cooking.model.Recipe
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import retrofit2.Retrofit
 
 object DependencyProvider {
-    val recipeDataSource: RecipeDataSource<Recipe> = RemoteRecipeDataSource()
+    private val retrofit = Retrofit.Builder()
+        .addConverterFactory(
+            Json {
+                ignoreUnknownKeys = true
+            }.asConverterFactory("application/json".toMediaType())
+        )
+        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
+        .build()
+
+    private val apiService = retrofit.create(ApiService::class.java)
+
+    val recipeDataSource: RecipeDataSource<Recipe> = RemoteRecipeRepo(apiService)
    // val recipeDataSource: RecipeDataSource<List<String>> = MockRecipeDataSource()
    // val recipeCardDataSource: RecipeDataSource<List<String>> = MockRecipeCardDataSource()
-    val recipeCardDataSource: RecipeDataSource<List<RecipeCard>> = RemoteRecipeCardsDataSource()
+    val recipeCardDataSource: RecipeDataSource<List<RecipeCard>> = RemoteRecipeCardsRepo(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
