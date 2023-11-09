@@ -50,6 +50,7 @@ import coil.compose.rememberAsyncImagePainter
 //import coil.compose.rememberAsyncImagePainter
 import com.example.cooking.R
 import com.example.cooking.UI.NavBar.navigation.Navigator
+import com.example.cooking.UI.NavBar.navigation.Screens
 
 
 @Composable
@@ -101,7 +102,9 @@ fun ProfileBox() {
             Column {
                 Row{
                 IconButton(onClick = {
-                    Navigator.navController.popBackStack()
+                    Navigator.navController.navigate(route = Screens.HomeScreen.name){
+                        popUpTo(0)
+                    }
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.arrow_back),
