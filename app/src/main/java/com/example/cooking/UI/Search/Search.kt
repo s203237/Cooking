@@ -27,7 +27,6 @@ import com.example.cooking.UI.NavBar.navigation.Screens
 
 @Composable
 fun SearchBar() {
-    val navController = rememberNavController()
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
 
     Column(
