@@ -49,6 +49,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 //import coil.compose.rememberAsyncImagePainter
 import com.example.cooking.R
+import com.example.cooking.UI.NavBar.navigation.Navigator
 
 
 @Composable
@@ -76,7 +77,6 @@ fun MyHelp() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileBox() {
-    val navController = rememberNavController()
     val notification = rememberSaveable { mutableStateOf("") }
     if (notification.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
@@ -101,7 +101,7 @@ fun ProfileBox() {
             Column {
                 Row{
                 IconButton(onClick = {
-                    navController.popBackStack()
+                    Navigator.navController.popBackStack()
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.arrow_back),
