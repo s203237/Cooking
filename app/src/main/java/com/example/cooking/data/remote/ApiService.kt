@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
-* The `ApiService` interface defines methods for making network requests to a cooking-related API.
+* The `ApiService` interface defines methods for making network requests to a BBCGoodFood API.
 *
 * Functions:
 * - `fetchRecipeCollection(collectionName: String)`: Retrieves a collection of recipes based on the

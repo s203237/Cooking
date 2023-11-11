@@ -6,7 +6,7 @@ import java.io.IOException
 
 /**
  * This class, `RecipeCardsRepo`, is an implementation of the `RecipeDataRepo` interface
- * specialized for fetching a collection of recipe cards. The class implements the `RecipeDataRepo<List<RecipeCard>>` interface, defining the
+ * specialized for fetching a collection of recipe cards. The class implements the `RecipeDataRepo<T>` interface, defining the
  * behavior for fetching a list of [RecipeCard] objects from a remote data source.
  *
  * @param apiService An instance of [ApiService] used for making network requests.
