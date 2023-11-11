@@ -68,10 +68,16 @@ fun ImageWithFavIcon(
     Box(
        // contentAlignment = Alignment.BottomEnd
     ) {
-        val aspectRatio: Float = when(cardFormat) {
+        val aspectRatioImg: Float = when(cardFormat) {
             CardFormats.SQUARE -> 1f
             CardFormats.LANDSCAPE -> 2f
             CardFormats.PORTRAIT -> 0.92f
+        }
+
+        val aspectRatioFavBox: Float = when(cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 1f
         }
 
         AsyncImage(
@@ -79,7 +85,7 @@ fun ImageWithFavIcon(
             contentDescription = null, //TODO give content description
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(aspectRatio)
+                .aspectRatio(aspectRatioImg)
                 .clickable {
                     onNavigateToRecipe(recipeId)
                 },
@@ -91,7 +97,7 @@ fun ImageWithFavIcon(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(aspectRatio)
+                .aspectRatio(aspectRatioFavBox)
                 .padding(16.dp)
         ) {
             DisplayFavButton()
