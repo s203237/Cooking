@@ -11,6 +11,11 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
+/**
+ *  Uses Retrofit to create an instance of the `ApiService` for network operations.
+ *  - Configures the base URL for the remote API and sets up JSON parsing using Kotlinx Serialization.
+ *  - Provides instances of `RecipeDataRepo` for fetching both detailed recipes and recipe cards.
+ */
 object DependencyProvider {
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(
@@ -24,8 +29,6 @@ object DependencyProvider {
     private val apiService = retrofit.create(ApiService::class.java)
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
-   // val recipeDataSource: RecipeDataSource<List<String>> = MockRecipeDataSource()
-   // val recipeCardDataSource: RecipeDataSource<List<String>> = MockRecipeCardDataSource()
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
 }
 
