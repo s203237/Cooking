@@ -4,6 +4,27 @@ import com.example.cooking.model.RecipeCard
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * This class, `RecipeCardsRepo`, is an implementation of the `RecipeDataRepo` interface
+ * specialized for fetching a collection of recipe cards. The class implements the `RecipeDataRepo<List<RecipeCard>>` interface, defining the
+ * behavior for fetching a list of [RecipeCard] objects from a remote data source.
+ *
+ * @param apiService An instance of [ApiService] used for making network requests.
+ *
+ *
+ * Functions:
+ * - `fetchData(collectionName: String)`: Retrieves a list of recipe cards associated with the
+ * specified collection name from the remote API.
+ *
+ * Parameters:
+ *
+ *   - `collectionName`: The name of the collection to fetch recipe cards from.
+ *
+ * Returns:
+ *
+ *   - A list of [RecipeCard] objects if the data retrieval is successful.
+ *   - An empty list if an error occurs during the retrieval process.
+ */
 class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
