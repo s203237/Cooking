@@ -31,7 +31,29 @@ import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 
-
+/**
+ * Composable function `AppNavigation` defines the navigation structure for the cooking app using
+ * Jetpack Compose Navigation. It includes screens for onboarding, account creation, home, search,
+ * favorites, profile, and displaying a detailed recipe. The navigation is facilitated by a
+ * [NavHost], and a [Scaffold] is used to provide a common layout, including a bottom navigation bar.
+ *
+ * The bottom navigation bar includes icons and labels for different navigation items, and it is
+ * dynamically updated based on the current destination. The composable uses a [NavigationBar] and
+ * [NavigationBarItem] for this purpose.
+ *
+ * @see Screens
+ * @see NavigationBar
+ * @see NavigationBarItem
+ * @see Scaffold
+ * @see NavHost
+ * @see OnBoardingPage
+ * @see AccountCreationPage
+ * @see PreviewscrollableList
+ * @see PreviewSearchBar
+ * @see ListAllRecipesScreen
+ * @see ProfileBox
+ * @see DisplayRecipeScreen
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
