@@ -4,7 +4,7 @@ import com.example.cooking.model.RecipeCard
 import retrofit2.HttpException
 import java.io.IOException
 
-class RecipeCardsRepo(apiService: ApiService) : RecipeDataSource<List<RecipeCard>> {
+class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
 

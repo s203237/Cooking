@@ -1,7 +1,7 @@
 package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
-import com.example.cooking.data.remote.RecipeDataSource
+import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
@@ -23,10 +23,10 @@ object DependencyProvider {
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    val recipeDataSource: RecipeDataSource<Recipe> = RecipesRepo(apiService)
+    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
    // val recipeDataSource: RecipeDataSource<List<String>> = MockRecipeDataSource()
    // val recipeCardDataSource: RecipeDataSource<List<String>> = MockRecipeCardDataSource()
-    val recipeCardDataSource: RecipeDataSource<List<RecipeCard>> = RecipeCardsRepo(apiService)
+    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
