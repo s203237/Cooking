@@ -33,13 +33,13 @@ import coil.compose.AsyncImage
 //import com.example.cooking.Data.Recipe
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.data.remote.RecipeCard
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.FoodCategories
+import com.example.cooking.model.Recipe
 
 @Composable
 fun scrollableList(
     modifier: Modifier,
-    //dailyRecipe: RecipeCard,
+    dailyRecipe: RecipeCard,
     listOfList: List<FoodCategories>,
     onNavigateToRecipe: (String) -> Unit
 ){
@@ -62,6 +62,8 @@ fun scrollableList(
 //                    DailyRecipeItem(recipe = dailyrecipe)
                 //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
                 //RecipeItem(dailyRecipe, onNavigateToRecipe)
+
+                RecipeItem(recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe)
             }
 
             /*items(listOfList) { listOfList ->
@@ -149,7 +151,9 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
         Text(
             text = recipe.title,
             fontSize = 20.sp,
-            modifier = Modifier.padding(10.dp).width(200.dp),
+            modifier = Modifier
+                .padding(10.dp)
+                .width(200.dp),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

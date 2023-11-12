@@ -17,3 +17,9 @@ data class RecipeCard(
     val imageUrl: String = "",
     //val imageDescription: String, TODO get image description
 )
+
+@Serializable
+data class RecipeSingleCard(
+    val collectionName: String = "Default Collection",
+    val results: RecipeCard = RecipeCard()
+)
