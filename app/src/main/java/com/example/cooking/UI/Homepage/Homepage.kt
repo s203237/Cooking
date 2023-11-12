@@ -7,12 +7,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Card
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,34 +25,22 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 //import com.example.cooking.Data.Recipe
-import com.example.cooking.R
-import com.example.cooking.UI.RecipeList.RecipeItem
 import com.example.cooking.UI.SharedComponents.BackToTop
-import com.example.cooking.data.RecipeData
-import com.example.cooking.data.dailyRecipe
-import com.example.cooking.data.loadCat1Recipes
-import com.example.cooking.data.loadCat2Recipes
-import com.example.cooking.data.loadCat3Recipes
-import com.example.cooking.data.loadCat4Recipes
-import com.example.cooking.data.loadCat5Recipes
 import com.example.cooking.data.remote.RecipeCard
-import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.Recipe
-import java.util.Objects
+import com.example.cooking.model.FoodCategories
 
 @Composable
 fun scrollableList(
     modifier: Modifier,
-    dailyRecipe: Recipe,
-    listOfList: List<List<RecipeCard>>,
+    //dailyRecipe: RecipeCard,
+    listOfList: List<FoodCategories>,
     onNavigateToRecipe: (String) -> Unit
 ){
 
@@ -70,10 +60,11 @@ fun scrollableList(
         ) {
             item {
 //                    DailyRecipeItem(recipe = dailyrecipe)
-                RecipeCard(recipe = dailyRecipe, "Daily Recipe")
+                //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
+                //RecipeItem(dailyRecipe, onNavigateToRecipe)
             }
 
-            items(listOfList) { listOfList ->
+            /*items(listOfList) { listOfList ->
                 Text(
                     text = "test 1",
                     fontSize = 20.sp,
@@ -88,14 +79,38 @@ fun scrollableList(
                 )
                 LazyRow {
                     /*items(listOfList) { recipe ->
-                        //RecipeCard(recipe = recipe)
+                        RecipeCard(recipe = recipe)
                     }*/
-                    itemsIndexed(listOfList) { index, recipe ->
+                    /*itemsIndexed(listOfList) { index, recipe ->
                         RecipeItem(recipe, index, onNavigateToRecipe)
+                    }*/
+                    /*items(listOfList) { recipe ->
+                        RecipeItem(recipe, 0, onNavigateToRecipe)
+                    }*/
+                }
+            }*/
+
+            items(listOfList){listOfList->
+                Text(
+                    text = listOfList.getName(),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(10.dp)
+                )
+                Text(
+                    text = "View more", // Need to be button sending user to category
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(5.dp),
+                    color = Color.Blue
+                )
+                LazyRow {
+                    items(listOfList.getList()) { recipe ->
+                        //RecipeCard(recipe = recipe)
+                        RecipeItem(recipe, onNavigateToRecipe)
                     }
                 }
-
             }
+
 
         }
     }
@@ -107,37 +122,36 @@ fun scrollableList(
 }
 
 @Composable
-fun RecipeItem(recipe: RecipeCard, index: Int, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
     ) {
-        AsyncImage(
-            model = recipe.imageUrl,
-            contentDescription = null, //TODO give content description
+        Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(0.92f)
-                .clickable { onNavigateToRecipe(recipe.recipeId) },
-            contentScale = ContentScale.Crop,
-
-            )
-        /*Image(painter = painterResource(id= recipe.imageUrl),
-            contentDescription = recipe.title,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .height(height = 170.dp)
-                .fillMaxWidth()
-                .clickable { onNavigateToRecipe(index) }
-            )*/
+                .height(200.dp)
+                .width(200.dp)
+        ){
+            AsyncImage(
+                model = recipe.imageUrl,
+                contentDescription = null, //TODO give content description
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(0.92f)
+                    .clickable { onNavigateToRecipe(recipe.recipeId) },
+                contentScale = ContentScale.Crop,
+                )
+        }
         val recipeTitle = recipe.title
         println("this is the recipe title: $recipeTitle")
         Text(
             text = recipe.title,
             fontSize = 20.sp,
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(10.dp).width(200.dp),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
