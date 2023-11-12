@@ -29,7 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.R
-import com.example.cooking.UI.Profile.ProfileBox
+import com.example.cooking.UI.Login.ProfileBox
 import com.example.cooking.UI.RecipePage.RecipePage
 import com.example.cooking.data.RecipeData
 import java.lang.Exception
