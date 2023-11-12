@@ -1,4 +1,4 @@
-package com.example.cooking.model
+package com.example.cooking.UI.Homepage
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -1,7 +1,7 @@
 package com.example.cooking.UI.SharedComponents
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,13 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.cooking.R
-import com.example.cooking.data.RecipeData
-import com.example.cooking.model.Recipe
+import coil.compose.AsyncImage
 
 @Composable
 fun DisplayFavButton() {
@@ -62,39 +58,46 @@ fun DisplayFavButton() {
 }
 
 @Composable
-fun ImageWithFavIcon(recipe: Recipe, isSquare: Boolean) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
+fun ImageWithFavIcon(
+    recipeId: String,
+    imageUrl: String,
+    onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit,
+    cardFormat: CardFormats
+) {
     Box(
        // contentAlignment = Alignment.BottomEnd
     ) {
-        if(isSquare) {
-            Image(
-                painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.imageDescription,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop,
-
-                )
-        } else {
-            Image(
-                painter = painterResource(recipe.mainImage),
-                contentDescription = recipe.imageDescription,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(0.92f),
-                contentScale = ContentScale.Crop,
-
-                )
+        val aspectRatioImg: Float = when(cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 0.92f
         }
+
+        val aspectRatioFavBox: Float = when(cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 1f
+        }
+
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = null, //TODO give content description
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatioImg)
+                .clickable {
+                    onNavigateToRecipe(recipeId)
+                },
+            contentScale = ContentScale.Crop,
+
+            )
 
         Box(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .aspectRatio(aspectRatioFavBox)
                 .padding(16.dp)
         ) {
             DisplayFavButton()
@@ -105,14 +108,37 @@ fun ImageWithFavIcon(recipe: Recipe, isSquare: Boolean) {
 
 @Preview
 @Composable
-fun previewImageWithFavIconRect() {
-    val recipeList = RecipeData().loadRecipes()
-    ImageWithFavIcon(recipe = recipeList[0], false)
+fun previewImageWithFavIconPortrait() {
+    ImageWithFavIcon(
+        "spiced-lentil-spinach-pies",
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        {},
+        {},
+        CardFormats.PORTRAIT
+    )
+}
+
+@Preview
+@Composable
+fun previewImageWithFavIconLandscape() {
+    ImageWithFavIcon(
+        "spiced-lentil-spinach-pies",
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        {},
+        {},
+        CardFormats.LANDSCAPE
+    )
 }
 
 @Preview
 @Composable
 fun previewImageWithFavIconSqr() {
-    val recipeList = RecipeData().loadRecipes()
-    ImageWithFavIcon(recipe = recipeList[0], true)
+    ImageWithFavIcon(
+        "spiced-lentil-spinach-pies",
+        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        {},
+        {},
+        CardFormats.SQUARE
+    )
 }
+

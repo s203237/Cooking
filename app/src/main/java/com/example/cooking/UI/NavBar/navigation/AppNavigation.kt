@@ -1,5 +1,4 @@
 package com.example.cooking.UI.NavBar.navigation
-
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -39,24 +38,44 @@ import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
-import com.example.cooking.UI.Onboarding.OnBoardingPage
-import com.example.cooking.UI.Profile.ProfileBox
-import com.example.cooking.UI.RecipeList.RecipeList
-import com.example.cooking.UI.RecipePage.RecipePage
 import com.example.cooking.UI.Search.PreviewSearchBar
-import com.example.cooking.data.RecipeData
+import com.example.cooking.UI.Onboarding.OnBoardingPage
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.example.cooking.UI.Profile.ProfileBox
+import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
+import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 
-
+/**
+ * Composable function `AppNavigation` defines the navigation structure for the cooking app using
+ * Jetpack Compose Navigation. It includes screens for onboarding, account creation, home, search,
+ * favorites, profile, and displaying a detailed recipe. The navigation is facilitated by a
+ * [NavHost], and a [Scaffold] is used to provide a common layout, including a bottom navigation bar.
+ *
+ * The bottom navigation bar includes icons and labels for different navigation items, and it is
+ * dynamically updated based on the current destination. The composable uses a [NavigationBar] and
+ * [NavigationBarItem] for this purpose.
+ *
+ * @see Screens
+ * @see NavigationBar
+ * @see NavigationBarItem
+ * @see Scaffold
+ * @see NavHost
+ * @see OnBoardingPage
+ * @see AccountCreationPage
+ * @see PreviewscrollableList
+ * @see PreviewSearchBar
+ * @see ListAllRecipesScreen
+ * @see ProfileBox
+ * @see DisplayRecipeScreen
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
-    try {
-        Navigator.navController = navController
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
+fun AppNavigation(){
+    val navController= rememberNavController()
     var displayBottomBar by remember { mutableStateOf(false) }
     var displayTopBar by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
@@ -178,7 +197,6 @@ fun AppNavigation() {
 
             composable(route = Screens.AccountCreation.name) {
                 AccountCreationPage(
-
                     onNavigateToHomeScreen = {
                         navController.navigate(
                             route = Screens.HomeScreen.name
@@ -195,28 +213,46 @@ fun AppNavigation() {
                 //SearchPage()
                 PreviewSearchBar()
             }
-            composable(route = Screens.Favorites.name) {
-                RecipeList(
-                    onNavigateToRecipe = { index ->
-                        navController.navigate(
-                            route = "Screens.RecipeItem.name/$index"
-                        )
-                    }
-                )
+            composable(
+                route=Screens.Favorites.name,
+                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+            ){//backStackEntry ->
+               // val collectionName = backStackEntry.arguments?.getString("collectionName")
+               // if(collectionName != null) {
+                    ListAllRecipesScreen("easy-vegetarian-recipes",
+                        onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    })
+                /*} else {
+                    Text("Collection not found")
+                }*/
+            }
+
+            composable(
+                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+            ){backStackEntry ->
+                 val collectionName = backStackEntry.arguments?.getString("collectionName")
+                 if(collectionName != null) {
+                ListAllRecipesScreen(collectionName,
+                    onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    })
+                } else {
+                    Text("Collection not found")
+                }
             }
             composable(route = Screens.Profile.name) {
                 ProfileBox()
             }
-            val recipeList = RecipeData().loadRecipes()
+
             composable(
                 route = "Screens.RecipeItem.name/{recipeId}",
-                arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+                arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
             ) { backStackEntry ->
-                val recipeId = backStackEntry.arguments?.getInt("recipeId")
+                val recipeId = backStackEntry.arguments?.getString("recipeId")
                 if (recipeId != null) {
-                    RecipePage(recipe = recipeList[recipeId])
+                   DisplayRecipeScreen(recipeId)
                 } else {
-                    // Handle the case where the recipe doesn't exist
                     Text("Recipe not found")
                 }
             }

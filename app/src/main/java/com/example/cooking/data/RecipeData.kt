@@ -2,46 +2,50 @@ package com.example.cooking.data
 
 import com.example.cooking.R
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.TimeToCook
 
 class RecipeData {
     fun loadRecipes(): List<Recipe> {
+        val relativePath = "app/src/main/res/drawable"
+        val projectRoot = System.getProperty("user.dir")
+        val fileUrl = "$projectRoot/$relativePath"
+
         return listOf(
             Recipe(
                 title = "Pear And Rainbow",
-                mainImage = R.drawable.pear,
+                imageUrl = "$fileUrl/peach.png",
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
-                author = "Melissa Woo",
-                prepTime = 20,
-                cookingTime = 65,
-                servingSize = 4,
+                author = "Melissa Woo"/*,
+                timeToCook = TimeToCook("5 min", "60 min"),
                 difficulty = "Medium",
+                servingSize = 4,
                 rating = 4.6f,
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
                 ingredients = listOf("Pear", "Rainbow", "Green paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-            ),
+            */),
             Recipe(
                 title = "Peach",
-                mainImage = R.drawable.peach,
+                imageUrl = "$fileUrl/pear.png",
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
-                author = "Melissa Woo",
-                prepTime = 10,
-                cookingTime = 610,
-                servingSize = 10,
+                author = "Melissa Woo"/*,
+                timeToCook = TimeToCook("10 min", "1h30 min"),
+
+        servingSize = 10,
                 difficulty = "Easy",
                 rating = 4.4f,
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
                 ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-            ),
+            */),
             Recipe(
                 title = "Spicy Sichuan Boiled Tofu",
-                mainImage = R.drawable.tofu,
+                imageUrl = "$fileUrl/tofu.jpg",
                 imageDescription = "Picture of shuizhu sichuan boiled tofu dish",
-                author = "Sarah (Woks of Life)",
-                prepTime = 40,
-                cookingTime = 30,
-                servingSize = 4,
+                author = "Sarah (Woks of Life)"/*,
+                timeToCook = TimeToCook("40 min", "30 min"),
+
+        servingSize = 4,
                 difficulty = "Easy",
                 rating = 4.4f,
                 recipeDescription = "This Sichuan boiled tofu, or shuǐzhǔ dòufu gān (水煮豆腐干) is an adapted version of Sichuan boiled beef that's vegetarian, vegan, and very tasty!",
@@ -52,7 +56,7 @@ class RecipeData {
                     "To the oil, add the white parts of the scallions, the spicy bean paste, and tomato paste. Fry for 1 minute, until the oil is red, then stir in the blanched tofu. Stir-fry for 30 seconds.",
                     "Then add the water, sugar, and light soy sauce. Bring to a simmer. Then add the cornstarch slurry. When it’s thickened, add this mixture on top of the mushrooms and bean sprouts.",
                     "Top with the minced garlic, chili flakes, and Sichuan peppercorn powder on top. In a small saucepan, heat the remaining 2 tablespoons of oil until it shimmers. Pour hot oil into the garlic, chili, and peppercorn powder; the ingredients should sizzle immediately. Then sprinkle over the green parts of the scallions and the cilantro. Serve immediately.")
-            )
+            */)
 
 
         )

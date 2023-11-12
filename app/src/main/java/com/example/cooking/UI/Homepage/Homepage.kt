@@ -22,12 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 //import com.example.cooking.Data.Recipe
-import com.example.cooking.R
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.data.RecipeData
-import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.Recipe
-import java.util.Objects
 
 @Composable
 fun scrollableList(

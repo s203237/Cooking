@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -88,14 +84,14 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
                 end = 16.dp
             )
     ) {
-        val prepTime =  formatTime(recipe.prepTime)
-        val cookingTime = formatTime(recipe.cookingTime)
+       // val prepTime =  formatTime(recipe.timeToCook.prepTime)
+       // val cookingTime = formatTime(recipe.timeToCook.cookTime)
 
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_timer_24),
-            infoType1 = "PREP", infoVal1 = prepTime,
+            infoType1 = "PREP", infoVal1 = recipe.timeToCook.prepTime,
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
-            infoType2 = "COOK", infoVal2 = cookingTime
+            infoType2 = "COOK", infoVal2 = recipe.timeToCook.cookTime
         )
 
         val diff = recipe.difficulty
