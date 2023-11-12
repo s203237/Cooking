@@ -40,17 +40,11 @@ import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
-import com.example.cooking.R
-import com.example.cooking.UI.Login.ProfileBox
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.RecipePage.RecipePage
+import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.data.RecipeData
-import java.lang.Exception
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,7 +74,8 @@ fun AppNavigation() {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary),
+                        titleContentColor = MaterialTheme.colorScheme.primary
+                    ),
                     title = {
                         Text(
                             text = "vegelicious",
@@ -97,7 +92,7 @@ fun AppNavigation() {
                         }
                     },
                     actions = {
-                        IconButton(onClick = {expanded=true }) {
+                        IconButton(onClick = { expanded = true }) {
                             Icon(
                                 imageVector = Icons.Default.Menu,
                                 contentDescription = "Menu Icon"
@@ -105,20 +100,24 @@ fun AppNavigation() {
                         }
 
                         DropdownMenu(
-                            expanded =expanded,
-                            onDismissRequest ={expanded=false},
-                            modifier=Modifier.fillMaxWidth(0.75f)){
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false },
+                            modifier = Modifier.fillMaxWidth(0.75f)
+                        ) {
                             menuItems.forEach { item ->
                                 DropdownMenuItem(
-                                    text = { Text(
-                                        text = item,
-                                        fontSize = 22.sp,
-                                        textAlign = TextAlign.Center) },
+                                    text = {
+                                        Text(
+                                            text = item,
+                                            fontSize = 22.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    },
 
                                     onClick = {
                                         selectedItem = item
                                         expanded = false
-                                         navController.navigate(route = commonRoute)
+                                        navController.navigate(route = commonRoute)
                                     }
 
                                 )
@@ -130,7 +129,7 @@ fun AppNavigation() {
             }
         }, bottomBar = {
             if (displayBottomBar) {
-                NavigationBar() {
+                NavigationBar{
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentDestination = navBackStackEntry?.destination
                     listOfNavItem.forEach { navItem ->
@@ -160,13 +159,13 @@ fun AppNavigation() {
                 }
             }
         }
-    ){paddingValues ->
+    ) { paddingValues ->
         NavHost(
-            navController =navController ,
+            navController = navController,
             startDestination = Screens.Onboarding.name,
-            modifier= Modifier
+            modifier = Modifier
                 .padding(paddingValues)
-        ){
+        ) {
             composable(route = Screens.Onboarding.name) {
                 OnBoardingPage(
                     onNavigateToAccountCreation = {
@@ -189,6 +188,7 @@ fun AppNavigation() {
             }
             composable(route = Screens.HomeScreen.name) {
                 displayBottomBar = true
+                displayTopBar=true
                 PreviewscrollableList()
             }
             composable(route = Screens.SearchScreen.name) {
@@ -223,8 +223,6 @@ fun AppNavigation() {
         }
 
     }
-
-        }
 }
 
 
