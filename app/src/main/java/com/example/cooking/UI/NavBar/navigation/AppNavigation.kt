@@ -84,7 +84,7 @@ fun AppNavigation() {
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = {navController.popBackStack() }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
                                 contentDescription = "Go Back Icon"
