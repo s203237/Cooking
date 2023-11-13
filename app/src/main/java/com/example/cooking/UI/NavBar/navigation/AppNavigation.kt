@@ -30,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -154,9 +153,9 @@ fun AppNavigation(){
                             selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
                             onClick = {
                                 navController.navigate(navItem.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
+                                 /*   popUpTo(navController.graph.findStartDestination().id) {
                                         saveState = true
-                                    }
+                                    }*/
                                     launchSingleTop = true
                                     restoreState = true
                                 }
