@@ -17,3 +17,15 @@ fun CategoriesList(): List<String>{
     )
 
 }
+
+fun getCollectionName(tagTitle: String) : String {
+    val collectionName : String = when (tagTitle){
+        "Dinner" -> "vegetarian-dinner-recipes"
+        "Easy"-> "easy-vegetarian-recipes"
+        else -> "default"
+
+    }
+
+    return collectionName;
+
+}

@@ -1,0 +1,4 @@
+package com.example.cooking.UI.Search
+
+class SearchPageViewModel {
+}

@@ -24,41 +24,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.semantics.Role.Companion.Button
 
 @Composable
-fun  DisplayTextBoxes() {
+fun  DisplayTextBoxes(onNavigateToRecipieList: (String) -> Unit) {
     val categoriesList = CategoriesList()
     val colorList = ColorList()
-    /*Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
 
-        categoriesList.forEachIndexed { index, category ->
-            val color = colorList.getOrNull(index)
-
-            if (color != null) {
-                val backgroundColor = Color(android.graphics.Color.parseColor(color))
-
-                Box(
-
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp)
-                        .background(backgroundColor)
-                        .border(1.dp, Color.Gray, RoundedCornerShape(50.dp))
-
-                ) {
-                    Text(
-                        text = category,
-                        modifier = Modifier.padding(16.dp),
-                        fontSize = 18.sp,
-                        color = Color.Black
-                    )
-                }
-            }
-
-        }
-    }*/
     Column {
         for (i in categoriesList.indices step 2) {
             Row(
@@ -68,7 +37,7 @@ fun  DisplayTextBoxes() {
                 for (j in i until if (i + 2 <= categoriesList.size) i + 2 else categoriesList.size) {
                     if (j < colorList.size) {
                         val color = Color(android.graphics.Color.parseColor(colorList[j]))
-                        CreateButton(color, categoriesList[j])
+                        CreateButton(color, categoriesList[j] , onNavigateToRecipieList)
                     }
                 }
             }
@@ -77,9 +46,10 @@ fun  DisplayTextBoxes() {
     }
 }
 @Composable
-fun CreateButton(color:Color, text: String){
+fun CreateButton(color:Color, text: String , onNavigateToRecipieList: (String) -> Unit){
+    val collectionname = getCollectionName(text)
     Button(
-        onClick = {},
+        onClick = {onNavigateToRecipieList(collectionname)},
         modifier = Modifier
             //.fillMaxWidth()
             .width(200.dp)
