@@ -183,6 +183,9 @@ fun AppNavigation(){
                 .padding(paddingValues)
         ) {
             composable(route = Screens.Onboarding.name) {
+               displayBottomBar=false
+                displayTopBar=false
+
                 OnBoardingPage(
                     onNavigateToAccountCreation = {
                         navController.navigate(
@@ -194,6 +197,8 @@ fun AppNavigation(){
             }
 
             composable(route = Screens.AccountCreation.name) {
+                displayBottomBar=false
+                displayTopBar=false
                 AccountCreationPage(
                     onNavigateToHomeScreen = {
                         navController.navigate(
@@ -206,11 +211,13 @@ fun AppNavigation(){
             composable(route = Screens.HomeScreen.name) {
                 displayBottomBar = true
                 displayTopBar=true
+
                 PreviewscrollableList()
                 printBackStack(navController.currentBackStack, "Home screen: ")
             }
             composable(route = Screens.SearchScreen.name) {
-
+                displayBottomBar=true
+                displayTopBar=true
                 PreviewSearchBar()
                 printBackStack(navController.currentBackStack, "Preview: ")
                }
@@ -220,10 +227,12 @@ fun AppNavigation(){
             ){//backStackEntry ->
                // val collectionName = backStackEntry.arguments?.getString("collectionName")
                // if(collectionName != null) {
-                    ListAllRecipesScreen("easy-vegetarian-recipes",
+                ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                     })
+                displayBottomBar=true
+                displayTopBar=true
                 printBackStack(navController.currentBackStack, "Favourites: ")
                 /*} else {
                     Text("Collection not found")
@@ -243,8 +252,12 @@ fun AppNavigation(){
                 } else {
                     Text("Collection not found")
                 }
+                displayBottomBar=true
+                displayTopBar=true
             }
             composable(route = Screens.Profile.name) {
+                displayBottomBar=true
+                displayTopBar=true
                 ProfileBox()
                 printBackStack(navController.currentBackStack, "Profile: ")
             }
@@ -260,6 +273,8 @@ fun AppNavigation(){
                 } else {
                     Text("Recipe not found")
                 }
+                displayBottomBar=true
+                displayTopBar=true
             }
         }
 
@@ -271,7 +286,14 @@ fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: S
     for(entry in entryList.value){
         val stringEntry =  entry.toString()
         Log.v("Backstack" , "$screenName: $stringEntry")
+
     }
+
+    for (entry in entryList.value) {
+        val stringEntry = entry.destination.route ?: "Unknown route"
+        Log.v("Backstack", "Entry: $stringEntry")
+    }
+
 
 }
 
