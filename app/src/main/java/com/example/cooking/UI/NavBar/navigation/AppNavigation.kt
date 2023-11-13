@@ -154,9 +154,9 @@ fun AppNavigation(){
                             selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
                             onClick = {
                                 navController.navigate(navItem.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
+                                   /* popUpTo(navController.graph.findStartDestination().id) {
                                         saveState = true
-                                    }
+                                    }*/
                                     launchSingleTop = true
                                     restoreState = true
                                 }
