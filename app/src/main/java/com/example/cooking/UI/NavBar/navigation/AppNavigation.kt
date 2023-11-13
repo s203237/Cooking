@@ -1,4 +1,5 @@
 package com.example.cooking.UI.NavBar.navigation
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -40,13 +42,10 @@ import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.Onboarding.OnBoardingPage
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -65,7 +64,6 @@ import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
  * @see NavHost
  * @see OnBoardingPage
  * @see AccountCreationPage
- * @see PreviewscrollableList
  * @see PreviewSearchBar
  * @see ListAllRecipesScreen
  * @see ProfileBox
@@ -172,7 +170,6 @@ fun AppNavigation(){
                             label = {
                                 Text(text = navItem.label)
                             },
-                            //modifier = Modifier.background(color = Color(0xFF93BBCF))
                         )
                     }
                 }
@@ -193,6 +190,7 @@ fun AppNavigation(){
                         )
                     }
                 )
+                printBackStack(navController.currentBackStack, "On boarding: ")
             }
 
             composable(route = Screens.AccountCreation.name) {
@@ -203,16 +201,19 @@ fun AppNavigation(){
                         )
                     }
                 )
+                printBackStack(navController.currentBackStack, "Account creation page: ")
             }
             composable(route = Screens.HomeScreen.name) {
                 displayBottomBar = true
                 displayTopBar=true
                 PreviewscrollableList()
+                printBackStack(navController.currentBackStack, "Home screen: ")
             }
             composable(route = Screens.SearchScreen.name) {
-                //SearchPage()
+
                 PreviewSearchBar()
-            }
+                printBackStack(navController.currentBackStack, "Preview: ")
+               }
             composable(
                 route=Screens.Favorites.name,
                 //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
@@ -223,6 +224,7 @@ fun AppNavigation(){
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                     })
+                printBackStack(navController.currentBackStack, "Favourites: ")
                 /*} else {
                     Text("Collection not found")
                 }*/
@@ -237,12 +239,14 @@ fun AppNavigation(){
                     onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                     })
+                     printBackStack(navController.currentBackStack, "Recipe List: ")
                 } else {
                     Text("Collection not found")
                 }
             }
             composable(route = Screens.Profile.name) {
                 ProfileBox()
+                printBackStack(navController.currentBackStack, "Profile: ")
             }
 
             composable(
@@ -252,6 +256,7 @@ fun AppNavigation(){
                 val recipeId = backStackEntry.arguments?.getString("recipeId")
                 if (recipeId != null) {
                    DisplayRecipeScreen(recipeId)
+                    printBackStack(navController.currentBackStack, "Recipe Screen: ")
                 } else {
                     Text("Recipe not found")
                 }
@@ -259,6 +264,15 @@ fun AppNavigation(){
         }
 
     }
+}
+
+fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: String) {
+
+    for(entry in entryList.value){
+        val stringEntry =  entry.toString()
+        Log.v("Backstack" , "$screenName: $stringEntry")
+    }
+
 }
 
 

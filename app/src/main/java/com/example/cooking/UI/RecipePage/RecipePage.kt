@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,17 +16,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.CustomHeading1
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.cooking.R
-import com.example.cooking.UI.NavBar.navigation.Navigator
+import com.example.cooking.UI.SharedComponents.CardFormats
 
 @Composable
 fun RecipePage(recipe: Recipe) {
@@ -41,29 +36,24 @@ fun RecipePage(recipe: Recipe) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            ImageWithFavIcon(recipe = recipe, false)
-
-            IconButton(onClick ={ Navigator.navController.popBackStack()} ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.arrow_back),
-                    contentDescription = "",
-                    tint = Color.Black,
-                    modifier = Modifier
-                )
-            }
-
-
-
+            ImageWithFavIcon(
+                recipeId = recipe.recipeId,
+                imageUrl = recipe.imageUrl,
+                {},
+                {},
+                CardFormats.PORTRAIT
+            )
             TabLayout(recipe = recipe)
         }
-        /* ImageWithFavIcon(recipe = recipe)
+       /* ImageWithFavIcon(recipe = recipe)
 
-         Column(
-             modifier = Modifier
-                 .fillMaxWidth()
-         ) {
-             TabLayout(recipe = recipe)
-         }*/
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            TabLayout(recipe = recipe)
+        }*/
+
 
 
     }
@@ -74,12 +64,12 @@ fun TabLayout(recipe: Recipe) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     var selectedTabIndex by remember { mutableStateOf(0) }
-    Box(
+    Box (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = screenWidth)
+            .padding( top = screenWidth)
 
-    ) {
+    ){
         when (selectedTabIndex) {
             0 -> InfoTab(recipe = recipe)
             1 -> PrepTab(recipe = recipe)
@@ -90,9 +80,9 @@ fun TabLayout(recipe: Recipe) {
         ) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(top = 8.dp)
-                    .clickable { selectedTabIndex = 0 },
+                .fillMaxWidth(0.5f)
+                .padding(top = 8.dp)
+                .clickable { selectedTabIndex = 0 },
                 contentAlignment = Alignment.Center
 
             )
@@ -101,9 +91,9 @@ fun TabLayout(recipe: Recipe) {
             }
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
-                    .clickable { selectedTabIndex = 1 },
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+                .clickable { selectedTabIndex = 1 },
                 contentAlignment = Alignment.Center
             )
             {
