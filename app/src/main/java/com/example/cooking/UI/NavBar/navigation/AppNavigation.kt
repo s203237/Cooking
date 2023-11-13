@@ -40,11 +40,11 @@ import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
-import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
+import com.example.cooking.UI.Search.PreviewSearchBar
 import kotlinx.coroutines.flow.StateFlow
 
 /**
