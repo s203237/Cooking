@@ -98,7 +98,7 @@ fun AppNavigation(){
     ){paddingValues ->
         NavHost(
             navController = navController ,
-            startDestination = Screens.Favorites.name,
+            startDestination = Screens.SearchScreen.name,
             modifier= Modifier
                 .padding(paddingValues)
         ){
@@ -155,7 +155,7 @@ fun AppNavigation(){
             }
 
             composable(
-                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+                route="Screens.RecipeList.name/{collectionName}", arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
             ){backStackEntry ->
                  val collectionName = backStackEntry.arguments?.getString("collectionName")
                  if(collectionName != null) {
