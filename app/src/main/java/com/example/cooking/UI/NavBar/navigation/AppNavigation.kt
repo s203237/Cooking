@@ -8,6 +8,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
@@ -29,7 +30,10 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
+import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
+import com.example.cooking.UI.Search.SearchBar
+import com.example.cooking.model.RecipeCard
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -125,8 +129,15 @@ fun AppNavigation(){
                 PreviewscrollableList()
             }
             composable(route=Screens.SearchScreen.name){
-                //SearchPage()
-                PreviewSearchBar()
+                SearchBar(onNavigateToRecipeList= {recipeCards: List<RecipeCard> ->
+                    composable(route = "abcd") {
+                        RecipeList(
+                            recipes = recipeCards,
+                            onNavigateToRecipe = { recipeId ->
+                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")}
+                        )
+                    }
+                } )
             }
             composable(
                 route=Screens.Favorites.name,

@@ -56,4 +56,8 @@ class MockApiService: ApiService {
             steps = mapOf("Step 1" to "Do something", "Step 2" to "Do something else")
         )
     }
+
+    override suspend fun fetchRecipeList(temp: String): RecipeCollection {
+        TODO("Not yet implemented")
+    }
 }
