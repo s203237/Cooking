@@ -139,7 +139,6 @@ class MainActivity : ComponentActivity() {
                         text = "Logout",
                         modifier = Modifier.clickable { notification.value = "You logged out" })
 
-
                 }
 
                 ProfileImage()
@@ -175,7 +174,6 @@ class MainActivity : ComponentActivity() {
                 }
 
             }
-
         }
 
         //@Preview
@@ -183,7 +181,6 @@ class MainActivity : ComponentActivity() {
         fun PreviewScreen() {
             ProfileScreen()
         }
-
 
         @Composable
         fun ProfileImage() {
@@ -198,10 +195,7 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
-
             Column(
                 modifier = Modifier
                     .padding(8.dp)
@@ -227,7 +221,6 @@ class MainActivity : ComponentActivity() {
                 Text(text = "Change Profile Picture")
             }
         }
-
         @Composable
         fun CommentImage() {
             val imageUri = rememberSaveable { mutableStateOf("") }
@@ -241,8 +234,6 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
 
             Column(
@@ -285,8 +276,6 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
 
             Column(
@@ -317,7 +306,6 @@ class MainActivity : ComponentActivity() {
 //RecipeList()
 
         }
-
         @Composable
         fun CreateImage() {
             val imageUri = rememberSaveable { mutableStateOf("") }
@@ -331,8 +319,6 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
 
             Column(
