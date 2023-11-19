@@ -1,8 +1,11 @@
 package com.example.cooking.data.remote
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCollection
+import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
 * The `ApiService` interface defines methods for making network requests to a BBCGoodFood API.
@@ -28,7 +31,6 @@ interface ApiService {
     @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
 
-    @GET("search?query={temp}?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
-    suspend fun fetchRecipeList(@Path("temp") temp: String): RecipeCollection
-
+    @GET("search?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    suspend fun fetchRecipeList(@Query("query") query: String): RecipeCollection
 }

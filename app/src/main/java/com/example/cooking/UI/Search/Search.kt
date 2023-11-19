@@ -39,29 +39,7 @@ fun SearchBar( onNavigateToRecipeList: (List<RecipeCard>) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Row(){
-            IconButton(onClick = {
-                Navigator.navController.navigate(route = Screens.HomeScreen.name){
-                    popUpTo(0)
-                }
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.arrow_back),
-                    contentDescription = "",
-                    tint = Color.Black,
-                    modifier = Modifier
-                )}
-                Spacer(modifier = Modifier.width(40.dp))
 
-                Text(
-                    modifier = Modifier.height(55.dp),
-                    text = "vegelicious",
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold
-
-                )
-
-        }
         // First Part (SearchBar)
         //SearchBar(modifier = Modifier.weight(1f))
         // Spacer to create a division
@@ -72,7 +50,6 @@ fun SearchBar( onNavigateToRecipeList: (List<RecipeCard>) -> Unit) {
             },
             onSearch = { query ->
                 GlobalScope.launch {
-
                     val listRepoCard = callRecipeList(query)
                     onNavigateToRecipeList(listRepoCard)
                 }
@@ -103,6 +80,5 @@ suspend fun callRecipeList(query: String): List<RecipeCard> {
 @Composable
 fun PreviewSearchBar(){
     SearchBar({
-
     })
 }

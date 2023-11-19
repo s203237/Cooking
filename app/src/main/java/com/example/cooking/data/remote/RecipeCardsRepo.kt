@@ -3,6 +3,7 @@ package com.example.cooking.data.remote
 import com.example.cooking.model.RecipeCard
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.UnknownHostException
 
 /**
  * This class, `RecipeCardsRepo`, is an implementation of the `RecipeDataRepo` interface
@@ -24,6 +25,8 @@ import java.io.IOException
  *
  *   - A list of [RecipeCard] objects if the data retrieval is successful.
  *   - An empty list if an error occurs during the retrieval process.
+ *
+ *   Similar explanation for class 'RecipeCardsRepoSearch' and functions 'fetchData(query: String)'
  */
 class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
@@ -45,17 +48,26 @@ class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>>
 class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
     override suspend fun fetchData(query: String): List<RecipeCard> {
-
         try {
             val recipeCollection = apiService.fetchRecipeList(query)
             return recipeCollection.results
-        } catch (e : IOException) {
-            println("It broke :((( ${e.message}")
+        } catch (e: UnknownHostException) {
+            println("UnknownHostException: Unable to resolve host. Check your internet connection and ensure the hostname is correct.")
+            e.printStackTrace()
+        } catch (e: IOException) {
+            println("IOException: ${e.message}")
+            e.printStackTrace()
         } catch (e: HttpException) {
             val errorCode = e.code()
             val errorResponse = e.response()?.errorBody()?.string()
             println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
+            e.printStackTrace()
+        } catch (e: Exception) {
+            println("An unexpected error occurred: ${e.message}")
+            e.printStackTrace()
         }
         return emptyList()
     }
+
+
 }

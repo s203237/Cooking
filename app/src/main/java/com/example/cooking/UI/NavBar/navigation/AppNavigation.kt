@@ -43,6 +43,7 @@ import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
+import com.example.cooking.UI.RecipeList.ListAllRecipes
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
@@ -223,15 +224,29 @@ fun AppNavigation(){
                 displayBottomBar=true
                 displayTopBar=true
                 SearchBar(onNavigateToRecipeList= {recipeCards: List<RecipeCard> ->
-                    composable(route = "abcd") {
-                        RecipeList(
+                    composable(route =Screens.RecipeList.name) {
+                       /*RecipeList(
                             recipes = recipeCards,
                             onNavigateToRecipe = { recipeId ->
                                 navController.navigate(route = "Screens.RecipeItem.name/$recipeId")}
                         )
+
+                        */
+
+                        ListAllRecipes("",
+                            onNavigateToRecipe = { recipeId ->
+                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                            })
+                        displayBottomBar=true
+                        displayTopBar=true
+                        printBackStack(navController.currentBackStack, "search page ")
+
+
                     }
                 } )
-                printBackStack(navController.currentBackStack, "Preview: ")
+                printBackStack(navController.currentBackStack, "SearchScreen ")
+
+
                }
             composable(
                 route=Screens.Favorites.name,
@@ -250,7 +265,6 @@ fun AppNavigation(){
                     Text("Collection not found")
                 }*/
             }
-
             composable(
                 route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
             ){backStackEntry ->
