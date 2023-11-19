@@ -1,5 +1,6 @@
 package com.example.cooking.data.remote
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -27,4 +28,7 @@ interface ApiService {
 
     @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
+
+    @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
 }

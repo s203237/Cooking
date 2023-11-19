@@ -1,6 +1,7 @@
 package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
+import com.example.cooking.data.remote.RecipeCardRepo
 import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipesRepo
@@ -30,6 +31,7 @@ object DependencyProvider {
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
+    val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

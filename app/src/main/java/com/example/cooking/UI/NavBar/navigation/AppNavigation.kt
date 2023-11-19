@@ -38,7 +38,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
-import com.example.cooking.UI.Homepage.PreviewscrollableList
+import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
@@ -212,7 +212,9 @@ fun AppNavigation(){
                 displayBottomBar = true
                 displayTopBar=true
 
-                PreviewscrollableList()
+                HomepageScreen(onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                })
                 printBackStack(navController.currentBackStack, "Home screen: ")
             }
             composable(route = Screens.SearchScreen.name) {
