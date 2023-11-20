@@ -1,9 +1,11 @@
 package com.example.cooking.UI.Homepage
 
+import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.FoodCategories
@@ -50,7 +52,7 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
         val dailyRecipe = list[Random.nextInt(list.size)]
 
         scrollableList(
-            Modifier,
+            modifier =   Modifier.background(color = Color(0xFFF2ECE3)),
             dailyRecipe = dailyRecipe,
             listOfList = listOfList,
             onNavigateToRecipe = onNavigateToRecipe

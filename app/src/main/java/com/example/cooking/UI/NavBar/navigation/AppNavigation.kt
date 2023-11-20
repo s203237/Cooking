@@ -1,5 +1,6 @@
 package com.example.cooking.UI.NavBar.navigation
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,6 +48,7 @@ import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
+import com.example.cooking.UI.theme.NavigationInComposeTheme
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -73,213 +77,222 @@ import kotlinx.coroutines.flow.StateFlow
 @Preview
 @Composable
 fun AppNavigation(){
-    val navController= rememberNavController()
-    var displayBottomBar by remember { mutableStateOf(false) }
-    var displayTopBar by remember { mutableStateOf(false) }
-    var expanded by remember { mutableStateOf(false) }
-    var selectedItem by remember { mutableStateOf("") }
-    val menuItems = listOf(
-        "Dinner", "Breakfast", "Lunch", "Dessert", "Snacks", "Soup",
-        "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
-        "Appetizers", "Seasonal"
-    )
-    val commonRoute = Screens.Favorites.name
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            if (displayTopBar) {
-                CenterAlignedTopAppBar(
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary
-                    ),
-                    title = {
-                        Text(
-                            text = "vegelicious",
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Medium
-                        )
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = {navController.popBackStack() }) {
-                            Icon(
-                                imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Go Back Icon"
-                            )
-                        }
-                    },
-                    actions = {
-                        IconButton(onClick = { expanded = true }) {
-                            Icon(
-                                imageVector = Icons.Default.Menu,
-                                contentDescription = "Menu Icon"
-                            )
-                        }
+    NavigationInComposeTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            val navController = rememberNavController()
+            var displayBottomBar by remember { mutableStateOf(false) }
+            var displayTopBar by remember { mutableStateOf(false) }
+            var expanded by remember { mutableStateOf(false) }
+            var selectedItem by remember { mutableStateOf("") }
+            val menuItems = listOf(
+                "Dinner", "Breakfast", "Lunch", "Dessert", "Snacks", "Soup",
+                "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
+                "Appetizers", "Seasonal"
+            )
+            val commonRoute = Screens.Favorites.name
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                topBar = {
+                    if (displayTopBar) {
+                        CenterAlignedTopAppBar(
+                            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.background,
+                                titleContentColor = MaterialTheme.colorScheme.primary
+                            ),
+                            title = {
+                                Text(
+                                    text = "vegelicious",
+                                    fontSize = 22.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            },
+                            navigationIcon = {
+                                IconButton(onClick = { navController.popBackStack() }) {
+                                    Icon(
+                                        imageVector = Icons.Default.ArrowBack,
+                                        contentDescription = "Go Back Icon"
+                                    )
+                                }
+                            },
+                            actions = {
+                                IconButton(onClick = { expanded = true }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Menu,
+                                        contentDescription = "Menu Icon"
+                                    )
+                                }
 
-                        DropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false },
-                            modifier = Modifier.fillMaxWidth(0.75f)
-                        ) {
-                            menuItems.forEach { item ->
-                                DropdownMenuItem(
-                                    text = {
-                                        Text(
-                                            text = item,
-                                            fontSize = 22.sp,
-                                            textAlign = TextAlign.Center
+                                DropdownMenu(
+                                    expanded = expanded,
+                                    onDismissRequest = { expanded = false },
+                                    modifier = Modifier.fillMaxWidth(0.75f)
+                                ) {
+                                    menuItems.forEach { item ->
+                                        DropdownMenuItem(
+                                            text = {
+                                                Text(
+                                                    text = item,
+                                                    fontSize = 22.sp,
+                                                    textAlign = TextAlign.Center
+                                                )
+                                            },
+
+                                            onClick = {
+                                                selectedItem = item
+                                                expanded = false
+                                                navController.navigate(route = commonRoute)
+                                            }
+
+                                        )
+                                    }
+                                }
+                            }
+
+                        )
+                    }
+                }, bottomBar = {
+                    if (displayBottomBar) {
+                        NavigationBar {
+                            val navBackStackEntry by navController.currentBackStackEntryAsState()
+                            val currentDestination = navBackStackEntry?.destination
+                            listOfNavItem.forEach { navItem ->
+                                NavigationBarItem(
+                                    selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
+                                    onClick = {
+                                        navController.navigate(navItem.route) {
+                                            /* popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }*/
+                                            launchSingleTop = true
+                                            restoreState = true
+                                        }
+                                    },
+                                    icon = {
+                                        Icon(
+                                            imageVector = navItem.icon,
+                                            contentDescription = null
                                         )
                                     },
-
-                                    onClick = {
-                                        selectedItem = item
-                                        expanded = false
-                                        navController.navigate(route = commonRoute)
-                                    }
-
+                                    label = {
+                                        Text(text = navItem.label)
+                                    },
                                 )
                             }
                         }
                     }
-
-                )
-            }
-        }, bottomBar = {
-            if (displayBottomBar) {
-                NavigationBar{
-                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-                    val currentDestination = navBackStackEntry?.destination
-                    listOfNavItem.forEach { navItem ->
-                        NavigationBarItem(
-                            selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
-                            onClick = {
-                                navController.navigate(navItem.route) {
-                                   /* popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
-                                    }*/
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            },
-                            icon = {
-                                Icon(
-                                    imageVector = navItem.icon,
-                                    contentDescription = null
-                                )
-                            },
-                            label = {
-                                Text(text = navItem.label)
-                            },
-                        )
-                    }
                 }
-            }
-        }
-    ) { paddingValues ->
-        NavHost(
-            navController = navController,
-            startDestination = Screens.Onboarding.name,
-            modifier = Modifier
-                .padding(paddingValues)
-        ) {
-            composable(route = Screens.Onboarding.name) {
-               displayBottomBar=false
-                displayTopBar=false
+            ) { paddingValues ->
+                NavHost(
+                    navController = navController,
+                    startDestination = Screens.HomeScreen.name,
+                    modifier = Modifier
+                        .padding(paddingValues)
+                ) {
+                    composable(route = Screens.Onboarding.name) {
+                        displayBottomBar = false
+                        displayTopBar = false
 
-                OnBoardingPage(
-                    onNavigateToAccountCreation = {
-                        navController.navigate(
-                            route = Screens.AccountCreation.name
+                        OnBoardingPage(
+                            onNavigateToAccountCreation = {
+                                navController.navigate(
+                                    route = Screens.AccountCreation.name
+                                )
+                            }
                         )
+                        printBackStack(navController.currentBackStack, "On boarding: ")
                     }
-                )
-                printBackStack(navController.currentBackStack, "On boarding: ")
-            }
 
-            composable(route = Screens.AccountCreation.name) {
-                displayBottomBar=false
-                displayTopBar=false
-                AccountCreationPage(
-                    onNavigateToHomeScreen = {
-                        navController.navigate(
-                            route = Screens.HomeScreen.name
+                    composable(route = Screens.AccountCreation.name) {
+                        displayBottomBar = false
+                        displayTopBar = false
+                        AccountCreationPage(
+                            onNavigateToHomeScreen = {
+                                navController.navigate(
+                                    route = Screens.HomeScreen.name
+                                )
+                            }
                         )
+                        printBackStack(navController.currentBackStack, "Account creation page: ")
                     }
-                )
-                printBackStack(navController.currentBackStack, "Account creation page: ")
-            }
-            composable(route = Screens.HomeScreen.name) {
-                displayBottomBar = true
-                displayTopBar=true
+                    composable(route = Screens.HomeScreen.name) {
+                        displayBottomBar = true
+                        displayTopBar = true
 
-                HomepageScreen(onNavigateToRecipe = { recipeId ->
-                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                })
-                printBackStack(navController.currentBackStack, "Home screen: ")
-            }
-            composable(route = Screens.SearchScreen.name) {
-                displayBottomBar=true
-                displayTopBar=true
-                PreviewSearchBar()
-                printBackStack(navController.currentBackStack, "Preview: ")
-               }
-            composable(
-                route=Screens.Favorites.name,
-                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-            ){//backStackEntry ->
-               // val collectionName = backStackEntry.arguments?.getString("collectionName")
-               // if(collectionName != null) {
-                ListAllRecipesScreen("easy-vegetarian-recipes",
-                        onNavigateToRecipe = { recipeId ->
-                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                    })
-                displayBottomBar=true
-                displayTopBar=true
-                printBackStack(navController.currentBackStack, "Favourites: ")
-                /*} else {
+                        HomepageScreen(onNavigateToRecipe = { recipeId ->
+                            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                        })
+                        printBackStack(navController.currentBackStack, "Home screen: ")
+                    }
+                    composable(route = Screens.SearchScreen.name) {
+                        displayBottomBar = true
+                        displayTopBar = true
+                        PreviewSearchBar()
+                        printBackStack(navController.currentBackStack, "Preview: ")
+                    }
+                    composable(
+                        route = Screens.Favorites.name,
+                        //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+                    ) {//backStackEntry ->
+                        // val collectionName = backStackEntry.arguments?.getString("collectionName")
+                        // if(collectionName != null) {
+                        ListAllRecipesScreen("easy-vegetarian-recipes",
+                            onNavigateToRecipe = { recipeId ->
+                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                            })
+                        displayBottomBar = true
+                        displayTopBar = true
+                        printBackStack(navController.currentBackStack, "Favourites: ")
+                        /*} else {
                     Text("Collection not found")
                 }*/
-            }
+                    }
 
-            composable(
-                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-            ){backStackEntry ->
-                 val collectionName = backStackEntry.arguments?.getString("collectionName")
-                 if(collectionName != null) {
-                ListAllRecipesScreen(collectionName,
-                    onNavigateToRecipe = { recipeId ->
-                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                    })
-                     printBackStack(navController.currentBackStack, "Recipe List: ")
-                } else {
-                    Text("Collection not found")
-                }
-                displayBottomBar=true
-                displayTopBar=true
-            }
-            composable(route = Screens.Profile.name) {
-                displayBottomBar=true
-                displayTopBar=true
-                ProfileBox()
-                printBackStack(navController.currentBackStack, "Profile: ")
-            }
+                    composable(
+                        route = Screens.RecipeList.name,
+                        arguments = listOf(navArgument("collectionName") {
+                            type = NavType.StringType
+                        })
+                    ) { backStackEntry ->
+                        val collectionName = backStackEntry.arguments?.getString("collectionName")
+                        if (collectionName != null) {
+                            ListAllRecipesScreen(collectionName,
+                                onNavigateToRecipe = { recipeId ->
+                                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                                })
+                            printBackStack(navController.currentBackStack, "Recipe List: ")
+                        } else {
+                            Text("Collection not found")
+                        }
+                        displayBottomBar = true
+                        displayTopBar = true
+                    }
+                    composable(route = Screens.Profile.name) {
+                        displayBottomBar = true
+                        displayTopBar = true
+                        ProfileBox()
+                        printBackStack(navController.currentBackStack, "Profile: ")
+                    }
 
-            composable(
-                route = "Screens.RecipeItem.name/{recipeId}",
-                arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
-            ) { backStackEntry ->
-                val recipeId = backStackEntry.arguments?.getString("recipeId")
-                if (recipeId != null) {
-                   DisplayRecipeScreen(recipeId)
-                    printBackStack(navController.currentBackStack, "Recipe Screen: ")
-                } else {
-                    Text("Recipe not found")
+                    composable(
+                        route = "Screens.RecipeItem.name/{recipeId}",
+                        arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
+                    ) { backStackEntry ->
+                        val recipeId = backStackEntry.arguments?.getString("recipeId")
+                        if (recipeId != null) {
+                            DisplayRecipeScreen(recipeId)
+                            printBackStack(navController.currentBackStack, "Recipe Screen: ")
+                        } else {
+                            Text("Recipe not found")
+                        }
+                        displayBottomBar = true
+                        displayTopBar = true
+                    }
                 }
-                displayBottomBar=true
-                displayTopBar=true
             }
         }
-
     }
 }
 
