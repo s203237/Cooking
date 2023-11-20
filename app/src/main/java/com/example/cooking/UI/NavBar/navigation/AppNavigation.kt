@@ -223,30 +223,8 @@ fun AppNavigation(){
             composable(route = Screens.SearchScreen.name) {
                 displayBottomBar=true
                 displayTopBar=true
-                SearchBar(onNavigateToRecipeList= {recipeCards: List<RecipeCard> ->
-                    composable(route =Screens.RecipeList.name) {
-                       /*RecipeList(
-                            recipes = recipeCards,
-                            onNavigateToRecipe = { recipeId ->
-                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")}
-                        )
-
-                        */
-
-                        ListAllRecipes("",
-                            onNavigateToRecipe = { recipeId ->
-                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                            })
-                        displayBottomBar=true
-                        displayTopBar=true
-                        printBackStack(navController.currentBackStack, "search page ")
-
-
-                    }
-                } )
+                SearchBar()
                 printBackStack(navController.currentBackStack, "SearchScreen ")
-
-
                }
             composable(
                 route=Screens.Favorites.name,
@@ -265,22 +243,22 @@ fun AppNavigation(){
                     Text("Collection not found")
                 }*/
             }
-            composable(
-                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-            ){backStackEntry ->
-                 val collectionName = backStackEntry.arguments?.getString("collectionName")
-                 if(collectionName != null) {
-                ListAllRecipesScreen(collectionName,
-                    onNavigateToRecipe = { recipeId ->
-                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                    })
-                     printBackStack(navController.currentBackStack, "Recipe List: ")
-                } else {
-                    Text("Collection not found")
-                }
-                displayBottomBar=true
-                displayTopBar=true
-            }
+//            composable(
+//                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+//            ){backStackEntry ->
+//                 val collectionName = backStackEntry.arguments?.getString("collectionName")
+//                 if(collectionName != null) {
+//                ListAllRecipesScreen(collectionName,
+//                    onNavigateToRecipe = { recipeId ->
+//                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+//                    })
+//                     printBackStack(navController.currentBackStack, "Recipe List: ")
+//                } else {
+//                    Text("Collection not found")
+//                }
+//                displayBottomBar=true
+//                displayTopBar=true
+//            }
             composable(route = Screens.Profile.name) {
                 displayBottomBar=true
                 displayTopBar=true

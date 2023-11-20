@@ -27,37 +27,38 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.*
 import com.example.cooking.DependencyProvider
+import com.example.cooking.UI.NavBar.navigation.Navigator.navController
+import com.example.cooking.UI.RecipeList.ListAllRecipes
 import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 @Composable
-fun SearchBar( onNavigateToRecipeList: (List<RecipeCard>) -> Unit) {
+fun SearchBar() {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
+    val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
+    if(onSearching !=true){
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
+            // First Part (SearchBar)
+            //SearchBar(modifier = Modifier.weight(1f))
+            // Spacer to create a division
+            SearchBox(
+                query = searchQuery,
+                onQueryChange = { newQuery ->
+                    setSearchQuery(newQuery)
+                },
+                onSearch = { query ->
+                    setOnSearchValue(true)
 
-        // First Part (SearchBar)
-        //SearchBar(modifier = Modifier.weight(1f))
-        // Spacer to create a division
-        SearchBox(
-            query = searchQuery,
-            onQueryChange = { newQuery ->
-                setSearchQuery(newQuery)
-            },
-            onSearch = { query ->
-                GlobalScope.launch {
-                    val listRepoCard = callRecipeList(query)
-                    onNavigateToRecipeList(listRepoCard)
-                }
-
-            },
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-    }
+                },
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -68,17 +69,22 @@ fun SearchBar( onNavigateToRecipeList: (List<RecipeCard>) -> Unit) {
             DisplayTextBoxes()
         }
 
+    } else {
+        ListAllRecipes(query = searchQuery, onNavigateToRecipe = { recipeId ->
+            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+        } )
     }
+
+}
+
 suspend fun callRecipeList(query: String): List<RecipeCard> {
     val listRepoCard = DependencyProvider.recipeCardsRepoSearch.fetchData(query)
     return listRepoCard
 }
 
 
-
 @Preview
 @Composable
-fun PreviewSearchBar(){
-    SearchBar({
-    })
+fun PreviewSearchBar() {
+    SearchBar()
 }
