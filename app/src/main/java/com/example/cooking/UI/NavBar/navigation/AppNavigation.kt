@@ -154,7 +154,7 @@ fun AppNavigation(){
                 }, bottomBar = {
                     if (displayBottomBar) {
                         NavigationBar(
-                                containerColor = MaterialTheme.colorScheme.secondary,
+                                containerColor = MaterialTheme.colorScheme.onSecondary,
                                 contentColor = MaterialTheme.colorScheme.onBackground
 
                             ) {
