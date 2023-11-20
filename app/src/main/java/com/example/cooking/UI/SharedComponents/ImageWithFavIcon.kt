@@ -101,6 +101,7 @@ fun ImageWithFavIcon(
                 .padding(16.dp)
         ) {
             DisplayFavButton()
+
         }
 
     }

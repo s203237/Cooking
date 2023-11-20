@@ -6,6 +6,9 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import android.util.Log
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.cooking.UI.Search.SearchBar
+
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
  * collection name. It interacts with a [RecipeListViewModel] to fetch and observe the list of
@@ -37,4 +40,13 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> 
         onNavigateToRecipe = onNavigateToRecipe,
     )
 
+}
+@Preview
+@Composable
+fun ListAllRecipesScreenPreview() {
+    // Define a sample collection name for the preview
+    val sampleCollectionName = "SampleCollection"
+
+    // Create a preview of the ListAllRecipesScreen
+    ListAllRecipesScreen(collectionName = sampleCollectionName) { /* navigate to recipe action */ }
 }
