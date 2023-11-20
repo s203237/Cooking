@@ -66,6 +66,7 @@ fun DisplayImage(
 ) {
     val aspectRatioImg: Float = when(cardFormat) {
         CardFormats.SQUARE -> 1f
+        CardFormats.SQUARE_10P -> 0.1f
         CardFormats.LANDSCAPE -> 2f
         CardFormats.PORTRAIT -> 0.92f
     }
@@ -97,6 +98,7 @@ fun ImageWithFavIcon(
     ) {
         val aspectRatioFavBox: Float = when(cardFormat) {
             CardFormats.SQUARE -> 1f
+            CardFormats.SQUARE_10P ->1f
             CardFormats.LANDSCAPE -> 2f
             CardFormats.PORTRAIT -> 1f
         }

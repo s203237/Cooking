@@ -53,6 +53,8 @@ import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.theme.NavigationInComposeTheme
 import kotlinx.coroutines.flow.StateFlow
+import com.example.cooking.data.HomepageCuration
+import com.example.cooking.data.loadCat1Recipes
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -224,7 +226,6 @@ fun AppNavigation(){
                     composable(route = Screens.HomeScreen.name) {
                         displayBottomBar = true
                         displayTopBar = true
-
                         HomepageScreen(onNavigateToRecipe = { recipeId ->
                             navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                         })

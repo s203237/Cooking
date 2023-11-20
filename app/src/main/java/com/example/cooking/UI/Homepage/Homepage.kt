@@ -5,6 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,6 +35,7 @@ import coil.compose.AsyncImage
 //import com.example.cooking.Data.Recipe
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
+import com.example.cooking.UI.SharedComponents.DisplayImage
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.FoodCategories
@@ -78,7 +80,9 @@ fun scrollableList(
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
                         //RecipeCard(recipe = recipe)
-                        RecipeItem(modifier = Modifier.height(200.dp).width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
+                        RecipeItem(modifier = Modifier
+                            .height(200.dp)
+                            .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
                     }
                 }
 
@@ -94,8 +98,16 @@ fun scrollableList(
 }
 
 @Composable
-fun RecipeCardListItem() {
-
+fun RecipeCardListItem(recipeId: String, imageUrl: String, onNavigateToRecipe: (String) -> Unit) {
+    Row {
+        DisplayImage(
+            recipeId =  recipeId,
+            imageUrl = imageUrl,
+            onNavigateToRecipe = onNavigateToRecipe,
+            cardFormat = CardFormats.SQUARE_10P,
+        )
+       // Text(text = )
+    }
 }
 
 /*

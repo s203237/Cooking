@@ -2,6 +2,7 @@ package com.example.cooking.UI.Homepage
 
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -22,10 +23,10 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
 
     //val dailyRecipe = RecipeData().loadRecipes()[0]
 
-    val recipeList1 by viewModel.recipeCards1.collectAsState()
-    val recipeList2 by viewModel.recipeCards2.collectAsState()
-    val recipeList3 by viewModel.recipeCards3.collectAsState()
-    val recipeList4 by viewModel.recipeCards4.collectAsState()
+    val recipeList1 by viewModel.recipeCardsList[0].collectAsState()
+    val recipeList2 by viewModel.recipeCardsList[1].collectAsState()
+    val recipeList3 by viewModel.recipeCardsList[2].collectAsState()
+    val recipeList4 by viewModel.recipeCardsList[3].collectAsState()
 
     val food1 = FoodCategories(categoryName = "high protein vegan recipes", categoryListOfRecipe = recipeList1)
     val food2 = FoodCategories(categoryName = "vegan winter recipes", categoryListOfRecipe = recipeList2)
