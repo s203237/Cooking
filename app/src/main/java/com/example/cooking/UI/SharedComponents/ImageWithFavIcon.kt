@@ -58,6 +58,33 @@ fun DisplayFavButton() {
 }
 
 @Composable
+fun DisplayImage(
+    recipeId: String,
+    imageUrl: String,
+    onNavigateToRecipe: (String) -> Unit,
+    cardFormat: CardFormats
+) {
+    val aspectRatioImg: Float = when(cardFormat) {
+        CardFormats.SQUARE -> 1f
+        CardFormats.LANDSCAPE -> 2f
+        CardFormats.PORTRAIT -> 0.92f
+    }
+
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = null, //TODO give content description
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(aspectRatioImg)
+            .clickable {
+                onNavigateToRecipe(recipeId)
+            },
+        contentScale = ContentScale.Crop,
+
+        )
+}
+
+@Composable
 fun ImageWithFavIcon(
     recipeId: String,
     imageUrl: String,
@@ -68,30 +95,18 @@ fun ImageWithFavIcon(
     Box(
        // contentAlignment = Alignment.BottomEnd
     ) {
-        val aspectRatioImg: Float = when(cardFormat) {
-            CardFormats.SQUARE -> 1f
-            CardFormats.LANDSCAPE -> 2f
-            CardFormats.PORTRAIT -> 0.92f
-        }
-
         val aspectRatioFavBox: Float = when(cardFormat) {
             CardFormats.SQUARE -> 1f
             CardFormats.LANDSCAPE -> 2f
             CardFormats.PORTRAIT -> 1f
         }
 
-        AsyncImage(
-            model = imageUrl,
-            contentDescription = null, //TODO give content description
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(aspectRatioImg)
-                .clickable {
-                    onNavigateToRecipe(recipeId)
-                },
-            contentScale = ContentScale.Crop,
-
-            )
+        DisplayImage(
+            recipeId = recipeId,
+            imageUrl = imageUrl,
+            onNavigateToRecipe = onNavigateToRecipe,
+            cardFormat = cardFormat
+        )
 
         Box(
             contentAlignment = Alignment.BottomEnd,
