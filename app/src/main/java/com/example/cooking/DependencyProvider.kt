@@ -35,6 +35,7 @@ object DependencyProvider {
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
     lateinit var favoritesDataSource: FavoriteDataSource
+        //private set
 }
 fun initialize(context : Context){
     favoritesDataSource = DataStoreFavoritesDataSource(context)
