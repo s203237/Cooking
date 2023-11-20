@@ -15,7 +15,6 @@
  */
 package com.example.cooking.UI.RecipeList
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,7 +23,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,11 +30,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.data.RecipeData
+import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit ) {
     Column (
        /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
@@ -51,14 +49,14 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
         )
         LazyColumn {
             items(recipes) { recipe ->
-                RecipeItem(recipe, onNavigateToRecipe)
+                RecipeItem(recipe, onNavigateToRecipe , onFavoriteButtonClicked )
                 println("Composed recipe item")
             }
         }
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
+fun RecipeItem(recipe: Recipe, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit){
 
 Column(
     modifier = Modifier
@@ -68,8 +66,9 @@ Column(
         recipeId = recipe.recipeId,
         imageUrl = recipe.imageUrl,
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = {},
+        onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
         cardFormat = CardFormats.LANDSCAPE
+
     )
     Text(
         text = recipe.title ,
@@ -81,10 +80,15 @@ Column(
             bottom = 32.dp
         )
     )
+
+
 }
 
 }
-val testRecipes = RecipeData().loadRecipes()
+
+
+
+//val testRecipes = RecipeData().loadRecipes()
 /*val testRecipes = listOf(
     Recipe("test 1", R.drawable.image,"",10,2,2, "","",listOf(""),listOf("") ),
     Recipe("test 2", R.drawable.image2,"",10,2,2, "","",listOf(""),listOf("")),
@@ -95,7 +99,7 @@ val testRecipes = RecipeData().loadRecipes()
 @Preview
 @Composable
 fun PreviewRecipeList(){
-RecipeList(emptyList(), onNavigateToRecipe = {})
+RecipeList(emptyList(), onNavigateToRecipe = {} , onFavoriteButtonClicked = {})
 }
 
 

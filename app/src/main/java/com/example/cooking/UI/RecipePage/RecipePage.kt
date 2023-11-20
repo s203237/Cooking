@@ -106,6 +106,6 @@ fun TabLayout(recipe: Recipe) {
 @Preview
 @Composable
 fun PreviewRecipePage() {
-    val recipeList = RecipeData().loadRecipes()
-    RecipePage(recipe = recipeList[2])
+   /* val recipeList = RecipeData().loadRecipes()
+    RecipePage(recipe = recipeList[2])*/
 }

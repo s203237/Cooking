@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,9 +25,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
 
 @Composable
-fun DisplayFavButton() {
+fun DisplayFavButton(recipe: Recipe, onFavoriteButtonClicked: (String) -> Unit) {
     var isFavorite by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
@@ -39,7 +42,7 @@ fun DisplayFavButton() {
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick = { isFavorite = !isFavorite }
+            onClick = { onFavoriteButtonClicked(recipe.imageUrl)}
         ) {
             if (isFavorite)
                 Icon(
@@ -63,8 +66,10 @@ fun ImageWithFavIcon(
     imageUrl: String,
     onNavigateToRecipe: (String) -> Unit,
     onFavoriteButtonClicked: (String) -> Unit,
-    cardFormat: CardFormats
+    cardFormat: CardFormats,
+
 ) {
+    val recipe = Recipe(isFavorite = false)
     Box(
        // contentAlignment = Alignment.BottomEnd
     ) {
@@ -81,7 +86,7 @@ fun ImageWithFavIcon(
         }
 
         AsyncImage(
-            model = imageUrl,
+            model = recipe.imageUrl,
             contentDescription = null, //TODO give content description
             modifier = Modifier
                 .fillMaxWidth()
@@ -92,6 +97,19 @@ fun ImageWithFavIcon(
             contentScale = ContentScale.Crop,
 
             )
+        IconButton(
+            onClick = { onFavoriteButtonClicked(recipe.imageUrl) },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 8.dp, bottom = 8.dp)
+        ) {
+            val icon = if (recipe.isFavorite) {
+                Icons.Default.Favorite
+            } else {
+                Icons.Default.FavoriteBorder
+            }
+            Icon(imageVector = icon, contentDescription = null)
+        }
 
         Box(
             contentAlignment = Alignment.BottomEnd,
@@ -100,7 +118,9 @@ fun ImageWithFavIcon(
                 .aspectRatio(aspectRatioFavBox)
                 .padding(16.dp)
         ) {
-            DisplayFavButton()
+            DisplayFavButton(recipe = recipe, onFavoriteButtonClicked = {}//imageUrl ->
+
+            )
 
         }
 

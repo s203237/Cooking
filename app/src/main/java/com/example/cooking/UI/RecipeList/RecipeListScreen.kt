@@ -37,7 +37,7 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> 
     val recipes by viewModel.recipeCards.collectAsState()
     RecipeList(
         recipes = recipes,
-        onNavigateToRecipe = onNavigateToRecipe,
+        onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = {}
     )
 
 }

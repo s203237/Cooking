@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -38,9 +39,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
+import com.example.cooking.UI.Faviorite.FavoritesScreen
 import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
+import com.example.cooking.UI.Profile.FavouriteImage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
@@ -147,8 +150,10 @@ fun AppNavigation(){
         }, bottomBar = {
             if (displayBottomBar) {
                 NavigationBar{
+
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentDestination = navBackStackEntry?.destination
+                   // val tab = Tab(title =)
                     listOfNavItem.forEach { navItem ->
                         NavigationBarItem(
                             selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
@@ -170,6 +175,7 @@ fun AppNavigation(){
                             label = {
                                 Text(text = navItem.label)
                             },
+
                         )
                     }
                 }
@@ -182,6 +188,12 @@ fun AppNavigation(){
             modifier = Modifier
                 .padding(paddingValues)
         ) {
+
+            composable(route = Screens.Favorites.name){
+                FavoritesScreen()
+                printBackStack(navController.currentBackStack, "Favorites : ")
+            }
+
             composable(route = Screens.Onboarding.name) {
                displayBottomBar=false
                 displayTopBar=false

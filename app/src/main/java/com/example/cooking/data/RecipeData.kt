@@ -5,7 +5,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.model.TimeToCook
 
 class RecipeData {
-    fun loadRecipes(): List<Recipe> {
+  /*  fun loadRecipes(): List<Recipe> {
         val relativePath = "app/src/main/res/drawable"
         val projectRoot = System.getProperty("user.dir")
         val fileUrl = "$projectRoot/$relativePath"
@@ -60,5 +60,5 @@ class RecipeData {
 
 
         )
-    }
+    }*/
 }

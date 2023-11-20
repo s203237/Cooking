@@ -1,6 +1,6 @@
 package com.example.cooking.data.local
 
-import FavoriteDataSource
+import FavoritesDataSource
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class DataStoreFavoritesDataSource(private val context: Context): FavoriteDataSource {
+class DataStoreFavoritesDataSource(private val context: Context): FavoritesDataSource {
 
     private val Context.dataStore by preferencesDataStore("favorites")
     private val favoritesKey = stringPreferencesKey("favorites")

@@ -7,5 +7,6 @@ enum class Screens {
     Favorites,
     SearchScreen,
     Profile,
-    RecipeList
+    RecipeList,
+
 }

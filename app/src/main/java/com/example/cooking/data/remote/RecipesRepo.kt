@@ -37,6 +37,6 @@ class RecipesRepo(apiService: ApiService) : RecipeDataRepo<Recipe> {
             val errorResponse = e.response()?.errorBody()?.string()
             println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
         }
-        return Recipe()
+        return Recipe(isFavorite = false)
     }
 }

@@ -1,6 +1,6 @@
 package com.example.cooking
 
-import FavoriteDataSource
+import FavoritesDataSource
 import android.content.Context
 import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.data.local.DataStoreFavoritesDataSource
@@ -34,8 +34,8 @@ object DependencyProvider {
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
-    lateinit var favoritesDataSource: FavoriteDataSource
-        //private set
+    lateinit var favoritesDataSource: FavoritesDataSource
+        set
 }
 fun initialize(context : Context){
     favoritesDataSource = DataStoreFavoritesDataSource(context)

@@ -18,10 +18,12 @@ import coil.compose.AsyncImage
 import com.example.cooking.model.Recipe
 
 @Composable
-fun RecipeCard(recipe: Recipe, subTitle: String ="") =
+fun RecipeCard(recipe: Recipe, subTitle: String ="" ) =
     Column {
         Card(
-            modifier = Modifier.fillMaxWidth().padding(10.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
         ) {
             Box(
                 contentAlignment = Alignment.BottomEnd
@@ -64,16 +66,20 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
             fontSize = 20.sp,
             modifier = Modifier.padding(10.dp)
         )
+
+       /* */
+
     }
 
 
 @Preview
 @Composable
 fun PreviewRecipeCard(){
-    val recipe = Recipe(
+   /* val recipe = Recipe(
         title = "Peach",
         imageUrl = "app/src/main/res/drawable/peach.png",
-        imageDescription = "3d rendering of a close-up of a peach with googly eyes"/*,
+        imageDescription = "3d rendering of a close-up of a peach with googly eyes"
+    ,
         timeToCook = TimeToCook("10 min", "1h30 min"),
         difficulty = "Easy",
         servingSize = "10",
@@ -82,7 +88,7 @@ fun PreviewRecipeCard(){
         recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
         ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
         steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-    */)
-    RecipeCard(recipe = recipe)
+    )*/
+    //RecipeCard(recipe = recipe)
 }
 
