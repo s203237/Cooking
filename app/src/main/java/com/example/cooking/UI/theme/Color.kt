@@ -9,6 +9,7 @@ val Pink80 = Color(0xFFEFB8C8)
 val Yellow = Color(0xFFF3B144)
 val Blue = Color(0xFF93BBCF)
 val Maroon = Color(0xFF7D5260)
+val Black = Color(0xFF000000)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)

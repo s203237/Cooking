@@ -10,6 +10,7 @@ import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 /**
@@ -18,12 +19,20 @@ import retrofit2.Retrofit
  *  - Provides instances of `RecipeDataRepo` for fetching both detailed recipes and recipe cards.
  */
 object DependencyProvider {
+    private const val timeoutSeconds = 60L
+    private val okHttpClient = OkHttpClient.Builder()
+        .connectTimeout(timeoutSeconds, java.util.concurrent.TimeUnit.SECONDS)
+        .readTimeout(timeoutSeconds, java.util.concurrent.TimeUnit.SECONDS)
+        .writeTimeout(timeoutSeconds, java.util.concurrent.TimeUnit.SECONDS)
+        .build()
+
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(
             Json {
                 ignoreUnknownKeys = true
             }.asConverterFactory("application/json".toMediaType())
         )
+        .client(okHttpClient)
         .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
         .build()
 

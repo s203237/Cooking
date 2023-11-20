@@ -16,6 +16,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -77,11 +80,6 @@ import kotlinx.coroutines.flow.StateFlow
 @Preview
 @Composable
 fun AppNavigation(){
-    NavigationInComposeTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
             val navController = rememberNavController()
             var displayBottomBar by remember { mutableStateOf(false) }
             var displayTopBar by remember { mutableStateOf(false) }
@@ -100,7 +98,7 @@ fun AppNavigation(){
                         CenterAlignedTopAppBar(
                             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                                 containerColor = MaterialTheme.colorScheme.background,
-                                titleContentColor = MaterialTheme.colorScheme.primary
+                                titleContentColor = MaterialTheme.colorScheme.onBackground
                             ),
                             title = {
                                 Text(
@@ -155,7 +153,11 @@ fun AppNavigation(){
                     }
                 }, bottomBar = {
                     if (displayBottomBar) {
-                        NavigationBar {
+                        NavigationBar(
+                                containerColor = MaterialTheme.colorScheme.secondary,
+                                contentColor = MaterialTheme.colorScheme.onBackground
+
+                            ) {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
                             val currentDestination = navBackStackEntry?.destination
                             listOfNavItem.forEach { navItem ->
@@ -176,9 +178,11 @@ fun AppNavigation(){
                                             contentDescription = null
                                         )
                                     },
-                                    label = {
+                                   /* label = {
                                         Text(text = navItem.label)
-                                    },
+                                    },*/
+                                    colors = NavigationBarItemDefaults.colors(
+                                        indicatorColor = MaterialTheme.colorScheme.secondary)
                                 )
                             }
                         }
@@ -291,8 +295,7 @@ fun AppNavigation(){
                         displayTopBar = true
                     }
                 }
-            }
-        }
+
     }
 }
 
