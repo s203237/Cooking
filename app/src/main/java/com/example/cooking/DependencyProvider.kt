@@ -2,8 +2,8 @@ package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
 import com.example.cooking.data.remote.RecipeCardRepo
-import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
+import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
