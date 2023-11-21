@@ -183,13 +183,19 @@ fun AppNavigation(){
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screens.Onboarding.name,
+            startDestination = Screens.HomeScreen.name,
             modifier = Modifier
                 .padding(paddingValues)
         ) {
 
             composable(route = Screens.Favorites.name){
-                FavoritesScreen()
+                FavoritesScreen(
+                    onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    }
+                )
+                displayBottomBar = true
+                displayTopBar = true
                 printBackStack(navController.currentBackStack, "Favorites : ")
             }
 
