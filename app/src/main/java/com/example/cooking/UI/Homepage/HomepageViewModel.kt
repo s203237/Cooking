@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Homepage
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -11,7 +12,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import kotlin.random.Random
 
 class HomePageViewModel: ViewModel() {
     private val collectionNames = HomepageCuration().loadCollectionNames()
@@ -40,12 +40,16 @@ class HomePageViewModel: ViewModel() {
             0
     }
   private fun getDailyRecipe() : RecipeCard{
+      Log.v("getDailyRecipe ", "collectionCount: $collectionCount")
       val randomNumber = (0 until collectionCount).random() //TODO pick using computer's date?? So it only changes once a day...
-      val randomListIndex = _recipeCardsList[randomNumber].value.size
-      val dailyPickNum = pickNumber(randomListIndex)
+      Log.v("getDailyRecipe ", "random number: $randomNumber")
+      val randomListSize = _recipeCardsList[randomNumber].value.size
+      Log.v("getDailyRecipe ", "random list size: $randomListSize")
+      val dailyPickNum = pickNumber(randomListSize)
+      Log.v("getDailyRecipe ", "rdailypicknum: $dailyPickNum")
 
       if (_recipeCardsList.isNotEmpty()) {
-          return _recipeCardsList[randomListIndex].value[Random.nextInt(dailyPickNum)]
+          return _recipeCardsList[randomNumber].value[dailyPickNum]
       }
       return RecipeCard()
   }
