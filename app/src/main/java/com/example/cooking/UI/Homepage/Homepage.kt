@@ -3,10 +3,9 @@ package com.example.cooking.UI.Homepage
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,24 +24,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-//import com.example.cooking.Data.Recipe
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
-import com.example.cooking.UI.SharedComponents.DisplayImage
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.data.RecipeData
+import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.model.FoodCategories
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
-
 @Composable
 fun scrollableList(
     modifier: Modifier,
@@ -67,7 +60,12 @@ fun scrollableList(
             item {
 //                    DailyRecipeItem(recipe = dailyrecipe)
                 //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
-                RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe, subtitle = "Daily recipe")
+                RecipeItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    recipe = dailyRecipe,
+                    onNavigateToRecipe = onNavigateToRecipe,
+                    subtitle = "Daily recipe"
+                )
             }
 
             items(listOfList) { listOfList ->
@@ -82,7 +80,10 @@ fun scrollableList(
                         //RecipeCard(recipe = recipe)
                         RecipeItem(modifier = Modifier
                             .height(200.dp)
-                            .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
+                            .width(200.dp),
+                            recipe = recipe,
+                            onNavigateToRecipe = onNavigateToRecipe
+                        )
                     }
                 }
 
@@ -98,16 +99,33 @@ fun scrollableList(
 }
 
 @Composable
-fun RecipeCardListItem(recipeId: String, imageUrl: String, onNavigateToRecipe: (String) -> Unit) {
-    Row {
-        DisplayImage(
-            recipeId =  recipeId,
-            imageUrl = imageUrl,
+fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
+    Row (
+        Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .background(color = MaterialTheme.colorScheme.background)
+    ) {
+        RecipeImage(
+            recipeId =  recipeCard.recipeId,
+            imageUrl = recipeCard.imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
             cardFormat = CardFormats.SQUARE_10P,
         )
-       // Text(text = )
+        Text(text = recipeCard.title)
+        com.example.cooking.UI.SharedComponents.FavButton()
     }
+}
+
+@Preview
+@Composable
+fun PreviewRecipeCardListItem() {
+    val recipeCard = RecipeCard(
+        recipeId = "miso-butternut-soup",
+        title = "Miso Butternut Soup",
+        imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/09/Miso-and-butternut-soup-efe9277.jpg?quality=90&webp=true&resize=600,545"
+    )
+    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
 }
 
 /*
