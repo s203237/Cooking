@@ -56,7 +56,7 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit, 
     }
 }
 @Composable
-fun RecipeItem(recipe: Recipe, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit){
 
 Column(
     modifier = Modifier

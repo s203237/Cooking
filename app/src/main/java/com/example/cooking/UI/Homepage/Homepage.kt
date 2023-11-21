@@ -82,17 +82,17 @@ fun scrollableList(
 
 }
 
-@Preview
+/*@Preview
 @Composable
 fun PreviewscrollableList(){
-/*
+
     val dailyRecipe = testingClass().dailyRecipe()
     val recipeList1 = testingClass().loadCat1Recipes()
     val recipeList2 = testingClass().loadCat2Recipes()
     val recipeList3 = testingClass().loadCat3Recipes()
     val recipeList4 = testingClass().loadCat4Recipes()
     val recipeList5 = testingClass().loadCat5Recipes()
-*/
+
     val dailyRecipe = RecipeData().loadRecipes()[0]
     val recipeList1 = RecipeData().loadRecipes()
     val recipeList2 = RecipeData().loadRecipes()
@@ -113,5 +113,5 @@ fun PreviewscrollableList(){
 
 
 }
-
+*/
 

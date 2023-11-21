@@ -5,7 +5,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.model.TimeToCook
 
 class RecipeData {
-  /*  fun loadRecipes(): List<Recipe> {
+    fun loadRecipes(): List<Recipe> {
         val relativePath = "app/src/main/res/drawable"
         val projectRoot = System.getProperty("user.dir")
         val fileUrl = "$projectRoot/$relativePath"
@@ -15,7 +15,7 @@ class RecipeData {
                 title = "Pear And Rainbow",
                 imageUrl = "$fileUrl/peach.png",
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
-                author = "Melissa Woo"/*,
+                author = "Melissa Woo",/*,
                 timeToCook = TimeToCook("5 min", "60 min"),
                 difficulty = "Medium",
                 servingSize = 4,
@@ -23,7 +23,8 @@ class RecipeData {
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
                 ingredients = listOf("Pear", "Rainbow", "Green paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-            */),
+            */
+            isFavorite = false),
             Recipe(
                 title = "Peach",
                 imageUrl = "$fileUrl/pear.png",
@@ -37,7 +38,7 @@ class RecipeData {
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
                 ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-            */),
+            */,isFavorite = false),
             Recipe(
                 title = "Spicy Sichuan Boiled Tofu",
                 imageUrl = "$fileUrl/tofu.jpg",
@@ -56,9 +57,10 @@ class RecipeData {
                     "To the oil, add the white parts of the scallions, the spicy bean paste, and tomato paste. Fry for 1 minute, until the oil is red, then stir in the blanched tofu. Stir-fry for 30 seconds.",
                     "Then add the water, sugar, and light soy sauce. Bring to a simmer. Then add the cornstarch slurry. When it’s thickened, add this mixture on top of the mushrooms and bean sprouts.",
                     "Top with the minced garlic, chili flakes, and Sichuan peppercorn powder on top. In a small saucepan, heat the remaining 2 tablespoons of oil until it shimmers. Pour hot oil into the garlic, chili, and peppercorn powder; the ingredients should sizzle immediately. Then sprinkle over the green parts of the scallions and the cilantro. Serve immediately.")
-            */)
+            */
+            ,isFavorite = false)
 
 
         )
-    }*/
+    }
 }

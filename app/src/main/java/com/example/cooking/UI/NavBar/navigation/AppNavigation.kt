@@ -40,7 +40,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Faviorite.FavoritesScreen
-import com.example.cooking.UI.Homepage.PreviewscrollableList
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.FavouriteImage
@@ -224,7 +223,7 @@ fun AppNavigation(){
                 displayBottomBar = true
                 displayTopBar=true
 
-                PreviewscrollableList()
+                ///PreviewscrollableList()
                 printBackStack(navController.currentBackStack, "Home screen: ")
             }
             composable(route = Screens.SearchScreen.name) {
