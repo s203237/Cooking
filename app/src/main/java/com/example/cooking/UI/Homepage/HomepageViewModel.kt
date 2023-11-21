@@ -1,6 +1,5 @@
 package com.example.cooking.UI.Homepage
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -40,13 +39,10 @@ class HomePageViewModel: ViewModel() {
             0
     }
   private fun getDailyRecipe() : RecipeCard{
-      Log.v("getDailyRecipe ", "collectionCount: $collectionCount")
-      val randomNumber = (0 until collectionCount).random() //TODO pick using computer's date?? So it only changes once a day...
-      Log.v("getDailyRecipe ", "random number: $randomNumber")
+      val randomNumber = (0 until collectionCount).random() //TODO pick using computer's date?? So it only changes once a day...Log.v("getDailyRecipe ", "random number: $randomNumber")
       val randomListSize = _recipeCardsList[randomNumber].value.size
-      Log.v("getDailyRecipe ", "random list size: $randomListSize")
       val dailyPickNum = pickNumber(randomListSize)
-      Log.v("getDailyRecipe ", "rdailypicknum: $dailyPickNum")
+
 
       if (_recipeCardsList.isNotEmpty()) {
           return _recipeCardsList[randomNumber].value[dailyPickNum]
