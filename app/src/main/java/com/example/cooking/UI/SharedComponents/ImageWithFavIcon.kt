@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,41 +25,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-
 @Composable
-fun DisplayFavButton() {
-    var isFavorite by remember { mutableStateOf(false) }
-    Box(
-        modifier = Modifier
-            .fillMaxWidth(.15f)
-            .aspectRatio(1f)
-            .background(
-                color = Color(0xFFC1DAE2),
-                shape = CircleShape
-            ),
-        contentAlignment = Alignment.Center,
-    ) {
-        IconButton(
-            onClick = { isFavorite = !isFavorite }
-        ) {
-            if (isFavorite)
-                Icon(
-                    Icons.Filled.Favorite,
-                    contentDescription = "Favourite Heart Filled",
-                    tint = Color.White
-                )
-            else
-                Icon(
-                    Icons.Outlined.FavoriteBorder,
-                    contentDescription = "Favourite Heart Outlined",
-                    tint = Color.White
-                )
-        }
-    }
-}
-
-@Composable
-fun DisplayImage(
+fun RecipeImage(
     recipeId: String,
     imageUrl: String,
     onNavigateToRecipe: (String) -> Unit,
@@ -86,6 +54,39 @@ fun DisplayImage(
 }
 
 @Composable
+fun FavButton() {
+    var isFavorite by remember { mutableStateOf(false) }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(.15f)
+            .aspectRatio(1f)
+            .background(
+                color = MaterialTheme.colorScheme.primary,
+                shape = CircleShape
+            ),
+        contentAlignment = Alignment.Center,
+    ) {
+        IconButton(
+            onClick = { isFavorite = !isFavorite }
+        ) {
+            if (isFavorite)
+                Icon(
+                    Icons.Filled.Favorite,
+                    contentDescription = "Favourite Heart Filled",
+                    tint = Color.White
+                )
+            else
+                Icon(
+                    Icons.Outlined.FavoriteBorder,
+                    contentDescription = "Favourite Heart Outlined",
+                    tint = Color.White
+                )
+        }
+    }
+}
+
+
+@Composable
 fun ImageWithFavIcon(
     recipeId: String,
     imageUrl: String,
@@ -103,7 +104,7 @@ fun ImageWithFavIcon(
             CardFormats.PORTRAIT -> 1f
         }
 
-        DisplayImage(
+        RecipeImage(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
@@ -117,7 +118,7 @@ fun ImageWithFavIcon(
                 .aspectRatio(aspectRatioFavBox)
                 .padding(16.dp)
         ) {
-            DisplayFavButton()
+            FavButton()
         }
 
     }
