@@ -14,18 +14,14 @@ import com.example.cooking.UI.RecipeList.RecipeList
 @Composable
 fun FavoritesScreen(onNavigateToRecipe: (String) -> Unit) {
     val viewModel: FavoritesScreenViewModel = viewModel()
-
-   /* LaunchedEffect(key1 = collectionName){
-        viewModel.updateCollectionName(collectionName)
-    }*/
     val recipes by viewModel.favorites.collectAsState(emptyList())
 
     RecipeList(recipes = recipes , onNavigateToRecipe = onNavigateToRecipe , onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked)
 }
-@Preview
+/*@Preview
 @Composable
 fun FavoriteScreenPreview(){
 
     FavoritesScreen(onNavigateToRecipe = { recipeId ->
         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")})
-}
+}*/
