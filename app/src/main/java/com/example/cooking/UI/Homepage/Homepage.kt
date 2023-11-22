@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +24,9 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,13 +38,14 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.model.FoodCategories
 import com.example.cooking.model.RecipeCard
+
 @Composable
 fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     listOfList: List<FoodCategories>,
     onNavigateToRecipe: (String) -> Unit
-){
+) {
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -78,9 +82,10 @@ fun scrollableList(
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
                         //RecipeCard(recipe = recipe)
-                        RecipeItem(modifier = Modifier
-                            .height(200.dp)
-                            .width(200.dp),
+                        RecipeItem(
+                            modifier = Modifier
+                                .height(200.dp)
+                                .width(200.dp),
                             recipe = recipe,
                             onNavigateToRecipe = onNavigateToRecipe
                         )
@@ -100,20 +105,35 @@ fun scrollableList(
 
 @Composable
 fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
-    Row (
-        Modifier
+    Row(
+        modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp)
-            .background(color = MaterialTheme.colorScheme.background)
+            .background(color = Color.LightGray)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        RecipeImage(
-            recipeId =  recipeCard.recipeId,
-            imageUrl = recipeCard.imageUrl,
-            onNavigateToRecipe = onNavigateToRecipe,
-            cardFormat = CardFormats.SQUARE_10P,
-        )
-        Text(text = recipeCard.title)
-        com.example.cooking.UI.SharedComponents.FavButton()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(0.6f),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RecipeImage(
+                recipeId = recipeCard.recipeId,
+                imageUrl = recipeCard.imageUrl,
+                onNavigateToRecipe = onNavigateToRecipe,
+                cardFormat = CardFormats.SQUARE,
+                sizeFraction = 0.35f
+            )
+            Text(
+                text = recipeCard.title,
+                color = MaterialTheme.colorScheme.onBackground,
+                /*modifier = Modifier
+                    .fillMaxWidth(0.3f)*/
+            )
+
+        }
+        com.example.cooking.UI.SharedComponents.FavButton(0.35f)
     }
 }
 
@@ -164,7 +184,12 @@ fun PreviewscrollableList(){
 
  */
 @Composable
-fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
+fun RecipeItem(
+    modifier: Modifier,
+    recipe: RecipeCard,
+    onNavigateToRecipe: (String) -> Unit,
+    subtitle: String = ""
+) {
 
     Column(
         modifier = Modifier
@@ -173,7 +198,7 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
     ) {
         Card(
             modifier = modifier
-        ){
+        ) {
 //            AsyncImage(
 //                model = recipe.imageUrl,
 //                contentDescription = null, //TODO give content description
@@ -202,7 +227,7 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-        if(!subtitle.equals("")){
+        if (!subtitle.equals("")) {
             Text(
                 text = subtitle,
                 fontSize = 15.sp,

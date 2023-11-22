@@ -34,7 +34,7 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
         food1, food2, food3, food4
     )
 
-   /* val randomNumber = (0..3).random()
+    val randomNumber = (0..3).random()
 
     var list = food1.getList()
 
@@ -45,15 +45,15 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
         else -> list = food4.getList()
     }
 
-    if(list.size > 0) {
-        val dailyRecipe = list[Random.nextInt(list.size)]
-*/
-        scrollableList(
-            modifier =   Modifier.background(color = Color(0xFFF2ECE3)),
-            dailyRecipe = dailyRecipe,
-            listOfList = listOfList,
-            onNavigateToRecipe = onNavigateToRecipe
-        )
+    //if(list.size > 0) {
+       // val dailyRecipe = list[Random.nextInt(list.size)]
+
+    scrollableList(
+        modifier =   Modifier.background(color = Color(0xFFF2ECE3)),
+        dailyRecipe = dailyRecipe,
+        listOfList = listOfList,
+        onNavigateToRecipe = onNavigateToRecipe
+    )
 
     //}
 }

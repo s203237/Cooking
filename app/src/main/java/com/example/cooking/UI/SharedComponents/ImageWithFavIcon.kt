@@ -25,40 +25,46 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+
 @Composable
 fun RecipeImage(
     recipeId: String,
     imageUrl: String,
     onNavigateToRecipe: (String) -> Unit,
-    cardFormat: CardFormats
+    cardFormat: CardFormats,
+    sizeFraction: Float = 1f
+
 ) {
-    val aspectRatioImg: Float = when(cardFormat) {
+    val aspectRatioImg: Float = when (cardFormat) {
         CardFormats.SQUARE -> 1f
-        CardFormats.SQUARE_10P -> 0.1f
         CardFormats.LANDSCAPE -> 2f
         CardFormats.PORTRAIT -> 0.92f
     }
 
-    AsyncImage(
-        model = imageUrl,
-        contentDescription = null, //TODO give content description
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(aspectRatioImg)
-            .clickable {
-                onNavigateToRecipe(recipeId)
-            },
-        contentScale = ContentScale.Crop,
+    Box(
+        Modifier.fillMaxWidth(sizeFraction)
+    ) {
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = null, //TODO give content description
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatioImg)
+                .clickable {
+                    onNavigateToRecipe(recipeId)
+                },
+            contentScale = ContentScale.Crop,
 
-        )
+            )
+    }
 }
 
 @Composable
-fun FavButton() {
+fun FavButton(sizeFraction: Float = 0.15f) {
     var isFavorite by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
-            .fillMaxWidth(.15f)
+            .fillMaxWidth(sizeFraction)
             .aspectRatio(1f)
             .background(
                 color = MaterialTheme.colorScheme.primary,
@@ -95,11 +101,10 @@ fun ImageWithFavIcon(
     cardFormat: CardFormats
 ) {
     Box(
-       // contentAlignment = Alignment.BottomEnd
+        // contentAlignment = Alignment.BottomEnd
     ) {
-        val aspectRatioFavBox: Float = when(cardFormat) {
+        val aspectRatioFavBox: Float = when (cardFormat) {
             CardFormats.SQUARE -> 1f
-            CardFormats.SQUARE_10P ->1f
             CardFormats.LANDSCAPE -> 2f
             CardFormats.PORTRAIT -> 1f
         }
@@ -108,7 +113,7 @@ fun ImageWithFavIcon(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
-            cardFormat = cardFormat
+            cardFormat = cardFormat,
         )
 
         Box(
