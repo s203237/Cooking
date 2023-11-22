@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.cooking.model.Recipe
 import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.CustomHeading1
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.cooking.UI.SharedComponents.CardFormats
@@ -87,7 +87,7 @@ fun TabLayout(recipe: Recipe) {
 
             )
             {
-                CustomHeading1(heading = "information")
+                UppercaseHeadingMedium(heading = "information")
             }
             Box(
                 modifier = Modifier
@@ -97,7 +97,7 @@ fun TabLayout(recipe: Recipe) {
                 contentAlignment = Alignment.Center
             )
             {
-                CustomHeading1(heading = "preparation")
+                UppercaseHeadingMedium(heading = "preparation")
             }
         }
     }

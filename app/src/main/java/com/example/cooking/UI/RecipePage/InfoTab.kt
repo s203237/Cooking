@@ -21,8 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
-import com.example.cooking.UI.SharedComponents.CustomHeading1
-import com.example.cooking.UI.SharedComponents.CustomHeading2
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingSmall
 import com.example.cooking.UI.SharedComponents.CustomTitle
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.Recipe
@@ -61,15 +61,15 @@ fun InfoTab(recipe: Recipe) {
         ) {
             DisplayRecipeInfo(recipe = recipe)
             CustomTitle(title = recipe.title, textAlign = TextAlign.Center)
-            CustomHeading2(heading = recipe.author, textAlign = TextAlign.Center)
-            CustomHeading1(heading = "description")
+            UppercaseHeadingSmall(heading = recipe.author, textAlign = TextAlign.Center)
+            UppercaseHeadingMedium(heading = "description")
             Text(
                 text = recipe.recipeDescription,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
 
-            CustomHeading1(heading = "ingredients")
+            UppercaseHeadingMedium(heading = "ingredients")
             BulletList(list = recipe.ingredients)
         }
     }
