@@ -35,7 +35,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun SearchBar() {
+fun SearchBar(onNavigateToRecipe:(String)-> Unit) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
     val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
     if(onSearching !=true){
@@ -70,9 +70,8 @@ fun SearchBar() {
         }
 
     } else {
-        ListAllRecipes(query = searchQuery, onNavigateToRecipe = { recipeId ->
-            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-        } )
+        ListAllRecipes(query = searchQuery, onNavigateToRecipe = onNavigateToRecipe
+         )
     }
 
 }
@@ -86,5 +85,5 @@ suspend fun callRecipeList(query: String): List<RecipeCard> {
 @Preview
 @Composable
 fun PreviewSearchBar() {
-    SearchBar()
+    SearchBar({})
 }

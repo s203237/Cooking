@@ -225,7 +225,9 @@ fun AppNavigation(){
             composable(route = Screens.SearchScreen.name) {
                 displayBottomBar=true
                 displayTopBar=true
-                SearchBar()
+                SearchBar(onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                })
                 printBackStack(navController.currentBackStack, "SearchScreen ")
                }
             composable(
