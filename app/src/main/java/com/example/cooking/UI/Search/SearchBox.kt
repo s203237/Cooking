@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.sp
 fun SearchBox(
     query: String,
     onQueryChange: (String) -> Unit,
-    onSearch: () -> Unit,
+    onSearch: (String) -> Unit,
     modifier: Modifier = Modifier,
     leadingIcon: ImageVector = Icons.Outlined.Search
 ) {
@@ -72,7 +72,7 @@ fun SearchBox(
         ),
         keyboardActions = KeyboardActions(
             onSearch = {
-                onSearch()
+                onSearch(query)
             }
         ),
         textStyle = TextStyle(color = Color.Black , fontSize = 22.sp), // Adjust the text color as needed

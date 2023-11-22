@@ -36,6 +36,7 @@ class RecipeListViewModel: ViewModel() {
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
     private val _collectionName = MutableStateFlow("")
+    private val query = MutableStateFlow("")
 
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
@@ -54,7 +55,20 @@ class RecipeListViewModel: ViewModel() {
         }
     }
 
+    fun updateSearchKey(newSearchKeyword: String) {
+        query.value = newSearchKeyword
+        val printOutValue = query.value
+        Log.v(" SearchKeyword Trace", "In updateSearchKeyword: $printOutValue")
+    }
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            query.collect{newSearchKeyword ->
+                Log.v("SearchKeyword Trace", "SearchKeyword in viewModel.launch: $newSearchKeyword")
+                val recipeCards = DependencyProvider.recipeCardsRepoSearch.fetchData(query.value)
+                _recipeCards.value = recipeCards
+            }
 
-
+        }
+    }
 
 }
