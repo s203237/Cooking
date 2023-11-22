@@ -2,8 +2,10 @@ package com.example.cooking
 
 import androidx.compose.runtime.Composable
 import com.example.cooking.data.remote.ApiService
+
 import com.example.cooking.data.remote.AuthenticationInterceptor
 import com.example.cooking.data.remote.MockApiService
+import com.example.cooking.data.remote.RecipeCardRepo
 import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCardsRepoSearch
@@ -39,7 +41,11 @@ object DependencyProvider {
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
+
     val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
+
+    val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
+
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
