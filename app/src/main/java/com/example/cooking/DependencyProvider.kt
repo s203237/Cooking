@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  *  Uses Retrofit to create an instance of the `ApiService` for network operations.
@@ -26,6 +27,8 @@ object DependencyProvider {
 
     fun createBuilder(): OkHttpClient {
         val builder = OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60,TimeUnit.SECONDS)
         builder.interceptors().add(AuthenticationInterceptor())
         val client = builder.build()
         return client

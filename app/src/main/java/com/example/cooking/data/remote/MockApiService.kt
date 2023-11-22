@@ -60,4 +60,8 @@ class MockApiService: ApiService {
     override suspend fun fetchRecipeList(temp: String): RecipeCollection {
         TODO("Not yet implemented")
     }
+
+    override suspend fun fetchRecipeCardById(recipeId: String): RecipeCard {
+        TODO("Not yet implemented")
+    }
 }
