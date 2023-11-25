@@ -32,11 +32,6 @@ fun UppercaseHeadingMedium(heading: String, textAlign: TextAlign = TextAlign.Sta
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         textAlign = textAlign,
-        modifier = Modifier
-            .padding(
-                bottom = 8.dp,
-                top = 8.dp
-            )
     )
 }
 
