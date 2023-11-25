@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
@@ -118,9 +119,7 @@ fun ImageWithFavIcon(
                 .aspectRatio(aspectRatioFavBox)
                 .padding(16.dp)
         ) {
-            DisplayFavButton(recipe = recipe, onFavoriteButtonClicked = {}//imageUrl ->
-
-            )
+            DisplayFavButton(recipe = recipe, onFavoriteButtonClicked = onFavoriteButtonClicked)
 
         }
 

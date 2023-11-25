@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.UI.Homepage.RecipeCard
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
@@ -49,21 +50,23 @@ class RecipeListViewModel: ViewModel() {
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            //val recipies = DependencyProvider.recipeCardRepo.fetchData()
             _collectionName.collect{newCollectionName ->
                 Log.v("CollectionName Trace", "CollectionName in viewModel.launch: $newCollectionName")
                 val recipeCards = DependencyProvider.recipeCardRepo.fetchData(_collectionName.value)
+                //val favorites = favoritesDataSource.getFavorites().first()
                 _recipeCards.value = recipeCards
-               /* favoritesDataSource
+               favoritesDataSource
                     .getFavorites()
                     .collect{ favorites ->
-                        _recipeCards.value = _recipeCards.map{ recipeCard ->
-                            Recipe(
+                        _recipeCards.value = recipeCards.map{ recipeCard ->
+                            RecipeCard(
                                 imageUrl = recipeCard.imageUrl,
                                 isFavorite = favorites.contains(recipeCard.imageUrl)
                             )
                         }
 
-                    }*/
+                    }
             }
 
         }

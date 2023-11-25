@@ -69,6 +69,7 @@ Column(
         onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
         cardFormat = CardFormats.LANDSCAPE
 
+
     )
     Text(
         text = recipe.title ,
