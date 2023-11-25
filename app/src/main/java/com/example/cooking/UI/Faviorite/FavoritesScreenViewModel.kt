@@ -3,15 +3,10 @@ package com.example.cooking.UI.Faviorite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.DependencyProvider.favoritesDataSource
-import com.example.cooking.UI.RecipeList.RecipeItem
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 
@@ -43,6 +38,8 @@ class FavoritesScreenViewModel: ViewModel() {
             DependencyProvider.favoritesDataSource.toggleFavorite(imageUrl)
         }
     }
+
+
 }
 
 

@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -31,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,7 +40,6 @@ import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Faviorite.FavoritesScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
-import com.example.cooking.UI.Profile.FavouriteImage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
@@ -189,6 +186,8 @@ fun AppNavigation(){
         ) {
 
             composable(route = Screens.Favorites.name){
+                displayBottomBar = true
+                displayTopBar=true
                 FavoritesScreen()
                 printBackStack(navController.currentBackStack, "Favorites : ")
             }
@@ -232,23 +231,23 @@ fun AppNavigation(){
                 PreviewSearchBar()
                 printBackStack(navController.currentBackStack, "Preview: ")
                }
-            composable(
-                route=Screens.Favorites.name,
-                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-            ){//backStackEntry ->
-               // val collectionName = backStackEntry.arguments?.getString("collectionName")
-               // if(collectionName != null) {
-                ListAllRecipesScreen("easy-vegetarian-recipes",
-                        onNavigateToRecipe = { recipeId ->
-                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                    })
-                displayBottomBar=true
-                displayTopBar=true
-                printBackStack(navController.currentBackStack, "Favourites: ")
-                /*} else {
-                    Text("Collection not found")
-                }*/
-            }
+//            composable(
+//                route=Screens.Favorites.name,
+//                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+//            ){//backStackEntry ->
+//               // val collectionName = backStackEntry.arguments?.getString("collectionName")
+//               // if(collectionName != null) {
+//                ListAllRecipesScreen("easy-vegetarian-recipes",
+//                        onNavigateToRecipe = { recipeId ->
+//                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+//                    })
+//                displayBottomBar=true
+//                displayTopBar=true
+//                printBackStack(navController.currentBackStack, "Favourites: ")
+//                /*} else {
+//                    Text("Collection not found")
+//                }*/
+//            }
 
             composable(
                 route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
