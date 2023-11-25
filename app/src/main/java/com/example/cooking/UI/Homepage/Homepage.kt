@@ -27,7 +27,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,6 +35,7 @@ import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.model.FoodCategories
 import com.example.cooking.model.RecipeCard
 
@@ -73,12 +73,13 @@ fun scrollableList(
             }
 
             items(listOfList) { listOfList ->
-                Text(
+                UppercaseHeadingMedium(heading = listOfList.getName())
+                /*Text(
                     text = listOfList.getName(),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(10.dp)
-                )
+                )*/
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
                         //RecipeCard(recipe = recipe)
@@ -148,41 +149,6 @@ fun PreviewRecipeCardListItem() {
     RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
 }
 
-/*
-@Preview
-@Composable
-fun PreviewscrollableList(){
-/*
-    val dailyRecipe = testingClass().dailyRecipe()
-    val recipeList1 = testingClass().loadCat1Recipes()
-    val recipeList2 = testingClass().loadCat2Recipes()
-    val recipeList3 = testingClass().loadCat3Recipes()
-    val recipeList4 = testingClass().loadCat4Recipes()
-    val recipeList5 = testingClass().loadCat5Recipes()
-*/
-    val dailyRecipe = RecipeData().loadRecipes()[0]
-    val recipeList1 = RecipeData().loadRecipes()
-    val recipeList2 = RecipeData().loadRecipes()
-    val recipeList3 = RecipeData().loadRecipes()
-    val recipeList4 = RecipeData().loadRecipes()
-    val recipeList5 = RecipeData().loadRecipes()
-
-
-    val listOfList: List<List<Recipe>> = listOf(
-        recipeList1, recipeList2, recipeList3, recipeList4, recipeList5
-    )
-
-    scrollableList(
-        Modifier,
-        dailyRecipe = dailyRecipe,
-        listOfList = listOfList,
-    )
-
-
-}
-
-
- */
 @Composable
 fun RecipeItem(
     modifier: Modifier,
@@ -194,7 +160,7 @@ fun RecipeItem(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(16.dp),
     ) {
         Card(
             modifier = modifier
@@ -222,21 +188,35 @@ fun RecipeItem(
             text = recipe.title,
             fontSize = 20.sp,
             modifier = Modifier
-                .padding(10.dp)
-                .width(200.dp),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+                .padding(
+                    top = 16.dp,
+                    bottom = 16.dp
+                )
+            //    .width(200.dp),
+            //maxLines = 1,
+           // overflow = TextOverflow.Ellipsis
         )
         if (!subtitle.equals("")) {
             Text(
                 text = subtitle,
                 fontSize = 15.sp,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .width(200.dp),
+               // modifier = Modifier
+               //     .padding(10.dp)
+               //     .width(200.dp),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewRecipeItem() {
+    val recipeCard = RecipeCard(
+        recipeId = "miso-butternut-soup",
+        title = "Miso Butternut Soup And a Very Long Title",
+        imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/09/Miso-and-butternut-soup-efe9277.jpg?quality=90&webp=true&resize=600,545"
+    )
+    RecipeItem(modifier = Modifier, recipe = recipeCard, onNavigateToRecipe = {})
 }
