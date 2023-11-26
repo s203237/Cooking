@@ -70,7 +70,7 @@ fun InfoTab(recipe: Recipe) {
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
-
+            Spacer(Modifier.height(16.dp))
             UppercaseHeadingMedium(heading = "ingredients")
             BulletList(list = recipe.ingredients)
         }
@@ -107,6 +107,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             infoType2 = "SERVING SIZE", infoVal2 = serv
         )
 
+        Spacer(Modifier.height(16.dp))
         DisplayRating(recipe.rating);
     }
 }
@@ -153,7 +154,7 @@ private fun InfoRowWithIcons(icon1: Painter, infoType1: String, infoVal1: String
                 Text(
                     text =  infoVal2,
                     modifier = Modifier
-                        .fillMaxWidth(0.5f)
+                        .fillMaxWidth()
                 )
             }
         }
@@ -215,6 +216,6 @@ private fun BulletList(list: List<String>) {
 @Preview
 @Composable
 fun PreviewInfoTab() {
-    val recipe = Recipe()
+    val recipe = Recipe(servingSize = "A super duper big serving")
     InfoTab(recipe = recipe)
 }
