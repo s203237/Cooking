@@ -1,11 +1,11 @@
 package com.example.cooking.UI.RecipeList
 
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import android.util.Log
-import androidx.compose.runtime.LaunchedEffect
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
  * collection name. It interacts with a [RecipeListViewModel] to fetch and observe the list of
@@ -34,7 +34,7 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> 
     val recipes by viewModel.recipeCards.collectAsState()
     RecipeList(
         recipes = recipes,
-        onNavigateToRecipe = onNavigateToRecipe,
+        onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = {}
     )
 }
 @Composable
@@ -48,6 +48,6 @@ fun ListAllRecipes(query:String, onNavigateToRecipe: (String) -> Unit) {
     val recipes by viewModel.recipeCards.collectAsState()
     RecipeList(
         recipes = recipes,
-        onNavigateToRecipe = onNavigateToRecipe,
+        onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = {}
     )
 }
