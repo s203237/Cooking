@@ -41,7 +41,6 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.model.FoodCategories
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -98,7 +97,7 @@ fun scrollableList(
 }
 
 
-@Preview
+/*@Preview
 @Composable
 fun PreviewscrollableList(){
 /*
@@ -110,16 +109,7 @@ fun PreviewscrollableList(){
     val recipeList5 = testingClass().loadCat5Recipes()
 */
     val dailyRecipe = Recipe()
-    val recipeList: List<RecipeCard> = {
-        for (i in 0 .. 5)
-            recipeList[i] = Recipe()
-    }
-    val recipeList1 = RecipeData().loadRecipes()
-    val recipeList2 = RecipeData().loadRecipes()
-    val recipeList3 = RecipeData().loadRecipes()
-    val recipeList4 = RecipeData().loadRecipes()
-    val recipeList5 = RecipeData().loadRecipes()
-
+    val recipeCardList = RecipeData().loadRecipeCards()
 
     val listOfList: List<List<Recipe>> = listOf(
         recipeList1, recipeList2, recipeList3, recipeList4, recipeList5
@@ -133,6 +123,8 @@ fun PreviewscrollableList(){
 
 
 }
+
+ */
 
 @Composable
 fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {

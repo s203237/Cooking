@@ -63,7 +63,12 @@ class RecipeData {
 
     fun loadRecipeCards(): List<RecipeCard> {
         return listOf(
-
+            RecipeCard(),
+            RecipeCard(),
+            RecipeCard(),
+            RecipeCard(),
+            RecipeCard(),
+            RecipeCard(),
         )
     }
 }
