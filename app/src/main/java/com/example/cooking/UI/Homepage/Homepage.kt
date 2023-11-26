@@ -184,7 +184,8 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
         Row(
             modifier = Modifier
                 .fillMaxWidth(0.6f),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             RecipeImage(
                 recipeId = recipeCard.recipeId,
