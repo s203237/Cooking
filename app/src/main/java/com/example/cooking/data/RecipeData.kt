@@ -1,8 +1,7 @@
 package com.example.cooking.data
 
-import com.example.cooking.R
 import com.example.cooking.model.Recipe
-import com.example.cooking.model.TimeToCook
+import com.example.cooking.model.RecipeCard
 
 class RecipeData {
     fun loadRecipes(): List<Recipe> {
@@ -58,6 +57,12 @@ class RecipeData {
                     "Top with the minced garlic, chili flakes, and Sichuan peppercorn powder on top. In a small saucepan, heat the remaining 2 tablespoons of oil until it shimmers. Pour hot oil into the garlic, chili, and peppercorn powder; the ingredients should sizzle immediately. Then sprinkle over the green parts of the scallions and the cilantro. Serve immediately.")
             */)
 
+
+        )
+    }
+
+    fun loadRecipeCards(): List<RecipeCard> {
+        return listOf(
 
         )
     }

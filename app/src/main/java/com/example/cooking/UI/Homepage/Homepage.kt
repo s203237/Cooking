@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,6 +41,7 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.model.FoodCategories
+import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -60,29 +62,21 @@ fun scrollableList(
 
 
     Surface {
-        Column {
-            UppercaseHeadingMedium(heading = "daily pick")
-//                    DailyRecipeItem(recipe = dailyrecipe)
-            //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
-            RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe)
-
-        }
         LazyColumn(
             modifier = modifier,
             state = listState
         ) {
             item {
-              }
+                UppercaseHeadingMedium(heading = "daily pick")
+                RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe)
+
+            }
 
             items(listOfList) { listOfList ->
                 Spacer(Modifier.height(16.dp))
                 UppercaseHeadingMedium(heading = listOfList.getName())
-                /*Text(
-                    text = listOfList.getName(),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(10.dp)
-                )*/
+                Spacer(Modifier.height(16.dp))
+
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
                         //RecipeCard(recipe = recipe)
@@ -103,15 +97,105 @@ fun scrollableList(
 
 }
 
+
+@Preview
+@Composable
+fun PreviewscrollableList(){
+/*
+    val dailyRecipe = testingClass().dailyRecipe()
+    val recipeList1 = testingClass().loadCat1Recipes()
+    val recipeList2 = testingClass().loadCat2Recipes()
+    val recipeList3 = testingClass().loadCat3Recipes()
+    val recipeList4 = testingClass().loadCat4Recipes()
+    val recipeList5 = testingClass().loadCat5Recipes()
+*/
+    val dailyRecipe = Recipe()
+    val recipeList: List<RecipeCard> = {
+        for (i in 0 .. 5)
+            recipeList[i] = Recipe()
+    }
+    val recipeList1 = RecipeData().loadRecipes()
+    val recipeList2 = RecipeData().loadRecipes()
+    val recipeList3 = RecipeData().loadRecipes()
+    val recipeList4 = RecipeData().loadRecipes()
+    val recipeList5 = RecipeData().loadRecipes()
+
+
+    val listOfList: List<List<Recipe>> = listOf(
+        recipeList1, recipeList2, recipeList3, recipeList4, recipeList5
+    )
+
+    scrollableList(
+        Modifier,
+        dailyRecipe = dailyRecipe,
+        listOfList = listOfList,
+    )
+
+
+}
+
+@Composable
+fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                end = 10.dp,
+            )
+    ) {
+        Card(
+            modifier = modifier
+        ){
+            ImageWithFavIcon(
+                recipeId = recipe.recipeId,
+                imageUrl = recipe.imageUrl,
+                onNavigateToRecipe = onNavigateToRecipe,
+                onFavoriteButtonClicked = {},
+                cardFormat = CardFormats.SQUARE
+            )
+        }
+        val recipeTitle = recipe.title
+        println("this is the recipe title: $recipeTitle")
+        Text(
+            text = recipe.title,
+            fontSize = 16.sp,
+            modifier = Modifier
+                .width(200.dp)
+                .padding(
+                    top = 8.dp,
+                    bottom = 16.dp
+                ),
+            //maxLines = 1,
+            //overflow = TextOverflow.Ellipsis
+        )
+        if(subtitle != ""){
+            Text(
+                text = subtitle,
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .width(200.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
 @Composable
 fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.LightGray)
-            .padding(16.dp),
+            .padding(16.dp)
+            .clickable {
+                onNavigateToRecipe(recipeCard.recipeId)
+            },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
+
     ) {
         Row(
             modifier = Modifier
@@ -148,96 +232,3 @@ fun PreviewRecipeCardListItem() {
     RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
 }
 
-
-/*
-@Preview
-@Composable
-fun PreviewscrollableList(){
-/*
-    val dailyRecipe = testingClass().dailyRecipe()
-    val recipeList1 = testingClass().loadCat1Recipes()
-    val recipeList2 = testingClass().loadCat2Recipes()
-    val recipeList3 = testingClass().loadCat3Recipes()
-    val recipeList4 = testingClass().loadCat4Recipes()
-    val recipeList5 = testingClass().loadCat5Recipes()
-*/
-    val dailyRecipe = RecipeData().loadRecipes()[0]
-    val recipeList1 = RecipeData().loadRecipes()
-    val recipeList2 = RecipeData().loadRecipes()
-    val recipeList3 = RecipeData().loadRecipes()
-    val recipeList4 = RecipeData().loadRecipes()
-    val recipeList5 = RecipeData().loadRecipes()
-
-
-    val listOfList: List<List<Recipe>> = listOf(
-        recipeList1, recipeList2, recipeList3, recipeList4, recipeList5
-    )
-
-    scrollableList(
-        Modifier,
-        dailyRecipe = dailyRecipe,
-        listOfList = listOfList,
-    )
-
-
-}
-
-
- */
-@Composable
-fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                end = 10.dp,
-            )
-    ) {
-        Card(
-            modifier = modifier
-        ){
-//            AsyncImage(
-//                model = recipe.imageUrl,
-//                contentDescription = null, //TODO give content description
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .aspectRatio(0.92f)
-//                    .clickable { onNavigateToRecipe(recipe.recipeId) },
-//                contentScale = ContentScale.Crop,
-//            )
-            ImageWithFavIcon(
-                recipeId = recipe.recipeId,
-                imageUrl = recipe.imageUrl,
-                onNavigateToRecipe = onNavigateToRecipe,
-                onFavoriteButtonClicked = {},
-                cardFormat = CardFormats.SQUARE
-            )
-        }
-        val recipeTitle = recipe.title
-        println("this is the recipe title: $recipeTitle")
-        Text(
-            text = recipe.title,
-            fontSize = 16.sp,
-            modifier = Modifier
-                .width(200.dp)
-                .padding(
-                    top = 8.dp,
-                    bottom = 16.dp
-                ),
-            //maxLines = 1,
-            //overflow = TextOverflow.Ellipsis
-        )
-        if(subtitle != ""){
-            Text(
-                text = subtitle,
-                fontSize = 14.sp,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .width(200.dp),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
-    }
-}
