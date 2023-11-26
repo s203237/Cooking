@@ -232,7 +232,8 @@ fun AppNavigation(){
             ){//ckStackEntry ->
                //al collectionName = backStackEntry.arguments?.getString("collectionName")
                //f(collectionName != null) {
-                FavoritesScreen(onNavigateToFavorite ={navController.navigate(("Favorite/$collectionName")
+                FavoritesScreen(onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
               /* ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
@@ -240,7 +241,7 @@ fun AppNavigation(){
                 displayBottomBar=true
                 displayTopBar=true
                 printBackStack(navController.currentBackStack, "Favourites: ")
-                }/*lse {
+                })/*lse {
                     Text("Collection not found")
                 }*/
             }

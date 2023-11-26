@@ -9,11 +9,8 @@ import com.example.cooking.UI.RecipeList.RecipeList
 
 
 @Composable
-fun FavoritesScreen(
-    onNavigateToFavorite: (String) -> Unit,
-    collectionName: String,
-    navController: NavController // Make sure to include NavController as a parameter
-) {
+fun FavoritesScreen(onNavigateToRecipe: (String) -> Unit  )
+{
     val viewModel: FavoritesScreenViewModel = viewModel()
 
     // ...
@@ -21,8 +18,10 @@ fun FavoritesScreen(
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = { recipeId ->
-            val route = "Favorites/$collectionName/$recipeId"
-            onNavigateToFavorite(route)
+            //val route = "Favorites/$collectionName/$recipeId"
+            val route = "Screens.RecipeItem.name/$recipeId"
+            onNavigateToRecipe(route)
+
             // Alternatively, if you want to navigate directly:
             // navController.navigate(route)
         },

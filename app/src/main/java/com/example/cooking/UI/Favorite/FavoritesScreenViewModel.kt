@@ -41,7 +41,7 @@ class FavoritesScreenViewModel: ViewModel() {
             } catch (e: Exception) {
                 println("Error toggling favorite: ${e.message}")
             }
-            favoritesDataSource.toggleFavorite(imageUrl)
+            //favoritesDataSource.toggleFavorite(imageUrl)
         }
     }
 
