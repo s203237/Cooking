@@ -39,11 +39,17 @@ object DependencyProvider {
     .addConverterFactory(GsonConverterFactory.create()) // Use GSON converter for JSON to POJO object mapping.
     .client(client) // Here we set the custom OkHttp client we just created.
     .build()
+    val mockapi = Retrofit.Builder() // Create retrofit builder.
+        .baseUrl("https://65636d57ee04015769a730e1.mockapi.io/") // Base url for the api has to end with a slash.
+        .addConverterFactory(GsonConverterFactory.create()) // Use GSON converter for JSON to POJO object mapping.
+        .client(client) // Here we set the custom OkHttp client we just created.
+        .build()
+
     private val apiService = api.create(ApiService::class.java)
-    private val mockapiService = MockApiService()
+    private val mockapiService = mockapi.create(ApiService::class.java)
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
-    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
+    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(mockapiService)
 
     val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
 
