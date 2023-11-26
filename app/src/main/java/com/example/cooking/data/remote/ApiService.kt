@@ -2,9 +2,7 @@ package com.example.cooking.data.remote
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
-import retrofit2.Retrofit
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -26,13 +24,12 @@ import retrofit2.http.Query
 *     - A [Recipe] object representing the fetched recipe.
 */
 interface ApiService {
-    @GET("collection/{collectionName}/recipes/?rapidapi-key=65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")
+    @GET("collection/{collectionName}/recipes/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
     suspend fun fetchRecipeCollection(@Path("collectionName") collectionName: String): RecipeCollection
 
-    @GET("recipe/{recipeId}/?rapidapi-key=65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")
+    @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
 
-    @GET("recipe/{recipeId}/?rapidapi-key=65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")
 
     @GET("search?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
     suspend fun fetchRecipeList(@Query("query") query: String): RecipeCollection
