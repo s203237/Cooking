@@ -13,7 +13,9 @@ import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 
 /**
  *  Uses Retrofit to create an instance of the `ApiService` for network operations.
@@ -28,6 +30,7 @@ object DependencyProvider {
             }.asConverterFactory("application/json".toMediaType())
         )
         .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
+        .client(OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS).build()) // Set a timeout (e.g., 30 seconds)
         .build()
 
     private val apiService = retrofit.create(ApiService::class.java)

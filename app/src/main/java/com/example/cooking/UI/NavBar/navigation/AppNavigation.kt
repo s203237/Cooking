@@ -179,7 +179,7 @@ fun AppNavigation(){
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screens.Onboarding.name,
+            startDestination = Screens.RecipeList.name,
             modifier = Modifier
                 .padding(paddingValues)
         ) {
@@ -228,19 +228,19 @@ fun AppNavigation(){
 
             composable(
                 route=Screens.Favorites.name,
-                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-            ){//backStackEntry ->
-               // val collectionName = backStackEntry.arguments?.getString("collectionName")
-               // if(collectionName != null) {
-               // FavoritesScreen()
-                ListAllRecipesScreen("easy-vegetarian-recipes",
+               //rguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+            ){//ckStackEntry ->
+               //al collectionName = backStackEntry.arguments?.getString("collectionName")
+               //f(collectionName != null) {
+                FavoritesScreen(onNavigateToFavorite ={navController.navigate(("Favorite/$collectionName")
+              /* ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                    })
+                    })*/
                 displayBottomBar=true
                 displayTopBar=true
                 printBackStack(navController.currentBackStack, "Favourites: ")
-                /*} else {
+                }/*lse {
                     Text("Collection not found")
                 }*/
             }

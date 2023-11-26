@@ -30,7 +30,7 @@ class HomePageViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             //val dailyRecipe = DependencyProvider.recipeSingleCardRepo.fetchData("miso-butternut-soup")
 
-            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("high-protein-vegan-recipes")
+           /* val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("high-protein-vegan-recipes")
             val recipeCards2 = DependencyProvider.recipeCardRepo.fetchData("vegan-winter-recipes")
             val recipeCards3 = DependencyProvider.recipeCardRepo.fetchData("vegan-lentil-recipes")
             val recipeCards4 = DependencyProvider.recipeCardRepo.fetchData("vegan-slow-cooker-recipes")
@@ -39,7 +39,22 @@ class HomePageViewModel: ViewModel() {
             _recipeCards1.value = recipeCards1
             _recipeCards2.value = recipeCards2
             _recipeCards3.value = recipeCards3
-            _recipeCards4.value = recipeCards4
+            _recipeCards4.value = recipeCards4*/
+            try {
+                val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("high-protein-vegan-recipes")
+                val recipeCards2 = DependencyProvider.recipeCardRepo.fetchData("vegan-winter-recipes")
+                val recipeCards3 = DependencyProvider.recipeCardRepo.fetchData("vegan-lentil-recipes")
+                val recipeCards4 = DependencyProvider.recipeCardRepo.fetchData("vegan-slow-cooker-recipes")
+
+                _recipeCards1.value = recipeCards1
+                _recipeCards2.value = recipeCards2
+                _recipeCards3.value = recipeCards3
+                _recipeCards4.value = recipeCards4
+            } catch (e: Exception) {
+                // Log the error and handle it accordingly
+                println("Error fetching recipe cards: ${e.message}")
+                // You might want to show a message to the user or take other appropriate actions
+            }
         }
     }
 }

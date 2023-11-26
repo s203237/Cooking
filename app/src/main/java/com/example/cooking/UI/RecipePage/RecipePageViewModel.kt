@@ -45,6 +45,13 @@ class RecipePageViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _recipeId.collect { newRecipeId ->
                 Log.v("RecipeId Trace", "RecipeId in viewModel.launch: $newRecipeId")
+                try {
+                    val recipeData = DependencyProvider.recipeRepo.fetchData(_recipeId.value)
+                    println("Fetched RecipeData: $recipeData")
+                    _recipe.value = recipeData
+                } catch (e: Exception) {
+                    println("Error fetching data: ${e.message}")
+                }
                 val recipeData = DependencyProvider.recipeRepo.fetchData(_recipeId.value)
                 _recipe.value = recipeData
             }

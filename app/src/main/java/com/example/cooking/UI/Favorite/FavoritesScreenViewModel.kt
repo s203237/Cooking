@@ -35,6 +35,12 @@ class FavoritesScreenViewModel: ViewModel() {
 
     fun onFavoriteButtonClicked(imageUrl: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            try {
+                favoritesDataSource.toggleFavorite(imageUrl)
+                println("Toggled favorite for imageUrl: $imageUrl")
+            } catch (e: Exception) {
+                println("Error toggling favorite: ${e.message}")
+            }
             favoritesDataSource.toggleFavorite(imageUrl)
         }
     }

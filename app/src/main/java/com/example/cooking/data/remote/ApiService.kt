@@ -23,12 +23,12 @@ import retrofit2.http.Path
 *     - A [Recipe] object representing the fetched recipe.
 */
 interface ApiService {
-    @GET("collection/{collectionName}/recipes/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("collection/{collectionName}/recipes/?rapidapi-key=d52a2713afmsh25859ff785f5605p1a9213jsn590aed6325a1")
     suspend fun fetchRecipeCollection(@Path("collectionName") collectionName: String): RecipeCollection
 
-    @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("recipe/{recipeId}/?rapidapi-key=d52a2713afmsh25859ff785f5605p1a9213jsn590aed6325a1")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
 
-    @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("recipe/{recipeId}/?rapidapi-key=d52a2713afmsh25859ff785f5605p1a9213jsn590aed6325a1")
     suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
 }
