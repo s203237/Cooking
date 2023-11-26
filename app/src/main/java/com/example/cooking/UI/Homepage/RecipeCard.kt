@@ -72,6 +72,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
 fun PreviewRecipeCard(){
     val recipe = Recipe(
         title = "Peach",
+        isFavorite = false,
         imageUrl = "app/src/main/res/drawable/peach.png",
         imageDescription = "3d rendering of a close-up of a peach with googly eyes"/*,
         timeToCook = TimeToCook("10 min", "1h30 min"),

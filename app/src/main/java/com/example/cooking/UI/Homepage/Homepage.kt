@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -31,10 +33,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.cooking.UI.RecipeList.ImageWithFavIcon
 //import com.example.cooking.Data.Recipe
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
-import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
+//import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.FoodCategories
 import com.example.cooking.model.Recipe
@@ -178,5 +181,53 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
                 overflow = TextOverflow.Ellipsis
             )
         }
+    }
+}
+@Composable
+fun ImageWithFavIcon(
+    recipeId: String,
+    imageUrl: String,
+    onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit,
+    cardFormat: CardFormats
+) {
+    Box(
+        // contentAlignment = Alignment.BottomEnd
+    ) {
+        val aspectRatioImg: Float = when(cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 0.92f
+        }
+
+        val aspectRatioFavBox: Float = when(cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 1f
+        }
+
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = null, //TODO give content description
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatioImg)
+                .clickable {
+                    onNavigateToRecipe(recipeId)
+                },
+            contentScale = ContentScale.Crop,
+
+            )
+
+        Box(
+            contentAlignment = Alignment.BottomEnd,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatioFavBox)
+                .padding(16.dp)
+        ) {
+            com.example.cooking.UI.SharedComponents.DisplayFavButton()
+        }
+
     }
 }

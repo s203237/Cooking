@@ -13,9 +13,11 @@ class RecipeData {
         return listOf(
             Recipe(
                 title = "Pear And Rainbow",
+                isFavorite = false,
                 imageUrl = "$fileUrl/peach.png",
                 imageDescription = "3d rendering of a pear with a rainbow over it.",
-                author = "Melissa Woo"/*,
+                author = "Melissa Woo"
+            /*,
                 timeToCook = TimeToCook("5 min", "60 min"),
                 difficulty = "Medium",
                 servingSize = 4,
@@ -23,9 +25,11 @@ class RecipeData {
                 recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous. Who knew how wonderful the thing could be. Well would you look at that, we are making a thing.",
                 ingredients = listOf("Pear", "Rainbow", "Green paint"),
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-            */),
+            */
+            ),
             Recipe(
                 title = "Peach",
+                isFavorite = false,
                 imageUrl = "$fileUrl/pear.png",
                 imageDescription = "3d rendering of a close-up of a peach with googly eyes",
                 author = "Melissa Woo"/*,
@@ -40,6 +44,7 @@ class RecipeData {
             */),
             Recipe(
                 title = "Spicy Sichuan Boiled Tofu",
+                isFavorite = false,
                 imageUrl = "$fileUrl/tofu.jpg",
                 imageDescription = "Picture of shuizhu sichuan boiled tofu dish",
                 author = "Sarah (Woks of Life)"/*,

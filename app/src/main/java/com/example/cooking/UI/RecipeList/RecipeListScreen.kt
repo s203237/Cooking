@@ -35,6 +35,7 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> 
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,
+        onFavoriteButtonClicked = {}
     )
 
 }

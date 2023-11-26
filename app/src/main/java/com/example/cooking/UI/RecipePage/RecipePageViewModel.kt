@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
  * @see DependencyProvider
  */
 class RecipePageViewModel: ViewModel() {
-    private val _recipe = MutableStateFlow(Recipe())
+    private val _recipe = MutableStateFlow(Recipe(isFavorite = false))
     val recipe = _recipe.asStateFlow()
 
     private val _recipeId = MutableStateFlow("")

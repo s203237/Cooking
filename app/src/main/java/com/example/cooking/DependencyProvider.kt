@@ -1,5 +1,8 @@
 package com.example.cooking
 
+import FavoritesDataSource
+import android.content.Context
+import com.example.cooking.data.local.DataStoreFavoritesDataSource
 import com.example.cooking.data.remote.ApiService
 import com.example.cooking.data.remote.RecipeCardRepo
 import com.example.cooking.data.remote.RecipeDataRepo
@@ -32,6 +35,12 @@ object DependencyProvider {
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
+
+    lateinit var favoritesDataSource: FavoritesDataSource
+        private set
+    fun initialize(context : Context){
+        favoritesDataSource = DataStoreFavoritesDataSource(context)
+    }
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

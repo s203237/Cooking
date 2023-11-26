@@ -38,6 +38,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
+import com.example.cooking.UI.Faviorite.FavoritesScreen
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
@@ -182,6 +183,7 @@ fun AppNavigation(){
             modifier = Modifier
                 .padding(paddingValues)
         ) {
+
             composable(route = Screens.Onboarding.name) {
                displayBottomBar=false
                 displayTopBar=false
@@ -223,12 +225,14 @@ fun AppNavigation(){
                 //PreviewSearchBar()
                 printBackStack(navController.currentBackStack, "Preview: ")
                }
+
             composable(
                 route=Screens.Favorites.name,
                 //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
             ){//backStackEntry ->
                // val collectionName = backStackEntry.arguments?.getString("collectionName")
                // if(collectionName != null) {
+               // FavoritesScreen()
                 ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")

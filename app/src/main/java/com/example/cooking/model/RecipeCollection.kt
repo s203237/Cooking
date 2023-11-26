@@ -11,6 +11,7 @@ data class RecipeCollection(
 @Serializable
 data class RecipeCard(
     val recipeId: String = "defaultId",
+    val isFavorite: Boolean,
     @SerialName("recipeName")
     val title: String = "Default title",
     @SerialName("imageSrc")
