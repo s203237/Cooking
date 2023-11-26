@@ -1,16 +1,9 @@
 package com.example.cooking.UI.Homepage
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.cooking.DependencyProvider
-import com.example.cooking.model.RecipeCard
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class HomePageViewModel: ViewModel() {
-
+/*
     //private val _dailyRecipe = MutableStateFlow(RecipeCard())
 
     private val _recipeCards1 = MutableStateFlow<List<RecipeCard>>(emptyList())
@@ -41,4 +34,6 @@ class HomePageViewModel: ViewModel() {
             _recipeCards4.value = recipeCards4
         }
     }
+
+ */
 }

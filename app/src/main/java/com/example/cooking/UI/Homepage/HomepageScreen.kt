@@ -1,16 +1,7 @@
 package com.example.cooking.UI.Homepage
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.model.FoodCategories
-import kotlin.random.Random
 
 
 @Composable
@@ -22,7 +13,7 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
 
     //val dailyRecipe = RecipeData().loadRecipes()[0]
 
-    val recipeList1 by viewModel.recipeCards1.collectAsState()
+   /* val recipeList1 by viewModel.recipeCards1.collectAsState()
     val recipeList2 by viewModel.recipeCards2.collectAsState()
     val recipeList3 by viewModel.recipeCards3.collectAsState()
     val recipeList4 by viewModel.recipeCards4.collectAsState()
@@ -51,16 +42,16 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
     if(list.size > 0) {
         val dailyRecipe = list[Random.nextInt(list.size)]
 
-        scrollableList(
+       /* scrollableList(
             modifier =   Modifier
                 .background(color = Color(0xFFF2ECE3))
                 .padding(16.dp),
             dailyRecipe = dailyRecipe,
             listOfList = listOfList,
             onNavigateToRecipe = onNavigateToRecipe
-        )
+        )*/
     }
-
+*/
 
 
 }

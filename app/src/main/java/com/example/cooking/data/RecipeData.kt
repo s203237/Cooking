@@ -2,6 +2,7 @@ package com.example.cooking.data
 
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
+import com.example.cooking.model.RecipeCollection
 
 class RecipeData {
     fun loadRecipes(): List<Recipe> {
@@ -69,6 +70,27 @@ class RecipeData {
             RecipeCard(),
             RecipeCard(),
             RecipeCard(),
+        )
+    }
+
+    fun loadRecipeCollections(): List<RecipeCollection> {
+        val recipeCards = loadRecipeCards()
+        return listOf(
+            RecipeCollection(
+                results = recipeCards
+            ),
+            RecipeCollection(
+                results = recipeCards
+            ),
+            RecipeCollection(
+                results = recipeCards
+            ),
+            RecipeCollection(
+                results = recipeCards
+            ),
+            RecipeCollection(
+                results = recipeCards
+            )
         )
     }
 }

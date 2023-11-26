@@ -40,14 +40,15 @@ import com.example.cooking.UI.SharedComponents.FavButton
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
-import com.example.cooking.model.FoodCategories
+import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
+import com.example.cooking.model.RecipeCollection
 
 @Composable
 fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
-    listOfList: List<FoodCategories>,
+    listOfCollections: List<RecipeCollection>,
     onNavigateToRecipe: (String) -> Unit
 ){
 
@@ -67,17 +68,18 @@ fun scrollableList(
         ) {
             item {
                 UppercaseHeadingMedium(heading = "daily pick")
+                Spacer(Modifier.height(16.dp))
                 RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe)
 
             }
 
-            items(listOfList) { listOfList ->
+            items(listOfCollections) { collection ->
                 Spacer(Modifier.height(16.dp))
-                UppercaseHeadingMedium(heading = listOfList.getName())
+                UppercaseHeadingMedium(heading = collection.collectionName)
                 Spacer(Modifier.height(16.dp))
 
                 LazyRow {
-                    items(listOfList.getList()) { recipe ->
+                    items(collection.results) { recipe ->
                         //RecipeCard(recipe = recipe)
                         RecipeItem(modifier = Modifier
                             .height(200.dp)
@@ -97,34 +99,24 @@ fun scrollableList(
 }
 
 
-/*@Preview
+@Preview
 @Composable
 fun PreviewscrollableList(){
-/*
-    val dailyRecipe = testingClass().dailyRecipe()
-    val recipeList1 = testingClass().loadCat1Recipes()
-    val recipeList2 = testingClass().loadCat2Recipes()
-    val recipeList3 = testingClass().loadCat3Recipes()
-    val recipeList4 = testingClass().loadCat4Recipes()
-    val recipeList5 = testingClass().loadCat5Recipes()
-*/
-    val dailyRecipe = Recipe()
-    val recipeCardList = RecipeData().loadRecipeCards()
 
-    val listOfList: List<List<Recipe>> = listOf(
-        recipeList1, recipeList2, recipeList3, recipeList4, recipeList5
-    )
+    val dailyRecipeCard = RecipeCard()
+    val collections = RecipeData().loadRecipeCollections()
 
     scrollableList(
         Modifier,
-        dailyRecipe = dailyRecipe,
-        listOfList = listOfList,
+        dailyRecipe = dailyRecipeCard,
+        listOfCollections = collections,
+        onNavigateToRecipe = {}
     )
 
 
 }
 
- */
+
 
 @Composable
 fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
