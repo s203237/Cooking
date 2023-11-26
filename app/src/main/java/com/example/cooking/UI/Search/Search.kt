@@ -23,52 +23,42 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cooking.R
 import com.example.cooking.UI.NavBar.navigation.Navigator
 import com.example.cooking.UI.NavBar.navigation.Screens
-
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.*
+import com.example.cooking.DependencyProvider
+import com.example.cooking.UI.NavBar.navigation.Navigator.navController
+import com.example.cooking.UI.RecipeList.ListAllRecipes
+import com.example.cooking.UI.RecipeList.RecipeList
+import com.example.cooking.model.RecipeCard
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun SearchBar() {
+fun SearchBar(onNavigateToRecipe:(String)-> Unit) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
+    val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
+    if(onSearching !=true){
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Row(){
-            IconButton(onClick = {
-                Navigator.navController.navigate(route = Screens.HomeScreen.name){
-                    popUpTo(0)
-                }
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.arrow_back),
-                    contentDescription = "",
-                    tint = Color.Black,
-                    modifier = Modifier
-                )}
-                Spacer(modifier = Modifier.width(40.dp))
+            // First Part (SearchBar)
+            //SearchBar(modifier = Modifier.weight(1f))
+            // Spacer to create a division
+            SearchBox(
+                query = searchQuery,
+                onQueryChange = { newQuery ->
+                    setSearchQuery(newQuery)
+                },
+                onSearch = { query ->
+                    setOnSearchValue(true)
 
-                Text(
-                    modifier = Modifier.height(55.dp),
-                    text = "vegelicious",
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold
-
-                )
-
+                },
+            )
+            Spacer(modifier = Modifier.height(16.dp))
         }
-        // First Part (SearchBar)
-        //SearchBar(modifier = Modifier.weight(1f))
-        // Spacer to create a division
-        SearchBox(query = searchQuery, onQueryChange = { newQuery ->
-            setSearchQuery(newQuery)
-        } , onSearch = { /*TODO*/ },
-           // active = true, // Or false based on your needs
-            //onActiveChange = { isActive ->
-                // Handle active state change here
-            //}
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-    }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -79,9 +69,21 @@ fun SearchBar() {
             DisplayTextBoxes()
         }
 
+    } else {
+        ListAllRecipes(query = searchQuery, onNavigateToRecipe = onNavigateToRecipe
+         )
     }
+
+}
+
+suspend fun callRecipeList(query: String): List<RecipeCard> {
+    val listRepoCard = DependencyProvider.recipeCardsRepoSearch.fetchData(query)
+    return listRepoCard
+}
+
+
 @Preview
 @Composable
-fun PreviewSearchBar(){
-    SearchBar()
+fun PreviewSearchBar() {
+    SearchBar({})
 }
