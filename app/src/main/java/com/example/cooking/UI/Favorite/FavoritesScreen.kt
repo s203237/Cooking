@@ -28,9 +28,9 @@ fun FavoritesScreen(
             // navController.navigate(route)
         },*/
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = { recipeId ->
+        onFavoriteButtonClicked = /*{ recipeId ->
             toggleFavorite(recipeId.recipeId)
-        }//viewModel::onFavoriteButtonClicked
+        }*/viewModel::onFavoriteButtonClicked
     )
 }
 
