@@ -1,6 +1,7 @@
 package dk.shape.dtu.networkrequestsandlocalstorage.data.local
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+
 
 class DataStoreFavoritesDataSource(private val context: Context) : FavoritesDataSource {
 
@@ -47,5 +49,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
         context.dataStore.edit {
             it[favoritesKey] = updatedJsonString
         }
+
+        Log.d("FavoritesScreenViewModel", "Updated Favorites: $updatedFavorites")
     }
 }

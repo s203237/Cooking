@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Faviorite
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,6 +22,6 @@ fun FavoritesScreen() {
 
     val recipes by viewModel.favorites.collectAsState(emptyList())
     RecipeList(recipes = recipes , onNavigateToRecipe = {}, onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked)
-
+    Log.d("FavoritesScreen", "Collected Recipes: $recipes")
 
 }
