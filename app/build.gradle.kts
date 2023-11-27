@@ -68,6 +68,7 @@ dependencies {
    // implementation ("androidx.compose.material:compose-material:1.4.2")
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.navigation:navigation-common-ktx:2.7.4")
+    implementation("com.android.car.ui:car-ui-lib:2.5.1")
     testImplementation("junit:junit:4.13.2")
 
     implementation("io.coil-kt:coil-compose:2.4.0")

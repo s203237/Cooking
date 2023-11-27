@@ -43,7 +43,10 @@ import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit) {
+fun RecipeList(
+    recipes: List<RecipeCard>,
+    onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit) {
     Column (
        /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
@@ -65,7 +68,7 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit, 
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (RecipeCard) -> Unit){
 
 Column(
     modifier = Modifier
@@ -75,7 +78,7 @@ Column(
         recipeId = recipe.recipeId,
         imageUrl = recipe.imageUrl,
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
+        onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe)},
         cardFormat = CardFormats.LANDSCAPE
     )
     Text(

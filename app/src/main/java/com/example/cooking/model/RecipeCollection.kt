@@ -15,6 +15,6 @@ data class RecipeCard(
     @SerialName("recipeName")
     val title: String = "Default title",
     @SerialName("imageSrc")
-    val imageUrl: String = "",
+    val imageUrl: String= "",
     //val imageDescription: String, TODO get image description
 )

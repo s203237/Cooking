@@ -1,6 +1,5 @@
 package com.example.cooking.data.remote
 
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import retrofit2.HttpException
 import java.io.IOException

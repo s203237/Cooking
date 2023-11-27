@@ -4,12 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.cooking.UI.RecipeList.RecipeList
+import com.example.cooking.model.RecipeCard
 
 
 @Composable
-fun FavoritesScreen(onNavigateToRecipe: (String) -> Unit  )
+fun FavoritesScreen(
+    //favorites: List<RecipeCard>,
+    onNavigateToRecipe: (String) -> Unit  )
 {
     val viewModel: FavoritesScreenViewModel = viewModel()
 
@@ -17,15 +19,18 @@ fun FavoritesScreen(onNavigateToRecipe: (String) -> Unit  )
     val recipes by viewModel.favorites.collectAsState(emptyList())
     RecipeList(
         recipes = recipes,
-        onNavigateToRecipe = { recipeId ->
+        /*onNavigateToRecipe = { recipeId ->
             //val route = "Favorites/$collectionName/$recipeId"
             val route = "Screens.RecipeItem.name/$recipeId"
             onNavigateToRecipe(route)
 
             // Alternatively, if you want to navigate directly:
             // navController.navigate(route)
-        },
-        onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked
+        },*/
+        onNavigateToRecipe = onNavigateToRecipe,
+        onFavoriteButtonClicked = { recipeId ->
+            toggleFavorite(recipeId.recipeId)
+        }//viewModel::onFavoriteButtonClicked
     )
 }
 

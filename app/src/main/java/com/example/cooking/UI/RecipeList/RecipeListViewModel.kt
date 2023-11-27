@@ -37,6 +37,8 @@ class RecipeListViewModel: ViewModel() {
     val recipeCards = _recipeCards.asStateFlow()
     private val _collectionName = MutableStateFlow("")
 
+    private val favoritesDataSource = DependencyProvider.favoritesDataSource
+
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
         val printOutValue = _collectionName.value
@@ -50,6 +52,8 @@ class RecipeListViewModel: ViewModel() {
                 val recipeCards = DependencyProvider.recipeCardRepo.fetchData(_collectionName.value)
                 _recipeCards.value = recipeCards
             }
+
+            val favoriteRecipie = DependencyProvider.recipeCardRepo.fetchData("recipeId")
 
         }
     }

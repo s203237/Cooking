@@ -45,8 +45,10 @@ import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
+import com.example.cooking.model.RecipeCard
 //import com.example.cooking.UI.Search.PreviewSearchBar
 import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -85,6 +87,9 @@ fun AppNavigation(){
         "Appetizers", "Seasonal"
     )
     val commonRoute = Screens.Favorites.name
+    //val favorites: List<RecipeCard>
+
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -227,12 +232,14 @@ fun AppNavigation(){
                }
 
             composable(
-                route=Screens.Favorites.name,
+                route=Screens.Favorites.name
                //rguments = listOf(navArgument("collectionName") { type = NavType.StringType })
             ){//ckStackEntry ->
                //al collectionName = backStackEntry.arguments?.getString("collectionName")
                //f(collectionName != null) {
-                FavoritesScreen(onNavigateToRecipe = { recipeId ->
+                //val favorites //by viewModel.favorites.collectAsState(emptyList())
+                FavoritesScreen(//favorites = favorites,
+                    onNavigateToRecipe = { recipeId ->
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
               /* ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->

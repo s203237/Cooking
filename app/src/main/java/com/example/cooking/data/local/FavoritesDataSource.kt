@@ -1,6 +1,7 @@
+import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.flow.Flow
 
 interface FavoritesDataSource {
-    fun getFavorites(): Flow<List<String>>
-    suspend fun toggleFavorite(imageUrl: String)
+    fun getFavorites(): Flow<List<RecipeCard>>
+    suspend fun toggleFavorite(recipeId: String)
 }
