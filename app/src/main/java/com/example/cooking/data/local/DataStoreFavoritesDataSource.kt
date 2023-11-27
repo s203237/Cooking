@@ -21,7 +21,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
         return context.dataStore.data.map {  prefs ->
             val jsonString = prefs[favoritesKey].orEmpty()
             try {
-                Json.decodeFromString(jsonString)
+                Json.decodeFromString<List<String>>(jsonString)
             } catch (error: Throwable) {
                 emptyList()
             }
