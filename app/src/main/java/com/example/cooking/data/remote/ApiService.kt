@@ -24,16 +24,16 @@ import retrofit2.http.Query
  *     - A [Recipe] object representing the fetched recipe.
  */
 interface ApiService {
-    @GET("collection/{collectionName}/recipes/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("collection/{collectionName}/recipes/?rapidapi-key=f126ee70a3msh878012a5b25f30ap13b19fjsn993601390640")
     suspend fun fetchRecipeCollection(@Path("collectionName") collectionName: String): RecipeCollection
 
-    @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("recipe/{recipeId}/?rapidapi-key=f126ee70a3msh878012a5b25f30ap13b19fjsn993601390640")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
 
 
-    @GET("search?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("search?rapidapi-key=f126ee70a3msh878012a5b25f30ap13b19fjsn993601390640")
     suspend fun fetchRecipeList(@Query("query") query: String): RecipeCollection
 
-    @GET("recipe/{recipeId}/?rapidapi-key=564d89b1demshec6f0e210cbdd20p1c252ajsnafddd033c068")
+    @GET("recipe/{recipeId}/?rapidapi-key=f126ee70a3msh878012a5b25f30ap13b19fjsn993601390640")
     suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
 }
