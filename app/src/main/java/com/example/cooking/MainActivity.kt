@@ -73,16 +73,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-
-            // AccountCreationPage()
-            //OnBoardingPage()
-            //RecipeList()
-            //scrollableList()
-
-
             AppNavigation()
-
-
         }
 
         @Composable
@@ -105,7 +96,6 @@ class MainActivity : ComponentActivity() {
             }
 
         }
-
 
         @OptIn(ExperimentalMaterial3Api::class)
         @Composable

@@ -1,4 +1,4 @@
-package com.example.cooking
+package com.example.cooking.test
 
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
