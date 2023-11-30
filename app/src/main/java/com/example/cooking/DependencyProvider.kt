@@ -1,22 +1,22 @@
 package com.example.cooking
 
-import androidx.compose.runtime.Composable
+import android.content.Context
+import com.example.cooking.data.local.FavoritesDataSource
 import com.example.cooking.data.remote.ApiService
-
 import com.example.cooking.data.remote.AuthenticationInterceptor
 import com.example.cooking.data.remote.MockApiService
 import com.example.cooking.data.remote.RecipeCardRepo
-import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCardsRepoSearch
+import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dk.shape.dtu.networkrequestsandlocalstorage.data.local.DataStoreFavoritesDataSource
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -65,7 +65,15 @@ object DependencyProvider {
 
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
 
+    lateinit var favoritesDataSource: FavoritesDataSource
+        private set
+
+    fun initialize(context: Context) {
+        favoritesDataSource = DataStoreFavoritesDataSource(context)
+    }
+
 }
+
 
 /* NOTE ON DEPENDENCY PROVIDER
 A dependency provider is used in order for our code to follow the Dependency Injection

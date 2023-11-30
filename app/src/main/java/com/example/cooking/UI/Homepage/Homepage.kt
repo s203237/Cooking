@@ -37,7 +37,8 @@ fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     listOfList: List<FoodCategories>,
-    onNavigateToRecipe: (String) -> Unit
+    onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String)->Unit
 ){
 
     val listState = rememberLazyListState()
@@ -57,7 +58,7 @@ fun scrollableList(
             item {
 //                    DailyRecipeItem(recipe = dailyrecipe)
                 //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
-                RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe, subtitle = "Daily recipe")
+                RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe, subtitle = "Daily recipe",onFavoriteButtonClicked=onFavoriteButtonClicked)
             }
 
             items(listOfList) { listOfList ->
@@ -70,7 +71,7 @@ fun scrollableList(
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
                         //RecipeCard(recipe = recipe)
-                        RecipeItem(modifier = Modifier.height(200.dp).width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
+                        RecipeItem(modifier = Modifier.height(200.dp).width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = onFavoriteButtonClicked)
                     }
                 }
 
@@ -121,7 +122,7 @@ fun PreviewscrollableList(){
 
  */
 @Composable
-fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
+fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (String) -> Unit) {
 
     Column(
         modifier = Modifier
@@ -144,7 +145,7 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
                 recipeId = recipe.recipeId,
                 imageUrl = recipe.imageUrl,
                 onNavigateToRecipe = onNavigateToRecipe,
-                onFavoriteButtonClicked ={} ,
+                onFavoriteButtonClicked =onFavoriteButtonClicked ,
                 cardFormat = CardFormats.SQUARE
             )
         }

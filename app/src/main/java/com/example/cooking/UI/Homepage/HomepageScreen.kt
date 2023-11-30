@@ -5,9 +5,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.data.RecipeData
+import com.example.cooking.UI.Faviorite.FavoritesScreenViewModel
 import com.example.cooking.model.FoodCategories
-import com.example.cooking.model.Recipe
 import kotlin.random.Random
 
 
@@ -15,6 +14,7 @@ import kotlin.random.Random
 fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
 
     val viewModel: HomePageViewModel = viewModel()
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
 
     //val dailyRecipe by viewModel.dailyRecipe.collectAsState()
 
@@ -53,7 +53,8 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
             Modifier,
             dailyRecipe = dailyRecipe,
             listOfList = listOfList,
-            onNavigateToRecipe = onNavigateToRecipe
+            onNavigateToRecipe = onNavigateToRecipe,
+            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
         )
     }
 

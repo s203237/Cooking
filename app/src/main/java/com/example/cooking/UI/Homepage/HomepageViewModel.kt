@@ -3,7 +3,7 @@ package com.example.cooking.UI.Homepage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.model.Recipe
+import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,6 +40,11 @@ class HomePageViewModel: ViewModel() {
             _recipeCards2.value = recipeCards2
             _recipeCards3.value = recipeCards3
             _recipeCards4.value = recipeCards4
+        }
+    }
+    fun onFavoriteButtonClicked(imageUrl: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            favoritesDataSource.toggleFavorite(imageUrl)
         }
     }
 }
