@@ -29,10 +29,10 @@ import com.example.cooking.UI.SharedComponents.CardFormats
 @Composable
 fun RecipePage(recipe: Recipe) {
     Column(
-        modifier = Modifier
+        modifier = Modifier.testTag("recipePage")
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .testTag("recipepage")
+
     ) {
         Box(
             modifier = Modifier

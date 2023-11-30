@@ -36,7 +36,7 @@ import com.example.cooking.model.RecipeCard
 
 @Composable
 fun scrollableList(
-    modifier: Modifier,
+
     dailyRecipe: RecipeCard,
     listOfList: List<FoodCategories>,
     onNavigateToRecipe: (String) -> Unit
@@ -52,13 +52,13 @@ fun scrollableList(
 
     Surface {
         LazyColumn(
-            modifier = modifier,
+            modifier = Modifier.testTag("homepagescreen"),
             state = listState
         ) {
             item {
 //                    DailyRecipeItem(recipe = dailyrecipe)
                 //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
-                RecipeItem(modifier = Modifier.fillMaxWidth().testTag("homepagescreen"), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe, subtitle = "Daily recipe")
+                RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe, subtitle = "Daily recipe")
             }
 
             items(listOfList) { listOfList ->
@@ -71,7 +71,7 @@ fun scrollableList(
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
                         //RecipeCard(recipe = recipe)
-                        RecipeItem(modifier = Modifier.height(200.dp).width(200.dp).testTag("homepagescreen"), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
+                        RecipeItem(modifier = Modifier.height(200.dp).width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
                     }
                 }
 

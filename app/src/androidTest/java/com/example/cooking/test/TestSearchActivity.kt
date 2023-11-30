@@ -8,6 +8,8 @@ import org.junit.Test
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performKeyPress
@@ -37,9 +39,12 @@ class TestSearchActivity {
             )
         )
         //Then I should see a list of tofu recipes
-        composeTestRule.onNodeWithText("Recipe List").assertIsDisplayed()
+        composeTestRule.waitUntil(120000, {
+            composeTestRule.onAllNodesWithText("Crispy tofu").fetchSemanticsNodes().size == 1
+        })
+        composeTestRule.onNodeWithText("Crispy tofu").assertIsDisplayed()
 
-        Thread.sleep(1200000L);
+
 
     }
 }
