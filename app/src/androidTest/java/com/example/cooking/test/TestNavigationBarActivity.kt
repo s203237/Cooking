@@ -1,15 +1,20 @@
 package com.example.cooking.test
 
-import android.view.KeyEvent
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performKeyPress
-import androidx.compose.ui.test.performTextInput
-import com.example.cooking.UI.Search.SearchBar
+import androidx.compose.ui.test.performClick
+
+import com.example.cooking.UI.NavBar.navigation.AppNavigation
+
 import org.junit.Rule
 import org.junit.Test
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.navigation.NavDestination.Companion.hierarchy
+import com.example.cooking.UI.NavBar.listOfNavItem
+
 
 class TestNavigationBarActivity {
     @get:Rule
@@ -18,27 +23,30 @@ class TestNavigationBarActivity {
     // an activity
 
     @Test
-    fun myTest() {
+    fun navigationTest() {
         // Given I am on the homepage
         composeTestRule.setContent {
-            SearchBar(onNavigateToRecipe = {})
+           AppNavigation(){
+               NavigationBar {
+                   listOfNavItem.forEach { navItem ->
+                   NavigationBarItem(selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
+                       onClick = {
+                           navController.navigate(navItem.route)
+
+                   }
+
+               }
+
+           }
 
         }
-        //When I fill search box with tofu
-        composeTestRule.onNodeWithTag("searchtext").performTextInput("tofu")
-        //And I click enter
-        composeTestRule.onNodeWithTag("searchtext").performKeyPress(
-            androidx.compose.ui.input.key.KeyEvent(
-                KeyEvent(
-                    KeyEvent.ACTION_DOWN,
-                    KeyEvent.KEYCODE_ENTER
-                )
-            )
-        )
-        //Then I should see a list of tofu recipes
-        composeTestRule.onNodeWithText("Recipe List").assertIsDisplayed()
+        // I click the "Search" button on the navigation bar
+        composeTestRule.onNodeWithTag("Search").performClick()
 
-        Thread.sleep(1200000L);
+        // I should see the search screen
+        composeTestRule.onNodeWithTag("searchtext").assertIsDisplayed()
 
     }
+
+
 }

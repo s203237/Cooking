@@ -5,9 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.data.RecipeData
 import com.example.cooking.model.FoodCategories
-import com.example.cooking.model.Recipe
 import kotlin.random.Random
 
 
@@ -52,8 +50,7 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
         scrollableList(
             Modifier,
             dailyRecipe = dailyRecipe,
-            listOfList = listOfList,
-            onNavigateToRecipe = onNavigateToRecipe
+            listOfList = listOfList
         )
     }
 

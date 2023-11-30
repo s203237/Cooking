@@ -1,29 +1,32 @@
-package com.example.cooking.test
+package com.example.cooking.test.stepDef
 
+import com.example.cooking.UI.Search.SearchBar
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-import io.cucumber.java.en.When
 
-class StepDefinitions3 {
-    @Given("I am on the home page")
+
+class SearchForRecipeStepDefinition {
+
+    @Given("I am on the search page")
     fun theAppIsOpen() {
         // Implementation for opening the app
     }
 
-    @io.cucumber.java.en.When("I see the recipe card for miso and butternut soup")
+    @io.cucumber.java.en.When("I fill search box with tofu")
     fun iPerformASampleAction() {
         // Implementation for performing the sample action
     }
-    @And("I tap on the image")
+
+    @And("I click enter")
     fun iPerformAction() {
         // Implementation for performing the sample action
     }
 
-    @Then("I should see the info page for miso and butternut soup")
+    @Then("I should see a list of tofu recipes")
     fun iShouldSeeTheResult() {
         // Implementation for verifying the result
     }
 
-
 }
+

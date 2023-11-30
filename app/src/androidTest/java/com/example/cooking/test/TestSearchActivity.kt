@@ -20,11 +20,10 @@ class TestSearchActivity {
     // an activity
 
     @Test
-    fun myTest() {
+    fun searchTest() {
         // Given I am on the search page
         composeTestRule.setContent {
             SearchBar(onNavigateToRecipe = {})
-
         }
         //When I fill search box with tofu
         composeTestRule.onNodeWithTag("searchtext").performTextInput("tofu")

@@ -3,31 +3,16 @@ package com.example.cooking
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
 
-import androidx.compose.material3.MaterialTheme.colorScheme
-
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.cooking.UI.AboutUsPage.AboutUsPage
-import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
-import com.example.cooking.UI.Homepage.Homepage
-import com.example.cooking.UI.Homepage.scrollableList
-import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.NavBar.navigation.AppNavigation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,8 +24,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.absolutePadding
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -48,7 +31,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TextField
@@ -64,7 +46,6 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.cooking.UI.Login.CommentImage
 import com.example.cooking.UI.Login.CreateImage
 import com.example.cooking.UI.Login.FavouriteImage
-import com.example.cooking.UI.Login.ProfileBox
 import com.example.cooking.UI.Login.ProfileImage
 
 
@@ -73,7 +54,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            AppNavigation()
+            AppNavigation {
+
+            }
         }
 
         @Composable

@@ -1,9 +1,9 @@
-package com.example.cooking.test
+package com.example.cooking.test.stepDef
 
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 
-class StepDefinitions4 {
+class PreparationTabStepDefinition {
     @Given("I am on recipe page for miso and butternut soup")
     fun theAppIsOpen() {
         // Implementation for opening the app

@@ -1,4 +1,4 @@
-package com.example.cooking.test
+package com.example.cooking.test.stepDef
 
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
