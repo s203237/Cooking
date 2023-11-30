@@ -19,7 +19,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -43,14 +41,11 @@ import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
-import com.example.cooking.UI.RecipeList.ListAllRecipes
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
-import com.example.cooking.UI.RecipeList.RecipeList
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
 import kotlinx.coroutines.flow.StateFlow
 import com.example.cooking.UI.Search.SearchBar
-import com.example.cooking.model.RecipeCard
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -75,9 +70,9 @@ import com.example.cooking.model.RecipeCard
  * @see DisplayRecipeScreen
  */
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
+
 @Composable
-fun AppNavigation(){
+fun AppNavigation(function: () -> Unit) {
     val navController= rememberNavController()
     var displayBottomBar by remember { mutableStateOf(false) }
     var displayTopBar by remember { mutableStateOf(false) }
@@ -220,7 +215,7 @@ fun AppNavigation(){
                 HomepageScreen(onNavigateToRecipe = { recipeId ->
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                 })
-                printBackStack(navController.currentBackStack, "Home screen: ")
+                printBackStack(navController.currentBackStack, "Home screen")
             }
             composable(route = Screens.SearchScreen.name) {
                 displayBottomBar=true

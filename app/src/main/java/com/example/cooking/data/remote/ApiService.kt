@@ -24,15 +24,16 @@ import retrofit2.http.Query
 *     - A [Recipe] object representing the fetched recipe.
 */
 interface ApiService {
+
     @GET("collection/{collectionName}/recipes/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeCollection(@Path("collectionName") collectionName: String): RecipeCollection
 
     @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
 
-
     @GET("search?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeList(@Query("query") query: String): RecipeCollection
+
 
     @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard

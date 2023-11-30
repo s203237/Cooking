@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -59,6 +60,7 @@ fun DisplayFavButton() {
 
 @Composable
 fun ImageWithFavIcon(
+
     recipeId: String,
     imageUrl: String,
     onNavigateToRecipe: (String) -> Unit,
@@ -83,7 +85,7 @@ fun ImageWithFavIcon(
         AsyncImage(
             model = imageUrl,
             contentDescription = null, //TODO give content description
-            modifier = Modifier
+            modifier = Modifier.testTag("itemImage")
                 .fillMaxWidth()
                 .aspectRatio(aspectRatioImg)
                 .clickable {

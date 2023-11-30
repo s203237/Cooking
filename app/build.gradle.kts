@@ -84,7 +84,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    testImplementation ("io.cucumber:cucumber-java:7.14.0")
-    testImplementation ("io.cucumber:cucumber-junit:7.14.0")
+    androidTestImplementation ("io.cucumber:cucumber-java:7.14.0")
+    androidTestImplementation ("io.cucumber:cucumber-junit:7.14.0")
+
+
+
 
 }

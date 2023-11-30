@@ -22,15 +22,17 @@ import com.example.cooking.data.RecipeData
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.CustomHeading1
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.example.cooking.UI.SharedComponents.CardFormats
 
 @Composable
 fun RecipePage(recipe: Recipe) {
     Column(
-        modifier = Modifier
+        modifier = Modifier.testTag("recipePage")
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+
     ) {
         Box(
             modifier = Modifier

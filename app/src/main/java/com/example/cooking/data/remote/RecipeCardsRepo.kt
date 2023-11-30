@@ -51,22 +51,16 @@ class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<Recipe
         try {
             val recipeCollection = apiService.fetchRecipeList(query)
             return recipeCollection.results
-        } catch (e: UnknownHostException) {
-            println("UnknownHostException: Unable to resolve host. Check your internet connection and ensure the hostname is correct.")
-            e.printStackTrace()
-        } catch (e: IOException) {
-            println("IOException: ${e.message}")
-            e.printStackTrace()
+        }
+        catch (e : IOException) {
+            println("It broke :((( ${e.message}")
         } catch (e: HttpException) {
             val errorCode = e.code()
             val errorResponse = e.response()?.errorBody()?.string()
             println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
-            e.printStackTrace()
-        } catch (e: Exception) {
-            println("An unexpected error occurred: ${e.message}")
-            e.printStackTrace()
         }
         return emptyList()
+
     }
 
 
