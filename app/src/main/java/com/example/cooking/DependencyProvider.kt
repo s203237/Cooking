@@ -1,19 +1,22 @@
 package com.example.cooking
 
-import android.content.Context
-import com.example.cooking.data.local.FavoritesDataSource
+import androidx.compose.runtime.Composable
 import com.example.cooking.data.remote.ApiService
+
 import com.example.cooking.data.remote.AuthenticationInterceptor
 import com.example.cooking.data.remote.MockApiService
 import com.example.cooking.data.remote.RecipeCardRepo
+import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCardsRepoSearch
-import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
-import dk.shape.dtu.networkrequestsandlocalstorage.data.local.DataStoreFavoritesDataSource
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -28,34 +31,39 @@ object DependencyProvider {
     fun createBuilder(): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60,TimeUnit.SECONDS)
         builder.interceptors().add(AuthenticationInterceptor())
         val client = builder.build()
         return client
     }
-
     val client = createBuilder()
+    val api2 = Retrofit.Builder() // Create retrofit builder.
+    .baseUrl("https://bbc-good-food-api.p.rapidapi.com/") // Base url for the api has to end with a slash.
+    .addConverterFactory(GsonConverterFactory.create()) // Use GSON converter for JSON to POJO object mapping.
+    .client(client) // Here we set the custom OkHttp client we just created.
+    .build()
+    private val apiService2 = api2.create(ApiService::class.java)
 
-    val api = Retrofit.Builder()
+    private val retrofit = Retrofit.Builder()
+        .addConverterFactory(
+            Json {
+                ignoreUnknownKeys = true
+            }.asConverterFactory("application/json".toMediaType())
+        )
         .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
         .build()
 
-    private val apiService = api.create(ApiService::class.java)
+    private val apiService = retrofit.create(ApiService::class.java)
+
+
     private val mockapiService = MockApiService()
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
-    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
-    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
+    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService2)
+
+    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
+
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
-
-    lateinit var favoritesDataSource: FavoritesDataSource
-        private set
-
-    fun initialize(context: Context) {
-        favoritesDataSource = DataStoreFavoritesDataSource(context)
-    }
 
 }
 

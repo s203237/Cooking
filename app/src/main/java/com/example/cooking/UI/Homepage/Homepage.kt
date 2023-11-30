@@ -1,11 +1,10 @@
 package com.example.cooking.UI.Homepage
 
+//import com.example.cooking.Data.Recipe
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,21 +22,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-//import com.example.cooking.Data.Recipe
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.data.RecipeData
 import com.example.cooking.model.FoodCategories
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -152,7 +144,7 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
                 recipeId = recipe.recipeId,
                 imageUrl = recipe.imageUrl,
                 onNavigateToRecipe = onNavigateToRecipe,
-                onFavoriteButtonClicked = {},
+                onFavoriteButtonClicked ={} ,
                 cardFormat = CardFormats.SQUARE
             )
         }
