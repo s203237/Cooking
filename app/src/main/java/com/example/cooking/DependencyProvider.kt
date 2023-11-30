@@ -71,7 +71,7 @@ object DependencyProvider {
     val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
 
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
-    
+
 
 }
 

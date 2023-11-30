@@ -30,7 +30,7 @@ class HomePageViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             //val dailyRecipe = DependencyProvider.recipeSingleCardRepo.fetchData("miso-butternut-soup")
 
-            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("high-protein-vegan-recipes")
+            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("High-protein-vegan-meals")
             val recipeCards2 = DependencyProvider.recipeCardRepo.fetchData("vegan-winter-recipes")
             val recipeCards3 = DependencyProvider.recipeCardRepo.fetchData("vegan-lentil-recipes")
             val recipeCards4 = DependencyProvider.recipeCardRepo.fetchData("vegan-slow-cooker-recipes")
