@@ -25,7 +25,7 @@ data class RecipeCard(
 @Serializable
 data class RecipeCard(
     val recipeId: String = "defaultId",
-    val isFavorite: Boolean = false,
+    var isFavorite: Boolean = false,
     @SerialName("recipeName")
     val title: String = "Default title",
     @SerialName("imageSrc")

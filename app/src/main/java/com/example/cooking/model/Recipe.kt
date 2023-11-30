@@ -29,7 +29,7 @@ data class Recipe(
 
     val ingredients: List<String> = emptyList(),
     val steps: Map<String,String> = emptyMap(),
-    val isFavorite: Boolean =false,
+    var isFavorite: Boolean =false,
     /* val title: String = "Default Title",
      @DrawableRes val imageUrl: Int = 0,
      val imageDescription: String = "",

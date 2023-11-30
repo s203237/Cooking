@@ -71,10 +71,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (String) ->
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = { imageUrl ->
-            // Use the FavoritesScreenViewModel when handling the favorite button click
-            favoritesViewModel.onFavoriteButtonClicked(imageUrl)
-        }
+        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
     )
 }
 
@@ -95,6 +92,6 @@ fun ListAllRecipes(query: String, onNavigateToRecipe: (String) -> Unit) {
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = { /* handle the click as needed */ }
+        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
     )
 }

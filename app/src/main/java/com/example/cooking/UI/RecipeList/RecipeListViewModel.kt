@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -68,6 +69,11 @@ class RecipeListViewModel: ViewModel() {
                 _recipeCards.value = recipeCards
             }
 
+        }
+    }
+    fun onFavoriteButtonClicked(imageUrl: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            favoritesDataSource.toggleFavorite(imageUrl)
         }
     }
 

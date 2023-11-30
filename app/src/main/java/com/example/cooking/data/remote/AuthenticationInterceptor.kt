@@ -9,7 +9,7 @@ class AuthenticationInterceptor : Interceptor {
 
         val newRequest = chain.request().newBuilder()
             // TODO: Use your API Key provided by CoinMarketCap Professional API Developer Portal.
-            .addHeader("X-RapidAPI-Key", "kltkUnBfT7mshlp9SCnkPi8NCpPyp1wAE7TjsnsyNUEdqjaMCE")
+            .addHeader("X-RapidAPI-Key", "f126ee70a3msh878012a5b25f30ap13b19fjsn993601390640")
             .addHeader("X-RapidAPI-Host", "bbc-good-food-api.p.rapidapi.com")
             .build()
 

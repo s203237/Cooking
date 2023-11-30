@@ -11,7 +11,7 @@ import com.example.cooking.UI.RecipeList.RecipeList
 @Composable
 fun FavoritesScreen() {
 
-    val viewModel: FavoritesScreenViewModel = viewModel()
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
 
    /* LaunchedEffect(key1 = collectionName){
         viewModel.updateCollectionName(collectionName)
@@ -20,8 +20,8 @@ fun FavoritesScreen() {
 
     */
 
-    val recipes by viewModel.favorites.collectAsState(emptyList())
-    RecipeList(recipes = recipes , onNavigateToRecipe = {}, onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked)
+    val recipes by favoritesViewModel.favorites.collectAsState(emptyList())
+    RecipeList(recipes = recipes , onNavigateToRecipe = {}, onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked)
     Log.d("FavoritesScreen", "Collected Recipes: $recipes")
 
 }
