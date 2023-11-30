@@ -86,5 +86,6 @@ dependencies {
 
     testImplementation ("io.cucumber:cucumber-java:7.14.0")
     testImplementation ("io.cucumber:cucumber-junit:7.14.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
 }
