@@ -26,7 +26,7 @@ interface ApiService {
     @GET("collection/{collectionName}/recipes/?rapidapi-key=65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")
     suspend fun fetchRecipeCollection(@Path("collectionName") collectionName: String): RecipeCollection
 
-    @GET("recipe/{recipeId}/?rapidapi-key=65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")
+    @GET("{recipeId}")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
 
     @GET("recipe/{recipeId}/?rapidapi-key=65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")

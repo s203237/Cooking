@@ -35,7 +35,7 @@ object DependencyProvider {
             }.asConverterFactory("application/json".toMediaType())
         )
         .client(okHttpClient)
-        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
+        .baseUrl("https://908df8e8-1ee4-4e87-8d04-b794f81750b5.mock.pstmn.io/")
         .build()
 
     private val apiService = retrofit.create(ApiService::class.java)
