@@ -28,8 +28,8 @@ class HomePageViewModel: ViewModel() {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData("vegetarian-pasta-recipes")
-            val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData("vegan-slow-cooker-recipes")
+            val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData("party")
+            val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData("party")
 
             _recipeCollection1.value = recipeCollection1
             _recipeCollection2.value = recipeCollection2

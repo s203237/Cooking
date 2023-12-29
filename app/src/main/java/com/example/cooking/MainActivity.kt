@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
+import com.example.cooking.UI.NavBar.navigation.AppNavigation
 import com.example.cooking.UI.theme.CookingTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,9 +20,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //AppNavigation()
-                    DisplayRecipeScreen(recipeId = "gnocchi-cacio-e-pepe")
-
+                    AppNavigation()
+                    //DisplayRecipeScreen(recipeId = "party-vol-au-vents")
+                    //ListAllRecipesScreen(collectionName = "party", onNavigateToRecipe = {})
                 }
             }
         }

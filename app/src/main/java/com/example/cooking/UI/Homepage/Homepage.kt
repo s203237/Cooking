@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cooking.UI.RecipeList.RecipeItem
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.FavButton
@@ -43,14 +44,13 @@ import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
-
 @Composable
 fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     listOfCollections: List<RecipeCollection>,
     onNavigateToRecipe: (String) -> Unit
-){
+) {
 
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -69,7 +69,11 @@ fun scrollableList(
             item {
                 UppercaseHeadingMedium(heading = "daily pick")
                 Spacer(Modifier.height(16.dp))
-                RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe)
+                RecipeItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    recipe = dailyRecipe,
+                    onNavigateToRecipe = onNavigateToRecipe
+                )
 
             }
 
@@ -78,48 +82,21 @@ fun scrollableList(
                 UppercaseHeadingMedium(heading = collection.collectionName)
                 Spacer(Modifier.height(16.dp))
 
-                LazyRow {
-                    items(collection.results) { recipe ->
-                        //RecipeCard(recipe = recipe)
-                        RecipeItem(modifier = Modifier
-                            .height(200.dp)
-                            .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
-                    }
-                }
-
             }
-
         }
-    }
 
-    AnimatedVisibility(visible = showButton, enter = fadeIn(), exit = fadeOut()) {
-        BackToTop(listState, coroutineScope) { }
-    }
+        AnimatedVisibility(visible = showButton, enter = fadeIn(), exit = fadeOut()) {
+            BackToTop(listState, coroutineScope) { }
+        }
 
+    }
 }
 
-
-@Preview
+///////////////////////////////////////
+// HOMEPAGE COMPONENTS
+///////////////////////////////////////
 @Composable
-fun PreviewscrollableList(){
-
-    val dailyRecipeCard = RecipeCard()
-    val collections = RecipeData().loadRecipeCollections()
-
-    scrollableList(
-        Modifier,
-        dailyRecipe = dailyRecipeCard,
-        listOfCollections = collections,
-        onNavigateToRecipe = {}
-    )
-
-
-}
-
-
-
-@Composable
-fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
+fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
 
     Column(
         modifier = Modifier
@@ -168,6 +145,28 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
 }
 
 @Composable
+fun RecipeCardRow(collection: RecipeCollection) {
+    LazyRow {
+        items(collection.results) { recipe ->
+            //RecipeCard(recipe = recipe)
+            RecipeRowItem(modifier = Modifier
+                .height(200.dp)
+                .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
+        }
+    }
+}
+
+
+@Composable
+fun RecipeCardList(recipeCards: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
+    Column {
+        recipeCards.forEach { card ->
+            RecipeCardListItem(recipeCard = card, onNavigateToRecipe = onNavigateToRecipe)
+        }
+
+    }
+}
+@Composable
 fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
     Row(
         modifier = Modifier
@@ -204,6 +203,35 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
         }
         FavButton(0.35f)
     }
+}
+
+
+///////////////////////////////////////
+// PREVIEWS
+///////////////////////////////////////
+@Preview
+@Composable
+fun PreviewscrollableList(){
+
+    val dailyRecipeCard = RecipeCard()
+    val collections = RecipeData().loadRecipeCollections()
+
+    scrollableList(
+        Modifier,
+        dailyRecipe = dailyRecipeCard,
+        listOfCollections = collections,
+        onNavigateToRecipe = {}
+    )
+
+
+}
+
+
+@Preview
+@Composable
+fun PreviewRecipeCardList() {
+    val recipeCards = RecipeData().loadRecipeCards()
+    RecipeCardList(recipeCards = recipeCards, onNavigateToRecipe = {})
 }
 
 @Preview
