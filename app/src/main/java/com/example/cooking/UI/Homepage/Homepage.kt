@@ -78,7 +78,7 @@ fun scrollableList(
             item{
                 RecipeCardRow(collection = listOfCollections[0], onNavigateToRecipe = onNavigateToRecipe)
             }
-            println("Made recipe card row")
+
             item {
                 RecipeCardList(
                     collection = listOfCollections[1],
@@ -86,6 +86,29 @@ fun scrollableList(
                     onNavigateToRecipe = onNavigateToRecipe
                 )
             }
+
+            item{
+                RecipeCardRow(collection = listOfCollections[2], onNavigateToRecipe = onNavigateToRecipe)
+            }
+
+            item{
+                RecipeCardRow(collection = listOfCollections[3], onNavigateToRecipe = onNavigateToRecipe)
+            }
+
+            item {
+                RecipeRowItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    recipe = dailyRecipe,
+                    onNavigateToRecipe = onNavigateToRecipe
+                )
+
+            }
+
+            item{
+                RecipeCardRow(collection = listOfCollections[4], onNavigateToRecipe = onNavigateToRecipe)
+            }
+
+
 
         }
 
