@@ -41,6 +41,8 @@ import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
+import kotlin.math.min
+
 @Composable
 fun scrollableList(
     modifier: Modifier,
@@ -76,9 +78,13 @@ fun scrollableList(
             item{
                 RecipeCardRow(collection = listOfCollections[0], onNavigateToRecipe = onNavigateToRecipe)
             }
-
+            println("Made recipe card row")
             item {
-                RecipeCardList(collection = listOfCollections[1], onNavigateToRecipe = onNavigateToRecipe)
+                RecipeCardList(
+                    collection = listOfCollections[1],
+                    listSize = 3,
+                    onNavigateToRecipe = onNavigateToRecipe
+                )
             }
 
         }
@@ -160,17 +166,20 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> 
 
 
 @Composable
-fun RecipeCardList(collection: RecipeCollection, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeCardList(
+    collection: RecipeCollection,
+    listSize: Int,
+    onNavigateToRecipe: (String) -> Unit
+) {
     val recipeCards = collection.results
     Column {
         Spacer(Modifier.height(16.dp))
         UppercaseHeadingMedium(heading = collection.collectionName)
         Spacer(Modifier.height(16.dp))
 
-        recipeCards.forEach { card ->
-            RecipeCardListItem(recipeCard = card, onNavigateToRecipe = onNavigateToRecipe)
+        for(i in 0 until min(listSize, recipeCards.size)) {
+            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe)
         }
-
     }
 }
 @Composable
@@ -238,7 +247,7 @@ fun PreviewscrollableList(){
 @Composable
 fun PreviewRecipeCardList() {
     val collections = RecipeData().loadRecipeCollections()
-    RecipeCardList(collection = collections[0], onNavigateToRecipe = {})
+    RecipeCardList(collection = collections[0], listSize = 3) {}
 }
 
 @Preview
