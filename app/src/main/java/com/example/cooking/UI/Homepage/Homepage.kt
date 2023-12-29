@@ -34,7 +34,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cooking.UI.RecipeList.RecipeItem
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.FavButton
@@ -69,7 +68,7 @@ fun scrollableList(
             item {
                 UppercaseHeadingMedium(heading = "daily pick")
                 Spacer(Modifier.height(16.dp))
-                RecipeItem(
+                RecipeRowItem(
                     modifier = Modifier.fillMaxWidth(),
                     recipe = dailyRecipe,
                     onNavigateToRecipe = onNavigateToRecipe
@@ -145,7 +144,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
 }
 
 @Composable
-fun RecipeCardRow(collection: RecipeCollection) {
+fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> Unit) {
     LazyRow {
         items(collection.results) { recipe ->
             //RecipeCard(recipe = recipe)
