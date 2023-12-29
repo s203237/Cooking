@@ -4,7 +4,6 @@ package com.example.cooking.UI.Homepage
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -180,8 +178,7 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color.LightGray)
-            .padding(16.dp)
+            //.padding(16.dp)
             .clickable {
                 onNavigateToRecipe(recipeCard.recipeId)
             },
@@ -191,9 +188,8 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth(0.6f),
+                .fillMaxWidth(0.70f),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             RecipeImage(
                 recipeId = recipeCard.recipeId,
@@ -202,6 +198,7 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
                 cardFormat = CardFormats.SQUARE,
                 sizeFraction = 0.35f
             )
+            Spacer(Modifier.width(16.dp))
             Text(
                 text = recipeCard.title,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -212,6 +209,7 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
         }
         FavButton(0.35f)
     }
+    Spacer(Modifier.height(16.dp))
 }
 
 
