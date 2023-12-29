@@ -1,10 +1,8 @@
 package com.example.cooking.UI.Homepage
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.data.HomepageCuration
 import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,67 +10,61 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class HomePageViewModel: ViewModel() {
-
-    //private val _dailyRecipe = MutableStateFlow(RecipeCard())
-    private val collections = HomepageCuration().loadCollectionNames()
-    private val _recipeCollections = MutableStateFlow<List<RecipeCollection>>(emptyList<RecipeCollection>())
+    //private val collections = HomepageCuration().loadCollectionNames()
     private val _recipeCollection1 = MutableStateFlow(RecipeCollection())
     private val _recipeCollection2 = MutableStateFlow(RecipeCollection())
+    private val _recipeCollection3 = MutableStateFlow(RecipeCollection())
+    private val _recipeCollection4 = MutableStateFlow(RecipeCollection())
+    private val _recipeCollection5 = MutableStateFlow(RecipeCollection())
+
+    private val collections = listOf (
+        "party",
+        "party",
+        "party",
+        "party",
+        "party"
+    )
 
     val recipeCollection1 = _recipeCollection1.asStateFlow()
     val recipeCollection2 = _recipeCollection2.asStateFlow()
-
-    val recipeCollections = _recipeCollections.asStateFlow()
-
-    //val dailyRecipe = _dailyRecipe.asStateFlow()
-
+    val recipeCollection3 = _recipeCollection3.asStateFlow()
+    val recipeCollection4 = _recipeCollection4.asStateFlow()
+    val recipeCollection5 = _recipeCollection5.asStateFlow()
+    //private val _recipeCollections = MutableStateFlow<List<RecipeCollection>>(emptyList<RecipeCollection>())
+    //val recipeCollections = _recipeCollections.asStateFlow()
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCollections = collections.map { collection ->
-                 DependencyProvider.recipeCollectionRepo.fetchData(collection)
-            }
-            _recipeCollections.value = recipeCollections
-
-            /*
             val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData("party")
             val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData("party")
+            val recipeCollection3 = DependencyProvider.recipeCollectionRepo.fetchData("party")
+            val recipeCollection4 = DependencyProvider.recipeCollectionRepo.fetchData("party")
+            val recipeCollection5 = DependencyProvider.recipeCollectionRepo.fetchData("party")
 
             _recipeCollection1.value = recipeCollection1
             _recipeCollection2.value = recipeCollection2
-            */
-            Log.v("HomePageViewModel", _recipeCollection1.value.collectionName)
+            _recipeCollection3.value = recipeCollection3
+            _recipeCollection4.value = recipeCollection4
+            _recipeCollection5.value = recipeCollection5
 
-            //val dailyRecipe = DependencyProvider.recipeSingleCardRepo.fetchData("miso-butternut-soup")
+/*
+            Log.v("HomescreenVM", "before recipeCOllections creation")
+            collections.forEach {
 
-
-            /*
+                Log.v("HomescreenVM", "coll name: $it")
+            }
             val recipeCollections : List<RecipeCollection> = collections.map{
-                DependencyProvider.recipeCollectionRepo.fetchData(it)
+                RecipeCollection(it)
             }
-
-            _recipeCollections.value = recipeCollections
-            for(collection in _recipeCollections.value){
-                val name = collection.collectionName
-                Log.v("HomePageViewModel", "collectionName: $name")
+            /*recipeCollections.forEach {
+                Log.v("HomescreenVM", it.collectionName)
             }*/
-            /*val recipeCollections: List<RecipeCollection> = List(size = collections.size)
-            for(i in collections.indices) {
-                recipeCollections[i] = DependencyProvider.recipeCollectionRepo.fetchData(collections[i])
+            Log.v("HomescreenVM", "after recipeCOllections creation")
+            //_recipeCollections.value = recipeCollections
 
-            }
-            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("high-protein-vegan-recipes")
-            val recipeCards2 = DependencyProvider.recipeCardRepo.fetchData("vegan-winter-recipes")
-            val recipeCards3 = DependencyProvider.recipeCardRepo.fetchData("vegan-lentil-recipes")
-            val recipeCards4 = DependencyProvider.recipeCardRepo.fetchData("vegan-slow-cooker-recipes")
-
-            //_dailyRecipe.value = dailyRecipe
-            _recipeCards1.value = recipeCards1
-            _recipeCards2.value = recipeCards2
-            _recipeCards3.value = recipeCards3
-            _recipeCards4.value = recipeCards4
-
-             */
+ */
         }
+
+
     }
 
 }

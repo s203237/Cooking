@@ -2,11 +2,11 @@ package com.example.cooking.data
 
 class HomepageCuration {
     private val collectionNames = listOf<String>(
-        "high-protein-vegan-recipes",
-        "vegan-winter-recipes",
-        "vegan-lentil-recipes",
-        "vegan-slow-cooker-recipes",
-        "vegetarian-pasta-recipes"
+        "party",
+        "party",
+        "party",
+        "party",
+        "party"
     )
     fun getCollectionsCount(): Int {
         return collectionNames.size;
