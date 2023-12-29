@@ -80,7 +80,7 @@ fun scrollableList(
             }
 
             item {
-
+                RecipeCardList(collection = listOfCollections[1], onNavigateToRecipe = onNavigateToRecipe)
             }
 
         }
