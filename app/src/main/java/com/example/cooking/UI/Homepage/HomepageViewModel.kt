@@ -28,12 +28,18 @@ class HomePageViewModel: ViewModel() {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            val recipeCollections = collections.map { collection ->
+                 DependencyProvider.recipeCollectionRepo.fetchData(collection)
+            }
+            _recipeCollections.value = recipeCollections
+
+            /*
             val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData("party")
             val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData("party")
 
             _recipeCollection1.value = recipeCollection1
             _recipeCollection2.value = recipeCollection2
-
+            */
             Log.v("HomePageViewModel", _recipeCollection1.value.collectionName)
 
             //val dailyRecipe = DependencyProvider.recipeSingleCardRepo.fetchData("miso-butternut-soup")
