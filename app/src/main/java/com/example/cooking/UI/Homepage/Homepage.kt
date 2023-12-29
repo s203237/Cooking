@@ -75,11 +75,14 @@ fun scrollableList(
                 )
 
             }
+            item{
+                RecipeCardRow(collection = listOfCollections[0], onNavigateToRecipe = onNavigateToRecipe)
+            }
 
-            items(listOfCollections) { collection ->
-
+            item {
 
             }
+
         }
 
         AnimatedVisibility(visible = showButton, enter = fadeIn(), exit = fadeOut()) {
@@ -146,6 +149,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> 
     Spacer(Modifier.height(16.dp))
     UppercaseHeadingMedium(heading = collection.collectionName)
     Spacer(Modifier.height(16.dp))
+
     LazyRow {
         items(collection.results) { recipe ->
             //RecipeCard(recipe = recipe)
@@ -158,8 +162,13 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> 
 
 
 @Composable
-fun RecipeCardList(recipeCards: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeCardList(collection: RecipeCollection, onNavigateToRecipe: (String) -> Unit) {
+    val recipeCards = collection.results
     Column {
+        Spacer(Modifier.height(16.dp))
+        UppercaseHeadingMedium(heading = collection.collectionName)
+        Spacer(Modifier.height(16.dp))
+
         recipeCards.forEach { card ->
             RecipeCardListItem(recipeCard = card, onNavigateToRecipe = onNavigateToRecipe)
         }
@@ -230,8 +239,8 @@ fun PreviewscrollableList(){
 @Preview
 @Composable
 fun PreviewRecipeCardList() {
-    val recipeCards = RecipeData().loadRecipeCards()
-    RecipeCardList(recipeCards = recipeCards, onNavigateToRecipe = {})
+    val collections = RecipeData().loadRecipeCollections()
+    RecipeCardList(collection = collections[0], onNavigateToRecipe = {})
 }
 
 @Preview
