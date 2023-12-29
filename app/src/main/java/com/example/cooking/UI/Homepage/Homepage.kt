@@ -77,9 +77,7 @@ fun scrollableList(
             }
 
             items(listOfCollections) { collection ->
-                Spacer(Modifier.height(16.dp))
-                UppercaseHeadingMedium(heading = collection.collectionName)
-                Spacer(Modifier.height(16.dp))
+
 
             }
         }
@@ -145,6 +143,9 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
 
 @Composable
 fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> Unit) {
+    Spacer(Modifier.height(16.dp))
+    UppercaseHeadingMedium(heading = collection.collectionName)
+    Spacer(Modifier.height(16.dp))
     LazyRow {
         items(collection.results) { recipe ->
             //RecipeCard(recipe = recipe)
