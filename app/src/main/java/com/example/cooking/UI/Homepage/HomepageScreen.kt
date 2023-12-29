@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.model.RecipeCard
 
 
 @Composable
@@ -22,6 +21,8 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
     val collection3 by viewModel.recipeCollection3.collectAsState()
     val collection4 by viewModel.recipeCollection4.collectAsState()
     val collection5 by viewModel.recipeCollection5.collectAsState()
+    val dailyRecipe by viewModel.dailyRecipe.collectAsState()
+
 
     val collections = listOf(
         collection1,
@@ -68,14 +69,15 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
     if(list.size > 0) {
         val dailyRecipe = list[Random.nextInt(list.size)]
 */
-    val recipe = RecipeCard()
+
     scrollableList(
             modifier = Modifier
                 .background(color = Color(0xFFF2ECE3))
                 .padding(16.dp),
-            dailyRecipe = recipe,
+            dailyRecipe = dailyRecipe,
             listOfCollections = collections,
             onNavigateToRecipe = onNavigateToRecipe
         )
 
 }
+
