@@ -3,6 +3,7 @@ package com.example.cooking.UI.Homepage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.data.HomepageCuration
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
@@ -12,21 +13,13 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class HomePageViewModel: ViewModel() {
-    //private val collections = HomepageCuration().loadCollectionNames()
+    private val collections = HomepageCuration().loadCollectionNames()
     private val _recipeCollection1 = MutableStateFlow(RecipeCollection())
     private val _recipeCollection2 = MutableStateFlow(RecipeCollection())
     private val _recipeCollection3 = MutableStateFlow(RecipeCollection())
     private val _recipeCollection4 = MutableStateFlow(RecipeCollection())
     private val _recipeCollection5 = MutableStateFlow(RecipeCollection())
     private val _dailyRecipe = MutableStateFlow(RecipeCard())
-
-    private val collections = listOf (
-        "party",
-        "party",
-        "party",
-        "party",
-        "party"
-    )
 
     val recipeCollection1 = _recipeCollection1.asStateFlow()
     val recipeCollection2 = _recipeCollection2.asStateFlow()
@@ -39,11 +32,11 @@ class HomePageViewModel: ViewModel() {
     //val recipeCollections = _recipeCollections.asStateFlow()
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData("party")
-            val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData("party")
-            val recipeCollection3 = DependencyProvider.recipeCollectionRepo.fetchData("party")
-            val recipeCollection4 = DependencyProvider.recipeCollectionRepo.fetchData("party")
-            val recipeCollection5 = DependencyProvider.recipeCollectionRepo.fetchData("party")
+            val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData(collections[0])
+            val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData(collections[1])
+            val recipeCollection3 = DependencyProvider.recipeCollectionRepo.fetchData(collections[2])
+            val recipeCollection4 = DependencyProvider.recipeCollectionRepo.fetchData(collections[3])
+            val recipeCollection5 = DependencyProvider.recipeCollectionRepo.fetchData(collections[4])
 
             _dailyRecipe.value = getDailyRecipe(recipeCollection5)
 
