@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
-import com.example.cooking.data.RecipeData
+import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.Recipe
 
 @Composable

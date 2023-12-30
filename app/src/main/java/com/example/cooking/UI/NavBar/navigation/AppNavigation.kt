@@ -51,10 +51,7 @@ import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
-import com.example.cooking.UI.theme.CookingTheme
 import kotlinx.coroutines.flow.StateFlow
-import com.example.cooking.data.HomepageCuration
-import com.example.cooking.data.loadCat1Recipes
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using

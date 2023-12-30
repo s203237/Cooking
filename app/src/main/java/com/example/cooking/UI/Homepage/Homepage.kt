@@ -38,7 +38,7 @@ import com.example.cooking.UI.SharedComponents.FavButton
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
-import com.example.cooking.data.RecipeData
+import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import kotlin.math.min

@@ -8,7 +8,6 @@ class HomepageCuration {
         "vegetarian-dinner",
         "traybake-recipes"
     )
-
     fun getCollectionsCount(): Int {
         return collectionNames.size;
     }

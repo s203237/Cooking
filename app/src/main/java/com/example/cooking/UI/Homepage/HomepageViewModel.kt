@@ -46,34 +46,13 @@ class HomePageViewModel: ViewModel() {
             _recipeCollection4.value = recipeCollection4
             _recipeCollection5.value = recipeCollection5
 
-/*
-            Log.v("HomescreenVM", "before recipeCOllections creation")
-            collections.forEach {
-
-                Log.v("HomescreenVM", "coll name: $it")
-            }
-            val recipeCollections : List<RecipeCollection> = collections.map{
-                RecipeCollection(it)
-            }
-            /*recipeCollections.forEach {
-                Log.v("HomescreenVM", it.collectionName)
-            }*/
-            Log.v("HomescreenVM", "after recipeCOllections creation")
-            //_recipeCollections.value = recipeCollections
-
- */
         }
-
-
     }
-
 }
 
 fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
     val calendar = Calendar.getInstance()
     val currentDate = calendar.get(Calendar.DAY_OF_MONTH)
-    val collSize = collection.results.size
-    println("Current date: $currentDate, collection size $collSize")
     val i = currentDate % collection.results.size
     return collection.results[i]
 }
