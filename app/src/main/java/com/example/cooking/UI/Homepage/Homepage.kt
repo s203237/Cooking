@@ -128,9 +128,6 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(
-                end = 10.dp,
-            )
     ) {
         Card(
             modifier = modifier
@@ -182,7 +179,9 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> 
             //RecipeCard(recipe = recipe)
             RecipeRowItem(modifier = Modifier
                 .height(200.dp)
-                .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
+                .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe
+            )
+            Spacer(Modifier.width(10.dp))
         }
     }
 }
