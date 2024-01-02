@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -65,6 +64,7 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, onFavor
         ImageWithFavIcon(
             recipeId = recipe.recipeId,
             imageUrl = recipe.imageUrl,
+            isFavorite = false,
             onNavigateToRecipe = onNavigateToRecipe,
             onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
             cardFormat = CardFormats.LANDSCAPE

@@ -14,10 +14,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -141,6 +137,7 @@ fun previewImageWithFavIconPortrait() {
     ImageWithFavIcon(
         "spiced-lentil-spinach-pies",
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        isFavorite =false,
         {},
         {},
         CardFormats.PORTRAIT
@@ -153,6 +150,7 @@ fun previewImageWithFavIconLandscape() {
     ImageWithFavIcon(
         "spiced-lentil-spinach-pies",
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+       isFavorite = false,
         {},
         {},
         CardFormats.LANDSCAPE
@@ -165,6 +163,7 @@ fun previewImageWithFavIconSqr() {
     ImageWithFavIcon(
         "spiced-lentil-spinach-pies",
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+       isFavorite = false,
         {},
         {},
         CardFormats.SQUARE

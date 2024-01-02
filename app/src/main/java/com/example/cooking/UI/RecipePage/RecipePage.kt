@@ -41,6 +41,7 @@ fun RecipePage(recipe: Recipe) {
             ImageWithFavIcon(
                 recipeId = recipe.recipeId,
                 imageUrl = recipe.imageUrl,
+                isFavorite = false,
                 {},
                 {},
                 CardFormats.PORTRAIT

@@ -87,6 +87,7 @@ fun scrollableList(
                     collection = listOfCollections[1],
                     listSize = 3,
                     onNavigateToRecipe = onNavigateToRecipe,
+                    onFavoriteButtonClicked=onFavoriteButtonClicked
                 )
             }
 
@@ -127,7 +128,7 @@ fun scrollableList(
 // HOMEPAGE COMPONENTS
 ///////////////////////////////////////
 @Composable
-fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "",onFavoriteButtonClicked:(String) -> Unit) {
+fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (String) -> Unit) {
 
     Column(
         modifier = Modifier
@@ -140,8 +141,9 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
                 recipeId = recipe.recipeId,
                 imageUrl = recipe.imageUrl,
                 onNavigateToRecipe = onNavigateToRecipe,
-                onFavoriteButtonClicked =onFavoriteButtonClicked ,
-                cardFormat = CardFormats.SQUARE
+                onFavoriteButtonClicked=onFavoriteButtonClicked,
+                cardFormat = CardFormats.SQUARE,
+                isFavorite = false
             )
         }
         val recipeTitle = recipe.title
@@ -195,7 +197,8 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> 
 fun RecipeCardList(
     collection: RecipeCollection,
     listSize: Int,
-    onNavigateToRecipe: (String) -> Unit
+    onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit
 ) {
     val recipeCards = collection.results
     Column {
@@ -204,12 +207,12 @@ fun RecipeCardList(
         Spacer(Modifier.height(16.dp))
 
         for(i in 0 until min(listSize, recipeCards.size)) {
-            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe)
+            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = onFavoriteButtonClicked)
         }
     }
 }
 @Composable
-fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit,onFavoriteButtonClicked: (String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -242,7 +245,7 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
             )
 
         }
-        FavButton(0.35f)
+        FavButton(0.35f, isFavorite = true, onClick = {onFavoriteButtonClicked})
     }
     Spacer(Modifier.height(16.dp))
 }
@@ -274,7 +277,7 @@ fun PreviewscrollableList(){
 @Composable
 fun PreviewRecipeCardList() {
     val collections = RecipeData().loadRecipeCollections()
-    RecipeCardList(collection = collections[0], listSize = 3) {}
+    RecipeCardList(collection = collections[0], listSize = 3, onNavigateToRecipe = {}, onFavoriteButtonClicked = {})
 }
 
 @Preview
@@ -285,6 +288,6 @@ fun PreviewRecipeCardListItem() {
         title = "Miso Butternut Soup",
         imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/09/Miso-and-butternut-soup-efe9277.jpg?quality=90&webp=true&resize=600,545"
     )
-    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
+    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {}, onFavoriteButtonClicked = {})
 }
 
