@@ -34,10 +34,10 @@ import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit ) {
     Column (
-       /* modifier = Modifier
-            .background(color = Color(0xFFFFFBEF))*/
+        /* modifier = Modifier
+             .background(color = Color(0xFFFFFBEF))*/
     ) {
         Text(
             text = "Recipe List",
@@ -49,40 +49,47 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
         )
         LazyColumn {
             items(recipes) { recipe ->
-                RecipeItem(recipe, onNavigateToRecipe)
+                RecipeItem(recipe, onNavigateToRecipe , onFavoriteButtonClicked )
                 println("Composed recipe item")
             }
         }
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, onFavoriteButtonClicked: (String) -> Unit){
 
-Column(
-    modifier = Modifier
-        .fillMaxWidth()
-){
-    ImageWithFavIcon(
-        recipeId = recipe.recipeId,
-        imageUrl = recipe.imageUrl,
-        onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = {},
-        cardFormat = CardFormats.LANDSCAPE
-    )
-    Text(
-        text = recipe.title ,
-        fontSize = 20.sp,
-        modifier = Modifier.padding(
-            top = 16.dp,
-            start = 16.dp,
-            end = 16.dp,
-            bottom = 32.dp
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ){
+        ImageWithFavIcon(
+            recipeId = recipe.recipeId,
+            imageUrl = recipe.imageUrl,
+            onNavigateToRecipe = onNavigateToRecipe,
+            onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
+            cardFormat = CardFormats.LANDSCAPE
+
+
         )
-    )
-}
+        Text(
+            text = recipe.title ,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(
+                top = 16.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 32.dp
+            )
+        )
+
+
+    }
 
 }
-val testRecipes = RecipeData().loadRecipes()
+
+
+
+//val testRecipes = RecipeData().loadRecipes()
 /*val testRecipes = listOf(
     Recipe("test 1", R.drawable.image,"",10,2,2, "","",listOf(""),listOf("") ),
     Recipe("test 2", R.drawable.image2,"",10,2,2, "","",listOf(""),listOf("")),
@@ -93,7 +100,5 @@ val testRecipes = RecipeData().loadRecipes()
 @Preview
 @Composable
 fun PreviewRecipeList(){
-RecipeList(emptyList(), onNavigateToRecipe = {})
+    RecipeList(emptyList(), onNavigateToRecipe = {} , onFavoriteButtonClicked = {})
 }
-
-

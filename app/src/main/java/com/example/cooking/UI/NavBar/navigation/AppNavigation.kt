@@ -44,6 +44,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
+import com.example.cooking.UI.Faviorite.FavoritesScreen
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
@@ -51,6 +52,7 @@ import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
+import com.example.cooking.UI.Search.SearchBar
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -208,6 +210,80 @@ fun AppNavigation(){
                         printBackStack(navController.currentBackStack, "On boarding: ")
                     }
 
+            composable(route = Screens.AccountCreation.name) {
+                displayBottomBar=false
+                displayTopBar=false
+                AccountCreationPage(
+                    onNavigateToHomeScreen = {
+                        navController.navigate(
+                            route = Screens.HomeScreen.name
+                        )
+                    }
+                )
+                printBackStack(navController.currentBackStack, "Account creation page: ")
+            }
+            composable(route = Screens.HomeScreen.name) {
+                displayBottomBar = true
+                displayTopBar=true
+
+                HomepageScreen(onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                })
+                printBackStack(navController.currentBackStack, "Home screen: ")
+            }
+            composable(route = Screens.SearchScreen.name) {
+                displayBottomBar=true
+                displayTopBar=true
+                PreviewSearchBar()
+                printBackStack(navController.currentBackStack, "Preview: ")
+            }
+            composable(route = Screens.Favorites.name){
+                displayBottomBar = true
+                displayTopBar=true
+                FavoritesScreen()
+                printBackStack(navController.currentBackStack, "Favorites : ")
+            }
+//            composable(
+//                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
+//            ){backStackEntry ->
+//                 val collectionName = backStackEntry.arguments?.getString("collectionName")
+//                 if(collectionName != null) {
+//                ListAllRecipesScreen(collectionName,
+//                    onNavigateToRecipe = { recipeId ->
+//                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+//                    })
+//                     printBackStack(navController.currentBackStack, "Recipe List: ")
+//                } else {
+//                    Text("Collection not found")
+//                }
+//                displayBottomBar=true
+//                displayTopBar=true
+//            }
+            composable(route = Screens.Profile.name) {
+                displayBottomBar=true
+                displayTopBar=true
+                ProfileBox()
+                printBackStack(navController.currentBackStack, "Profile: ")
+            }
+                    composable(
+                        route = Screens.RecipeList.name,
+                        arguments = listOf(navArgument("collectionName") {
+                            type = NavType.StringType
+                        })
+                    ) { backStackEntry ->
+                        val collectionName = backStackEntry.arguments?.getString("collectionName")
+                        if (collectionName != null) {
+                            ListAllRecipesScreen(collectionName,
+                                onNavigateToRecipe = { recipeId ->
+                                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                                })
+                            printBackStack(navController.currentBackStack, "Recipe List: ")
+                        } else {
+                            Text("Collection not found")
+                        }
+                        displayBottomBar = true
+                        displayTopBar = true
+                    }
                     composable(route = Screens.AccountCreation.name) {
                         displayBottomBar = false
                         displayTopBar = false

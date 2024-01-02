@@ -7,7 +7,6 @@ data class Recipe(
     val recipeId: String = "defaultId",
     @SerialName("name")
     val title: String = "Default title",
-
     @SerialName("imageSrc")
     val imageUrl: String = "",
 
@@ -29,7 +28,8 @@ data class Recipe(
     val recipeDescription: String = "Default description",
 
     val ingredients: List<String> = emptyList(),
-    val steps: Map<String,String> = emptyMap()
+    val steps: Map<String,String> = emptyMap(),
+    var isFavorite: Boolean =false,
     /* val title: String = "Default Title",
      @DrawableRes val imageUrl: Int = 0,
      val imageDescription: String = "",

@@ -10,11 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cooking.UI.Faviorite.FavoritesScreenViewModel
+
 
 
 @Composable
 fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
 
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     val viewModel: HomePageViewModel = viewModel()
     val collection1 by viewModel.recipeCollection1.collectAsState()
     val collection2 by viewModel.recipeCollection2.collectAsState()
@@ -43,7 +46,8 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
                 .padding(16.dp),
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
-            onNavigateToRecipe = onNavigateToRecipe
+            onNavigateToRecipe = onNavigateToRecipe,
+                    onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked
         )
 
 }

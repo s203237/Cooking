@@ -48,6 +48,16 @@ class HomePageViewModel: ViewModel() {
 
         }
     }
+    fun onFavoriteButtonClicked(imageUrl: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                favoritesDataSource.toggleFavorite(imageUrl)
+                println("Favorite toggled for image URL: $imageUrl")
+            } catch (e: Exception) {
+                println("Error toggling favorite: $e")
+            }
+        }
+    }
 }
 
 fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {

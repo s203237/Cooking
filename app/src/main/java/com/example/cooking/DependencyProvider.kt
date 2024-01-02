@@ -1,7 +1,12 @@
 package com.example.cooking
 
+import android.content.Context
+import com.example.cooking.data.local.FavoritesDataSource
 import com.example.cooking.data.remote.ApiService
+import com.example.cooking.data.remote.AuthenticationInterceptor
+import com.example.cooking.data.remote.MockApiService
 import com.example.cooking.data.remote.RecipeCardRepo
+import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
@@ -10,6 +15,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dk.shape.dtu.networkrequestsandlocalstorage.data.local.DataStoreFavoritesDataSource
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -34,8 +40,7 @@ object DependencyProvider {
                 ignoreUnknownKeys = true
             }.asConverterFactory("application/json".toMediaType())
         )
-        .client(okHttpClient)
-        .baseUrl("https://908df8e8-1ee4-4e87-8d04-b794f81750b5.mock.pstmn.io/")
+        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
         .build()
 
     private val apiService = retrofit.create(ApiService::class.java)
@@ -44,6 +49,14 @@ object DependencyProvider {
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
     val recipeCollectionRepo : RecipeDataRepo<RecipeCollection> = RecipeCollectionRepo(apiService)
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
+
+    lateinit var favoritesDataSource: FavoritesDataSource
+        private set
+
+    fun initialize(context: Context) {
+        favoritesDataSource = DataStoreFavoritesDataSource(context)
+    }
+
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

@@ -28,10 +28,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+//import com.example.cooking.Data.Recipe
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.FavButton
@@ -136,7 +141,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
                 recipeId = recipe.recipeId,
                 imageUrl = recipe.imageUrl,
                 onNavigateToRecipe = onNavigateToRecipe,
-                onFavoriteButtonClicked = {},
+                onFavoriteButtonClicked =onFavoriteButtonClicked ,
                 cardFormat = CardFormats.SQUARE
             )
         }
