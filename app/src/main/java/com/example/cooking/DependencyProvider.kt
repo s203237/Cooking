@@ -3,10 +3,7 @@ package com.example.cooking
 import android.content.Context
 import com.example.cooking.data.local.FavoritesDataSource
 import com.example.cooking.data.remote.ApiService
-import com.example.cooking.data.remote.AuthenticationInterceptor
-import com.example.cooking.data.remote.MockApiService
 import com.example.cooking.data.remote.RecipeCardRepo
-import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
@@ -40,7 +37,8 @@ object DependencyProvider {
                 ignoreUnknownKeys = true
             }.asConverterFactory("application/json".toMediaType())
         )
-        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
+        .client(okHttpClient)
+        .baseUrl("https://908df8e8-1ee4-4e87-8d04-b794f81750b5.mock.pstmn.io/")
         .build()
 
     private val apiService = retrofit.create(ApiService::class.java)

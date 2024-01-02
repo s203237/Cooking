@@ -47,9 +47,9 @@ class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>>
 }
 class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
-    override suspend fun fetchData(query: String): List<RecipeCard> {
+    override suspend fun fetchData(collectionName: String): List<RecipeCard> {
         try {
-            val recipeCollection = apiService.fetchRecipeList(query)
+            val recipeCollection = apiService.fetchRecipeCollection(collectionName)
             return recipeCollection.results
         } catch (e: UnknownHostException) {
             println("UnknownHostException: Unable to resolve host. Check your internet connection and ensure the hostname is correct.")

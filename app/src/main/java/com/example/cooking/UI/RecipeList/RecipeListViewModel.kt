@@ -64,7 +64,7 @@ class RecipeListViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             query.collect { newSearchKeyword ->
                 Log.v("SearchKeyword Trace", "SearchKeyword in viewModel.launch: $newSearchKeyword")
-                val recipeCards = DependencyProvider.recipeCardsRepoSearch.fetchData(query.value)
+                val recipeCards = DependencyProvider.recipeCardRepo.fetchData(_collectionName.value)
                 _recipeCards.value = recipeCards
             }
 

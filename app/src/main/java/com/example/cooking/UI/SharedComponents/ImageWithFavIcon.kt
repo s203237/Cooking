@@ -60,8 +60,7 @@ fun RecipeImage(
 }
 
 @Composable
-fun FavButton(sizeFraction: Float = 0.15f) {
-    var isFavorite by remember { mutableStateOf(false) }
+fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth(sizeFraction)
@@ -73,7 +72,8 @@ fun FavButton(sizeFraction: Float = 0.15f) {
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick = { isFavorite = !isFavorite }
+            onClick = onClick
+
         ) {
             if (isFavorite)
                 Icon(
@@ -96,6 +96,7 @@ fun FavButton(sizeFraction: Float = 0.15f) {
 fun ImageWithFavIcon(
     recipeId: String,
     imageUrl: String,
+    isFavorite: Boolean,
     onNavigateToRecipe: (String) -> Unit,
     onFavoriteButtonClicked: (String) -> Unit,
     cardFormat: CardFormats
@@ -123,7 +124,12 @@ fun ImageWithFavIcon(
                 .aspectRatio(aspectRatioFavBox)
                 .padding(16.dp)
         ) {
-            FavButton()
+            FavButton(
+                onClick = {
+                          onFavoriteButtonClicked(imageUrl)
+                },
+                isFavorite = isFavorite
+            )
         }
 
     }

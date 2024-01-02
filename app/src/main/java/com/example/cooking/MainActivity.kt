@@ -13,6 +13,7 @@ import com.example.cooking.UI.theme.CookingTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DependencyProvider.initialize(this)
         setContent {
 
             CookingTheme {
