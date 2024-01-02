@@ -47,7 +47,7 @@ import com.example.cooking.R
 @Composable
 fun MyPrivacy() {
         Button(
-            modifier = Modifier.padding(70.dp),
+            modifier = Modifier.padding(10.dp),
             onClick = {}
         ) {
             Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
