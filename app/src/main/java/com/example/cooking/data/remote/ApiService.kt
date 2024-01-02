@@ -40,8 +40,7 @@ interface ApiService {
 
 
 
-    @GET("recipes/list?q=chicken")
-    suspend fun fetchRecipeNewAPI(): RecipeCollection
-//@Path("searchTerm") searchTerm: String
+    @GET("recipes/list")
+    suspend fun fetchRecipeNewAPI(@Query("q") searchTerm: String): RecipeCollection
 }
 

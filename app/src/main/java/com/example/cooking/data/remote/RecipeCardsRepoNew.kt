@@ -9,7 +9,7 @@ class RecipeCardsRepoNew(apiService: ApiService) : RecipeDataRepoNew<List<Recipe
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
 
         try {//collectionName
-            val recipeCollection = apiService.fetchRecipeNewAPI()
+            val recipeCollection = apiService.fetchRecipeNewAPI(collectionName)
             return recipeCollection.results
         } catch (e : IOException) {
             println("It broke :((( ${e.message}")
