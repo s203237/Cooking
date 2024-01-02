@@ -54,7 +54,7 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
             dailyRecipe = dailyRecipe,
             listOfList = listOfList,
             onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
+            onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked
         )
     }
 

@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Faviorite
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -35,6 +36,7 @@ class FavoritesScreenViewModel: ViewModel() {
     fun onFavoriteButtonClicked(imageUrl: String) {
         viewModelScope.launch(Dispatchers.IO) {
            favoritesDataSource.toggleFavorite(imageUrl)
+            Log.d("onFavoriteButtonClicked called with " ,"imageUrl: $imageUrl")
         }
     }
 
