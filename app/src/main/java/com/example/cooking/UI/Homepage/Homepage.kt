@@ -65,6 +65,7 @@ fun scrollableList(
             modifier = modifier,
             state = listState
         ) {
+            //listOfCollections.forEach { Log.v("Homepage UI", it.collectionName) }
             item {
                 UppercaseHeadingMedium(heading = "daily pick")
                 Spacer(Modifier.height(16.dp))
@@ -76,23 +77,23 @@ fun scrollableList(
 
             }
             item{
-                RecipeCardRow(collection = listOfCollections[0], onNavigateToRecipe = onNavigateToRecipe)
+                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[0]*/, onNavigateToRecipe = onNavigateToRecipe)
             }
 
             item {
                 RecipeCardList(
-                    collection = listOfCollections[1],
+                    collection = RecipeCollection()/*listOfCollections[1]*/,
                     listSize = 3,
                     onNavigateToRecipe = onNavigateToRecipe
                 )
             }
 
             item{
-                RecipeCardRow(collection = listOfCollections[2], onNavigateToRecipe = onNavigateToRecipe)
+                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[2]*/, onNavigateToRecipe = onNavigateToRecipe)
             }
 
             item{
-                RecipeCardRow(collection = listOfCollections[3], onNavigateToRecipe = onNavigateToRecipe)
+                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[3]*/, onNavigateToRecipe = onNavigateToRecipe)
             }
 
             item {
@@ -105,7 +106,7 @@ fun scrollableList(
             }
 
             item{
-                RecipeCardRow(collection = listOfCollections[4], onNavigateToRecipe = onNavigateToRecipe)
+                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[4]*/, onNavigateToRecipe = onNavigateToRecipe)
             }
 
 

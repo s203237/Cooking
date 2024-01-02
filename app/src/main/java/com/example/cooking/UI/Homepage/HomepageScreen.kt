@@ -16,25 +16,26 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
 
     val viewModel: HomePageViewModel = viewModel()
-    val collection1 by viewModel.recipeCollection1.collectAsState()
+    val collections by viewModel.recipeCollections.collectAsState()
+    /*val collection1 by viewModel.recipeCollection1.collectAsState()
     val collection2 by viewModel.recipeCollection2.collectAsState()
     val collection3 by viewModel.recipeCollection3.collectAsState()
     val collection4 by viewModel.recipeCollection4.collectAsState()
-    val collection5 by viewModel.recipeCollection5.collectAsState()
+    val collection5 by viewModel.recipeCollection5.collectAsState()*/
     val dailyRecipe by viewModel.dailyRecipe.collectAsState()
 
 
-    val collections = listOf(
+    /*val collections = listOf(
         collection1,
         collection2,
         collection3,
         collection4,
         collection5,
-    )
+    )*/
 
     //val collections by viewModel.recipeCollections.collectAsState()
     collections.forEach { coll ->
-        Log.v("HomepageScreen", coll.collectionName)
+        Log.v("HomepageScreena", coll.collectionName)
     }
 
     scrollableList(
