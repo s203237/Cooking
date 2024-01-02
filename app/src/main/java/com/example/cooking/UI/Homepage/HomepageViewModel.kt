@@ -32,8 +32,8 @@ class HomePageViewModel: ViewModel() {
 
             val recipeCards1 = DependencyProvider.newrecipeCardRepo.fetchData("tofu")
             val recipeCards2 = DependencyProvider.newrecipeCardRepo.fetchData("carrot")
-            val recipeCards3 = DependencyProvider.newrecipeCardRepo.fetchData("chicken")
-            val recipeCards4 = DependencyProvider.newrecipeCardRepo.fetchData("fish")
+            val recipeCards3 = DependencyProvider.newrecipeCardRepo.fetchData("pasta")
+            val recipeCards4 = DependencyProvider.newrecipeCardRepo.fetchData("salad")
 
             //_dailyRecipe.value = dailyRecipe
             _recipeCards1.value = recipeCards1

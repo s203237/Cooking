@@ -26,7 +26,10 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("recipes/list")
-    suspend fun fetchRecipeCollection(@Query("q") searchTerm: String): RecipeCollection
+    suspend fun fetchRecipeCollection(
+        @Query("q") searchTerm: String,
+        @Query("tags") tag: String = "vegan"
+    ): RecipeCollection
 
     @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
