@@ -143,7 +143,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked=onFavoriteButtonClicked,
                 cardFormat = CardFormats.SQUARE,
-                isFavorite = false
+                isFavorite=false
             )
         }
         val recipeTitle = recipe.title
@@ -245,7 +245,7 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
             )
 
         }
-        FavButton(0.35f, isFavorite = true, onClick = {onFavoriteButtonClicked})
+        FavButton(0.35f, isFavorite =false , onClick = {})
     }
     Spacer(Modifier.height(16.dp))
 }
