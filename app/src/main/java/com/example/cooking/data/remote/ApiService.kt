@@ -25,8 +25,8 @@ import retrofit2.http.Query
 */
 interface ApiService {
 
-    @GET("collection/{collectionName}/recipes/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
-    suspend fun fetchRecipeCollection(@Path("collectionName") collectionName: String): RecipeCollection
+    @GET("recipes/list")
+    suspend fun fetchRecipeCollection(@Query("q") searchTerm: String): RecipeCollection
 
     @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
@@ -39,8 +39,5 @@ interface ApiService {
     suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
 
 
-
-    @GET("recipes/list")
-    suspend fun fetchRecipeNewAPI(@Query("q") searchTerm: String): RecipeCollection
 }
 

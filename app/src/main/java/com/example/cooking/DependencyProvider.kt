@@ -1,6 +1,5 @@
 package com.example.cooking
 
-import androidx.compose.runtime.Composable
 import com.example.cooking.data.remote.ApiService
 
 import com.example.cooking.data.remote.AuthenticationInterceptor
@@ -8,9 +7,7 @@ import com.example.cooking.data.remote.AuthenticationInterceptor
 import com.example.cooking.data.remote.RecipeCardRepo
 import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
-import com.example.cooking.data.remote.RecipeCardsRepoNew
 import com.example.cooking.data.remote.RecipeCardsRepoSearch
-import com.example.cooking.data.remote.RecipeDataRepoNew
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
@@ -19,7 +16,6 @@ import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -102,7 +98,7 @@ object DependencyProvider {
 
     private val newapiService = retrofit2.create(ApiService::class.java)
 
-    val newrecipeCardRepo: RecipeDataRepoNew<List<RecipeCard>> = RecipeCardsRepoNew(newapiService)
+    val newrecipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(newapiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
