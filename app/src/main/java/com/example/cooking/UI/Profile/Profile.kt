@@ -261,7 +261,7 @@ fun FavouriteImage() {
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(
         if (imageUri.value.isEmpty())
-            R.drawable.baseline_comment_24
+            R.drawable.comment
         else
             imageUri.value
     )
@@ -304,7 +304,7 @@ fun CreateImage() {
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(
         if (imageUri.value.isEmpty())
-            R.drawable.favourite
+            R.drawable.favorite
         else
             imageUri.value
     )
