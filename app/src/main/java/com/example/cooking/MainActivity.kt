@@ -1,5 +1,21 @@
 package com.example.cooking
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.example.cooking.UI.NavBar.navigation.AppNavigation
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -15,6 +31,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -52,16 +69,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
+            AppNavigation {
 
-            // AccountCreationPage()
-            //OnBoardingPage()
-            //RecipeList()
-            //scrollableList()
-
-
-            AppNavigation()
-
-
+            }
         }
 
         @Composable
@@ -84,7 +94,6 @@ class MainActivity : ComponentActivity() {
             }
 
         }
-
 
         @OptIn(ExperimentalMaterial3Api::class)
         @Composable
@@ -117,7 +126,6 @@ class MainActivity : ComponentActivity() {
                     Text(
                         text = "Logout",
                         modifier = Modifier.clickable { notification.value = "You logged out" })
-
 
                 }
 
@@ -154,7 +162,6 @@ class MainActivity : ComponentActivity() {
                 }
 
             }
-
         }
 
         //@Preview
@@ -162,7 +169,6 @@ class MainActivity : ComponentActivity() {
         fun PreviewScreen() {
             ProfileScreen()
         }
-
 
         @Composable
         fun ProfileImage() {
@@ -177,10 +183,7 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
-
             Column(
                 modifier = Modifier
                     .padding(8.dp)
@@ -206,7 +209,6 @@ class MainActivity : ComponentActivity() {
                 Text(text = "Change Profile Picture")
             }
         }
-
         @Composable
         fun CommentImage() {
             val imageUri = rememberSaveable { mutableStateOf("") }
@@ -220,8 +222,6 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
 
             Column(
@@ -264,8 +264,6 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
 
             Column(
@@ -296,7 +294,6 @@ class MainActivity : ComponentActivity() {
 //RecipeList()
 
         }
-
         @Composable
         fun CreateImage() {
             val imageUri = rememberSaveable { mutableStateOf("") }
@@ -310,8 +307,6 @@ class MainActivity : ComponentActivity() {
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { imageUri.value = it.toString() }
-
-
             }
 
             Column(

@@ -60,7 +60,7 @@ fun PrepTab(recipe: Recipe) {
                             bottom = 16.dp)
             ) {
                 CustomHeading1(heading = "steps")
-                StepsList(list = recipe.steps)
+                StepsList(list = recipe.steps.values.toList())
             }
 
             Image(
