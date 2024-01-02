@@ -68,6 +68,15 @@ object DependencyProvider {
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
 
 
+
+    val newapi2 = Retrofit.Builder() // Create retrofit builder.
+        .baseUrl("https://tasty.p.rapidapi.com/") // Base url for the api has to end with a slash.
+        .addConverterFactory(GsonConverterFactory.create()) // Use GSON converter for JSON to POJO object mapping.
+        .client(client) // Here we set the custom OkHttp client we just created.
+        .build()
+    private val newapiService2 = newapi2.create(ApiService::class.java)
+
+
     private val retrofit2 = Retrofit.Builder()
         .addConverterFactory(
             Json {
@@ -79,7 +88,7 @@ object DependencyProvider {
 
     private val newapiService = retrofit2.create(ApiService::class.java)
 
-    val newrecipeCardRepo: RecipeDataRepoNew<List<RecipeCard>> = RecipeCardsRepoNew(newapiService)
+    val newrecipeCardRepo: RecipeDataRepoNew<List<RecipeCard>> = RecipeCardsRepoNew(newapiService2)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
