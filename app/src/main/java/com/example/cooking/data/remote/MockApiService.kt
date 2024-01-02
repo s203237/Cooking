@@ -5,6 +5,7 @@ import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import com.example.cooking.model.TimeToCook
 
+/*
 class MockApiService: ApiService {
     override suspend fun fetchRecipeCollection(collectionName: String): RecipeCollection {
         // Simulate a successful response with dummy data
@@ -64,4 +65,4 @@ class MockApiService: ApiService {
     override suspend fun fetchRecipeCardById(recipeId: String): RecipeCard {
         TODO("Not yet implemented")
     }
-}
+}*/

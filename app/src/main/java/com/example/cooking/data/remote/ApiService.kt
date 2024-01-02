@@ -37,5 +37,11 @@ interface ApiService {
 
     @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
+
+
+
+    @GET("recipes/list?q={searchTerm}&X-RapidAPI-Key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
+    suspend fun fetchRecipeNewAPI(@Path("searchTerm") searchTerm: String): RecipeCollection
+
 }
 

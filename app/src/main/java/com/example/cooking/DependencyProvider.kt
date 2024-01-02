@@ -4,11 +4,13 @@ import androidx.compose.runtime.Composable
 import com.example.cooking.data.remote.ApiService
 
 import com.example.cooking.data.remote.AuthenticationInterceptor
-import com.example.cooking.data.remote.MockApiService
+//import com.example.cooking.data.remote.MockApiService
 import com.example.cooking.data.remote.RecipeCardRepo
 import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
+import com.example.cooking.data.remote.RecipeCardsRepoNew
 import com.example.cooking.data.remote.RecipeCardsRepoSearch
+import com.example.cooking.data.remote.RecipeDataRepoNew
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
@@ -56,7 +58,7 @@ object DependencyProvider {
     private val apiService = retrofit.create(ApiService::class.java)
 
 
-    private val mockapiService = MockApiService()
+    //private val mockapiService = MockApiService()
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService2)
@@ -65,6 +67,19 @@ object DependencyProvider {
 
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
 
+
+    private val retrofit2 = Retrofit.Builder()
+        .addConverterFactory(
+            Json {
+                ignoreUnknownKeys = true
+            }.asConverterFactory("application/json".toMediaType())
+        )
+        .baseUrl("https://tasty.p.rapidapi.com/")
+        .build()
+
+    private val newapiService = retrofit2.create(ApiService::class.java)
+
+    val newrecipeCardRepo: RecipeDataRepoNew<List<RecipeCard>> = RecipeCardsRepoNew(newapiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
