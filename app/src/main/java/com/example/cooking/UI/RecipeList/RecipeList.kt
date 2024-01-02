@@ -64,7 +64,7 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, onFavor
         ImageWithFavIcon(
             recipeId = recipe.recipeId,
             imageUrl = recipe.imageUrl,
-            isFavorite = false,
+            isFavorite = recipe.isFavorite,
             onNavigateToRecipe = onNavigateToRecipe,
             onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
             cardFormat = CardFormats.LANDSCAPE

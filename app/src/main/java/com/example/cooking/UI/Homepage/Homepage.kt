@@ -74,7 +74,7 @@ fun scrollableList(
                     modifier = Modifier.fillMaxWidth(),
                     recipe = dailyRecipe,
                     onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked=onFavoriteButtonClicked
+                    onFavoriteButtonClicked=onFavoriteButtonClicked,
                 )
 
             }
@@ -143,7 +143,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked=onFavoriteButtonClicked,
                 cardFormat = CardFormats.SQUARE,
-                isFavorite=false
+                isFavorite=recipe.isFavorite
             )
         }
         val recipeTitle = recipe.title
@@ -245,7 +245,7 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
             )
 
         }
-        FavButton(0.35f, isFavorite =false , onClick = {})
+        FavButton(0.35f, isFavorite =recipeCard.isFavorite, onClick = {})
     }
     Spacer(Modifier.height(16.dp))
 }
