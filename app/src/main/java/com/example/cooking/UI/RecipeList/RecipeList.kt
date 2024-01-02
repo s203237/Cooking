@@ -66,13 +66,13 @@ Column(
 ){
     ImageWithFavIcon(
         recipeId = recipe.recipeId,
-        imageUrl = recipe.imageUrl,
+        imageUrl = recipe.thumbnail_url,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = {},
         cardFormat = CardFormats.LANDSCAPE
     )
     Text(
-        text = recipe.title ,
+        text = recipe.name ,
         fontSize = 20.sp,
         modifier = Modifier.padding(
             top = 16.dp,

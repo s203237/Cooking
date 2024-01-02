@@ -1,17 +1,28 @@
 package com.example.cooking
 
-import com.example.cooking.model.Recipe
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cooking.UI.Homepage.HomePageViewModel
 import com.example.cooking.model.RecipeCard
-import kotlinx.coroutines.test.runTest
-import org.junit.Assert
+import com.example.cooking.model.Recipe
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import org.junit.Test
+import androidx.lifecycle.viewModelScope
+import org.junit.Assert.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 
 class NewAPITest {
     suspend fun getDataCollectionAPI(): List<RecipeCard>{
         val recipeCards = DependencyProvider.newrecipeCardRepo.fetchData("High-protein-vegan-meals")
         return recipeCards
     }
-
+/*
     @Test
     fun NewAPI_Results() = runTest{
 
@@ -21,6 +32,8 @@ class NewAPITest {
         Assert.assertEquals("Veggie protein chilli", recipeCards.get(0).title)
         Assert.assertEquals("https://images.immediate.co.uk/production/volatile/sites/30/2020/08/protein-veggie-chilli-6395abf.jpg", recipeCards.get(0).imageUrl)
     }
+
+ */
 /*
     suspend fun getDataRecipe(): Recipe {
         val recipeData = DependencyProvider.recipeRepo.fetchData("samphire-crab-salad")

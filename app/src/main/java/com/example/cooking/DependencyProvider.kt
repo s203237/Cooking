@@ -16,6 +16,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -69,10 +70,22 @@ object DependencyProvider {
 
 
 
+
+    val apiKeyInterceptor = Interceptor { chain ->
+        val request = chain.request().newBuilder()
+            .addHeader("X-RapidAPI-Key", "153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
+            .build()
+        chain.proceed(request)
+    }
+
+    val newclient = OkHttpClient.Builder()
+        .addInterceptor(apiKeyInterceptor)
+        .build()
+
     val newapi2 = Retrofit.Builder() // Create retrofit builder.
         .baseUrl("https://tasty.p.rapidapi.com/") // Base url for the api has to end with a slash.
         .addConverterFactory(GsonConverterFactory.create()) // Use GSON converter for JSON to POJO object mapping.
-        .client(client) // Here we set the custom OkHttp client we just created.
+        .client(newclient) // Here we set the custom OkHttp client we just created.
         .build()
     private val newapiService2 = newapi2.create(ApiService::class.java)
 
@@ -84,11 +97,12 @@ object DependencyProvider {
             }.asConverterFactory("application/json".toMediaType())
         )
         .baseUrl("https://tasty.p.rapidapi.com/")
+        .client(newclient)
         .build()
 
     private val newapiService = retrofit2.create(ApiService::class.java)
 
-    val newrecipeCardRepo: RecipeDataRepoNew<List<RecipeCard>> = RecipeCardsRepoNew(newapiService2)
+    val newrecipeCardRepo: RecipeDataRepoNew<List<RecipeCard>> = RecipeCardsRepoNew(newapiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

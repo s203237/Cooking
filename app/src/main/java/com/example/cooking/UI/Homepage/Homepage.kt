@@ -143,16 +143,16 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
 //            )
             ImageWithFavIcon(
                 recipeId = recipe.recipeId,
-                imageUrl = recipe.imageUrl,
+                imageUrl = recipe.thumbnail_url,
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked = {},
                 cardFormat = CardFormats.SQUARE
             )
         }
-        val recipeTitle = recipe.title
+        val recipeTitle = recipe.name
         println("this is the recipe title: $recipeTitle")
         Text(
-            text = recipe.title,
+            text = recipe.name,
             fontSize = 20.sp,
             modifier = Modifier
                 .padding(10.dp)
