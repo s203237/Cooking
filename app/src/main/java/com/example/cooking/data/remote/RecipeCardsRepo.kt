@@ -49,7 +49,7 @@ class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<Recipe
     private val apiService = apiService
     override suspend fun fetchData(query: String): List<RecipeCard> {
         try {
-            val recipeCollection = apiService.fetchRecipeList(query)
+            val recipeCollection = apiService.fetchRecipeCollection(query)
             return recipeCollection.results
         }
         catch (e : IOException) {

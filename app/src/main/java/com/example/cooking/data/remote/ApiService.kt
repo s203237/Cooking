@@ -31,8 +31,6 @@ interface ApiService {
         @Query("tags") tag: String = "vegan"
     ): RecipeCollection
 
-//    @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
-//    suspend fun fetchRecipeById(@Path("recipeId") recipeId: String): Recipe
     @GET("recipes/get-more-info")
     suspend fun fetchRecipeById(
         @Query("id") recipeId: String

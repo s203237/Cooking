@@ -60,7 +60,7 @@ object DependencyProvider {
 //    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService2)
 
-    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
+//    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
 
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
 
@@ -100,6 +100,7 @@ object DependencyProvider {
 
     val newrecipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(newapiService)
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(newapiService)
+    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(newapiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
