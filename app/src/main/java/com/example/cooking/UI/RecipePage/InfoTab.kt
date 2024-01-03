@@ -25,6 +25,7 @@ import com.example.cooking.UI.SharedComponents.CustomHeading1
 import com.example.cooking.UI.SharedComponents.CustomHeading2
 import com.example.cooking.UI.SharedComponents.CustomTitle
 import com.example.cooking.data.RecipeData
+import com.example.cooking.model.Component
 import com.example.cooking.model.Recipe
 import kotlin.math.roundToInt
 
@@ -76,7 +77,13 @@ fun InfoTab(recipe: Recipe) {
             )
 
             CustomHeading1(heading = "ingredients")
-            BulletList(list = recipe.ingredients)
+
+            val ingrList = if(recipe.sections.isNotEmpty()){
+                recipe.sections[0].components
+            }else{
+                emptyList()
+            }
+            BulletList(list = ingrList)
         }
     }
 }
@@ -97,7 +104,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             icon1 = painterResource(id = R.drawable.outline_timer_24),
             infoType1 = "PREP", infoVal1 = recipe.prep_time_minutes.toString(),
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
-            infoType2 = "COOK", infoVal2 = recipe.cook_time_minutes.toString()
+            infoType2 = "COOK", infoVal2 = recipe.id.toString()
 
         )
 
@@ -191,9 +198,9 @@ private fun DisplayRating(rating: Float) {
 }
 
 @Composable
-private fun BulletList(list: List<String>) {
+private fun BulletList(list: List<Component>) {
     list.forEach { item ->
-        Text(text =  "• $item",
+        Text(text =  "• ${item.raw_text}",
             fontSize = 16.sp,
         )
     }
