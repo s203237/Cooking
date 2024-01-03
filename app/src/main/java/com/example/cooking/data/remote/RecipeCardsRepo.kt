@@ -28,8 +28,7 @@ import java.net.UnknownHostException
  *
  *   Similar explanation for class 'RecipeCardsRepoSearch' and functions 'fetchData(query: String)'
  */
-class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
-    private val apiService = apiService
+class RecipeCardsRepo(private val apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     override suspend fun fetchData(collectionName: String): List<RecipeCard> {
 
         try {
@@ -47,9 +46,9 @@ class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>>
 }
 class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
-    override suspend fun fetchData(query: String): List<RecipeCard> {
+    override suspend fun fetchData(q: String): List<RecipeCard> {
         try {
-            val recipeCollection = apiService.fetchRecipeCollection(query)
+            val recipeCollection = apiService.fetchRecipeCollection(q)
             return recipeCollection.results
         }
         catch (e : IOException) {

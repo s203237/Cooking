@@ -37,7 +37,7 @@ object DependencyProvider {
     }
     val client = createBuilder()
     val api2 = Retrofit.Builder() // Create retrofit builder.
-    .baseUrl("https://bbc-good-food-api.p.rapidapi.com/") // Base url for the api has to end with a slash.
+    .baseUrl("https://tasty.p.rapidapi.com/") // Base url for the api has to end with a slash.
     .addConverterFactory(GsonConverterFactory.create()) // Use GSON converter for JSON to POJO object mapping.
     .client(client) // Here we set the custom OkHttp client we just created.
     .build()
@@ -49,7 +49,7 @@ object DependencyProvider {
                 ignoreUnknownKeys = true
             }.asConverterFactory("application/json".toMediaType())
         )
-        .baseUrl("https://bbc-good-food-api.p.rapidapi.com/")
+        .baseUrl("https://tasty.p.rapidapi.com/")
         .build()
 
     private val apiService = retrofit.create(ApiService::class.java)
@@ -57,10 +57,10 @@ object DependencyProvider {
 
     //private val mockapiService = MockApiService()
 
-//    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
+    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService2)
 
-//    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
+    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
 
     val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
 
@@ -69,7 +69,7 @@ object DependencyProvider {
 
     val apiKeyInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("X-RapidAPI-Key", "153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
+            .addHeader("X-RapidAPI-Key", "7f5a69bf50mshb2f0787d9ceb37ep13962ejsnda15f88a28c5")
             .build()
         chain.proceed(request)
     }
@@ -99,8 +99,6 @@ object DependencyProvider {
     private val newapiService = retrofit2.create(ApiService::class.java)
 
     val newrecipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(newapiService)
-    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(newapiService)
-    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(newapiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
