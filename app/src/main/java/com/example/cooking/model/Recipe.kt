@@ -47,12 +47,13 @@ data class Recipe(
     val name: String = "Default title",
     val thumbnail_url: String = "",
     val thumbnail_alt_text: String = "Default description",
-    val author: String = "Default author", //TODO: need rework auther=credits
+//    val author: String = "Default author", //TODO: need rework auther=credits
+    val credits: List<Author> = listOf(),
     val prep_time_minutes: Int? = 0, //Both prep time and cook time can be null
     val cook_time_minutes: Int? = 0,
     val difficulty: String = "Default difficulty", //TODO: look at this maybe not working with this API
     val num_servings: Int = 0,
-    val user_ratings: TestingScore = TestingScore(), //TODO: score is between 0 and 1
+    val user_ratings: Score = Score(), //TODO: score is between 0 and 1
     val description: String = "Default description",
     val ingredients: List<String> = emptyList(), //TODO: This need to be implemented
     val steps: Map<String,String> = emptyMap() //TODO: need rework
@@ -75,8 +76,11 @@ data class TimeToCook (
     )
 
 @Serializable
-data class TestingScore(
-
+data class Score(
     val score: Float = 0F
+)
 
+@Serializable
+data class Author(
+    val name: String = ""
 )

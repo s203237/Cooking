@@ -61,7 +61,13 @@ fun InfoTab(recipe: Recipe) {
         ) {
             DisplayRecipeInfo(recipe = recipe)
             CustomTitle(title = recipe.name, textAlign = TextAlign.Center)
-            CustomHeading2(heading = recipe.author, textAlign = TextAlign.Center)
+
+            val headingText = if(recipe.credits.isNotEmpty()){
+                recipe.credits[0].name
+            }else{
+                "Default Name"
+            }
+            CustomHeading2(heading = headingText, textAlign = TextAlign.Center)
             CustomHeading1(heading = "description")
             Text(
                 text = recipe.description,

@@ -1,6 +1,7 @@
 package com.example.cooking.data
 
 import com.example.cooking.R
+import com.example.cooking.model.Author
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.TimeToCook
 
@@ -15,7 +16,7 @@ class RecipeData {
                 name = "Pear And Rainbow",
                 thumbnail_url = "$fileUrl/peach.png",
                 thumbnail_alt_text = "3d rendering of a pear with a rainbow over it.",
-                author = "Melissa Woo"/*,
+                credits = listOf(Author("Melissa Woo"))/*,
                 timeToCook = TimeToCook("5 min", "60 min"),
                 difficulty = "Medium",
                 servingSize = 4,
@@ -28,7 +29,7 @@ class RecipeData {
                 name = "Peach",
                 thumbnail_url = "$fileUrl/pear.png",
                 thumbnail_alt_text = "3d rendering of a close-up of a peach with googly eyes",
-                author = "Melissa Woo"/*,
+                credits = listOf(Author("Melissa Woo"))/*,
                 timeToCook = TimeToCook("10 min", "1h30 min"),
 
         servingSize = 10,
@@ -42,7 +43,7 @@ class RecipeData {
                 name = "Spicy Sichuan Boiled Tofu",
                 thumbnail_url = "$fileUrl/tofu.jpg",
                 thumbnail_alt_text = "Picture of shuizhu sichuan boiled tofu dish",
-                author = "Sarah (Woks of Life)"/*,
+                credits = listOf(Author("Sarah (Woks of Life)"))/*,
                 timeToCook = TimeToCook("40 min", "30 min"),
 
         servingSize = 4,
