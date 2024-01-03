@@ -89,9 +89,10 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
 
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_timer_24),
-            infoType1 = "PREP", infoVal1 = recipe.cook_time.prepTime,
+            infoType1 = "PREP", infoVal1 = recipe.prep_time_minutes.toString(),
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
-            infoType2 = "COOK", infoVal2 = recipe.cook_time.cookTime
+            infoType2 = "COOK", infoVal2 = recipe.cook_time_minutes.toString()
+
         )
 
         val diff = recipe.difficulty
@@ -103,7 +104,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             infoType2 = "SERVING SIZE", infoVal2 = serv
         )
 
-        DisplayRating(recipe.score);
+        DisplayRating(recipe.user_ratings.score);
     }
 }
 @Composable
@@ -154,6 +155,7 @@ private fun formatTime(minutes: Int): String {
 }
 @Composable
 private fun DisplayRating(rating: Float) {
+    println("Rating: " + rating)
     val starCount = 5
     val filledStar: Painter = painterResource(id = R.drawable.baseline_star_24)
     val halfStar: Painter = painterResource(id = R.drawable.baseline_star_half_24)
