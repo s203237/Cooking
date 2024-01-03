@@ -15,8 +15,8 @@ data class Recipe(
     val num_servings: Int = 0,
     val user_ratings: Score = Score(), //TODO: score is between 0 and 1
     val description: String = "Default description",
-    val sections: List<Section> = listOf(), //TODO: This need to be implemented
-    val instructions: List<Instructions> = listOf() //TODO: need rework
+    val sections: List<Section> = listOf(),
+    val instructions: List<Instructions> = listOf()
 )
 
 @Serializable
