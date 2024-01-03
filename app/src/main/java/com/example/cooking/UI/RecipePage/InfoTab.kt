@@ -104,8 +104,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             icon1 = painterResource(id = R.drawable.outline_timer_24),
             infoType1 = "PREP", infoVal1 = recipe.prep_time_minutes.toString(),
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
-            infoType2 = "COOK", infoVal2 = recipe.id.toString()
-
+            infoType2 = "COOK", infoVal2 = recipe.cook_time_minutes.toString()
         )
 
         val diff = recipe.difficulty
