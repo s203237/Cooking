@@ -15,7 +15,6 @@
  */
 package com.example.cooking.UI.RecipeList
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,7 +23,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +34,7 @@ import com.example.cooking.data.RecipeData
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
     Column (
        /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
@@ -58,14 +56,14 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit){
 
 Column(
     modifier = Modifier
         .fillMaxWidth()
 ){
     ImageWithFavIcon(
-        recipeId = recipe.recipeId,
+        recipeId = recipe.id,
         imageUrl = recipe.thumbnail_url,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = {},

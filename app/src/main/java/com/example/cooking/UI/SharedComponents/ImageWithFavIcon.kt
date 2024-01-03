@@ -61,9 +61,9 @@ fun DisplayFavButton() {
 @Composable
 fun ImageWithFavIcon(
 
-    recipeId: String,
+    recipeId: Int,
     imageUrl: String,
-    onNavigateToRecipe: (String) -> Unit,
+    onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (String) -> Unit,
     cardFormat: CardFormats
 ) {
@@ -112,7 +112,7 @@ fun ImageWithFavIcon(
 @Composable
 fun previewImageWithFavIconPortrait() {
     ImageWithFavIcon(
-        "spiced-lentil-spinach-pies",
+        0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
@@ -124,7 +124,7 @@ fun previewImageWithFavIconPortrait() {
 @Composable
 fun previewImageWithFavIconLandscape() {
     ImageWithFavIcon(
-        "spiced-lentil-spinach-pies",
+        0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
@@ -136,7 +136,7 @@ fun previewImageWithFavIconLandscape() {
 @Composable
 fun previewImageWithFavIconSqr() {
     ImageWithFavIcon(
-        "spiced-lentil-spinach-pies",
+        0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},

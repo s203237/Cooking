@@ -57,7 +57,7 @@ object DependencyProvider {
 
     //private val mockapiService = MockApiService()
 
-    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
+//    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService2)
 
     val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService2)
@@ -99,6 +99,7 @@ object DependencyProvider {
     private val newapiService = retrofit2.create(ApiService::class.java)
 
     val newrecipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(newapiService)
+    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(newapiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

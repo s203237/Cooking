@@ -25,7 +25,7 @@ import androidx.compose.runtime.LaunchedEffect
  * @see RecipeList
  */
 @Composable
-fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> Unit) {
+fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Unit) {
     Log.v("CollectionName Trace", "RecipeId in viewModel.launch: $collectionName")
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect(key1 = collectionName){
@@ -38,7 +38,7 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> 
     )
 }
 @Composable
-fun ListAllRecipes(query:String, onNavigateToRecipe: (String) -> Unit) {
+fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
 
     Log.v("Recipes Trace", "RecipeId in viewModel.launch: $query")
     val viewModel: RecipeListViewModel = viewModel()

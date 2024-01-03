@@ -35,7 +35,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun SearchBar(onNavigateToRecipe:(String)-> Unit) {
+fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
     val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
     if(onSearching !=true){

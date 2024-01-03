@@ -12,9 +12,9 @@ class RecipeData {
 
         return listOf(
             Recipe(
-                title = "Pear And Rainbow",
-                imageUrl = "$fileUrl/peach.png",
-                imageDescription = "3d rendering of a pear with a rainbow over it.",
+                name = "Pear And Rainbow",
+                thumbnail_url = "$fileUrl/peach.png",
+                thumbnail_alt_text = "3d rendering of a pear with a rainbow over it.",
                 author = "Melissa Woo"/*,
                 timeToCook = TimeToCook("5 min", "60 min"),
                 difficulty = "Medium",
@@ -25,9 +25,9 @@ class RecipeData {
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
             */),
             Recipe(
-                title = "Peach",
-                imageUrl = "$fileUrl/pear.png",
-                imageDescription = "3d rendering of a close-up of a peach with googly eyes",
+                name = "Peach",
+                thumbnail_url = "$fileUrl/pear.png",
+                thumbnail_alt_text = "3d rendering of a close-up of a peach with googly eyes",
                 author = "Melissa Woo"/*,
                 timeToCook = TimeToCook("10 min", "1h30 min"),
 
@@ -39,9 +39,9 @@ class RecipeData {
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
             */),
             Recipe(
-                title = "Spicy Sichuan Boiled Tofu",
-                imageUrl = "$fileUrl/tofu.jpg",
-                imageDescription = "Picture of shuizhu sichuan boiled tofu dish",
+                name = "Spicy Sichuan Boiled Tofu",
+                thumbnail_url = "$fileUrl/tofu.jpg",
+                thumbnail_alt_text = "Picture of shuizhu sichuan boiled tofu dish",
                 author = "Sarah (Woks of Life)"/*,
                 timeToCook = TimeToCook("40 min", "30 min"),
 

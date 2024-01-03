@@ -60,11 +60,11 @@ fun InfoTab(recipe: Recipe) {
                 )
         ) {
             DisplayRecipeInfo(recipe = recipe)
-            CustomTitle(title = recipe.title, textAlign = TextAlign.Center)
+            CustomTitle(title = recipe.name, textAlign = TextAlign.Center)
             CustomHeading2(heading = recipe.author, textAlign = TextAlign.Center)
             CustomHeading1(heading = "description")
             Text(
-                text = recipe.recipeDescription,
+                text = recipe.description,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
@@ -89,13 +89,13 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
 
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_timer_24),
-            infoType1 = "PREP", infoVal1 = recipe.timeToCook.prepTime,
+            infoType1 = "PREP", infoVal1 = recipe.cook_time.prepTime,
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
-            infoType2 = "COOK", infoVal2 = recipe.timeToCook.cookTime
+            infoType2 = "COOK", infoVal2 = recipe.cook_time.cookTime
         )
 
         val diff = recipe.difficulty
-        val serv = recipe.servingSize.toString()
+        val serv = recipe.num_servings.toString()
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_thermostat_24),
             infoType1 = "DIFFICULTY", infoVal1 = diff,
@@ -103,7 +103,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             infoType2 = "SERVING SIZE", infoVal2 = serv
         )
 
-        DisplayRating(recipe.rating);
+        DisplayRating(recipe.score);
     }
 }
 @Composable

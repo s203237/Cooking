@@ -1,7 +1,5 @@
 package com.example.cooking.model
 
-import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,7 +9,7 @@ data class RecipeCollection(
 )
 @Serializable
 data class RecipeCard(
-    val recipeId: String = "defaultID",
+    val id: Int = 0,
     val name: String = "defaultName",
     val thumbnail_url: String = ""
 )

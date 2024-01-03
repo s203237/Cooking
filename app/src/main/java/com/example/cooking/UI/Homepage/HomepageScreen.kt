@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 
 @Composable
-fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
+fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
 
     val viewModel: HomePageViewModel = viewModel()
 
