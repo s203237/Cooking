@@ -39,6 +39,7 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.data.remote.mock_datasource.RecipeData
+import com.example.cooking.model.ListType
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import kotlin.math.min
@@ -65,6 +66,18 @@ fun scrollableList(
             modifier = modifier,
             state = listState
         ) {
+            items(listOfCollections) { collection ->
+                when (collection.type) {
+                    ListType.CARD -> RecipeCard()
+                    ListType.HORIZONTAL -> RecipeCardRow(collection = collection, onNavigateToRecipe = onNavigateToRecipe)
+                    ListType.VERTICAL -> RecipeCardList(
+                        collection = collection,
+                        listSize = 3,
+                        onNavigateToRecipe = onNavigateToRecipe
+                    )
+                }
+            }
+            /*
             //listOfCollections.forEach { Log.v("Homepage UI", it.collectionName) }
             item {
                 UppercaseHeadingMedium(heading = "daily pick")
@@ -76,6 +89,13 @@ fun scrollableList(
                 )
 
             }
+
+            items(listOfCollections) { collection ->
+                RecipeCardRow(collection = collection, onNavigateToRecipe = onNavigateToRecipe)
+
+            }
+
+
             item{
                 RecipeCardRow(collection = RecipeCollection()/*listOfCollections[0]*/, onNavigateToRecipe = onNavigateToRecipe)
             }
@@ -109,7 +129,7 @@ fun scrollableList(
                 RecipeCardRow(collection = RecipeCollection()/*listOfCollections[4]*/, onNavigateToRecipe = onNavigateToRecipe)
             }
 
-
+*/
 
         }
 

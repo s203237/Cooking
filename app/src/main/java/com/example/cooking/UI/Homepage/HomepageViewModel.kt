@@ -40,47 +40,20 @@ class HomePageViewModel: ViewModel() {
     //val recipeCollections = _recipeCollections.asStateFlow()
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.v("Homepage size _recipeCollections", _recipeCollections.value.size.toString())
-            Log.v("Homepage size recipeCollections", recipeCollections.value.size.toString())
-
-            val recipeCollections = mutableListOf<RecipeCollection>()
-            Log.v("Homepage coll size before fetch", recipeCollections.size.toString())
-
-            for (collectionName in collections) {
-                val collection = DependencyProvider.recipeCollectionRepo.fetchData(collectionName)
-                recipeCollections.add(collection)
-                Log.v("Homepage in forloop", recipeCollections[0].collectionName)
-
-            }
-
-            Log.v("Homepage coll size after fetch", recipeCollections.size.toString())
-
-            /*collections.forEach {
-                DependencyProvider.recipeCollectionRepo.fetchData(it)
-
-            }
             val recipeCollections : List<RecipeCollection> = collections.map{
                 DependencyProvider.recipeCollectionRepo.fetchData(it)
-            }*/
+            }
 
-            Log.v("HomepageVM", recipeCollections[0].collectionName)
+                // recipeCollections.forEach { it.type = ListType.HORIZONTAL }
+            val listTypes = HomepageCuration().loadListTypes()
+            listTypes.map {
+                recipeCollections
+            }
+            recipeCollections.forEach {  Log.v("HomepageVM Type", it.type.toString()) }
 
 
             _recipeCollections.value = recipeCollections
-            /*val recipeCollection1 = DependencyProvider.recipeCollectionRepo.fetchData(collections[0])
-            val recipeCollection2 = DependencyProvider.recipeCollectionRepo.fetchData(collections[1])
-            val recipeCollection3 = DependencyProvider.recipeCollectionRepo.fetchData(collections[2])
-            val recipeCollection4 = DependencyProvider.recipeCollectionRepo.fetchData(collections[3])
-            val recipeCollection5 = DependencyProvider.recipeCollectionRepo.fetchData(collections[4])
-*/
             _dailyRecipe.value = getDailyRecipe(recipeCollections[size-1])
-/*
-            _recipeCollection1.value = recipeCollection1
-            _recipeCollection2.value = recipeCollection2
-            _recipeCollection3.value = recipeCollection3
-            _recipeCollection4.value = recipeCollection4
-            _recipeCollection5.value = recipeCollection5
-*/
         }
     }
 }
