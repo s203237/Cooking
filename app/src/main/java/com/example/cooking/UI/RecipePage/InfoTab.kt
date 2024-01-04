@@ -174,9 +174,9 @@ private fun DisplayRating(rating: Float) {
     val borderStar: Painter = painterResource(id = R.drawable.baseline_star_border_24)
 
     //Scale rating(0to1) to fit five stars with halfstars
-    val scaledScore = (rating*starCount).roundToInt()
-    val fullStars = scaledScore/2
-    val halfStars = scaledScore%2
+    val scaledScore = (rating*starCount*2).roundToInt()/2f
+    val fullStars = scaledScore.toInt()
+    val halfStars = if(scaledScore - fullStars >= 0.5) 1 else 0
     val emptyStars = starCount - fullStars - halfStars
 
     Row( modifier = Modifier
