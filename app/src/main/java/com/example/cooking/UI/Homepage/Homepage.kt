@@ -1,6 +1,7 @@
 package com.example.cooking.UI.Homepage
 
 //import com.example.cooking.Data.Recipe
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -29,7 +30,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -76,59 +76,6 @@ fun scrollableList(
                     )
                 }
             }
-            /*
-            //listOfCollections.forEach { Log.v("Homepage UI", it.collectionName) }
-            item {
-                UppercaseHeadingMedium(heading = "daily pick")
-                Spacer(Modifier.height(16.dp))
-                RecipeRowItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    recipe = dailyRecipe,
-                    onNavigateToRecipe = onNavigateToRecipe
-                )
-
-            }
-
-            items(listOfCollections) { collection ->
-                RecipeCardRow(collection = collection, onNavigateToRecipe = onNavigateToRecipe)
-
-            }
-
-
-            item{
-                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[0]*/, onNavigateToRecipe = onNavigateToRecipe)
-            }
-
-            item {
-                RecipeCardList(
-                    collection = RecipeCollection()/*listOfCollections[1]*/,
-                    listSize = 3,
-                    onNavigateToRecipe = onNavigateToRecipe
-                )
-            }
-
-            item{
-                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[2]*/, onNavigateToRecipe = onNavigateToRecipe)
-            }
-
-            item{
-                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[3]*/, onNavigateToRecipe = onNavigateToRecipe)
-            }
-
-            item {
-                RecipeRowItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    recipe = dailyRecipe,
-                    onNavigateToRecipe = onNavigateToRecipe
-                )
-
-            }
-
-            item{
-                RecipeCardRow(collection = RecipeCollection()/*listOfCollections[4]*/, onNavigateToRecipe = onNavigateToRecipe)
-            }
-
-*/
 
         }
 
@@ -149,6 +96,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (I
         modifier = Modifier
             .fillMaxWidth()
     ) {
+        Log.v("Homepage Row Item", recipe.toString())
         Card(
             modifier = modifier
         ){
@@ -226,6 +174,7 @@ fun RecipeCardList(
 }
 @Composable
 fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
+    Log.v("Homepage List Item", recipeCard.toString())
     Row(
         modifier = Modifier
             .fillMaxWidth()

@@ -4,11 +4,11 @@ import com.example.cooking.model.ListType
 
 class HomepageCuration {
     private val collectionNames = listOf(
-        "party",
-        "vegetarian-sandwich-recipes",
+        "soup",
         "pasta",
-        "vegetarian-dinner",
-        "traybake-recipes"
+        "salad",
+        "under_30_minutes",
+        "dessert"
     )
 
     private val collectionListTypes = listOf (

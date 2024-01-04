@@ -30,7 +30,7 @@ class RecipeCollectionRepo(apiService: ApiService) : RecipeDataRepo<RecipeCollec
     override suspend fun fetchData(collectionName: String): RecipeCollection {
 
         try {
-            return apiService.fetchRecipeCollection(collectionName)
+            return apiService.fetchRecipeCollection(searchTerm = collectionName)
         } catch (e: IOException) {
             println("It broke :((( ${e.message}")
         } catch (e: HttpException) {

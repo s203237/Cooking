@@ -28,7 +28,7 @@ interface ApiService {
     @GET("recipes/list")
     suspend fun fetchRecipeCollection(
         @Query("q") searchTerm: String,
-        @Query("tags") tag: String = "vegan"
+        @Query("tags") tag: String = "vegetarian"
     ): RecipeCollection
 
     @GET("recipes/get-more-info")
