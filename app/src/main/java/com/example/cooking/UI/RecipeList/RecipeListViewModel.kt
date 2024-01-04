@@ -35,8 +35,9 @@ class RecipeListViewModel: ViewModel() {
 
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
+
     private val _collectionName = MutableStateFlow("")
-    private val query = MutableStateFlow("")
+   // private val query = MutableStateFlow("")
 
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
@@ -46,9 +47,10 @@ class RecipeListViewModel: ViewModel() {
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.v("RecipeList VM launch", recipeCards.value.toString())
             _collectionName.collect{newCollectionName ->
                 Log.v("CollectionName Trace", "CollectionName in viewModel.launch: $newCollectionName")
-                val recipeCards = DependencyProvider.recipeCardRepo.fetchData(_collectionName.value)
+                val recipeCards = DependencyProvider.recipeCardRepo.fetchData(newCollectionName/*_collectionName.value*/)
                 _recipeCards.value = recipeCards
             }
 
@@ -71,4 +73,5 @@ class RecipeListViewModel: ViewModel() {
         }
     }
 */
+
 }

@@ -63,7 +63,7 @@ import kotlinx.coroutines.flow.StateFlow
  * @see NavHost
  * @see OnBoardingPage
  * @see AccountCreationPage
- * @see PreviewSearchBar
+ * @see SearchBar
  * @see ListAllRecipesScreen
  * @see ProfileBox
  * @see DisplayRecipeScreen
@@ -183,7 +183,7 @@ fun AppNavigation(){
             ) { paddingValues ->
                 NavHost(
                     navController = navController,
-                    startDestination = Screens.HomeScreen.name,
+                    startDestination = Screens.SearchScreen.name,
                     modifier = Modifier
                         .padding(paddingValues)
                 ) {
@@ -224,9 +224,12 @@ fun AppNavigation(){
                     composable(route = Screens.SearchScreen.name) {
                         displayBottomBar = true
                         displayTopBar = true
-                        SearchBar(onNavigateToRecipe = { recipeId ->
+                        SearchBar(onSearch = { query ->
+                            navController.navigate(route = "Screens.RecipeList.name/$query"
+                            )
+                        }/*onNavigateToRecipe = { recipeId ->
                             navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                            }
+                            }*/
                         )
                         //PreviewSearchBar()
                         //printBackStack(navController.currentBackStack, "Preview: ")
@@ -237,10 +240,11 @@ fun AppNavigation(){
                     ) {//backStackEntry ->
                         // val collectionName = backStackEntry.arguments?.getString("collectionName")
                         // if(collectionName != null) {
-                        ListAllRecipesScreen("easy-vegetarian-recipes",
+                        ListAllRecipesScreen("salad",
                             onNavigateToRecipe = { recipeId ->
                                 navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                             })
+                        Log.v("In favs", "salad")
                         displayBottomBar = true
                         displayTopBar = true
                         //printBackStack(navController.currentBackStack, "Favourites: ")
@@ -250,12 +254,13 @@ fun AppNavigation(){
                     }
 
                     composable(
-                        route = Screens.RecipeList.name,
+                        route = "Screens.RecipeList.name/{collectionName}",
                         arguments = listOf(navArgument("collectionName") {
                             type = NavType.StringType
                         })
                     ) { backStackEntry ->
                         val collectionName = backStackEntry.arguments?.getString("collectionName")
+                        Log.v("Navigation", "In RecipeList, coll name : $collectionName")
                         if (collectionName != null) {
                             ListAllRecipesScreen(collectionName,
                                 onNavigateToRecipe = { recipeId ->

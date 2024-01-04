@@ -1,10 +1,9 @@
 package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
-import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
-import com.example.cooking.data.remote.RecipeCardsRepoSearch
 import com.example.cooking.data.remote.RecipeCollectionRepo
+import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
@@ -48,7 +47,7 @@ object DependencyProvider {
 
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
-    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
+   // val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
 
     val recipeCollectionRepo : RecipeDataRepo<RecipeCollection> = RecipeCollectionRepo(apiService)
 }

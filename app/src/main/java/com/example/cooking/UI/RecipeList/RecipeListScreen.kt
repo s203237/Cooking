@@ -26,12 +26,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
  */
 @Composable
 fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Unit) {
-    Log.v("CollectionName Trace", "RecipeId in viewModel.launch: $collectionName")
+    Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect(key1 = collectionName){
         viewModel.updateCollectionName(collectionName)
     }
     val recipes by viewModel.recipeCards.collectAsState()
+    Log.v("Recipe List Screen", recipes.toString())
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,

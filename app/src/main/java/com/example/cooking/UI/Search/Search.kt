@@ -15,12 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.cooking.DependencyProvider
-import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.model.RecipeCard
 
 
 @Composable
-fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
+fun SearchBar(onSearch:(String) -> Unit/*onNavigateToRecipe:(Int)-> Unit*/) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
     val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
     if(onSearching !=true){
@@ -37,10 +36,10 @@ fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
                 onQueryChange = { newQuery ->
                     setSearchQuery(newQuery)
                 },
-                onSearch = { query ->
+                onSearch = onSearch/*{ query ->
                     setOnSearchValue(true)
 
-                },
+                },*/
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -58,17 +57,17 @@ fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
         }
 
     } else {
-        ListAllRecipesScreen(collectionName = searchQuery, onNavigateToRecipe = onNavigateToRecipe)
+       // ListAllRecipesScreen(collectionName = searchQuery, onNavigateToRecipe = onNavigateToRecipe)
         //ListAllRecipes(query = searchQuery, onNavigateToRecipe = onNavigateToRecipe
         // )
     }
 
 }
 
-suspend fun callRecipeList(query: String): List<RecipeCard> {
+/*suspend fun callRecipeList(query: String): List<RecipeCard> {
     val listRepoCard = DependencyProvider.recipeCardsRepoSearch.fetchData(query)
     return listRepoCard
-}
+}*/
 
 /*@Preview
 @Composable
