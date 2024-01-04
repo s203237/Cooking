@@ -1,4 +1,4 @@
-package com.example.cooking.data
+package com.example.cooking.UI.Homepage
 
 import com.example.cooking.model.ListType
 
@@ -12,11 +12,9 @@ class HomepageCuration {
     )
 
     private val collectionListTypes = listOf (
-        //ListType.CARD,
         ListType.VERTICAL,
         ListType.HORIZONTAL,
         ListType.HORIZONTAL,
-        //ListType.CARD,
         ListType.VERTICAL,
         ListType.HORIZONTAL
 
