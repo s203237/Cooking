@@ -1,8 +1,9 @@
-package com.example.cooking.data.remote.mock_datasource
+package com.example.cooking.data
 
+import com.example.cooking.R
+import com.example.cooking.model.Author
 import com.example.cooking.model.Recipe
-import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
+import com.example.cooking.model.TimeToCook
 
 class RecipeData {
     fun loadRecipes(): List<Recipe> {
@@ -12,10 +13,10 @@ class RecipeData {
 
         return listOf(
             Recipe(
-                title = "Pear And Rainbow",
-                imageUrl = "$fileUrl/peach.png",
-                imageDescription = "3d rendering of a pear with a rainbow over it.",
-                author = "Melissa Woo"/*,
+                name = "Pear And Rainbow",
+                thumbnail_url = "$fileUrl/peach.png",
+                thumbnail_alt_text = "3d rendering of a pear with a rainbow over it.",
+                credits = listOf(Author("Melissa Woo"))/*,
                 timeToCook = TimeToCook("5 min", "60 min"),
                 difficulty = "Medium",
                 servingSize = 4,
@@ -25,10 +26,10 @@ class RecipeData {
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
             */),
             Recipe(
-                title = "Peach",
-                imageUrl = "$fileUrl/pear.png",
-                imageDescription = "3d rendering of a close-up of a peach with googly eyes",
-                author = "Melissa Woo"/*,
+                name = "Peach",
+                thumbnail_url = "$fileUrl/pear.png",
+                thumbnail_alt_text = "3d rendering of a close-up of a peach with googly eyes",
+                credits = listOf(Author("Melissa Woo"))/*,
                 timeToCook = TimeToCook("10 min", "1h30 min"),
 
         servingSize = 10,
@@ -39,10 +40,10 @@ class RecipeData {
                 steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
             */),
             Recipe(
-                title = "Spicy Sichuan Boiled Tofu",
-                imageUrl = "$fileUrl/tofu.jpg",
-                imageDescription = "Picture of shuizhu sichuan boiled tofu dish",
-                author = "Sarah (Woks of Life)"/*,
+                name = "Spicy Sichuan Boiled Tofu",
+                thumbnail_url = "$fileUrl/tofu.jpg",
+                thumbnail_alt_text = "Picture of shuizhu sichuan boiled tofu dish",
+                credits = listOf(Author("Sarah (Woks of Life)"))/*,
                 timeToCook = TimeToCook("40 min", "30 min"),
 
         servingSize = 4,
@@ -59,38 +60,6 @@ class RecipeData {
             */)
 
 
-        )
-    }
-
-    fun loadRecipeCards(): List<RecipeCard> {
-        return listOf(
-            RecipeCard(),
-            RecipeCard(),
-            RecipeCard(),
-            RecipeCard(),
-            RecipeCard(),
-            RecipeCard(),
-        )
-    }
-
-    fun loadRecipeCollections(): List<RecipeCollection> {
-        val recipeCards = loadRecipeCards()
-        return listOf(
-            RecipeCollection(
-                results = recipeCards
-            ),
-            RecipeCollection(
-                results = recipeCards
-            ),
-            RecipeCollection(
-                results = recipeCards
-            ),
-            RecipeCollection(
-                results = recipeCards
-            ),
-            RecipeCollection(
-                results = recipeCards
-            )
         )
     }
 }

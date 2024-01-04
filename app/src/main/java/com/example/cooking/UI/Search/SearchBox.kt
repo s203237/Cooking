@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
@@ -45,7 +46,7 @@ import androidx.compose.ui.unit.sp
 fun SearchBox(
     query: String,
     onQueryChange: (String) -> Unit,
-    onSearch: () -> Unit,
+    onSearch: (String) -> Unit,
     modifier: Modifier = Modifier,
     leadingIcon: ImageVector = Icons.Outlined.Search
 ) {
@@ -72,7 +73,7 @@ fun SearchBox(
         ),
         keyboardActions = KeyboardActions(
             onSearch = {
-                onSearch()
+                onSearch(query)
             }
         ),
         textStyle = TextStyle(color = Color.Black , fontSize = 22.sp), // Adjust the text color as needed
@@ -101,6 +102,7 @@ fun SearchBox(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .testTag("searchtext")
     )
 }
 

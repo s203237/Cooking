@@ -28,8 +28,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.BackToTop
@@ -46,10 +47,10 @@ import kotlin.math.min
 
 @Composable
 fun scrollableList(
-    modifier: Modifier,
+
     dailyRecipe: RecipeCard,
     listOfCollections: List<RecipeCollection>,
-    onNavigateToRecipe: (String) -> Unit
+    onNavigateToRecipe: (Int) -> Unit
 ) {
 
     val listState = rememberLazyListState()
@@ -60,10 +61,9 @@ fun scrollableList(
         }
     }
 
-
     Surface {
         LazyColumn(
-            modifier = modifier,
+            modifier = Modifier.testTag("homepagescreen"),
             state = listState
         ) {
             items(listOfCollections) { collection ->
@@ -144,7 +144,7 @@ fun scrollableList(
 // HOMEPAGE COMPONENTS
 ///////////////////////////////////////
 @Composable
-fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
+fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "") {
 
     Column(
         modifier = Modifier
@@ -154,17 +154,17 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
             modifier = modifier
         ){
             ImageWithFavIcon(
-                recipeId = recipe.recipeId,
-                imageUrl = recipe.imageUrl,
+                recipeId = recipe.id,
+                imageUrl = recipe.thumbnail_url,
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked = {},
                 cardFormat = CardFormats.SQUARE
             )
         }
-        val recipeTitle = recipe.title
+        val recipeTitle = recipe.name
         println("this is the recipe title: $recipeTitle")
         Text(
-            text = recipe.title,
+            text = recipe.name,
             fontSize = 16.sp,
             modifier = Modifier
                 .width(200.dp)
@@ -190,7 +190,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (S
 }
 
 @Composable
-fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (Int) -> Unit) {
     Spacer(Modifier.height(16.dp))
     UppercaseHeadingMedium(heading = collection.collectionName)
     Spacer(Modifier.height(16.dp))
@@ -212,7 +212,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> 
 fun RecipeCardList(
     collection: RecipeCollection,
     listSize: Int,
-    onNavigateToRecipe: (String) -> Unit
+    onNavigateToRecipe: (Int) -> Unit
 ) {
     val recipeCards = collection.results
     Column {
@@ -226,13 +226,13 @@ fun RecipeCardList(
     }
 }
 @Composable
-fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             //.padding(16.dp)
             .clickable {
-                onNavigateToRecipe(recipeCard.recipeId)
+                onNavigateToRecipe(recipeCard.id)
             },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -244,15 +244,15 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
             verticalAlignment = Alignment.CenterVertically,
         ) {
             RecipeImage(
-                recipeId = recipeCard.recipeId,
-                imageUrl = recipeCard.imageUrl,
+                recipeId = recipeCard.id,
+                imageUrl = recipeCard.thumbnail_url,
                 onNavigateToRecipe = onNavigateToRecipe,
                 cardFormat = CardFormats.SQUARE,
                 sizeFraction = 0.35f
             )
             Spacer(Modifier.width(16.dp))
             Text(
-                text = recipeCard.title,
+                text = recipeCard.name,
                 color = MaterialTheme.colorScheme.onBackground,
                 /*modifier = Modifier
                     .fillMaxWidth(0.3f)*/
@@ -268,39 +268,39 @@ fun RecipeCardListItem(recipeCard: RecipeCard, onNavigateToRecipe: (String) -> U
 ///////////////////////////////////////
 // PREVIEWS
 ///////////////////////////////////////
-@Preview
-@Composable
-fun PreviewscrollableList(){
-
-    val dailyRecipeCard = RecipeCard()
-    val collections = RecipeData().loadRecipeCollections()
-
-    scrollableList(
-        Modifier,
-        dailyRecipe = dailyRecipeCard,
-        listOfCollections = collections,
-        onNavigateToRecipe = {}
-    )
-
-
-}
-
-
-@Preview
-@Composable
-fun PreviewRecipeCardList() {
-    val collections = RecipeData().loadRecipeCollections()
-    RecipeCardList(collection = collections[0], listSize = 3) {}
-}
-
-@Preview
-@Composable
-fun PreviewRecipeCardListItem() {
-    val recipeCard = RecipeCard(
-        recipeId = "miso-butternut-soup",
-        title = "Miso Butternut Soup",
-        imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/09/Miso-and-butternut-soup-efe9277.jpg?quality=90&webp=true&resize=600,545"
-    )
-    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
-}
+//@Preview
+//@Composable
+//fun PreviewscrollableList(){
+//
+//    val dailyRecipeCard = RecipeCard()
+//    val collections = RecipeData().loadRecipeCollections()
+//
+//    scrollableList(
+//        Modifier,
+//        dailyRecipe = dailyRecipeCard,
+//        listOfCollections = collections,
+//        onNavigateToRecipe = {}
+//    )
+//
+//
+//}
+//
+//
+//@Preview
+//@Composable
+//fun PreviewRecipeCardList() {
+//    val collections = RecipeData().loadRecipeCollections()
+//    RecipeCardList(collection = collections[0], listSize = 3) {}
+//}
+//
+//@Preview
+//@Composable
+//fun PreviewRecipeCardListItem() {
+//    val recipeCard = RecipeCard(
+//        recipeId = "miso-butternut-soup",
+//        title = "Miso Butternut Soup",
+//        imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/09/Miso-and-butternut-soup-efe9277.jpg?quality=90&webp=true&resize=600,545"
+//    )
+//    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
+//}
 

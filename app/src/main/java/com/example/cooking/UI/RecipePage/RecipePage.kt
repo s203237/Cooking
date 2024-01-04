@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
@@ -30,17 +31,18 @@ import com.example.cooking.model.Recipe
 @Composable
 fun RecipePage(recipe: Recipe) {
     Column(
-        modifier = Modifier
+        modifier = Modifier.testTag("recipePage")
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
             ImageWithFavIcon(
-                recipeId = recipe.recipeId,
-                imageUrl = recipe.imageUrl,
+                recipeId = recipe.id,
+                imageUrl = recipe.thumbnail_url,
                 {},
                 {},
                 CardFormats.PORTRAIT

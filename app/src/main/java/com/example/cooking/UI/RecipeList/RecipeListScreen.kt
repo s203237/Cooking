@@ -17,15 +17,15 @@ import androidx.compose.runtime.LaunchedEffect
  *
  * The composable performs the following tasks:
  * - Initializes a [RecipeListViewModel] to manage and provide data for the UI.
- * - Uses a [LaunchedEffect] to update the collection name in the view model whenever the
- *   `collectionName` parameter changes.
+ * - Uses a [LaunchedEffect] to update the collection name or search keywords in the view model whenever the
+ *   `collectionName`or "query" parameter changes.
  * - Observes the list of recipe cards from the view model using [collectAsState].
  * - Passes the observed list of recipes to the [RecipeList] composable for display.
  * @see RecipeListViewModel
  * @see RecipeList
  */
 @Composable
-fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> Unit) {
+fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Unit) {
     Log.v("CollectionName Trace", "RecipeId in viewModel.launch: $collectionName")
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect(key1 = collectionName){
@@ -36,5 +36,18 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (String) -> 
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,
     )
+}
+@Composable
+fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
 
+    Log.v("Recipes Trace", "RecipeId in viewModel.launch: $query")
+    val viewModel: RecipeListViewModel = viewModel()
+    LaunchedEffect( key1 = query){
+        viewModel.updateSearchKey(query)
+    }
+    val recipes by viewModel.recipeCards.collectAsState()
+    RecipeList(
+        recipes = recipes,
+        onNavigateToRecipe = onNavigateToRecipe,
+    )
 }

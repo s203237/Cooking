@@ -1,6 +1,5 @@
 package com.example.cooking.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
@@ -23,10 +22,7 @@ data class RecipeCollection(
 )
 @Serializable
 data class RecipeCard(
-    val recipeId: String = "defaultId",
-    @SerialName("recipeName")
-    val title: String = "Default title",
-    @SerialName("imageSrc")
-    val imageUrl: String = "",
-    //val imageDescription: String, TODO get image description
+    val id: Int = 0,
+    val name: String = "defaultName",
+    val thumbnail_url: String = ""
 )

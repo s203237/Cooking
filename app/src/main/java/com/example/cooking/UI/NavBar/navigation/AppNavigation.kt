@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -52,6 +51,7 @@ import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
 import kotlinx.coroutines.flow.StateFlow
+import com.example.cooking.UI.Search.SearchBar
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -76,7 +76,7 @@ import kotlinx.coroutines.flow.StateFlow
  * @see DisplayRecipeScreen
  */
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
+
 @Composable
 fun AppNavigation(){
             val navController = rememberNavController()

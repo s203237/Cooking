@@ -1,16 +1,15 @@
 package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
-import com.example.cooking.data.remote.RecipeCardRepo
-import com.example.cooking.data.remote.RecipeCardsRepo
-import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
+import com.example.cooking.data.remote.RecipeCardsRepo
+import com.example.cooking.data.remote.RecipeCardsRepoSearch
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,11 +20,16 @@ import retrofit2.Retrofit
  *  - Provides instances of `RecipeDataRepo` for fetching both detailed recipes and recipe cards.
  */
 object DependencyProvider {
-    private const val timeoutSeconds = 60L
-    private val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(timeoutSeconds, java.util.concurrent.TimeUnit.SECONDS)
-        .readTimeout(timeoutSeconds, java.util.concurrent.TimeUnit.SECONDS)
-        .writeTimeout(timeoutSeconds, java.util.concurrent.TimeUnit.SECONDS)
+
+    val apiKeyInterceptor = Interceptor { chain ->
+        val request = chain.request().newBuilder()
+            .addHeader("X-RapidAPI-Key", "7f5a69bf50mshb2f0787d9ceb37ep13962ejsnda15f88a28c5")
+            .build()
+        chain.proceed(request)
+    }
+
+    val client = OkHttpClient.Builder()
+        .addInterceptor(apiKeyInterceptor)
         .build()
 
     private val retrofit = Retrofit.Builder()
@@ -34,16 +38,15 @@ object DependencyProvider {
                 ignoreUnknownKeys = true
             }.asConverterFactory("application/json".toMediaType())
         )
-        .client(okHttpClient)
-        .baseUrl("https://908df8e8-1ee4-4e87-8d04-b794f81750b5.mock.pstmn.io/")
+        .baseUrl("https://tasty.p.rapidapi.com/")
+        .client(client)
         .build()
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
     val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
-    val recipeCollectionRepo : RecipeDataRepo<RecipeCollection> = RecipeCollectionRepo(apiService)
-    val recipeSingleCardRepo: RecipeDataRepo<RecipeCard> = RecipeCardRepo(apiService)
+    val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
+    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

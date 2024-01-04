@@ -10,10 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlin.random.Random
+
 
 
 @Composable
-fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
+fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
 
     val viewModel: HomePageViewModel = viewModel()
     val collections by viewModel.recipeCollections.collectAsState()
@@ -38,6 +40,7 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
         Log.v("HomepageScreena", coll.collectionName)
     }
 
+//<<<<<<< HEAD
     scrollableList(
             modifier = Modifier
                 .background(color = Color(0xFFF2ECE3))
@@ -45,6 +48,15 @@ fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
             onNavigateToRecipe = onNavigateToRecipe
+//=======
+//    if(list.size > 0) {
+//        val dailyRecipe = list[Random.nextInt(list.size)]
+//
+//        scrollableList(
+//            dailyRecipe = dailyRecipe,
+//            listOfList = listOfList,
+//            onNavigateToRecipe =onNavigateToRecipe
+//>>>>>>> main
         )
 
 }

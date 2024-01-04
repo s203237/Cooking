@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
+import com.example.cooking.model.Instructions
 import com.example.cooking.model.Recipe
 
 
@@ -76,21 +77,28 @@ fun PrepTab(recipe: Recipe) {
 }
 
 @Composable
-private fun StepsList(list: List<String>) {
-    list.forEachIndexed { index, item ->
-        val stepCount = index + 1
-        Text(
-            text = "Step $stepCount" ,
-            fontWeight = FontWeight.Bold,
+private fun StepsList(list: List<Instructions>) {
+//    list.forEachIndexed { index, item ->
+//        val stepCount = index + 1
+//        Text(
+//            text = "Step $stepCount" ,
+//            fontWeight = FontWeight.Bold,
+//            fontSize = 16.sp,
+//        )
+//        Text(
+//            text = item,
+//            fontSize = 16.sp,
+//            modifier = Modifier
+//                .padding(
+//                    bottom = 16.dp
+//                )
+//        )
+//    }
+
+    list.forEach { item ->
+        Text(text =  "• ${item.display_text}",
             fontSize = 16.sp,
-        )
-        Text(
-            text = item,
-            fontSize = 16.sp,
-            modifier = Modifier
-                .padding(
-                    bottom = 16.dp
-                )
         )
     }
+
 }

@@ -34,7 +34,7 @@ import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) {
+fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
     Column (
        /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
@@ -56,21 +56,21 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (String) -> Unit) 
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit){
 
 Column(
     modifier = Modifier
         .fillMaxWidth()
 ){
     ImageWithFavIcon(
-        recipeId = recipe.recipeId,
-        imageUrl = recipe.imageUrl,
+        recipeId = recipe.id,
+        imageUrl = recipe.thumbnail_url,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = {},
         cardFormat = CardFormats.LANDSCAPE
     )
     Text(
-        text = recipe.title ,
+        text = recipe.name ,
         fontSize = 20.sp,
         modifier = Modifier.padding(
             top = 16.dp,

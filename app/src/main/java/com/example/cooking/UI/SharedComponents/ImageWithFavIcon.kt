@@ -22,15 +22,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
 fun RecipeImage(
-    recipeId: String,
+    recipeId: Int,
     imageUrl: String,
-    onNavigateToRecipe: (String) -> Unit,
+    onNavigateToRecipe: (Int) -> Unit,
     cardFormat: CardFormats,
     sizeFraction: Float = 1f
 
@@ -94,9 +95,10 @@ fun FavButton(sizeFraction: Float = 0.15f) {
 
 @Composable
 fun ImageWithFavIcon(
-    recipeId: String,
+
+    recipeId: Int,
     imageUrl: String,
-    onNavigateToRecipe: (String) -> Unit,
+    onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (String) -> Unit,
     cardFormat: CardFormats
 ) {
@@ -109,12 +111,27 @@ fun ImageWithFavIcon(
             CardFormats.PORTRAIT -> 1f
         }
 
+//<<<<<<< HEAD
         RecipeImage(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
             cardFormat = cardFormat,
         )
+//=======
+//        AsyncImage(
+//            model = imageUrl,
+//            contentDescription = null, //TODO give content description
+//            modifier = Modifier.testTag("itemImage")
+//                .fillMaxWidth()
+//                .aspectRatio(aspectRatioImg)
+//                .clickable {
+//                    onNavigateToRecipe(recipeId)
+//                },
+//            contentScale = ContentScale.Crop,
+//
+//            )
+//>>>>>>> main
 
         Box(
             contentAlignment = Alignment.BottomEnd,
@@ -133,7 +150,7 @@ fun ImageWithFavIcon(
 @Composable
 fun previewImageWithFavIconPortrait() {
     ImageWithFavIcon(
-        "spiced-lentil-spinach-pies",
+        0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
@@ -145,7 +162,7 @@ fun previewImageWithFavIconPortrait() {
 @Composable
 fun previewImageWithFavIconLandscape() {
     ImageWithFavIcon(
-        "spiced-lentil-spinach-pies",
+        0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
@@ -157,7 +174,7 @@ fun previewImageWithFavIconLandscape() {
 @Composable
 fun previewImageWithFavIconSqr() {
     ImageWithFavIcon(
-        "spiced-lentil-spinach-pies",
+        0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
         {},
         {},
