@@ -43,7 +43,7 @@ import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
-import com.example.cooking.UI.Search.PreviewSearchBar
+import com.example.cooking.UI.Search.SearchBar
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -224,7 +224,11 @@ fun AppNavigation(){
                     composable(route = Screens.SearchScreen.name) {
                         displayBottomBar = true
                         displayTopBar = true
-                        PreviewSearchBar()
+                        SearchBar(onNavigateToRecipe = { recipeId ->
+                            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                            }
+                        )
+                        //PreviewSearchBar()
                         //printBackStack(navController.currentBackStack, "Preview: ")
                     }
                     composable(
