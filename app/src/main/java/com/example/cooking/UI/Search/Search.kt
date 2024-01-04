@@ -63,7 +63,7 @@ fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
 }
 
 suspend fun callRecipeList(query: String): List<RecipeCard> {
-    val listRepoCard = DependencyProvider.recipeCardsRepoSearch.fetchData(query)
+    val listRepoCard = DependencyProvider.recipeCardRepo.fetchData(query)
     return listRepoCard
 }
 

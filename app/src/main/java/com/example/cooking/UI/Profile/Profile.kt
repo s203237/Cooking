@@ -65,16 +65,9 @@ fun MyHelp() {
         }
     }
 
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileBox(){
-
-
-
-
     val notification = rememberSaveable{ mutableStateOf("") }
     if (notification.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
@@ -83,7 +76,6 @@ fun ProfileBox(){
 
     var name by rememberSaveable { mutableStateOf("Default Name") }
     var email by rememberSaveable { mutableStateOf("Default Email") }
-
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -97,8 +89,6 @@ fun ProfileBox(){
         ) {
             Text(text = "Account Settings", fontSize = 20.sp)
             Text(text = "Logout", modifier = Modifier.clickable { notification.value = "You logged out"  })
-
-
         }
 
         ProfileImage()
@@ -110,7 +100,6 @@ fun ProfileBox(){
             Text(text = "Name", modifier = Modifier.width(100.dp))
             TextField(value = name, onValueChange = {name = it} )
         }
-
 
         Row(
             modifier = Modifier
@@ -131,8 +120,6 @@ fun ProfileBox(){
             FavouriteImage()
             CommentImage()
             CreateImage()
-
-
         }
         Column(modifier = Modifier
             .fillMaxWidth()
@@ -142,10 +129,7 @@ fun ProfileBox(){
             Spacer(modifier = Modifier.height(10.dp))
             MyPrivacy()
         }
-
-
     }
-
 }
 @Composable
 fun ProfileButtons(){
@@ -161,15 +145,11 @@ fun ProfileButtons(){
         MyPrivacy()}
 }
 
-
-
-
 @Preview
 @Composable
 fun PreviewBox(){
     ProfileBox()
 }
-
 
 @Composable
 fun ProfileImage() {
@@ -184,8 +164,6 @@ fun ProfileImage() {
         contract = ActivityResultContracts.GetContent()
     ){ uri: Uri? ->
         uri?.let{ imageUri.value = it.toString() }
-
-
     }
 
     Column(
@@ -226,8 +204,6 @@ fun CommentImage() {
         contract = ActivityResultContracts.GetContent()
     ){ uri: Uri? ->
         uri?.let{ imageUri.value = it.toString() }
-
-
     }
 
     Column(

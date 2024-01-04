@@ -35,15 +35,6 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
                     contentScale = ContentScale.Crop,
 
                     )
-               /* Image(
-                    painter = painterResource(recipe.imageUrl),
-                    contentDescription = recipe.imageDescription,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f),
-                    contentScale = ContentScale.Crop,
-
-                    )*/
                 Box(
                     modifier = Modifier
                         .padding(22.dp)
@@ -66,23 +57,13 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
         )
     }
 
-
 @Preview
 @Composable
 fun PreviewRecipeCard(){
     val recipe = Recipe(
         name = "Peach",
         thumbnail_url = "app/src/main/res/drawable/peach.png",
-        thumbnail_alt_text = "3d rendering of a close-up of a peach with googly eyes"/*,
-        timeToCook = TimeToCook("10 min", "1h30 min"),
-        difficulty = "Easy",
-        servingSize = "10",
-        rating = 3.4f,
-        author = "Hej Med Dig",
-        recipeDescription = "This is a beautiful description of a thing I am making and it's going to be marvelous.",
-        ingredients = listOf("Peach", "Googly eyes", "Salmon paint"),
-        steps = listOf("Do the thing.", "Do the other thing.", "Do the final thing.")
-    */)
+        thumbnail_alt_text = "3d rendering of a close-up of a peach with googly eyes"
+    )
     RecipeCard(recipe = recipe)
 }
-

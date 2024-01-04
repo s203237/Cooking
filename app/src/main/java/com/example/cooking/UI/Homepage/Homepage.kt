@@ -55,8 +55,6 @@ fun scrollableList(
             state = listState
         ) {
             item {
-//                    DailyRecipeItem(recipe = dailyrecipe)
-                //RecipeCard(recipe = dailyRecipe, "Daily Recipe")
                 RecipeItem(modifier = Modifier.fillMaxWidth(), recipe = dailyRecipe, onNavigateToRecipe = onNavigateToRecipe, subtitle = "Daily recipe")
             }
 
@@ -69,57 +67,17 @@ fun scrollableList(
                 )
                 LazyRow {
                     items(listOfList.getList()) { recipe ->
-                        //RecipeCard(recipe = recipe)
                         RecipeItem(modifier = Modifier.height(200.dp).width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe)
                     }
                 }
-
             }
-
         }
     }
-
     AnimatedVisibility(visible = showButton, enter = fadeIn(), exit = fadeOut()) {
         BackToTop(listState, coroutineScope) { }
     }
-
 }
 
-/*
-@Preview
-@Composable
-fun PreviewscrollableList(){
-/*
-    val dailyRecipe = testingClass().dailyRecipe()
-    val recipeList1 = testingClass().loadCat1Recipes()
-    val recipeList2 = testingClass().loadCat2Recipes()
-    val recipeList3 = testingClass().loadCat3Recipes()
-    val recipeList4 = testingClass().loadCat4Recipes()
-    val recipeList5 = testingClass().loadCat5Recipes()
-*/
-    val dailyRecipe = RecipeData().loadRecipes()[0]
-    val recipeList1 = RecipeData().loadRecipes()
-    val recipeList2 = RecipeData().loadRecipes()
-    val recipeList3 = RecipeData().loadRecipes()
-    val recipeList4 = RecipeData().loadRecipes()
-    val recipeList5 = RecipeData().loadRecipes()
-
-
-    val listOfList: List<List<Recipe>> = listOf(
-        recipeList1, recipeList2, recipeList3, recipeList4, recipeList5
-    )
-
-    scrollableList(
-        Modifier,
-        dailyRecipe = dailyRecipe,
-        listOfList = listOfList,
-    )
-
-
-}
-
-
- */
 @Composable
 fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "") {
 
@@ -131,15 +89,6 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int)
         Card(
             modifier = modifier
         ){
-//            AsyncImage(
-//                model = recipe.imageUrl,
-//                contentDescription = null, //TODO give content description
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .aspectRatio(0.92f)
-//                    .clickable { onNavigateToRecipe(recipe.recipeId) },
-//                contentScale = ContentScale.Crop,
-//            )
             ImageWithFavIcon(
                 recipeId = recipe.id,
                 imageUrl = recipe.thumbnail_url,

@@ -35,11 +35,5 @@ interface ApiService {
     suspend fun fetchRecipeById(
         @Query("id") recipeId: String
     ): Recipe
-
-
-    @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
-    suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
-
-
 }
 

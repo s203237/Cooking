@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cooking.model.FoodCategories
+import com.example.cooking.model.RecipeCard
 import kotlin.random.Random
 
 
@@ -36,7 +37,7 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
 
     val randomNumber = (0..3).random()
 
-    var list = food1.getList()
+    var list: List<RecipeCard>
 
     when (randomNumber) {
         0 -> list = food1.getList()

@@ -1,9 +1,7 @@
 package com.example.cooking.data
 
-import com.example.cooking.R
 import com.example.cooking.model.Author
 import com.example.cooking.model.Recipe
-import com.example.cooking.model.TimeToCook
 
 class RecipeData {
     fun loadRecipes(): List<Recipe> {

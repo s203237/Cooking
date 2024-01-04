@@ -44,23 +44,3 @@ class RecipeCardsRepo(private val apiService: ApiService) : RecipeDataRepo<List<
         return emptyList()
     }
 }
-class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
-    private val apiService = apiService
-    override suspend fun fetchData(q: String): List<RecipeCard> {
-        try {
-            val recipeCollection = apiService.fetchRecipeCollection(q)
-            return recipeCollection.results
-        }
-        catch (e : IOException) {
-            println("It broke :((( ${e.message}")
-        } catch (e: HttpException) {
-            val errorCode = e.code()
-            val errorResponse = e.response()?.errorBody()?.string()
-            println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
-        }
-        return emptyList()
-
-    }
-
-
-}

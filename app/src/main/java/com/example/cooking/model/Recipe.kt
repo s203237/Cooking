@@ -20,22 +20,6 @@ data class Recipe(
 )
 
 @Serializable
-data class Steps (
-    @SerialName("id")
-    val id: Int
-)
-
-@Serializable
-data class TimeToCook (
-
-    val cook_time_minutes: Int = 0,
-
-    @SerialName("Prep")
-    val prepTime: String = "0 min",
-
-    )
-
-@Serializable
 data class Score(
     val score: Float = 0F
 )

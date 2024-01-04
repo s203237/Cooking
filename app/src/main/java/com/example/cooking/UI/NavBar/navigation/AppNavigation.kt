@@ -227,10 +227,7 @@ fun AppNavigation(function: () -> Unit) {
                }
             composable(
                 route=Screens.Favorites.name,
-                //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-            ){//backStackEntry ->
-               // val collectionName = backStackEntry.arguments?.getString("collectionName")
-               // if(collectionName != null) {
+            ){
                 ListAllRecipesScreen("easy-vegetarian-recipes",
                         onNavigateToRecipe = { recipeId ->
                         navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
@@ -238,26 +235,7 @@ fun AppNavigation(function: () -> Unit) {
                 displayBottomBar=true
                 displayTopBar=true
                 printBackStack(navController.currentBackStack, "Favourites: ")
-                /*} else {
-                    Text("Collection not found")
-                }*/
             }
-//            composable(
-//                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-//            ){backStackEntry ->
-//                 val collectionName = backStackEntry.arguments?.getString("collectionName")
-//                 if(collectionName != null) {
-//                ListAllRecipesScreen(collectionName,
-//                    onNavigateToRecipe = { recipeId ->
-//                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-//                    })
-//                     printBackStack(navController.currentBackStack, "Recipe List: ")
-//                } else {
-//                    Text("Collection not found")
-//                }
-//                displayBottomBar=true
-//                displayTopBar=true
-//            }
             composable(route = Screens.Profile.name) {
                 displayBottomBar=true
                 displayTopBar=true
@@ -280,7 +258,6 @@ fun AppNavigation(function: () -> Unit) {
                 displayTopBar=true
             }
         }
-
     }
 }
 
@@ -289,15 +266,12 @@ fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: S
     for(entry in entryList.value){
         val stringEntry =  entry.toString()
         Log.v("Backstack" , "$screenName: $stringEntry")
-
     }
 
     for (entry in entryList.value) {
         val stringEntry = entry.destination.route ?: "Unknown route"
         Log.v("Backstack", "Entry: $stringEntry")
     }
-
-
 }
 
 

@@ -125,7 +125,6 @@ fun PrivacyPolicy() {
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
