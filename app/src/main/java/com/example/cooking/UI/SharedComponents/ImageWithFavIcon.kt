@@ -122,7 +122,7 @@ fun ImageWithFavIcon(
         ) {
             FavButton(
                 onClick = {
-                          onFavoriteButtonClicked(imageUrl)
+                          onFavoriteButtonClicked(recipeId)
                 },
                 isFavorite = isFavorite
             )
