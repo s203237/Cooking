@@ -54,7 +54,7 @@ class RecipeListViewModel: ViewModel() {
 
         }
     }
-
+/*
     fun updateSearchKey(newSearchKeyword: String) {
         query.value = newSearchKeyword
         val printOutValue = query.value
@@ -70,5 +70,5 @@ class RecipeListViewModel: ViewModel() {
 
         }
     }
-
+*/
 }

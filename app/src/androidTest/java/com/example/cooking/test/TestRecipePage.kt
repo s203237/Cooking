@@ -1,5 +1,6 @@
 package com.example.cooking.test
 
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -21,10 +22,13 @@ class TestRecipePage {
     @Test
     fun getRecipeDetailsTest() {
         // Given I am on the home page
-        var id = ""
+        var id = 0
         composeTestRule.setContent {
             val navController= rememberNavController()
-            scrollableList(RecipeCard("test","test",""), emptyList(),
+            scrollableList(
+                modifier = Modifier,
+                RecipeCard(0,"test","test"),
+                emptyList(),
                 onNavigateToRecipe = { recipeId ->
                 id = recipeId
             })
@@ -32,7 +36,7 @@ class TestRecipePage {
         }
         composeTestRule.onNodeWithText("test").assertIsDisplayed()
         composeTestRule.onNodeWithTag("itemImage").performClick()
-        assert(id == "test")
+        assert(id == 0)
 
     }
 }
