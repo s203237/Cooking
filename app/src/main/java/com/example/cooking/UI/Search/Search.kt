@@ -14,15 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.cooking.DependencyProvider
-import com.example.cooking.model.RecipeCard
 
 
 @Composable
 fun SearchBar(onSearch:(String) -> Unit/*onNavigateToRecipe:(Int)-> Unit*/) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
     val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
-    if(onSearching !=true){
+    if(!onSearching){
         Column(
             modifier = Modifier
                 .fillMaxWidth()
