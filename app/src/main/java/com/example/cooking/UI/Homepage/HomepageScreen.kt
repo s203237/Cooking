@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlin.random.Random
 
 
 
@@ -44,7 +43,10 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
     scrollableList(
             modifier = Modifier
                 .background(color = Color(0xFFF2ECE3))
-                .padding(16.dp),
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp
+                ),
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
             onNavigateToRecipe = onNavigateToRecipe
