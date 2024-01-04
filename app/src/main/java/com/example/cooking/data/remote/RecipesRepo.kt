@@ -27,7 +27,7 @@ import java.io.IOException
  */
 class RecipesRepo(apiService: ApiService) : RecipeDataRepo<Recipe> {
     private val apiService = apiService
-    override suspend fun fetchData(path: String): Recipe {
+    override suspend fun fetchData(path: String?, tags: String?): Recipe {
         try {
             return apiService.fetchRecipeById(path)
         } catch (e: IOException) {

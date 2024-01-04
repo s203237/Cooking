@@ -27,13 +27,21 @@ interface ApiService {
 
     @GET("recipes/list")
     suspend fun fetchRecipeCollection(
-        @Query("q") searchTerm: String,
-        @Query("tags") tag: String = "vegan"
+        @Query("q") searchTerm: String? = null,
+        @Query("tags") tag: String? = null
+    ): RecipeCollection {
+        val tags = if(tag != null) "vegan,$tag" else "vegan"
+        return fetchRecipeCollectionInternal(searchTerm, tags)
+    }
+
+    suspend fun fetchRecipeCollectionInternal(
+        @Query("q") searchTerm: String?,
+        @Query("tags") tags: String
     ): RecipeCollection
 
     @GET("recipes/get-more-info")
     suspend fun fetchRecipeById(
-        @Query("id") recipeId: String
+        @Query("id") recipeId: String?
     ): Recipe
 
 
