@@ -34,7 +34,7 @@ class HomePageViewModel: ViewModel() {
             }
 
             _recipeCollections.value = recipeCollections
-            _dailyRecipe.value = getDailyRecipe(recipeCollections[size-1])
+//            _dailyRecipe.value = getDailyRecipe(recipeCollections[size-1])
 
 //            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("tofu")
 //            val recipeCards2 = DependencyProvider.newrecipeCardRepo.fetchData("carrot")

@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
-import com.example.cooking.data.remote.mock_datasource.RecipeData
+//import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.Recipe
 
 @Composable
@@ -109,9 +109,9 @@ fun TabLayout(recipe: Recipe) {
     }
 }
 
-@Preview
-@Composable
-fun PreviewRecipePage() {
-    val recipeList = RecipeData().loadRecipes()
-    RecipePage(recipe = recipeList[2])
-}
+//@Preview
+//@Composable
+//fun PreviewRecipePage() {
+//    val recipeList = RecipeData().loadRecipes()
+//    RecipePage(recipe = recipeList[2])
+//}

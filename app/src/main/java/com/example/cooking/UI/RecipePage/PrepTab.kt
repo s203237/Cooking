@@ -61,7 +61,7 @@ fun PrepTab(recipe: Recipe) {
             ) {
                 Spacer(Modifier.height(32.dp))
                 UppercaseHeadingMedium(heading = "steps")
-                StepsList(list = recipe.steps.values.toList())
+                StepsList(list = recipe.instructions)
             }
 
             Image(
