@@ -130,6 +130,7 @@ fun DailyCard(
             modifier = Modifier
                 .fillMaxWidth()
         )
+        Spacer(Modifier.height(16.dp))
     }
 }
 @Composable
