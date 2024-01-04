@@ -1,6 +1,5 @@
 package com.example.cooking.UI.Homepage
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -15,7 +14,7 @@ import java.util.Calendar
 class HomePageViewModel: ViewModel() {
     private val collections = HomepageCuration().loadCollectionNames()
 
-    val size = HomepageCuration().getCollectionsCount()
+    private val count = HomepageCuration().getCollectionsCount()
     private val _recipeCollections = MutableStateFlow<List<RecipeCollection>>(emptyList())
     val recipeCollections = _recipeCollections.asStateFlow()
 
@@ -31,12 +30,13 @@ class HomePageViewModel: ViewModel() {
             val listTypes = HomepageCuration().loadListTypes()
 
             listTypes.mapIndexed { index, type ->
-                Log.v("HP Viewmodel", recipeCollections[index].collectionName)
+               // Log.v("HP Viewmodel", recipeCollections[index].collectionName)
                 recipeCollections[index].type = type
             }
 
             _recipeCollections.value = recipeCollections
-            _dailyRecipe.value = getDailyRecipe(recipeCollections[size-1])
+            //Log.v("HP Viewmodel", "collections size $count")
+            _dailyRecipe.value = getDailyRecipe(recipeCollections[count-1])
 
 //            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("tofu")
 //            val recipeCards2 = DependencyProvider.newrecipeCardRepo.fetchData("carrot")

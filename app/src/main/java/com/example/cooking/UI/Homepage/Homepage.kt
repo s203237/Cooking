@@ -65,6 +65,14 @@ fun scrollableList(
             modifier = Modifier.testTag("homepagescreen"),
             state = listState
         ) {
+            item {
+                DailyCard(
+                    modifier = modifier,
+                    dailyRecipe = dailyRecipe,
+                    onNavigateToRecipe = onNavigateToRecipe
+                )
+            }
+
             items(listOfCollections) { collection ->
                 when (collection.type) {
                     ListType.CARD -> RecipeCard()
@@ -89,6 +97,32 @@ fun scrollableList(
 ///////////////////////////////////////
 // HOMEPAGE COMPONENTS
 ///////////////////////////////////////
+@Composable
+fun DailyCard(
+    modifier: Modifier,
+    dailyRecipe: RecipeCard,
+    onNavigateToRecipe: (Int) -> Unit
+) {
+    ImageWithFavIcon(
+        recipeId = dailyRecipe.id,
+        imageUrl = dailyRecipe.thumbnail_url,
+        onNavigateToRecipe = onNavigateToRecipe,
+        onFavoriteButtonClicked = {},
+        cardFormat = CardFormats.SQUARE
+    )
+    Column (modifier = modifier) {
+        Spacer(Modifier.height(16.dp))
+        UppercaseHeadingMedium(heading = "daily pick")
+        Spacer(Modifier.height(8.dp))
+        Text(
+            text = dailyRecipe.name,
+            fontSize = 22.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        Spacer(Modifier.height(16.dp))
+    }
+}
 @Composable
 fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "") {
 

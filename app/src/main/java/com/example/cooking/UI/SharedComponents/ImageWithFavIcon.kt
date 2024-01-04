@@ -95,7 +95,6 @@ fun FavButton(sizeFraction: Float = 0.15f) {
 
 @Composable
 fun ImageWithFavIcon(
-
     recipeId: Int,
     imageUrl: String,
     onNavigateToRecipe: (Int) -> Unit,
