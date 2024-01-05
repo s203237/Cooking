@@ -62,6 +62,9 @@ class HomePageViewModel: ViewModel() {
 }
 
 fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
+    if (collection.results.isEmpty()) {
+        return RecipeCard() // or handle appropriately
+    }
     val calendar = Calendar.getInstance()
     val currentDate = calendar.get(Calendar.DAY_OF_MONTH)
     val i = currentDate % collection.results.size

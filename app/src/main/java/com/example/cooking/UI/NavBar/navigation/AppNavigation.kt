@@ -233,7 +233,9 @@ fun AppNavigation(){
             composable(route = Screens.Favorites.name){
                 displayBottomBar = true
                 displayTopBar=true
-                FavoritesScreen()
+                FavoritesScreen(onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                })
                 printBackStack(navController.currentBackStack, "Favorites : ")
             }
 //            composable(

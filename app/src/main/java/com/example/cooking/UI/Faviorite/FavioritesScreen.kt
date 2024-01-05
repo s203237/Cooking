@@ -7,9 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cooking.UI.RecipeList.RecipeList
 
-
 @Composable
-fun FavoritesScreen() {
+fun FavoritesScreen(onNavigateToRecipe:(String)->Unit) {
 
     val favoritesViewModel: FavoritesScreenViewModel = viewModel()
 
@@ -21,7 +20,7 @@ fun FavoritesScreen() {
     */
 
     val recipes by favoritesViewModel.favorites.collectAsState(emptyList())
-    RecipeList(recipes = recipes , onNavigateToRecipe = {}, onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked)
+    RecipeList(recipes = recipes , onNavigateToRecipe =onNavigateToRecipe  , onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked)
     Log.d("FavoritesScreen", "Collected Recipes: $recipes")
 
 }
