@@ -50,9 +50,9 @@ class RecipePageViewModel: ViewModel() {
             }
         }
     }
-    fun onFavoriteButtonClicked(imageUrl: String) {
+    fun onFavoriteButtonClicked(recipeId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            DependencyProvider.favoritesDataSource.toggleFavorite(imageUrl)
+            DependencyProvider.favoritesDataSource.toggleFavorite(recipeId)
         }
     }
 

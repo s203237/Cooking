@@ -30,7 +30,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
         }
     }
 
-    override suspend fun toggleFavorite(imageUrl: String) {
+    override suspend fun toggleFavorite(recipeId: String) {
         val currentJsonString = context.dataStore.data.first()[favoritesKey].orEmpty()
         val currentFavorites: List<String> = try {
             Json.decodeFromString(currentJsonString)
@@ -38,11 +38,11 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
             emptyList()
         }
 
-        val isFavorite = currentFavorites.contains(imageUrl)
+        val isFavorite = currentFavorites.contains(recipeId)
         val updatedFavorites = if (isFavorite) {
-            currentFavorites - imageUrl
+            currentFavorites - recipeId
         } else {
-            currentFavorites + imageUrl
+            currentFavorites + recipeId
         }
 
         val updatedJsonString = Json.encodeToString(updatedFavorites)
