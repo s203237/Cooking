@@ -5,7 +5,6 @@ import com.example.cooking.model.RecipeCollection
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-
 /**
 * The `ApiService` interface defines methods for making network requests to a BBCGoodFood API.
 *
@@ -40,7 +39,5 @@ interface ApiService {
 
     @GET("recipe/{recipeId}/?rapidapi-key=153fb15982msh07ef790555391adp1e7d60jsna0d4c47abb3c")
     suspend fun fetchRecipeCardById(@Path("recipeId") recipeId: String): RecipeCard
-
-
 }
 

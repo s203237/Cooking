@@ -6,6 +6,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cooking.UI.Faviorite.FavoritesScreenViewModel
+
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
  * collection name. It interacts with a [RecipeListViewModel] to fetch and observe the list of
@@ -27,21 +29,28 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Unit) {
     Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect(key1 = collectionName){
         viewModel.updateCollectionName(collectionName)
     }
+
     val recipes by viewModel.recipeCards.collectAsState()
     Log.v("Recipe List Screen", recipes.toString())
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,
+        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
     )
 }
 /*@Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
 
     Log.v("Recipes Trace", "RecipeId in viewModel.launch: $query")
+
+    // Create a reference to the FavoritesScreenViewModel
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
+
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect( key1 = query){
         viewModel.updateSearchKey(query)
@@ -50,5 +59,6 @@ fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
     RecipeList(
         recipes = recipes,
         onNavigateToRecipe = onNavigateToRecipe,
+        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
     )
 }*/

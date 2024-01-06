@@ -35,8 +35,11 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
-    Log.v("RecipeList", recipes.toString())
+
+fun RecipeList(
+    recipes: List<RecipeCard>,
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit ) {
     Column (
        /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
@@ -51,14 +54,14 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
         )
         LazyColumn {
             items(recipes) { recipe ->
-                RecipeItem(recipe, onNavigateToRecipe)
+                RecipeItem(recipe, onNavigateToRecipe , onFavoriteButtonClicked )
                 println("Composed recipe item")
             }
         }
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit){
+fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, onFavoriteButtonClicked: (String) -> Unit){
 
 Column(
     modifier = Modifier
@@ -68,7 +71,7 @@ Column(
         recipeId = recipe.id,
         imageUrl = recipe.thumbnail_url,
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = {},
+        onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.imageUrl)},
         cardFormat = CardFormats.LANDSCAPE
     )
     Text(
@@ -95,7 +98,5 @@ Column(
 @Preview
 @Composable
 fun PreviewRecipeList(){
-RecipeList(emptyList(), onNavigateToRecipe = {})
+    RecipeList(emptyList(), onNavigateToRecipe = {} , onFavoriteButtonClicked = {})
 }
-
-

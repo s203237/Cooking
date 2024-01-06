@@ -34,7 +34,6 @@ fun RecipePage(recipe: Recipe) {
         modifier = Modifier.testTag("recipePage")
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-
     ) {
         Box(
             modifier = Modifier
@@ -43,6 +42,7 @@ fun RecipePage(recipe: Recipe) {
             ImageWithFavIcon(
                 recipeId = recipe.id,
                 imageUrl = recipe.thumbnail_url,
+                isFavorite = false,
                 {},
                 {},
                 CardFormats.PORTRAIT

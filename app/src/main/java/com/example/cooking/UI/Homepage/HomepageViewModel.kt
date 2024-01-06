@@ -3,6 +3,7 @@ package com.example.cooking.UI.Homepage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
@@ -55,9 +56,22 @@ class HomePageViewModel: ViewModel() {
 
         }
     }
+    fun onFavoriteButtonClicked(recipeId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                favoritesDataSource.toggleFavorite(recipeId)
+                println("Favorite toggled for image URL: $recipeId")
+            } catch (e: Exception) {
+                println("Error toggling favorite: $e")
+            }
+        }
+    }
 }
 
 fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
+    if (collection.results.isEmpty()) {
+        return RecipeCard() // or handle appropriately
+    }
     val calendar = Calendar.getInstance()
     val currentDate = calendar.get(Calendar.DAY_OF_MONTH)
     val i = currentDate % collection.results.size

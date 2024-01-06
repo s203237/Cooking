@@ -50,6 +50,8 @@ fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     listOfCollections: List<RecipeCollection>,
+    //onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit
     onNavigateToRecipe: (Int) -> Unit
 ) {
 
@@ -72,6 +74,26 @@ fun scrollableList(
                     modifier = modifier,
                     dailyRecipe = dailyRecipe,
                     onNavigateToRecipe = onNavigateToRecipe
+                //UppercaseHeadingMedium(heading = "daily pick")
+                //Spacer(Modifier.height(16.dp))
+                RecipeRowItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    recipe = dailyRecipe,
+                    onNavigateToRecipe = onNavigateToRecipe,
+                    onFavoriteButtonClicked=onFavoriteButtonClicked,
+                )
+
+            }
+            item{
+                RecipeCardRow(collection = listOfCollections[0], onNavigateToRecipe = onNavigateToRecipe,onFavoriteButtonClicked=onFavoriteButtonClicked)
+            }
+
+            item {
+                RecipeCardList(
+                    collection = listOfCollections[1],
+                    listSize = 3,
+                    onNavigateToRecipe = onNavigateToRecipe,
+                    onFavoriteButtonClicked=onFavoriteButtonClicked
                 )
             }
 
@@ -91,6 +113,7 @@ fun scrollableList(
                         collection = collection,
                         listSize = 3,
                         onNavigateToRecipe = onNavigateToRecipe,
+                        onFavoriteButtonClicked=onFavoriteButtonClicked,
                         modifier = modifier
                     )
                 }
@@ -151,6 +174,7 @@ fun SingleCard(
         )
     }
 }
+fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (String) -> Unit) {
 
 @Composable
 fun RecipeCardRow(
@@ -202,8 +226,9 @@ fun RowItem(
                 recipeId = recipe.id,
                 imageUrl = recipe.thumbnail_url,
                 onNavigateToRecipe = onNavigateToRecipe,
-                onFavoriteButtonClicked = {},
-                cardFormat = CardFormats.SQUARE
+                onFavoriteButtonClicked=onFavoriteButtonClicked,
+                cardFormat = CardFormats.SQUARE,
+                isFavorite=recipe.isFavorite
             )
             Log.v("HP RecipeId", recipe.id.toString())
         }
@@ -234,6 +259,24 @@ fun RowItem(
     }
 }
 
+@Composable
+fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (String) -> Unit,onFavoriteButtonClicked: (String) -> Unit) {
+    Spacer(Modifier.height(16.dp))
+    UppercaseHeadingMedium(heading = collection.collectionName)
+    Spacer(Modifier.height(16.dp))
+
+    LazyRow {
+        items(collection.results) { recipe ->
+            //RecipeCard(recipe = recipe)
+            RecipeRowItem(modifier = Modifier
+                .height(200.dp)
+                .width(200.dp), recipe = recipe, onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = onFavoriteButtonClicked
+            )
+            Spacer(Modifier.width(10.dp))
+        }
+    }
+}
+
 
 @Composable
 fun RecipeCardList(
@@ -241,6 +284,8 @@ fun RecipeCardList(
     listSize: Int,
     onNavigateToRecipe: (Int) -> Unit,
     modifier: Modifier
+    //onNavigateToRecipe: (String) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit
 ) {
     val recipeCards = collection.results
     Column (modifier = modifier) {
@@ -249,15 +294,16 @@ fun RecipeCardList(
         Spacer(Modifier.height(16.dp))
 
         for(i in 0 until min(listSize, recipeCards.size)) {
-            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe)
+            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = onFavoriteButtonClicked)
         }
     }
 }
 @Composable
 fun RecipeCardListItem(
     recipeCard: RecipeCard,
-    onNavigateToRecipe: (Int) -> Unit
-) {
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (String) -> Unit)
+{
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -288,10 +334,10 @@ fun RecipeCardListItem(
             )
 
         }
-        FavButton(0.35f)
+        FavButton(0.35f, isFavorite =recipeCard.isFavorite, onClick ={onFavoriteButtonClicked(recipeCard.recipeId)})
     }
     Spacer(Modifier.height(16.dp))
-}
+}}
 
 
 ///////////////////////////////////////
@@ -308,7 +354,8 @@ fun PreviewscrollableList(){
         Modifier,
         dailyRecipe = dailyRecipeCard,
         listOfCollections = collections,
-        onNavigateToRecipe = {}
+        onNavigateToRecipe = {},
+        onFavoriteButtonClicked = {}
     )
 
 }
@@ -317,6 +364,7 @@ fun PreviewscrollableList(){
 fun PreviewRecipeCardList() {
     val collections = RecipeData().loadRecipeCollections()
     RecipeCardList(collection = collections[0], listSize = 3, {}, modifier = Modifier.padding (start = 16.dp, end = 16.dp))
+    RecipeCardList(collection = collections[0], listSize = 3, onNavigateToRecipe = {}, onFavoriteButtonClicked = {})
 }
 @Preview
 @Composable
@@ -326,7 +374,7 @@ fun PreviewRecipeCardListItem() {
         title = "Miso Butternut Soup",
         imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2021/09/Miso-and-butternut-soup-efe9277.jpg?quality=90&webp=true&resize=600,545"
     )
-    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {})
+    RecipeCardListItem(recipeCard = recipeCard, onNavigateToRecipe = {}, onFavoriteButtonClicked = {})
 }
 
 */

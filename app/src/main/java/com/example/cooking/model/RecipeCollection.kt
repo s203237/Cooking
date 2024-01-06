@@ -22,9 +22,22 @@ data class RecipeCollection(
     val results: List<RecipeCard> = emptyList(),
     var type: ListType = ListType.VERTICAL
 )
+/*
 @Serializable
 data class RecipeCard(
     val id: Int = 0,
     val name: String = "defaultName",
     val thumbnail_url: String = ""
+)
+*/
+
+@Serializable
+data class RecipeCard(
+    val recipeId: String = "defaultId",
+    var isFavorite: Boolean = false,
+    @SerialName("recipeName")
+    val title: String = "Default title",
+    @SerialName("imageSrc")
+    val imageUrl: String = "",
+    //val imageDescription: String, TODO get image description
 )

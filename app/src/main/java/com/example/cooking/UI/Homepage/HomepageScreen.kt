@@ -49,7 +49,7 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
                 ),
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
-            onNavigateToRecipe = onNavigateToRecipe
+            onNavigateToRecipe = onNavigateToRecipe,
 //=======
 //    if(list.size > 0) {
 //        val dailyRecipe = list[Random.nextInt(list.size)]
@@ -59,6 +59,7 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
 //            listOfList = listOfList,
 //            onNavigateToRecipe =onNavigateToRecipe
 //>>>>>>> main
+            onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked
         )
 
 }
