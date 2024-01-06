@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -57,6 +58,8 @@ fun RecipeImage(
 
 @Composable
 fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> Unit) {
+
+
     Box(
         modifier = Modifier
             .fillMaxWidth(sizeFraction)
@@ -70,12 +73,13 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
         IconButton(
             onClick = onClick
 
+
         ) {
             if (isFavorite)
                 Icon(
                     Icons.Filled.Favorite,
                     contentDescription = "Favourite Heart Filled",
-                    tint = Color.White
+                    tint = Color.Green
                 )
             else
                 Icon(
