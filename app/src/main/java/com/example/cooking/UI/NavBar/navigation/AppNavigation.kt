@@ -82,7 +82,7 @@ fun AppNavigation(){
                 "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
                 "Appetizers", "Seasonal"
             )
-            val commonRoute = Screens.Favorites.name
+            val commonRoute = "Screens.RecipeList.name/{collectionName}"
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 topBar = {
@@ -133,7 +133,7 @@ fun AppNavigation(){
                                             onClick = {
                                                 selectedItem = item
                                                 expanded = false
-                                                navController.navigate(route = commonRoute)
+                                                navController.navigate(route = "Screens.RecipeList.name/$item")
                                             }
 
                                         )
