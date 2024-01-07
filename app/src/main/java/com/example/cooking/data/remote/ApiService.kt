@@ -1,7 +1,6 @@
 package com.example.cooking.data.remote
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -30,7 +29,7 @@ interface ApiService {
         @Query("q") searchTerm: String,
         @Query("size") size: Int = 10,
         @Query("tags") tag: String = "vegetarian"
-    ): RecipeCollection
+    ): CollectionDto
 
     @GET("recipes/get-more-info")
     suspend fun fetchRecipeById(

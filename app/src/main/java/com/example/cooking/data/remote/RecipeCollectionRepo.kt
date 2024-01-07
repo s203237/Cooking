@@ -25,9 +25,9 @@ import java.io.IOException
  *   - A [RecipeCollection] object if the data retrieval is successful.
  *   - A default RecipeCollection object if an error occurs during the retrieval process.
  */
-class RecipeCollectionRepo(apiService: ApiService) : RecipeDataRepo<RecipeCollection> {
+class RecipeCollectionRepo(apiService: ApiService) : RecipeDataRepo<CollectionDto> {
     private val apiService = apiService
-    override suspend fun fetchData(collectionName: String): RecipeCollection {
+    override suspend fun fetchData(collectionName: String): CollectionDto {
 
         try {
             return apiService.fetchRecipeCollection(searchTerm = collectionName)
@@ -38,6 +38,6 @@ class RecipeCollectionRepo(apiService: ApiService) : RecipeDataRepo<RecipeCollec
             val errorResponse = e.response()?.errorBody()?.string()
             println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
         }
-        return RecipeCollection()
+        return CollectionDto()
     }
 }
