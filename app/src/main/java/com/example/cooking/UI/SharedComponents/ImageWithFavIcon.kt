@@ -29,6 +29,7 @@ fun RecipeImage(
     recipeId: Int,
     imageUrl: String,
     onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (Int) -> Unit,
     cardFormat: CardFormats,
     sizeFraction: Float = 1f
 
@@ -97,10 +98,10 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
 fun ImageWithFavIcon(
     recipeId: Int,
     imageUrl: String,
-    onNavigateToRecipe: (Int) -> Unit,
+    //onNavigateToRecipe: (Int) -> Unit,
     isFavorite: Boolean,
-    //onNavigateToRecipe: (String) -> Unit,
-    onFavoriteButtonClicked: (String) -> Unit,
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (Int) -> Unit,
     cardFormat: CardFormats
 ) {
     Box(
@@ -117,6 +118,7 @@ fun ImageWithFavIcon(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
+            onFavoriteButtonClicked = onFavoriteButtonClicked,
             cardFormat = cardFormat,
         )
 //=======
@@ -152,7 +154,7 @@ fun ImageWithFavIcon(
     }
 }
 
-@Preview
+/*@Preview
 @Composable
 fun previewImageWithFavIconPortrait() {
     ImageWithFavIcon(
@@ -163,9 +165,9 @@ fun previewImageWithFavIconPortrait() {
         {},
         CardFormats.PORTRAIT
     )
-}
+}*/
 
-@Preview
+/*@Preview
 @Composable
 fun previewImageWithFavIconLandscape() {
     ImageWithFavIcon(
@@ -176,9 +178,9 @@ fun previewImageWithFavIconLandscape() {
         {},
         CardFormats.LANDSCAPE
     )
-}
+}*/
 
-@Preview
+/*@Preview
 @Composable
 fun previewImageWithFavIconSqr() {
     ImageWithFavIcon(
@@ -189,5 +191,5 @@ fun previewImageWithFavIconSqr() {
         {},
         CardFormats.SQUARE
     )
-}
+}*/
 

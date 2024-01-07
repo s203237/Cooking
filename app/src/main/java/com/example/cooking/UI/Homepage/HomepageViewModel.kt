@@ -56,7 +56,7 @@ class HomePageViewModel: ViewModel() {
 
         }
     }
-    fun onFavoriteButtonClicked(recipeId: String) {
+    fun onFavoriteButtonClicked(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 favoritesDataSource.toggleFavorite(recipeId)

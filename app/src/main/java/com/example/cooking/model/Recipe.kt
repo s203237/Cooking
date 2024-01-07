@@ -16,8 +16,9 @@ data class Recipe(
     val user_ratings: Score = Score(), //TODO: score is between 0 and 1
     val description: String = "Default description",
     val sections: List<Section> = listOf(),
-    val instructions: List<Instructions> = listOf()
-)   var isFavorite: Boolean =false
+    val instructions: List<Instructions> = listOf(),
+    var isFavorite: Boolean =false
+)
 
 @Serializable
 data class Steps (

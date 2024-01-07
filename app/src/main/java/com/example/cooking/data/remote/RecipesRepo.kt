@@ -40,3 +40,21 @@ class RecipesRepo(apiService: ApiService) : RecipeDataRepo<Recipe> {
         return Recipe()
     }
 }
+/*class RecipesRepo(private val apiService: ApiService) : RecipeDataRepo<Recipe> {
+    override suspend fun fetchData(path: String): Recipe {
+        return try {
+            // This call may return null
+            val response = apiService.fetchRecipeById(path)
+            // If response is null, return a default Recipe or handle accordingly
+            response ?: Recipe() // Assuming Recipe has a default constructor
+        } catch (e: IOException) {
+            println("It broke :((( ${e.message}")
+            Recipe() // Return default Recipe in case of IOException
+        } catch (e: HttpException) {
+            val errorCode = e.code()
+            val errorResponse = e.response()?.errorBody()?.string()
+            println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
+            Recipe() // Return default Recipe in case of HttpException
+        }
+    }
+}*/

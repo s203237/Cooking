@@ -50,7 +50,7 @@ class RecipePageViewModel: ViewModel() {
             }
         }
     }
-    fun onFavoriteButtonClicked(recipeId: String) {
+    fun onFavoriteButtonClicked(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             DependencyProvider.favoritesDataSource.toggleFavorite(recipeId)
         }

@@ -1,7 +1,9 @@
 package com.example.cooking
 
 import android.content.Context
+import com.example.cooking.data.local.FavoritesDataSource
 import com.example.cooking.data.remote.ApiService
+import com.example.cooking.data.remote.RecipeCardRepo
 import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
@@ -10,6 +12,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dk.shape.dtu.networkrequestsandlocalstorage.data.local.DataStoreFavoritesDataSource
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -25,7 +28,7 @@ object DependencyProvider {
 
     val apiKeyInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("X-RapidAPI-Key", "7f5a69bf50mshb2f0787d9ceb37ep13962ejsnda15f88a28c5")
+            .addHeader("X-RapidAPI-Key", "173f6e51b0msh4dadab55e6361b6p13a3ebjsndf11d2202516")
             .build()
         chain.proceed(request)
     }

@@ -8,7 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cooking.UI.RecipeList.RecipeList
 
 @Composable
-fun FavoritesScreen(onNavigateToRecipe:(String)->Unit) {
+fun FavoritesScreen(onNavigateToRecipe:(Int)->Unit) {
 
     val favoritesViewModel: FavoritesScreenViewModel = viewModel()
 

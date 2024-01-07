@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.example.cooking.UI.NavBar.navigation.Navigator.navController
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
@@ -43,9 +44,12 @@ fun RecipePage(recipe: Recipe) {
                 recipeId = recipe.id,
                 imageUrl = recipe.thumbnail_url,
                 isFavorite = false,
-                {},
-                {},
-                CardFormats.PORTRAIT
+                /*onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                } ,*/
+                onNavigateToRecipe ={},
+                onFavoriteButtonClicked = {},
+                cardFormat = CardFormats.PORTRAIT
             )
             TabLayout(recipe = recipe)
         }

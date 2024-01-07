@@ -41,3 +41,22 @@ class RecipeCollectionRepo(apiService: ApiService) : RecipeDataRepo<RecipeCollec
         return RecipeCollection()
     }
 }
+/*class RecipeCollectionRepo(private val apiService: ApiService) : RecipeDataRepo<RecipeCollection?> {
+    override suspend fun fetchData(collectionName: String): RecipeCollection? {
+        return try {
+            apiService.fetchRecipeCollection(searchTerm = collectionName)
+        } catch (e: IOException) {
+            logError("IOException in fetchData", e)
+            //RecipeCollection() // Ensure default constructor or handle accordingly
+            null
+        } catch (e: HttpException) {
+            logError("HttpException in fetchData", e)
+           // RecipeCollection() // Ensure default constructor or handle accordingly
+            null
+        }
+    }
+
+    private fun logError(message: String, e: Exception) {
+        // Log the error or handle it as per your application's error handling strategy
+    }
+}*/
