@@ -4,12 +4,12 @@ import com.example.cooking.model.ListType
 
 class HomepageCuration {
     private val collectionNames = listOf(
-        "party",
-        "vegetarian-sandwich-recipes",
+        "soup",
         "pasta",
-        "party",
-        "vegetarian-dinner",
-        "traybake-recipes"
+        "salad",
+        "under_30_minutes",
+        "dessert",
+        "sandwich"
     )
 
     private val collectionListTypes = listOf (
@@ -19,14 +19,15 @@ class HomepageCuration {
         ListType.CARD,
         ListType.VERTICAL,
         ListType.HORIZONTAL
+    )
 
-        )
     fun getCollectionsCount(): Int {
         return collectionNames.size;
     }
     fun loadCollectionNames(): List<String> {
         return collectionNames
     }
+
     fun loadListTypes(): List<ListType> {
         return collectionListTypes
     }
