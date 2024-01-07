@@ -47,7 +47,7 @@ fun RecipePage(recipe: Recipe) {
                 /*onNavigateToRecipe = { recipeId ->
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                 } ,*/
-                onNavigateToRecipe ={},
+                onNavigateToRecipe = {},
                 onFavoriteButtonClicked = {},
                 cardFormat = CardFormats.PORTRAIT
             )

@@ -61,6 +61,4 @@ class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<Recipe
         return emptyList()
 
     }
-
-
 }

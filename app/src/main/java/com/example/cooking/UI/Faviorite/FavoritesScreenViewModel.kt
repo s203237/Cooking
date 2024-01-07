@@ -18,7 +18,7 @@ class FavoritesScreenViewModel: ViewModel() {
         .getFavorites()
         .map { recipeId ->
             recipeId.map {
-                RecipeCard(isFavorite = true, thumbnail_url = it)
+                RecipeCard(isFavorite = true, thumbnail_url = it )
             }
         }
     /*private val favoritesDataSource = DependencyProvider.favoritesDataSource
