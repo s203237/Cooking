@@ -7,7 +7,7 @@ class HomepageCuration {
         "soup",
         "pasta",
         "salad",
-        "under_30_minutes",
+        "breakfast",
         "dessert",
         "sandwich"
     )

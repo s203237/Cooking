@@ -67,3 +67,4 @@ fun getRandomRecipeCard(collection: CollectionDto): RecipeCard {
     val card = collection.results[i]
     return RecipeCard(card.recipeId, card.title, card.imageUrl)
 }
+
