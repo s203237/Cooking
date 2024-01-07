@@ -8,7 +8,6 @@ import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -25,7 +24,7 @@ object DependencyProvider {
 
     val apiKeyInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("X-RapidAPI-Key", "7f5a69bf50mshb2f0787d9ceb37ep13962ejsnda15f88a28c5")
+            .addHeader("X-RapidAPI-Key", "65ff42b648msha1e6f88928a2e65p12d37fjsn3963912f1b92")
             .build()
         chain.proceed(request)
     }
@@ -50,7 +49,7 @@ object DependencyProvider {
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
    // val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
 
-    val recipeCollectionRepo : RecipeDataRepo<RecipeCollection> = CollectionDto(apiService)
+    val recipeCollectionRepo : RecipeDataRepo<CollectionDto> = RecipeCollectionRepo(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

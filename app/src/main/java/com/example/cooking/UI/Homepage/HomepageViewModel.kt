@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Homepage
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -33,9 +34,9 @@ class HomePageViewModel: ViewModel() {
             val listTypes = HomepageCuration().loadListTypes()
 
             _recipeCollections.value = recipeCollections.mapIndexed { index, collection ->
-
                 val results = when(listTypes[index]) {
                     ListType.CARD -> {
+                        Log.v("Homepage VM Coll results", collection.results.toString())
                         listOf(getRandomRecipeCard(collection))
                     }
                     else -> {
@@ -45,7 +46,7 @@ class HomePageViewModel: ViewModel() {
                     }
                 }
 
-                RecipeCollection(collection.collectionName, results, listTypes[index])
+                RecipeCollection("Test name", results, listTypes[index])
 
             }
             _dailyRecipe.value = getDailyRecipe(_recipeCollections.value[size-1])
