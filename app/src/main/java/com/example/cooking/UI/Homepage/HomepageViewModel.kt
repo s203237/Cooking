@@ -46,7 +46,7 @@ class HomePageViewModel: ViewModel() {
                     }
                 }
 
-                RecipeCollection("Test name", results, listTypes[index])
+                RecipeCollection(collections[index], results, listTypes[index])
 
             }
             _dailyRecipe.value = getDailyRecipe(_recipeCollections.value[size-1])
