@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
 import com.example.cooking.data.remote.CollectionDto
+import com.example.cooking.data.remote.FetchParameters
 import com.example.cooking.model.ListType
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
@@ -16,7 +17,8 @@ import java.util.Calendar
 import kotlin.random.Random
 
 class HomePageViewModel: ViewModel() {
-    private val collections = HomepageCuration().loadCollectionNames()
+    private val collections = HomepageCuration().loadCollectionData()
+    //private val collections = HomepageCuration().loadCollectionNames()
     val size = HomepageCuration().getCollectionsCount()
 
     private val _recipeCollections = MutableStateFlow<List<RecipeCollection>>(emptyList())
@@ -28,13 +30,17 @@ class HomePageViewModel: ViewModel() {
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val recipeCollections : List<CollectionDto> = collections.map{
-                DependencyProvider.recipeCollectionRepo.fetchData(it)
+                val parameters = FetchParameters(
+                    id = it.id,
+                    size = it.size
+                )
+                DependencyProvider.recipeCollectionRepo.fetchData(parameters)
             }
 
-            val listTypes = HomepageCuration().loadListTypes()
+            //val listTypes = HomepageCuration().loadListTypes()
 
             _recipeCollections.value = recipeCollections.mapIndexed { index, collection ->
-                val results = when(listTypes[index]) {
+                val results = when(collections[index].listType) {
                     ListType.CARD -> {
                         Log.v("Homepage VM Coll results", collection.results.toString())
                         listOf(getRandomRecipeCard(collection))
@@ -46,7 +52,7 @@ class HomePageViewModel: ViewModel() {
                     }
                 }
 
-                RecipeCollection(collections[index], results, listTypes[index])
+                RecipeCollection(collections[index].id, results, collections[index].listType)
 
             }
             _dailyRecipe.value = getDailyRecipe(_recipeCollections.value[size-1])

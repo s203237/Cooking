@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.data.remote.FetchParameters
 import com.example.cooking.model.Recipe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,8 +45,8 @@ class RecipePageViewModel: ViewModel() {
     init {
         viewModelScope.launch(Dispatchers.IO) {
             _recipeId.collect { newRecipeId ->
-                Log.v("RecipeId Trace", "RecipeId in viewModel.launch: $newRecipeId")
-                val recipeData = DependencyProvider.recipeRepo.fetchData(_recipeId.value)
+                val parameters = FetchParameters(id = newRecipeId)
+                val recipeData = DependencyProvider.recipeRepo.fetchData(parameters)
                 _recipe.value = recipeData
             }
         }

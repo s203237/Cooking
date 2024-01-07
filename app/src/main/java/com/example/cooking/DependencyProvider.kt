@@ -2,12 +2,10 @@ package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
 import com.example.cooking.data.remote.CollectionDto
-import com.example.cooking.data.remote.RecipeCardsRepo
 import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
-import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -45,7 +43,7 @@ object DependencyProvider {
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
+    //val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
    // val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
 

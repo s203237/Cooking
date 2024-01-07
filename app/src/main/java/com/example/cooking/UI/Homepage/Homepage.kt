@@ -43,7 +43,6 @@ import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.model.ListType
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
-import kotlin.math.min
 
 @Composable
 fun scrollableList(
@@ -89,7 +88,6 @@ fun scrollableList(
                     )
                     ListType.VERTICAL -> RecipeCardList(
                         collection = collection,
-                        listSize = 3,
                         onNavigateToRecipe = onNavigateToRecipe,
                         modifier = modifier
                     )
@@ -238,7 +236,6 @@ fun RowItem(
 @Composable
 fun RecipeCardList(
     collection: RecipeCollection,
-    listSize: Int,
     onNavigateToRecipe: (Int) -> Unit,
     modifier: Modifier
 ) {
@@ -248,8 +245,8 @@ fun RecipeCardList(
         UppercaseHeadingMedium(heading = collection.collectionName)
         Spacer(Modifier.height(16.dp))
 
-        for(i in 0 until min(listSize, recipeCards.size)) {
-            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe)
+        for(card in recipeCards) {
+            RecipeCardListItem(recipeCard = card, onNavigateToRecipe = onNavigateToRecipe)
         }
     }
 }

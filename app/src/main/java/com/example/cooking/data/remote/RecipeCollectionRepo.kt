@@ -27,10 +27,15 @@ import java.io.IOException
  */
 class RecipeCollectionRepo(apiService: ApiService) : RecipeDataRepo<CollectionDto> {
     private val apiService = apiService
-    override suspend fun fetchData(collectionName: String): CollectionDto {
 
+    override suspend fun fetchData(parameters: FetchParameters): CollectionDto {
         try {
-            return apiService.fetchRecipeCollection(searchTerm = collectionName)
+            return apiService.fetchRecipeCollection(
+                searchTerm = parameters.id,
+                size = parameters.size,
+                tag = parameters.tag
+            )
+
         } catch (e: IOException) {
             println("It broke :((( ${e.message}")
         } catch (e: HttpException) {

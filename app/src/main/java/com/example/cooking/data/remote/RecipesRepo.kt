@@ -1,7 +1,6 @@
 package com.example.cooking.data.remote
 
 import com.example.cooking.model.Recipe
-import com.example.cooking.model.RecipeCard
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -27,9 +26,9 @@ import java.io.IOException
  */
 class RecipesRepo(apiService: ApiService) : RecipeDataRepo<Recipe> {
     private val apiService = apiService
-    override suspend fun fetchData(path: String): Recipe {
+    override suspend fun fetchData(parameters: FetchParameters): Recipe {
         try {
-            return apiService.fetchRecipeById(path)
+            return apiService.fetchRecipeById(parameters.id)
         } catch (e: IOException) {
             println("It broke :((( ${e.message}")
         } catch (e: HttpException) {

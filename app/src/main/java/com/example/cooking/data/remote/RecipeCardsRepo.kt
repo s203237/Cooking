@@ -27,10 +27,14 @@ import java.io.IOException
  */
 class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
     private val apiService = apiService
-    override suspend fun fetchData(collectionName: String): List<RecipeCard> {
+    override suspend fun fetchData(parameters: FetchParameters): List<RecipeCard> {
 
         try {
-            val recipeCollection = apiService.fetchRecipeCollection(collectionName)
+            val recipeCollection = apiService.fetchRecipeCollection(
+                searchTerm = parameters.id,
+                size = parameters.size,
+                tag = parameters.tag
+            )
             return recipeCollection.results.map{ RecipeCard(it.recipeId, it.title, it.imageUrl)}
         } catch (e : IOException) {
             println("It broke :((( ${e.message}")

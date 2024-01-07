@@ -1,5 +1,7 @@
 package com.example.cooking.model
 
+import com.example.cooking.data.remote.CardDto
+
 
 /*enum class ListType(listType: Int) {
     HORIZONTAL(0),
@@ -22,3 +24,15 @@ data class RecipeCard(
     val name: String = "defaultName",
     val thumbnail_url: String = ""
 )
+
+fun createCardsFromDto(dto: List<CardDto>): List<RecipeCard> {
+   val cards = dto.map {
+        RecipeCard(
+            id = it.recipeId,
+            name = it.title,
+            thumbnail_url = it.imageUrl
+        )
+    }
+
+    return cards
+}
