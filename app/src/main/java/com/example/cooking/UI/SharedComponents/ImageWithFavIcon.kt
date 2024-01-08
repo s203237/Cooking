@@ -14,7 +14,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,11 +59,11 @@ fun RecipeImage(
 
             )
     }
-}
 
+}
 @Composable
-fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> Unit) {
-//var isFavorite by remember { mutableStateOf(false) }
+fun FavButton(sizeFraction: Float = 0.15f, /*isFavorite: Boolean,*/  onClick: () -> Unit) {
+var isFavorite by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -73,7 +76,8 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick =  onClick
+            //onClick =  onClick
+            onClick = {isFavorite = !isFavorite}
 
 
         ) {
@@ -98,7 +102,6 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
 fun ImageWithFavIcon(
     recipeId: Int,
     imageUrl: String,
-    //onNavigateToRecipe: (Int) -> Unit,
     isFavorite: Boolean,
     onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (Int) -> Unit,
@@ -147,7 +150,7 @@ fun ImageWithFavIcon(
                 onClick = {
                           onFavoriteButtonClicked(recipeId)
                 },
-                isFavorite = isFavorite,
+                //isFavorite = isFavorite,
 
             )
         }
