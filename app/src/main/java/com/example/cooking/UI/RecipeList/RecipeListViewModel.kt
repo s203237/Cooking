@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
 import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,11 +47,10 @@ class RecipeListViewModel: ViewModel() {
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {
-
             Log.v("RecipeList VM launch", recipeCards.value.toString())
             _collectionName.collect{newCollectionName ->
                 Log.v("CollectionName Trace", "CollectionName in viewModel.launch: $newCollectionName")
-                val recipeCards = DependencyProvider.recipeCardRepo.fetchData(newCollectionName)
+                val recipeCards = DependencyProvider.recipeCardRepo.fetchData(newCollectionName/*_collectionName.value*/)
                 _recipeCards.value = recipeCards
             }
 
