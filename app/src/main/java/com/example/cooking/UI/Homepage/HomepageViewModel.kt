@@ -3,7 +3,6 @@ package com.example.cooking.UI.Homepage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.data.HomepageCuration
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
@@ -13,7 +12,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
+
 class HomePageViewModel: ViewModel() {
+    private val _recipes = MutableStateFlow<List<RecipeCard>>(emptyList())
+    val recipes = _recipes.asStateFlow()
+
+    private val favoritesDataSource = DependencyProvider.favoritesDataSource
+
     private val collections = HomepageCuration().loadCollectionNames()
     private val _recipeCollection1 = MutableStateFlow(RecipeCollection())
     private val _recipeCollection2 = MutableStateFlow(RecipeCollection())
@@ -47,6 +52,23 @@ class HomePageViewModel: ViewModel() {
             _recipeCollection4.value = recipeCollection4
             _recipeCollection5.value = recipeCollection5
 
+
+        }
+
+    }
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            val recipes = DependencyProvider.recipeCardRepo.fetchData("")
+            favoritesDataSource
+                .getFavorites()
+                .collect { favorites ->
+                    _recipes.value = recipes.map { recipeId ->
+                        RecipeCard(
+                            recipeId="recipeId",
+                            isFavorite = favorites.contains("recipeId")
+                        )
+                    }
+                }
         }
     }
     fun onFavoriteButtonClicked(recipeId: String) {
