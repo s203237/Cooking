@@ -92,7 +92,6 @@ fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     listOfCollections: List<RecipeCollection>,
-    //onNavigateToRecipe: (String) -> Unit,
     onFavoriteButtonClicked: (Int) -> Unit,
     onNavigateToRecipe: (Int) -> Unit
 ) {
@@ -159,7 +158,7 @@ fun scrollableList(
                         collection = collection,
                         listSize = 3,
                         onNavigateToRecipe = onNavigateToRecipe,
-                        onFavoriteButtonClicked=onFavoriteButtonClicked,
+                        onFavoriteButtonClicked = onFavoriteButtonClicked,
                         modifier = modifier,
 
                     )
@@ -181,7 +180,7 @@ fun scrollableList(
 
 
 
-fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (String) -> Unit) {
+fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (Int) -> Unit) {
 
 }
 

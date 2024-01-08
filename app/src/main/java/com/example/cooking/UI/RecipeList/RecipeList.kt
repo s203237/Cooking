@@ -45,7 +45,7 @@ fun RecipeList(
             .background(color = Color(0xFFFFFBEF))*/
     ) {
         Text(
-            text = "Recipe List",
+            text = "Favorits Recipes",
             textAlign = TextAlign.Left,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,

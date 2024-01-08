@@ -38,6 +38,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
+import com.example.cooking.UI.Faviorite.FavoritesScreen
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
@@ -238,16 +239,23 @@ fun AppNavigation(){
                     composable(
                         route = Screens.Favorites.name,
                         //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-                    ) {//backStackEntry ->
+                    ) {
+                        displayBottomBar = true
+                        displayTopBar=true
+                        FavoritesScreen(onNavigateToRecipe = { recipeId ->
+                            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                        })
+                       // printBackStack(navController.currentBackStack, "Favorites : ")
+                    //backStackEntry ->
                         // val collectionName = backStackEntry.arguments?.getString("collectionName")
                         // if(collectionName != null) {
-                        ListAllRecipesScreen("salad",
+                       /* ListAllRecipesScreen("salad",
                             onNavigateToRecipe = { recipeId ->
                                 navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                             })
                         Log.v("In favs", "salad")
                         displayBottomBar = true
-                        displayTopBar = true
+                        displayTopBar = true*/
                         //printBackStack(navController.currentBackStack, "Favourites: ")
                         /*} else {
                     Text("Collection not found")
