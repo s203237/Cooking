@@ -52,15 +52,15 @@ fun HelpPage() {
             )
         {
             Text(
-                modifier = Modifier.height(60.dp),
+                modifier = Modifier.height(50.dp),
                 text = "FAQ",
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                modifier = Modifier.height(60.dp),
+                modifier = Modifier.height(50.dp),
                 text = "Can I delete a recipe?",
-                fontSize = 45.sp,
+                fontSize = 35.sp,
                 fontWeight = FontWeight.Normal
             )
             Text(
@@ -70,26 +70,26 @@ fun HelpPage() {
                 fontWeight = FontWeight.Light
             )
             Text(
-                modifier = Modifier.height(60.dp),
+                modifier = Modifier.height(50.dp),
                 text = "What kind of recipes can I find on Vegelicious?",
-                fontSize = 45.sp,
+                fontSize = 35.sp,
                 fontWeight = FontWeight.Normal
             )
             Text(
-                text = "Vegelicious is an app that focusses on Vegetarian recipes" +
-                "Use our search function to open up a world of delicious recipes",
+                text = "Vegelicious is an app that focuses on Vegetarian recipes" +
+                        "Use our search function to open up a world of delicious recipes",
                 fontSize = 21.sp,
                 fontWeight = FontWeight.Light
             )
             Text(
-                modifier = Modifier.height(60.dp),
+                modifier = Modifier.height(50.dp),
                 text = "What if I have allergies?",
-                fontSize = 45.sp,
+                fontSize = 35.sp,
                 fontWeight = FontWeight.Normal
             )
             Text(
                 text = "We recommend that you always consult the ingredient list, before starting cooking." +
-                "The ingredient lists will show all components in the recipe.",
+                        "The ingredient lists will show all components in the recipe.",
                 fontSize = 21.sp,
                 fontWeight = FontWeight.Light
             )
@@ -99,14 +99,14 @@ fun HelpPage() {
                     .align(Alignment.Start)
                     .padding(0.dp, 20.dp, 0.dp, 0.dp),
                 text = "How to get started",
-                fontSize = 22.sp,
+                fontSize = 21.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "Vegelicious is a visual search engine, where you can find ideas and inspiration for vegetarian recipes." +
                         " Sign up with a username and email." +
-                "Now all you have to do is explore delicious recipes and save your favorite ones." +
-                "View your saved recipes under Favorite",
+                        "Now all you have to do is explore delicious recipes and save your favorite ones." +
+                        "View your saved recipes under Favorite",
                 fontSize = 21.sp,
                 fontWeight = FontWeight.Normal
             )
@@ -115,7 +115,7 @@ fun HelpPage() {
                     .align(Alignment.Start)
                     .padding(0.dp, 20.dp, 0.dp, 0.dp),
                 text = "Contant Us",
-                fontSize = 22.sp,
+                fontSize = 21.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
