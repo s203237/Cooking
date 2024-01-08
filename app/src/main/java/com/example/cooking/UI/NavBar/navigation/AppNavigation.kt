@@ -83,6 +83,8 @@ fun AppNavigation(function: () -> Unit) {
         "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
         "Appetizers", "Seasonal"
     )
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
     val commonRoute = Screens.Favorites.name
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -101,11 +103,13 @@ fun AppNavigation(function: () -> Unit) {
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = {navController.popBackStack() }) {
-                            Icon(
-                                imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "Go Back Icon"
-                            )
+                        if(currentRoute != Screens.HomeScreen.name) {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    imageVector = Icons.Default.ArrowBack,
+                                    contentDescription = "Go Back Icon"
+                                )
+                            }
                         }
                     },
                     actions = {
