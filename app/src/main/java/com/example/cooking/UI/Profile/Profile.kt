@@ -338,6 +338,6 @@ fun CreateImage() {
                 contentScale = ContentScale.Crop)
 
         }
-        Text(text = "Favourite")
+        Text(text = "Favorite")
     }
 }
