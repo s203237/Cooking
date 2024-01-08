@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -40,12 +39,13 @@ import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
+import com.example.cooking.UI.Profile.HelpPage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
-import kotlinx.coroutines.flow.StateFlow
 import com.example.cooking.UI.Search.SearchBar
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -68,6 +68,8 @@ import com.example.cooking.UI.Search.SearchBar
  * @see ListAllRecipesScreen
  * @see ProfileBox
  * @see DisplayRecipeScreen
+ * @see HelpPage
+ * @see PrivacyPolicy
  */
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -261,8 +263,32 @@ fun AppNavigation(function: () -> Unit) {
             composable(route = Screens.Profile.name) {
                 displayBottomBar=true
                 displayTopBar=true
-                ProfileBox()
+                ProfileBox(
+                    onNavigateToHelpPage = {
+                        navController.navigate(
+                            route = Screens.HelpPage.name
+                        )
+                    }
+                )
+
                 printBackStack(navController.currentBackStack, "Profile: ")
+            }
+
+            composable(route = Screens.HelpPage.name) {
+                displayBottomBar=true
+                displayTopBar=true
+                HelpPage()
+
+
+                printBackStack(navController.currentBackStack, "HelpPage: ")
+            }
+
+            composable(route = Screens.PrivacyPolicy.name) {
+                displayBottomBar=true
+                displayTopBar=true
+                PrivacyPolicy()
+
+                printBackStack(navController.currentBackStack, "PrivacyPolicy: ")
             }
 
             composable(
