@@ -39,8 +39,8 @@ fun RecipePage(recipe: Recipe) {
                 .fillMaxSize()
         ) {
             ImageWithFavIcon(
-                recipeId = recipe.recipeId,
-                imageUrl = recipe.imageUrl,
+                recipeId = recipe.id,
+                imageUrl = recipe.thumbnail_url,
                 {},
                 {},
                 CardFormats.PORTRAIT

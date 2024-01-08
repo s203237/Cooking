@@ -31,7 +31,6 @@ import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.model.FoodCategories
-import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -39,7 +38,7 @@ fun scrollableList(
 
     dailyRecipe: RecipeCard,
     listOfList: List<FoodCategories>,
-    onNavigateToRecipe: (String) -> Unit
+    onNavigateToRecipe: (Int) -> Unit
 ){
 
     val listState = rememberLazyListState()
@@ -122,7 +121,7 @@ fun PreviewscrollableList(){
 
  */
 @Composable
-fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (String) -> Unit, subtitle: String = "") {
+fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "") {
 
     Column(
         modifier = Modifier
@@ -142,17 +141,17 @@ fun RecipeItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Stri
 //                contentScale = ContentScale.Crop,
 //            )
             ImageWithFavIcon(
-                recipeId = recipe.recipeId,
-                imageUrl = recipe.imageUrl,
+                recipeId = recipe.id,
+                imageUrl = recipe.thumbnail_url,
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked = {},
                 cardFormat = CardFormats.SQUARE
             )
         }
-        val recipeTitle = recipe.title
+        val recipeTitle = recipe.name
         println("this is the recipe title: $recipeTitle")
         Text(
-            text = recipe.title,
+            text = recipe.name,
             fontSize = 20.sp,
             modifier = Modifier
                 .padding(10.dp)

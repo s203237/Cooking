@@ -30,16 +30,22 @@ class HomePageViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             //val dailyRecipe = DependencyProvider.recipeSingleCardRepo.fetchData("miso-butternut-soup")
 
-            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("high-protein-vegan-recipes")
-            val recipeCards2 = DependencyProvider.recipeCardRepo.fetchData("vegan-winter-recipes")
-            val recipeCards3 = DependencyProvider.recipeCardRepo.fetchData("vegan-lentil-recipes")
-            val recipeCards4 = DependencyProvider.recipeCardRepo.fetchData("vegan-slow-cooker-recipes")
+            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("tofu")
+//            val recipeCards2 = DependencyProvider.newrecipeCardRepo.fetchData("carrot")
+//            val recipeCards3 = DependencyProvider.newrecipeCardRepo.fetchData("pasta")
+//            val recipeCards4 = DependencyProvider.newrecipeCardRepo.fetchData("salad")
 
             //_dailyRecipe.value = dailyRecipe
             _recipeCards1.value = recipeCards1
-            _recipeCards2.value = recipeCards2
-            _recipeCards3.value = recipeCards3
-            _recipeCards4.value = recipeCards4
+            _recipeCards2.value = recipeCards1
+            _recipeCards3.value = recipeCards1
+            _recipeCards4.value = recipeCards1
+
+//            _recipeCards2.value = recipeCards2
+//            _recipeCards3.value = recipeCards3
+//            _recipeCards4.value = recipeCards4
+
+
         }
     }
 }

@@ -27,7 +27,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
                 contentAlignment = Alignment.BottomEnd
             ) {
                 AsyncImage(
-                    model = recipe.imageUrl,
+                    model = recipe.thumbnail_url,
                     contentDescription = null, //TODO give content description
                     modifier = Modifier
                         .fillMaxWidth()
@@ -60,7 +60,7 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
             )
         }
         Text(
-            text = recipe.title,
+            text = recipe.name,
             fontSize = 20.sp,
             modifier = Modifier.padding(10.dp)
         )
@@ -71,9 +71,9 @@ fun RecipeCard(recipe: Recipe, subTitle: String ="") =
 @Composable
 fun PreviewRecipeCard(){
     val recipe = Recipe(
-        title = "Peach",
-        imageUrl = "app/src/main/res/drawable/peach.png",
-        imageDescription = "3d rendering of a close-up of a peach with googly eyes"/*,
+        name = "Peach",
+        thumbnail_url = "app/src/main/res/drawable/peach.png",
+        thumbnail_alt_text = "3d rendering of a close-up of a peach with googly eyes"/*,
         timeToCook = TimeToCook("10 min", "1h30 min"),
         difficulty = "Easy",
         servingSize = "10",

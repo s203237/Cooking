@@ -25,6 +25,7 @@ import com.example.cooking.UI.SharedComponents.CustomHeading1
 import com.example.cooking.UI.SharedComponents.CustomHeading2
 import com.example.cooking.UI.SharedComponents.CustomTitle
 import com.example.cooking.data.RecipeData
+import com.example.cooking.model.Component
 import com.example.cooking.model.Recipe
 import kotlin.math.roundToInt
 
@@ -60,17 +61,29 @@ fun InfoTab(recipe: Recipe) {
                 )
         ) {
             DisplayRecipeInfo(recipe = recipe)
-            CustomTitle(title = recipe.title, textAlign = TextAlign.Center)
-            CustomHeading2(heading = recipe.author, textAlign = TextAlign.Center)
+            CustomTitle(title = recipe.name, textAlign = TextAlign.Center)
+
+            val headingText = if(recipe.credits.isNotEmpty()){
+                recipe.credits[0].name
+            }else{
+                "Default Name"
+            }
+            CustomHeading2(heading = headingText, textAlign = TextAlign.Center)
             CustomHeading1(heading = "description")
             Text(
-                text = recipe.recipeDescription,
+                text = recipe.description,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
 
             CustomHeading1(heading = "ingredients")
-            BulletList(list = recipe.ingredients)
+
+            val ingrList = if(recipe.sections.isNotEmpty()){
+                recipe.sections[0].components
+            }else{
+                emptyList()
+            }
+            BulletList(list = ingrList)
         }
     }
 }
@@ -89,13 +102,13 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
 
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_timer_24),
-            infoType1 = "PREP", infoVal1 = recipe.timeToCook.prepTime,
+            infoType1 = "PREP", infoVal1 = recipe.prep_time_minutes.toString(),
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
-            infoType2 = "COOK", infoVal2 = recipe.timeToCook.cookTime
+            infoType2 = "COOK", infoVal2 = recipe.cook_time_minutes.toString()
         )
 
         val diff = recipe.difficulty
-        val serv = recipe.servingSize.toString()
+        val serv = recipe.num_servings.toString()
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_thermostat_24),
             infoType1 = "DIFFICULTY", infoVal1 = diff,
@@ -103,7 +116,7 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             infoType2 = "SERVING SIZE", infoVal2 = serv
         )
 
-        DisplayRating(recipe.rating);
+        DisplayRating(recipe.user_ratings.score);
     }
 }
 @Composable
@@ -154,11 +167,17 @@ private fun formatTime(minutes: Int): String {
 }
 @Composable
 private fun DisplayRating(rating: Float) {
+    println("Rating: " + rating)
     val starCount = 5
     val filledStar: Painter = painterResource(id = R.drawable.baseline_star_24)
     val halfStar: Painter = painterResource(id = R.drawable.baseline_star_half_24)
     val borderStar: Painter = painterResource(id = R.drawable.baseline_star_border_24)
-    val halfStarIndex = rating.roundToInt()
+
+    //Scale rating(0to1) to fit five stars with halfstars
+    val scaledScore = (rating*starCount*2).roundToInt()/2f
+    val fullStars = scaledScore.toInt()
+    val halfStars = if(scaledScore - fullStars >= 0.5) 1 else 0
+    val emptyStars = starCount - fullStars - halfStars
 
     Row( modifier = Modifier
         .fillMaxWidth()
@@ -166,26 +185,34 @@ private fun DisplayRating(rating: Float) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
-        var currentStar: Painter = filledStar
-        for(i in 1..starCount) {
-            if (i == halfStarIndex)
-                currentStar = halfStar
-            else if (i > halfStarIndex)
-                currentStar = borderStar
-
+        //Display full stars
+        for(i in 1..fullStars){
             Icon(
-                currentStar,
+                painter = filledStar,
                 contentDescription = "rating star"
             )
         }
-
+        //Display half stars
+        if(halfStars > 0){
+            Icon(
+                painter = halfStar,
+                contentDescription = "rating star"
+            )
+        }
+        //Display empty stars
+        for(i in 1..emptyStars){
+            Icon(
+                painter = borderStar,
+                contentDescription = "rating star"
+            )
+        }
     }
 }
 
 @Composable
-private fun BulletList(list: List<String>) {
+private fun BulletList(list: List<Component>) {
     list.forEach { item ->
-        Text(text =  "• $item",
+        Text(text =  "• ${item.raw_text}",
             fontSize = 16.sp,
         )
     }
