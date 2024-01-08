@@ -73,7 +73,7 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick = onClick
+            onClick =  onClick
 
 
         ) {
@@ -147,7 +147,8 @@ fun ImageWithFavIcon(
                 onClick = {
                           onFavoriteButtonClicked(recipeId)
                 },
-                isFavorite = isFavorite
+                isFavorite = isFavorite,
+
             )
         }
 
