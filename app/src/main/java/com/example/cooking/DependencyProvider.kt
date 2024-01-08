@@ -23,7 +23,7 @@ object DependencyProvider {
 
     val apiKeyInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("X-RapidAPI-Key", "7f5a69bf50mshb2f0787d9ceb37ep13962ejsnda15f88a28c5")
+            .addHeader("X-RapidAPI-Key", "173f6e51b0msh4dadab55e6361b6p13a3ebjsndf11d2202516")
             .build()
         chain.proceed(request)
     }
