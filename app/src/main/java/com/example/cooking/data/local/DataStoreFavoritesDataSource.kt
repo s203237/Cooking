@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.cooking.data.local.FavoritesDataSource
+import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -19,11 +20,11 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
 
     private val favoritesKey = stringPreferencesKey("favorites")
 
-    override fun getFavorites(): Flow<List<String>> {
+    override fun getFavorites(): Flow<List<RecipeCard>> {
         return context.dataStore.data.map {  prefs ->
             val jsonString = prefs[favoritesKey].orEmpty()
             try {
-                Json.decodeFromString<List<String>>(jsonString)
+                Json.decodeFromString(jsonString)
             } catch (error: Throwable) {
                 emptyList()
             }

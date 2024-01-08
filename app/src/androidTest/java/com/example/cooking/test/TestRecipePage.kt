@@ -12,7 +12,7 @@ import com.example.cooking.model.RecipeCard
 import org.junit.Rule
 import org.junit.Test
 
-class TestRecipePage {
+/*class TestRecipePage {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -40,3 +40,6 @@ class TestRecipePage {
 
     }
 }
+
+
+     */

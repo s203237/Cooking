@@ -62,8 +62,8 @@ fun RecipeImage(
 
 }
 @Composable
-fun FavButton(sizeFraction: Float = 0.15f, /*isFavorite: Boolean,*/  onClick: () -> Unit) {
-var isFavorite by remember { mutableStateOf(false) }
+fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> Unit) {
+//var isFavorite by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -76,8 +76,9 @@ var isFavorite by remember { mutableStateOf(false) }
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            //onClick =  onClick
-            onClick = {isFavorite = !isFavorite}
+            onClick =  onClick,
+
+            //onClick = {isFavorite = !isFavorite}
 
 
         ) {
@@ -149,8 +150,9 @@ fun ImageWithFavIcon(
             FavButton(
                 onClick = {
                           onFavoriteButtonClicked(recipeId)
+                          //onFavoriteButtonClicked
                 },
-                //isFavorite = isFavorite,
+                isFavorite = isFavorite,
 
             )
         }

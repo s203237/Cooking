@@ -348,7 +348,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (Int) -> Uni
                 )
 
             }
-            FavButton(0.35f,/* isFavorite =recipeCard.isFavorite,*/ onClick ={onFavoriteButtonClicked(recipeCard.id)})
+            FavButton(0.35f, isFavorite = recipeCard.isFavorite , onClick = {onFavoriteButtonClicked(recipeCard.id)})
         }
         Spacer(Modifier.height(16.dp))
     }

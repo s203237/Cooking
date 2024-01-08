@@ -16,9 +16,9 @@ class FavoritesScreenViewModel: ViewModel() {
     private val favoritesDataSource = DependencyProvider.favoritesDataSource
     val favorites : Flow<List<RecipeCard>> = favoritesDataSource
         .getFavorites()
-        .map { recipeId ->
-            recipeId.map {
-                RecipeCard(isFavorite = true, thumbnail_url = it )
+        .map { recipeCard ->
+            recipeCard.map {
+                RecipeCard(isFavorite = true, thumbnail_url = it.thumbnail_url , id = it.id , name = it.name )
             }
         }
     /*private val favoritesDataSource = DependencyProvider.favoritesDataSource
