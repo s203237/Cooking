@@ -38,5 +38,11 @@ val listOfNavItem: List<NavItem> = listOf(
         icon= Icons.Default.Person,
         route= Screens.Profile.name
 
+    ),
+    NavItem(
+        label="Recipeslist",
+        icon= Icons.Default.Person,
+        route= Screens.RecipeList.name
+
     )
 )

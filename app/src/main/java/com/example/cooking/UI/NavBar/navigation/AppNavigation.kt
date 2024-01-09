@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -134,9 +133,10 @@ fun AppNavigation(function: () -> Unit) {
                                     onClick = {
                                         selectedItem = item
                                         expanded = false
-                                        navController.navigate(route = commonRoute)
-                                    }
+                                         navController.navigate(route ="Screens.RecipeList.name/$item" )
 
+
+                                    }
                                 )
                             }
                         }
@@ -242,29 +242,30 @@ fun AppNavigation(function: () -> Unit) {
                     Text("Collection not found")
                 }*/
             }
-//            composable(
-//                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-//            ){backStackEntry ->
-//                 val collectionName = backStackEntry.arguments?.getString("collectionName")
-//                 if(collectionName != null) {
-//                ListAllRecipesScreen(collectionName,
-//                    onNavigateToRecipe = { recipeId ->
-//                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-//                    })
-//                     printBackStack(navController.currentBackStack, "Recipe List: ")
-//                } else {
-//                    Text("Collection not found")
-//                }
-//                displayBottomBar=true
-//                displayTopBar=true
-//            }
+
             composable(route = Screens.Profile.name) {
                 displayBottomBar=true
                 displayTopBar=true
                 ProfileBox()
                 printBackStack(navController.currentBackStack, "Profile: ")
             }
-
+            composable(
+                route = "Screens.RecipeList.name/{item}",
+                arguments = listOf(navArgument("item") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val item = backStackEntry.arguments?.getString("item")
+                if (item != null) {
+                    ListAllRecipesScreen(item,
+                    onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    })
+                    printBackStack(navController.currentBackStack, "Recipe Screen: ")
+                } else {
+                    Text("Recipe not found")
+                }
+                displayBottomBar=true
+                displayTopBar=true
+            }
             composable(
                 route = "Screens.RecipeItem.name/{recipeId}",
                 arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
@@ -280,6 +281,7 @@ fun AppNavigation(function: () -> Unit) {
                 displayTopBar=true
             }
         }
+
 
     }
 }
