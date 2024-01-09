@@ -27,9 +27,9 @@ data class RecipeCard(
 )
 
 data class Tag(
-    val name: String,
-    val displayName: String,
-    val type: String
+    val name: String = "defaultName",
+    val displayName: String = "defaultDisplay",
+    val type: String = "defaultType"
 )
 fun createCardsFromDto(cardDto: List<CardDto>): List<RecipeCard> {
    val cards = cardDto.map {
@@ -47,6 +47,5 @@ fun createCardsFromDto(cardDto: List<CardDto>): List<RecipeCard> {
             tags = tags
         )
     }
-
     return cards
 }

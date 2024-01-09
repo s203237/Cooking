@@ -240,10 +240,12 @@ fun AppNavigation(){
                     ) {//backStackEntry ->
                         // val collectionName = backStackEntry.arguments?.getString("collectionName")
                         // if(collectionName != null) {
-                        ListAllRecipesScreen("salad",
+                        ListAllRecipesScreen(
+                            "salad",
                             onNavigateToRecipe = { recipeId ->
                                 navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                            })
+                            },
+                        )
                         Log.v("In favs", "salad")
                         displayBottomBar = true
                         displayTopBar = true
@@ -262,10 +264,12 @@ fun AppNavigation(){
                         val collectionName = backStackEntry.arguments?.getString("collectionName")
                         Log.v("Navigation", "In RecipeList, coll name : $collectionName")
                         if (collectionName != null) {
-                            ListAllRecipesScreen(collectionName,
+                            ListAllRecipesScreen(
+                                collectionName,
                                 onNavigateToRecipe = { recipeId ->
                                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                                })
+                                },
+                            )
                            // printBackStack(navController.currentBackStack, "Recipe List: ")
                         } else {
                             Text("Collection not found")

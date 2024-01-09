@@ -44,15 +44,27 @@ class RecipeListViewModel: ViewModel() {
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
     }
+
+    fun getCardsByTags(tagsList: List<String>, cards: List<RecipeCard>): List<RecipeCard> {
+        return cards.filter { card ->
+            val names = card.tags.map{ it.name }
+            val predicate: (String) -> Boolean = {it in tagsList}
+            names.any(predicate)
+        }
+    }
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _collectionName.collect{newCollectionName ->
-                val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(FetchParameters(id = newCollectionName)).results
+              _collectionName.collect{newCollectionName ->
+                val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(
+                    FetchParameters(
+                        id = newCollectionName
+                    )
+                ).results
                 Log.v("RecipeListViewModel", cardDtoList.toString())
                 val recipeCards = createCardsFromDto(cardDtoList)
                 _recipeCards.value = recipeCards
             }
-
         }
     }
 
