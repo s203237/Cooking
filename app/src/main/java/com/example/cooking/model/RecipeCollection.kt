@@ -22,14 +22,29 @@ data class RecipeCollection(
 data class RecipeCard(
     val id: Int = 0,
     val name: String = "defaultName",
-    val thumbnail_url: String = ""
+    val thumbnail_url: String = "",
+    val tags: List<Tag> = emptyList()
 )
-fun createCardsFromDto(dto: List<CardDto>): List<RecipeCard> {
-   val cards = dto.map {
+
+data class Tag(
+    val name: String,
+    val displayName: String,
+    val type: String
+)
+fun createCardsFromDto(cardDto: List<CardDto>): List<RecipeCard> {
+   val cards = cardDto.map {
+       val tags = it.tags.map { tagDto ->
+               Tag(
+                   name = tagDto.name,
+                   displayName = tagDto.displayName,
+                   type = tagDto.type
+               )
+       }
         RecipeCard(
             id = it.recipeId,
             name = it.title,
-            thumbnail_url = it.imageUrl
+            thumbnail_url = it.imageUrl,
+            tags = tags
         )
     }
 

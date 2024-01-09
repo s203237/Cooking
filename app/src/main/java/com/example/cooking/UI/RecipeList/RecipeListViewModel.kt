@@ -43,38 +43,17 @@ class RecipeListViewModel: ViewModel() {
 
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
-        val printOutValue = _collectionName.value
-        Log.v("CollectionName Trace", "In updateCollectionName: $printOutValue")
-
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.v("RecipeList VM launch", recipeCards.value.toString())
             _collectionName.collect{newCollectionName ->
-                Log.v("CollectionName Trace", "CollectionName in viewModel.launch: $newCollectionName")
                 val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(FetchParameters(id = newCollectionName)).results
+                Log.v("RecipeListViewModel", cardDtoList.toString())
                 val recipeCards = createCardsFromDto(cardDtoList)
                 _recipeCards.value = recipeCards
             }
 
         }
     }
-/*
-    fun updateSearchKey(newSearchKeyword: String) {
-        query.value = newSearchKeyword
-        val printOutValue = query.value
-        Log.v(" SearchKeyword Trace", "In updateSearchKeyword: $printOutValue")
-    }
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            query.collect{newSearchKeyword ->
-                Log.v("SearchKeyword Trace", "SearchKeyword in viewModel.launch: $newSearchKeyword")
-                val recipeCards = DependencyProvider.recipeCardsRepoSearch.fetchData(query.value)
-                _recipeCards.value = recipeCards
-            }
-
-        }
-    }
-*/
 
 }
