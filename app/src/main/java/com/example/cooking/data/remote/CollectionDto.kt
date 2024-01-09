@@ -23,6 +23,7 @@ data class CardDto(
 @Serializable
 data class TagDto(
     val name: String,
-    val display_name: String,
+    @SerialName("display_name")
+    val displayName: String,
     val type: String
 )
