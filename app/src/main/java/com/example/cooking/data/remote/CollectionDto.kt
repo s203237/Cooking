@@ -16,5 +16,13 @@ data class CardDto(
     val title: String = "Default title",
     @SerialName("thumbnail_url")
     val imageUrl: String = "",
+    val tags: List<TagDto> = emptyList()
     //val imageDescription: String, TODO get image description
+)
+
+@Serializable
+data class TagDto(
+    val name: String,
+    val display_name: String,
+    val type: String
 )
