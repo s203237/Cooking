@@ -3,16 +3,16 @@ package com.example.cooking.UI.Homepage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
-import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class HomePageViewModel: ViewModel() {
+class HomePageViewModel : ViewModel() {
     private val collections = HomepageCuration().loadCollectionNames()
 
     private val count = HomepageCuration().getCollectionsCount()
@@ -22,22 +22,24 @@ class HomePageViewModel: ViewModel() {
     private val _dailyRecipe = MutableStateFlow(RecipeCard())
 
     val dailyRecipe = _dailyRecipe.asStateFlow()
+    private val favoritesDataSource = DependencyProvider.favoritesDataSource
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCollections : List<RecipeCollection> = collections.map{
+            val recipeCollections: List<RecipeCollection> = collections.map {
                 DependencyProvider.recipeCollectionRepo.fetchData(it)
             }
 
             val listTypes = HomepageCuration().loadListTypes()
 
             listTypes.mapIndexed { index, type ->
-               // Log.v("HP Viewmodel", recipeCollections[index].collectionName)
+                // Log.v("HP Viewmodel", recipeCollections[index].collectionName)
                 recipeCollections[index].type = type
             }
 
             _recipeCollections.value = recipeCollections
             //Log.v("HP Viewmodel", "collections size $count")
-            _dailyRecipe.value = getDailyRecipe(recipeCollections[count-1])
+            _dailyRecipe.value = getDailyRecipe(recipeCollections[count - 1])
 
 //            val recipeCards1 = DependencyProvider.recipeCardRepo.fetchData("tofu")
 //            val recipeCards2 = DependencyProvider.newrecipeCardRepo.fetchData("carrot")
@@ -53,9 +55,25 @@ class HomePageViewModel: ViewModel() {
 //            _recipeCards2.value = recipeCards2
 //            _recipeCards3.value = recipeCards3
 //            _recipeCards4.value = recipeCards4
+            val favoritesCards = favoritesDataSource.getFavorites().first()
+            val favoriteIds = favoritesCards.map { it.id } // Assuming 'id' is the property that holds the recipe ID
+            updateCollectionsWithFavorites(favoriteIds)
 
         }
     }
+    private fun updateCollectionsWithFavorites(favorites: List<Int>) {
+        _recipeCollections.value = _recipeCollections.value.map { collection ->
+            updateFavoriteStatus(collection, favorites)
+        }
+    }
+
+    private fun updateFavoriteStatus(collection: RecipeCollection, favorites: List<Int>): RecipeCollection {
+        val updatedRecipes = collection.results.map { recipe ->
+            recipe.copy(isFavorite = favorites.contains(recipe.id))
+        }
+        return collection.copy(results = updatedRecipes)
+    }
+
     fun onFavoriteButtonClicked(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -68,7 +86,7 @@ class HomePageViewModel: ViewModel() {
     }
 }
 
-fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
+fun getDailyRecipe(collection: RecipeCollection): RecipeCard {
     if (collection.results.isEmpty()) {
         return RecipeCard() // or handle appropriately
     }
