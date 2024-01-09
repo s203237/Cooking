@@ -1,14 +1,13 @@
 package com.example.cooking.UI.Homepage
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
 import com.example.cooking.data.remote.CollectionDto
 import com.example.cooking.data.remote.FetchParameters
-import com.example.cooking.model.ListType
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
+import com.example.cooking.model.createCardsFromDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -37,23 +36,10 @@ class HomePageViewModel: ViewModel() {
                 DependencyProvider.recipeCollectionRepo.fetchData(parameters)
             }
 
-            //val listTypes = HomepageCuration().loadListTypes()
-
             _recipeCollections.value = recipeCollections.mapIndexed { index, collection ->
-                val results = when(collections[index].listType) {
-                    ListType.CARD -> {
-                        Log.v("Homepage VM Coll results", collection.results.toString())
-                        listOf(getRandomRecipeCard(collection))
-                    }
-                    else -> {
-                        collection.results.map { card ->
-                            RecipeCard(card.recipeId, card.title, card.imageUrl)
-                        }
-                    }
-                }
+               val results = createCardsFromDto(collection.results)
 
                 RecipeCollection(collections[index].id, results, collections[index].listType)
-
             }
             _dailyRecipe.value = getDailyRecipe(_recipeCollections.value[size-1])
         }
