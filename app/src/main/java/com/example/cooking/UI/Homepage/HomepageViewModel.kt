@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
 import com.example.cooking.data.remote.CollectionDto
 import com.example.cooking.data.remote.FetchParameters
+import com.example.cooking.data.remote.HomepageCollection
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import com.example.cooking.model.createCardsFromDto
@@ -13,10 +14,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import kotlin.random.Random
 
 class HomePageViewModel: ViewModel() {
-    private val collections = HomepageCuration().loadCollectionData()
+    private val collectionData = HomepageCuration().loadCollectionData()
     //private val collections = HomepageCuration().loadCollectionNames()
     val size = HomepageCuration().getCollectionsCount()
 
@@ -28,7 +28,7 @@ class HomePageViewModel: ViewModel() {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipeCollections : List<CollectionDto> = collections.map{
+            val collectionDtoList : List<CollectionDto> = collectionData.map{
                 val parameters = FetchParameters(
                     id = it.id,
                     size = it.size
@@ -36,10 +36,8 @@ class HomePageViewModel: ViewModel() {
                 DependencyProvider.recipeCollectionRepo.fetchData(parameters)
             }
 
-            _recipeCollections.value = recipeCollections.mapIndexed { index, collection ->
-               val results = createCardsFromDto(collection.results)
-
-                RecipeCollection(collections[index].id, results, collections[index].listType)
+            _recipeCollections.value = collectionDtoList.mapIndexed { index, collection ->
+                createRecipeCollection(collection, collectionData[index])
             }
             _dailyRecipe.value = getDailyRecipe(_recipeCollections.value[size-1])
         }
@@ -53,10 +51,8 @@ fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
     return collection.results[i]
 }
 
-fun getRandomRecipeCard(collection: CollectionDto): RecipeCard {
-    val size = collection.results.size
-    val i = Random.nextInt(0, size)
-    val card = collection.results[i]
-    return RecipeCard(card.recipeId, card.title, card.imageUrl)
+fun createRecipeCollection(dto: CollectionDto, collectionData: HomepageCollection) : RecipeCollection {
+    val results = createCardsFromDto(dto.results)
+    return RecipeCollection(collectionData.id, results, collectionData.listType)
 }
 
