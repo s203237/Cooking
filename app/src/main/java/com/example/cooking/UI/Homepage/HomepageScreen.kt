@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Homepage
 
+import HomePageViewModel
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun HomepageScreen(onNavigateToRecipe: (String) -> Unit){
     val viewModel: HomePageViewModel = viewModel()
+
     val collection1 by viewModel.recipeCollection1.collectAsState()
     val collection2 by viewModel.recipeCollection2.collectAsState()
     val collection3 by viewModel.recipeCollection3.collectAsState()
