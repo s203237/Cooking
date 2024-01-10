@@ -1,9 +1,4 @@
-package com.example.cooking.data.remote
-
-import com.example.cooking.model.Recipe
-import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
-import com.example.cooking.model.TimeToCook
+package com.example.cooking.data.remote.mock
 
 /*
 class MockApiService: ApiService {
