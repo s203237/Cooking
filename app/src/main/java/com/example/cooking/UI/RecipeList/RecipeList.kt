@@ -121,7 +121,12 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
             }
             if(isVisible) {
                 UppercaseHeadingSmall(heading = "difficulty")
-                FilterButton(label = "TEST")
+                FilterButton(
+                    label = "TEST 5 INGRE",
+                    onClick = {
+                        filters += "5_ingredients_or_less"
+                    }
+                )
                 Button(
                     onClick = { filters += "5_ingredients_or_less" },
                 ) {
@@ -150,13 +155,14 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
 }
 
 @Composable
-fun FilterButton(label: String) {
+fun FilterButton(label: String, onClick: () -> Unit) {
     var isSelected by remember { mutableStateOf(false) }
     var color = if (isSelected) {
         ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondary,
             contentColor = MaterialTheme.colorScheme.onSecondary,
         )
+
     } else {
         ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -164,12 +170,16 @@ fun FilterButton(label: String) {
         )
     }
     Button(
-        onClick = { isSelected = !isSelected },
+        onClick = onClick,
         colors = color
 
     ) {
         Text(text = label)
     }
+}
+
+private fun updateFiltersList(newFilter: String): String {
+    return newFilter
 }
 
 @Preview
