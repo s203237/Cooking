@@ -46,21 +46,17 @@ class RecipeListViewModel: ViewModel() {
         _collectionName.value = newCollectionName
     }
 
-    fun filterByTags(tags: List<String>, recipeCards: List<RecipeCard>) {
-        tags.forEach { println(it) }
+    fun filterByTags(tags: Set<String>, recipeCards: List<RecipeCard>) {
         val recipeCards = getCardsByTags(tags, recipeCards)
         println(recipeCards.toString())
         _recipeCards.value = recipeCards
     }
 
-    fun getCardsByTags(tagsList: List<String>, cards: List<RecipeCard>): List<RecipeCard> {
+    fun getCardsByTags(tagsList: Set<String>, cards: List<RecipeCard>): List<RecipeCard> {
         return cards.filter { card ->
             val cardTagNames = card.tags.map{ it.name }
-            val tagsSet = tagsList.toSet()
-            val intersection = tagsSet.intersect(cardTagNames.toSet())
-            intersection == tagsSet
-            /*val predicate: (String) -> Boolean = {it in tagsList}
-            cardTagNames.all(predicate)*/
+            val intersection = tagsList.intersect(cardTagNames.toSet())
+            intersection == tagsList
         }
     }
     init {

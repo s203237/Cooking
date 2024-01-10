@@ -47,7 +47,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
     val cards by viewModel.recipeCards.collectAsState()
     Log.v("Recipe List Screen", cards.toString())
     Column{
-        FilterMenu(
+         FilterMenu(
             onApplyFilters = { tagList ->
                 viewModel.filterByTags(
                     tags = tagList,
@@ -73,7 +73,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 @Composable
 fun TestTagFilterIsInTags(){
     val vm: RecipeListViewModel = viewModel()
-    val tagsList = listOf("dairy_free", "gluten_free")
+    val tagsList = setOf("dairy_free", "gluten_free")
     val recipesCardList = loadTestCardsWithTags()
     val recipeCardList = vm.getCardsByTags(tagsList, recipesCardList)
     Column{

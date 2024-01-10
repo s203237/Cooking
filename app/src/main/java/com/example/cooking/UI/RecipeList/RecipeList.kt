@@ -101,7 +101,7 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
 }
 
 @Composable
-fun FilterMenu(onApplyFilters: (List<String>) -> Unit) {
+fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
@@ -125,7 +125,7 @@ fun FilterMenu(onApplyFilters: (List<String>) -> Unit) {
                         text = "easy",
                         modifier = Modifier
                             .clickable {
-                                val easy = listOf("5_ingredients_or_less")
+                                val easy = setOf("5_ingredients_or_less")
                                 println(easy)
                                 onApplyFilters(easy)
                             }
