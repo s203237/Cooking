@@ -1,13 +1,19 @@
 package com.example.cooking.UI.RecipeList
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.Tag
@@ -40,9 +46,23 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 
     val cards by viewModel.recipeCards.collectAsState()
     Log.v("Recipe List Screen", cards.toString())
+
+    FilterMenu(
+        onApplyFilters = { tagList ->
+            viewModel.filterByTags(
+                tags = tagList,
+                recipeCards = cards
+            )
+        }
+    )
     RecipeList(
         recipeCards = cards,
         onNavigateToRecipe = onNavigateToRecipe,
+        modifier = Modifier
+            .padding(16.dp)
+            .background(color = MaterialTheme.colorScheme.background)
+            .fillMaxWidth(),
+
     )
 }
 
@@ -51,30 +71,12 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 @Composable
 fun TestTagFilterIsInTags(){
     val vm: RecipeListViewModel = viewModel()
-    val tagsList = listOf("tag1", "tag2")
-    val card1Tags = listOf(
-        Tag(name = "tag3"),
-        Tag(name = "tag4")
-    )
-
-    val card2Tags = listOf(
-        Tag(name = "tag3"),
-        Tag(name = "tag1")
-    )
-    val recipesCardList = listOf(
-        RecipeCard(
-            name = "card1",
-            tags = card1Tags
-        ),
-        RecipeCard(
-            name = "card2",
-            tags = card2Tags
-        )
-    )
+    val tagsList = listOf("dairy_free", "gluten_free")
+    val recipesCardList = loadTestCardsWithTags()
     val recipeCardList = vm.getCardsByTags(tagsList, recipesCardList)
     Column{
         Text(
-            text = "Expecting card2"
+            text = "Expecting card 'dairy-free gluten-free'"
         )
         recipeCardList.map{
             Text(
@@ -83,6 +85,31 @@ fun TestTagFilterIsInTags(){
         }
     }
 
+
+}
+
+fun loadTestCardsWithTags(): List<RecipeCard> {
+
+    val card1Tags = listOf(
+        Tag(name = "dairy_free"),
+        Tag(name = "gluten_free"),
+        Tag(name = "easy")
+    )
+
+    val card2Tags = listOf(
+        Tag(name = "asian"),
+        Tag(name = "dairy_free")
+    )
+    return listOf(
+        RecipeCard(
+            name = "dairy-free gluten-free",
+            tags = card1Tags
+        ),
+        RecipeCard(
+            name = "asian dairy-free",
+            tags = card2Tags
+        )
+    )
 }
 /*@Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {

@@ -51,9 +51,12 @@ class RecipeListViewModel: ViewModel() {
 
     fun getCardsByTags(tagsList: List<String>, cards: List<RecipeCard>): List<RecipeCard> {
         return cards.filter { card ->
-            val names = card.tags.map{ it.name }
-            val predicate: (String) -> Boolean = {it in tagsList}
-            names.any(predicate)
+            val cardTagNames = card.tags.map{ it.name }
+            val tagsSet = tagsList.toSet()
+            val intersection = tagsSet.intersect(cardTagNames.toSet())
+            intersection == tagsSet
+            /*val predicate: (String) -> Boolean = {it in tagsList}
+            cardTagNames.all(predicate)*/
         }
     }
     init {
