@@ -22,7 +22,6 @@ class MockCollectionRepo(apiService: ApiService): RecipeDataRepo<CollectionDto> 
         )
 
         val card2Tags = listOf(
-            TagDto(name = "dairy_free", displayName = "Dairy Free", type = "Dietary"),
             TagDto(name = "asian", displayName = "Asian", type = "Cuisine"),
             TagDto(name = "5_ingredients_or_less", displayName = "5 ingredients or less", type = "Difficulty")
         )
@@ -40,7 +39,7 @@ class MockCollectionRepo(apiService: ApiService): RecipeDataRepo<CollectionDto> 
                 imageUrl = "https://img.buzzfeed.com/video-api-prod/assets/eafca7a493d244788666b29cc4f0b017/BFV5191_CarrotCakeOatmeal-Thumb1080.jpg?resize=600:*&output-format=auto&output-quality=auto"
             ),
             CardDto(
-                title = "asian dairy-free 5 ingredients or less",
+                title = "asian 5 ingredients or less",
                 tags = card2Tags,
                 imageUrl = "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/448826.jpg?resize=600:*&output-format=auto&output-quality=auto"
             ),

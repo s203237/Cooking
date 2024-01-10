@@ -18,7 +18,6 @@ package com.example.cooking.UI.RecipeList
 //import com.example.cooking.data.remote.mock_datasource.RecipeData
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -103,6 +102,7 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
 @Composable
 fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
+    var filters by remember {  mutableStateOf(emptySet<String>()) }
     Box(
         modifier = Modifier
             .padding(16.dp)
@@ -120,16 +120,22 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
             }
             if(isVisible) {
                 UppercaseHeadingSmall(heading = "difficulty")
+                Button(onClick = { filters += "5_ingredients_or_less" }) {
+                    Text(text = "5 ingredients or less")
+                }
+                  
+                UppercaseHeadingSmall(heading = "dietary")
+                Button(onClick = { filters += "dairy_free" }) {
+                    Text(text = "Dairy-free")   
+                }
 
-                    Text(
-                        text = "easy",
-                        modifier = Modifier
-                            .clickable {
-                                val easy = setOf("5_ingredients_or_less")
-                                println(easy)
-                                onApplyFilters(easy)
-                            }
-                    )
+                Button(onClick = { filters += "gluten_free" }) {
+                    Text(text = "Gluten-free")
+                }
+                
+                Button(onClick = { onApplyFilters(filters) }) {
+                    Text(text = "Apply")
+                }
 
             }
 
