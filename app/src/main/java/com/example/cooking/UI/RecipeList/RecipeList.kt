@@ -121,26 +121,45 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
             }
             if(isVisible) {
                 UppercaseHeadingSmall(heading = "difficulty")
+                var isSelected by remember { mutableStateOf(false) }
                 FilterButton(
                     label = "TEST 5 INGRE",
                     onClick = {
-                        filters += "5_ingredients_or_less"
-                    }
+                        isSelected = !isSelected
+                        if(isSelected)
+                            filters += "5_ingredients_or_less"
+                        else
+                            filters -= "5_ingredients_or_less"
+                    },
+                    isSelected
                 )
-                Button(
-                    onClick = { filters += "5_ingredients_or_less" },
-                ) {
-                    Text(text = "5 ingredients or less")
-                }
                   
                 UppercaseHeadingSmall(heading = "dietary")
-                Button(onClick = { filters += "dairy_free" }) {
-                    Text(text = "Dairy-free")   
-                }
+                var isSelected2 by remember { mutableStateOf(false) }
+                FilterButton(
+                    label = "TEST DAIRY FREE",
+                    onClick = {
+                        isSelected2 = !isSelected2
+                        if(isSelected2)
+                            filters += "dairy_free"
+                        else
+                            filters -= "dairy_free"
+                    },
+                    isSelected2
+                )
 
-                Button(onClick = { filters += "gluten_free" }) {
-                    Text(text = "Gluten-free")
-                }
+                var isSelected3 by remember { mutableStateOf(false) }
+                FilterButton(
+                    label = "TEST GLUTEN FREE",
+                    onClick = {
+                        isSelected3 = !isSelected3
+                        if(isSelected3)
+                            filters += "gluten_free"
+                        else
+                            filters -= "gluten_free"
+                    },
+                    isSelected3
+                )
                 
                 Button(onClick = { onApplyFilters(filters) }) {
                     Text(text = "Apply")
@@ -155,8 +174,7 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
 }
 
 @Composable
-fun FilterButton(label: String, onClick: () -> Unit) {
-    var isSelected by remember { mutableStateOf(false) }
+fun FilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
     var color = if (isSelected) {
         ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondary,
