@@ -34,16 +34,14 @@ import com.example.cooking.model.Tag
 fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Unit, tags: String = "") {
     Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
     val viewModel: RecipeListViewModel = viewModel()
-    LaunchedEffect(key1 = collectionName, key2 = tags){
-        if(tags.isNotEmpty())
-            //viewModel.filterByTags(tags)
+    LaunchedEffect(key1 = collectionName){
         viewModel.updateCollectionName(collectionName)
     }
 
-    val recipes by viewModel.recipeCards.collectAsState()
-    Log.v("Recipe List Screen", recipes.toString())
+    val cards by viewModel.recipeCards.collectAsState()
+    Log.v("Recipe List Screen", cards.toString())
     RecipeList(
-        recipes = recipes,
+        recipeCards = cards,
         onNavigateToRecipe = onNavigateToRecipe,
     )
 }
