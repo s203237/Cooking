@@ -17,6 +17,7 @@ class FavoritesScreenViewModel: ViewModel() {
     val favorites : Flow<List<RecipeCard>> = favoritesDataSource
         .getFavorites()
         .map { recipeCard ->
+            Log.d("FavoritesVM", "Fetching favorites")
             recipeCard.map {
                 RecipeCard(isFavorite = true, thumbnail_url = it.thumbnail_url , id = it.id , name = it.name )
             }
@@ -35,6 +36,7 @@ class FavoritesScreenViewModel: ViewModel() {
 
     fun onFavoriteButtonClicked(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("FavoritesVM", "Toggling favorite for recipeId: $recipeId")
            favoritesDataSource.toggleFavorite(recipeId)
             Log.d("onFavoriteButtonClicked called with " ,"imageUrl: $recipeId")
         }
