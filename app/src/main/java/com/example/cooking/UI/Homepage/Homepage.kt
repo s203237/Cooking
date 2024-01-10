@@ -326,7 +326,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (Int) -> Uni
                     recipeId = recipeCard.id,
                     imageUrl = recipeCard.thumbnail_url,
                     onNavigateToRecipe = onNavigateToRecipe,
-                    //onFavoriteButtonClicked = onFavoriteButtonClicked,
+                    onFavoriteButtonClicked = onFavoriteButtonClicked,
                     //onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked,
                     cardFormat = CardFormats.SQUARE,
                     sizeFraction = 0.35f

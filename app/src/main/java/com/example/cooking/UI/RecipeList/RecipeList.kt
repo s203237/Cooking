@@ -45,7 +45,7 @@ fun RecipeList(
             .background(color = Color(0xFFFFFBEF))*/
     ) {
         Text(
-            text = "Favorits Recipes",
+            text = "Favorites",
             textAlign = TextAlign.Left,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
@@ -62,7 +62,7 @@ fun RecipeList(
 }
 @Composable
 fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, onFavoriteButtonClicked: (Int) -> Unit){
-
+    println("Composing RecipeItem: ${recipe.id}, isFavorite: ${recipe.isFavorite}")
 Column(
     modifier = Modifier
         .fillMaxWidth()
@@ -71,8 +71,10 @@ Column(
         recipeId = recipe.id,
         imageUrl = recipe.thumbnail_url,
         onNavigateToRecipe = onNavigateToRecipe,
-        isFavorite = false,
-        onFavoriteButtonClicked = {onFavoriteButtonClicked(recipe.id)},
+        isFavorite = recipe.isFavorite,
+        onFavoriteButtonClicked = {
+            println("Favorite button clicked for recipeId: ${recipe.id}")
+            onFavoriteButtonClicked(recipe.id)},
         cardFormat = CardFormats.LANDSCAPE
     )
     Text(

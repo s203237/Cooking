@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,7 +27,7 @@ fun RecipeImage(
     recipeId: Int,
     imageUrl: String,
     onNavigateToRecipe: (Int) -> Unit,
-  //  onFavoriteButtonClicked: (Int) -> Unit,
+    onFavoriteButtonClicked: (Int) -> Unit,
     cardFormat: CardFormats,
     sizeFraction: Float = 1f
 
@@ -48,6 +49,7 @@ fun RecipeImage(
                 .aspectRatio(aspectRatioImg)
                 .clickable {
                     onNavigateToRecipe(recipeId)
+                    onFavoriteButtonClicked(recipeId)
                 },
             contentScale = ContentScale.Crop,
 
@@ -70,7 +72,8 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick =  onClick,
+            onClick = onClick
+
 
             //onClick = {isFavorite = !isFavorite}
 
@@ -89,9 +92,15 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
                     tint = Color.White
                 )
         }
+           /* val icon = if (isFavorite) {
+                Icons.Default.Favorite
+            } else {
+                Icons.Default.FavoriteBorder
+            }
+            Icon(imageVector = icon, contentDescription = null)
+        }*/
     }
 }
-
 
 @Composable
 fun ImageWithFavIcon(
@@ -116,7 +125,7 @@ fun ImageWithFavIcon(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
-           // onFavoriteButtonClicked = onFavoriteButtonClicked,
+            onFavoriteButtonClicked = onFavoriteButtonClicked,
             cardFormat = cardFormat,
         )
 //=======
