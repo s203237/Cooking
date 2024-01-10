@@ -50,6 +50,5 @@ class MockCollectionRepo(apiService: ApiService): RecipeDataRepo<CollectionDto> 
             )
         )
     }
-
 }
 

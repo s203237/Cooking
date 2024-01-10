@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -120,7 +121,10 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
             }
             if(isVisible) {
                 UppercaseHeadingSmall(heading = "difficulty")
-                Button(onClick = { filters += "5_ingredients_or_less" }) {
+                FilterButton(label = "TEST")
+                Button(
+                    onClick = { filters += "5_ingredients_or_less" },
+                ) {
                     Text(text = "5 ingredients or less")
                 }
                   
@@ -143,6 +147,29 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
 
     }
 
+}
+
+@Composable
+fun FilterButton(label: String) {
+    var isSelected by remember { mutableStateOf(false) }
+    var color = if (isSelected) {
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary,
+        )
+    } else {
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+        )
+    }
+    Button(
+        onClick = { isSelected = !isSelected },
+        colors = color
+
+    ) {
+        Text(text = label)
+    }
 }
 
 @Preview
