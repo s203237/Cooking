@@ -10,6 +10,7 @@ import com.example.cooking.model.createCardsFromDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.dropWhile
 import kotlinx.coroutines.launch
 
 /**
@@ -46,7 +47,10 @@ class RecipeListViewModel: ViewModel() {
     }
 
     fun filterByTags(tags: List<String>, recipeCards: List<RecipeCard>) {
-        _recipeCards.value = getCardsByTags(tags, recipeCards)
+        tags.forEach { println(it) }
+        val recipeCards = getCardsByTags(tags, recipeCards)
+        println(recipeCards.toString())
+        _recipeCards.value = recipeCards
     }
 
     fun getCardsByTags(tagsList: List<String>, cards: List<RecipeCard>): List<RecipeCard> {
@@ -61,8 +65,9 @@ class RecipeListViewModel: ViewModel() {
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {
-              _collectionName.collect{newCollectionName ->
-                val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(
+              _collectionName.dropWhile { it.isEmpty() }.collect{newCollectionName ->
+                  println("RecipeListVM init newCollectionName: $newCollectionName")
+                  val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(
                     FetchParameters(
                         id = newCollectionName
                     )

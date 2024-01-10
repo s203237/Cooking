@@ -46,24 +46,26 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 
     val cards by viewModel.recipeCards.collectAsState()
     Log.v("Recipe List Screen", cards.toString())
+    Column{
+        FilterMenu(
+            onApplyFilters = { tagList ->
+                viewModel.filterByTags(
+                    tags = tagList,
+                    recipeCards = cards
+                )
+            }
+        )
+        RecipeList(
+            recipeCards = cards,
+            onNavigateToRecipe = onNavigateToRecipe,
+            modifier = Modifier
+                .padding(16.dp)
+                .background(color = MaterialTheme.colorScheme.background)
+                .fillMaxWidth(),
 
-    FilterMenu(
-        onApplyFilters = { tagList ->
-            viewModel.filterByTags(
-                tags = tagList,
-                recipeCards = cards
             )
-        }
-    )
-    RecipeList(
-        recipeCards = cards,
-        onNavigateToRecipe = onNavigateToRecipe,
-        modifier = Modifier
-            .padding(16.dp)
-            .background(color = MaterialTheme.colorScheme.background)
-            .fillMaxWidth(),
+    }
 
-    )
 }
 
 // makeshift test...
@@ -110,6 +112,27 @@ fun loadTestCardsWithTags(): List<RecipeCard> {
             tags = card2Tags
         )
     )
+}
+
+@Preview
+@Composable
+fun PreviewRecipeListScreen() {
+    val viewModel: RecipeListViewModel = viewModel()
+    val cards by viewModel.recipeCards.collectAsState()
+    val cardsForCollection = loadTestCardsWithTags()
+
+    Column{
+        FilterMenu(
+            onApplyFilters = { tagList ->
+                viewModel.filterByTags(
+                    tags = tagList,
+                    recipeCards = cards
+                )
+            }
+        )
+        RecipeList(recipeCards = cards, onNavigateToRecipe = {}, modifier = Modifier)
+
+    }
 }
 /*@Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {

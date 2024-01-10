@@ -110,27 +110,39 @@ fun FilterMenu(onApplyFilters: (List<String>) -> Unit) {
     ) {
         Column{
             Button(
-                onClick = { isVisible = !isVisible }
+                onClick = {
+                    isVisible = !isVisible
+                }
             ) {
                 Text(
                     text = "filters"
                 )
             }
             if(isVisible) {
-                UppercaseHeadingSmall(heading = "Dietary")
-                Text(
-                    text = "Dairy Free",
-                    modifier = Modifier
-                        .clickable {
-                            onApplyFilters(listOf("dairy_free"))
-                        }
-                )
+                UppercaseHeadingSmall(heading = "difficulty")
+
+                    Text(
+                        text = "easy",
+                        modifier = Modifier
+                            .clickable {
+                                val easy = listOf("5_ingredients_or_less")
+                                println(easy)
+                                onApplyFilters(easy)
+                            }
+                    )
+
             }
 
         }
 
     }
 
+}
+
+@Preview
+@Composable
+fun PreviewFilterMenu(){
+    FilterMenu(onApplyFilters = {})
 }
 
 @Preview
