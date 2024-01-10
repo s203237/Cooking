@@ -37,8 +37,8 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
-    Log.v("RecipeList", recipes.toString())
+fun RecipeList(recipeCards: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
+    Log.v("RecipeList", recipeCards.toString())
     Column (
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.background)
@@ -52,7 +52,7 @@ fun RecipeList(recipes: List<RecipeCard>, onNavigateToRecipe: (Int) -> Unit) {
                 .padding(16.dp)
         )
         LazyColumn {
-            items(recipes) { recipe ->
+            items(recipeCards) { recipe ->
                 RecipeItem(recipe, onNavigateToRecipe)
                 println("Composed recipe item")
             }

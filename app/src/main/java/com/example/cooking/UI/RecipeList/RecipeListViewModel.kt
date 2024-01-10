@@ -45,6 +45,10 @@ class RecipeListViewModel: ViewModel() {
         _collectionName.value = newCollectionName
     }
 
+    fun filterByTags(tags: List<String>, recipeCards: List<RecipeCard>) {
+        _recipeCards.value = getCardsByTags(tags, recipeCards)
+    }
+
     fun getCardsByTags(tagsList: List<String>, cards: List<RecipeCard>): List<RecipeCard> {
         return cards.filter { card ->
             val names = card.tags.map{ it.name }
@@ -52,7 +56,6 @@ class RecipeListViewModel: ViewModel() {
             names.any(predicate)
         }
     }
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
               _collectionName.collect{newCollectionName ->
