@@ -61,7 +61,10 @@ fun RecipeList(
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, onFavoriteButtonClicked: (Int) -> Unit){
+fun RecipeItem(
+    recipe: RecipeCard,
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (Int) -> Unit){
     println("Composing RecipeItem: ${recipe.id}, isFavorite: ${recipe.isFavorite}")
 Column(
     modifier = Modifier

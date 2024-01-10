@@ -20,7 +20,10 @@ fun FavoritesScreen(onNavigateToRecipe:(Int)->Unit) {
     */
 
     val recipes by favoritesViewModel.favorites.collectAsState(emptyList())
-    RecipeList(recipes = recipes , onNavigateToRecipe =onNavigateToRecipe  , onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked)
+    RecipeList(
+        recipes = recipes ,
+        onNavigateToRecipe =onNavigateToRecipe  ,
+        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked)
     Log.d("FavoritesScreen", "Collected Recipes: $recipes")
 
 }

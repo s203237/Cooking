@@ -27,7 +27,9 @@ import com.example.cooking.UI.Faviorite.FavoritesScreenViewModel
  * @see RecipeList
  */
 @Composable
-fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Unit) {
+fun ListAllRecipesScreen(
+    collectionName:String,
+    onNavigateToRecipe: (Int) -> Unit) {
     Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
     val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     val viewModel: RecipeListViewModel = viewModel()
