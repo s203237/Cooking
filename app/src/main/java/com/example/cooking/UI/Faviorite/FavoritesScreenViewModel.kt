@@ -39,6 +39,7 @@ import kotlinx.coroutines.launch
 
     fun onFavoriteButtonClicked(recipeId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("FavoritesVM", "Toggling favorite for recipeId: $recipeId")
            favoritesDataSource.toggleFavorite(recipeId)
             Log.d("onFavoriteButtonClicked called with " ,"imageUrl: $recipeId")
         }
