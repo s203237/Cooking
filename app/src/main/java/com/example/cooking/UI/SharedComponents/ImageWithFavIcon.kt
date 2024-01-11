@@ -132,10 +132,11 @@ fun ImageWithFavIcon(
         )
         // Create a RecipeCard instance with the provided details
         val recipeCard = RecipeCard(
-            id = recipeId,
-            thumbnail_url = imageUrl,
-            name = "Recipe Name", // You might need to pass this from outside
-            isFavorite = isFavorite)
+           // id = recipeId,
+           // thumbnail_url = imageUrl,
+            //name = "Recipe Name", // You might need to pass this from outside
+            //isFavorite = isFavorite
+            )
 //=======
 //        AsyncImage(
 //            model = imageUrl,

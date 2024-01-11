@@ -93,7 +93,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
         return context.dataStore.data.map { prefs ->
             val jsonString = prefs[favoritesKey].orEmpty()
             try {
-                Json.decodeFromString<List<RecipeCard>>(jsonString)
+                Json.decodeFromString(jsonString)
             } catch (error: Throwable) {
                 emptyList<RecipeCard>()
             }
@@ -103,7 +103,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
     override suspend fun toggleFavorite(recipeCard: RecipeCard) {
         val currentJsonString = context.dataStore.data.first()[favoritesKey].orEmpty()
         val currentFavorites: List<RecipeCard> = try {
-            Json.decodeFromString<List<RecipeCard>>(currentJsonString)
+            Json.decodeFromString(currentJsonString)
         } catch (error: Throwable) {
             emptyList()
         }
@@ -111,7 +111,8 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
        // val recipeIdString = recipeId.toString()
         val isFavorite = currentFavorites.contains(recipeCard)
         val updatedFavorites = if (isFavorite) {
-            currentFavorites - recipeCard
+            //currentFavorites - recipeCard
+            currentFavorites.filter { it.id != recipeCard.id }
         } else {
             currentFavorites + recipeCard
         }
@@ -121,5 +122,10 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
             it[favoritesKey] = updatedJsonString
         }
         Log.d("DataStoreFavoritesDataSource", "Updated Favorites: $updatedFavorites")
+    }
+    suspend fun clearFavorites() {
+        context.dataStore.edit { settings ->
+            settings.clear()
+        }
     }
 }

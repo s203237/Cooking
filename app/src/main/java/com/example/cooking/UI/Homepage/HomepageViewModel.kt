@@ -56,20 +56,20 @@ class HomePageViewModel : ViewModel() {
 //            _recipeCards3.value = recipeCards3
 //            _recipeCards4.value = recipeCards4
             val favoritesCards = favoritesDataSource.getFavorites().first()
-            val favoriteIds = favoritesCards.map { it.id } // Assuming 'id' is the property that holds the recipe ID
+            val favoriteIds = favoritesCards.map { it } // Assuming 'id' is the property that holds the recipe ID
             updateCollectionsWithFavorites(favoriteIds)
 
         }
     }
-    private fun updateCollectionsWithFavorites(favorites: List<Int>) {
+    private fun updateCollectionsWithFavorites(favorites: List<RecipeCard>) {
         _recipeCollections.value = _recipeCollections.value.map { collection ->
             updateFavoriteStatus(collection, favorites)
         }
     }
 
-    private fun updateFavoriteStatus(collection: RecipeCollection, favorites: List<Int>): RecipeCollection {
+    private fun updateFavoriteStatus(collection: RecipeCollection, favorites: List<RecipeCard>): RecipeCollection {
         val updatedRecipes = collection.results.map { recipe ->
-            recipe.copy(isFavorite = favorites.contains(recipe.id))
+            recipe.copy(isFavorite = favorites.contains(recipe))
         }
         return collection.copy(results = updatedRecipes)
     }
