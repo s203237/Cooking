@@ -196,8 +196,25 @@ fun FilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
     }
 }
 
-private fun updateFiltersList(newFilter: String): String {
-    return newFilter
+private fun getFiltersMap(): Map<String,String> {
+    return mapOf(
+        "difficulty" to "easy",
+        "difficulty" to "5_ingredients_or_less",
+        "dietary" to "dairy_free",
+        "dietary" to "gluten_free",
+        "cuisine" to "asian",
+        "cuisine" to "middle_eastern"
+    )
+}
+
+@Preview
+@Composable
+private fun printMap() {
+    val map = getFiltersMap()
+    map.forEach { (key,value) ->
+        Text( text = "Key: $key, Value: $value")
+
+    }
 }
 
 @Preview
