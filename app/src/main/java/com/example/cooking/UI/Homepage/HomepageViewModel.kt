@@ -79,8 +79,8 @@ class HomePageViewModel : ViewModel() {
             try {
                 favoritesDataSource.toggleFavorite(recipeCard)
                 println("Favorite toggled for image URL: $recipeCard")
-                //val updatedFavorites = favoritesDataSource.getFavorites().first()
-                //updateCollectionsWithFavorites(updatedFavorites)
+                val updatedFavorites = favoritesDataSource.getFavorites().first()
+                updateCollectionsWithFavorites(updatedFavorites)
             } catch (e: Exception) {
                 println("Error toggling favorite: $e")
             }
