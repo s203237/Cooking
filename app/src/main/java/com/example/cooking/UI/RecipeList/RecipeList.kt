@@ -45,7 +45,6 @@ import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.UI.theme.CookingTheme
 import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.Tag
 
 @Composable
 fun RecipeList(
@@ -124,16 +123,16 @@ fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFi
             }
             if(isVisible) {
                 getFiltersList()
-                    .groupBy { it.type }
+                    .groupBy { it.tag.type } //note to self: becomes key of map created by grouping
                     .forEach {
                         item { UppercaseHeadingMedium(heading = it.key) }
-                        items(it.value) { value ->
+                        items(it.value) { button ->
                             var isSelected by remember { mutableStateOf(false) }
-                            FilterButton(
-                                label = value.displayName,
+                            CreateFilterButton(
+                                label = button.tag.displayName,
                                 onClick = {
                                     isSelected = !isSelected
-                                    onSelect(value.name)
+                                    onSelect(button.tag.name)
                                 },
                                 isSelected = isSelected
                             )
@@ -159,7 +158,7 @@ fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFi
 }
 
 @Composable
-fun FilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
+fun CreateFilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
     var color = if (isSelected) {
         ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondary,
@@ -179,17 +178,6 @@ fun FilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
     ) {
         Text(text = label)
     }
-}
-
-private fun getFiltersList(): List<Tag> {
-    //TODO figure out where to put this function
-    return listOf(
-        Tag(name = "easy", displayName = "Easy", type = "Difficulty"),
-        Tag(name = "5_ingredients_or_less", displayName = "5 ingredients or less", type = "Difficulty"),
-        Tag(name = "dairy_free", displayName = "Dairy Free", type = "Dietary"),
-        Tag(name = "gluten_free", displayName = "Gluten Free", type = "Dietary"),
-        Tag(name = "asian", displayName = "Asian", type = "Cuisine")
-    )
 }
 
 @Preview
