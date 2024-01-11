@@ -39,17 +39,22 @@ class RecipeListViewModel: ViewModel() {
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
 
+    private val _unfilteredRecipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
+    val unfilteredRecipeCards = _unfilteredRecipeCards.asStateFlow()
+
     private val _collectionName = MutableStateFlow("")
-   // private val query = MutableStateFlow("")
 
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
     }
 
     fun filterByTags(tags: Set<String>, recipeCards: List<RecipeCard>) {
-        val recipeCards = getCardsByTags(tags, recipeCards)
-        println(recipeCards.toString())
-        _recipeCards.value = recipeCards
+        if (_unfilteredRecipeCards.value.isEmpty())
+            _unfilteredRecipeCards.value = recipeCards
+
+        val filteredRecipeCards = getCardsByTags(tags, recipeCards)
+        println(filteredRecipeCards.toString())
+        _recipeCards.value = filteredRecipeCards
     }
 
     fun getCardsByTags(tagsList: Set<String>, cards: List<RecipeCard>): List<RecipeCard> {
@@ -58,6 +63,11 @@ class RecipeListViewModel: ViewModel() {
             val intersection = tagsList.intersect(cardTagNames.toSet())
             intersection == tagsList
         }
+    }
+
+    fun resetCardsList(currentCards: List<RecipeCard>){
+        println(currentCards.toString())
+        _recipeCards.value = unfilteredRecipeCards.value
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {

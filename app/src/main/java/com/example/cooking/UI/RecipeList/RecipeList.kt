@@ -20,6 +20,7 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -113,7 +114,7 @@ private fun printMap() {
 }
 
 @Composable
-fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
+fun FilterMenu(onApplyFilters: (Set<String>) -> Unit, onResetFilters: () -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
     var filters by remember {  mutableStateOf(emptySet<String>()) }
     Box(
@@ -122,35 +123,54 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
             .background(color = MaterialTheme.colorScheme.primaryContainer)
     ) {
         LazyColumn {
-            getFiltersList()
-                .groupBy { it.type }
-                .forEach {
-                    item {
-                        UppercaseHeadingMedium(heading = it.key)
-                    }
-                    items(it.value) { value ->
-                        var isSelected by remember { mutableStateOf(false) }
-                        FilterButton(
-                            label = value.displayName,
-                            onClick = {
-                                isSelected = !isSelected
-                                if(isSelected)
-                                    filters += value.name
-                                else
-                                    filters -= value.name
-                            },
-                            isSelected = isSelected
-                        )
-                    }
-                }
-
             item {
-                Button(onClick = { onApplyFilters(filters) }) {
-                    Text(text = "Apply")
+                Button(
+                    onClick = {
+                        isVisible = !isVisible
+                    }
+                ) {
+                    Text(
+                        text = "filters"
+                    )
                 }
             }
-        }
+            if(isVisible) {
+                getFiltersList()
+                    .groupBy { it.type }
+                    .forEach {
+                        item {
+                            UppercaseHeadingMedium(heading = it.key)
+                        }
+                        items(it.value) { value ->
+                            var isSelected by remember { mutableStateOf(false) }
+                            FilterButton(
+                                label = value.displayName,
+                                onClick = {
+                                    isSelected = !isSelected
+                                    if (isSelected)
+                                        filters += value.name
+                                    else
+                                        filters -= value.name
+                                },
+                                isSelected = isSelected
+                            )
+                        }
+                    }
 
+                item {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Button(onClick = { onApplyFilters(filters) }) {
+                            Text(text = "Apply")
+                        }
+                        Button(onClick = { onResetFilters() }) {
+                            Text(text = "Reset")
+                        }
+                    }
+
+                }
+
+            }
+        }
 
 
         /* Column{
@@ -249,12 +269,6 @@ private fun getFiltersList(): List<Tag> {
         Tag(name = "gluten_free", displayName = "Gluten Free", type = "Dietary"),
         Tag(name = "asian", displayName = "Asian", type = "Cuisine")
     )
-}
-
-@Preview
-@Composable
-fun PreviewFilterMenu(){
-    FilterMenu(onApplyFilters = {})
 }
 
 @Preview

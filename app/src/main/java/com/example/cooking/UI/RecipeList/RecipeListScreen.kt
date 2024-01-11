@@ -53,7 +53,10 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
                     tags = tagList,
                     recipeCards = cards
                 )
-            }
+            },
+             onResetFilters = {
+                 viewModel.resetCardsList(cards)
+             }
         )
         RecipeList(
             recipeCards = cards,
@@ -114,7 +117,7 @@ fun loadTestCardsWithTags(): List<RecipeCard> {
     )
 }
 
-@Preview
+/*@Preview
 @Composable
 fun PreviewRecipeListScreen() {
     val viewModel: RecipeListViewModel = viewModel()
@@ -128,12 +131,18 @@ fun PreviewRecipeListScreen() {
                     tags = tagList,
                     recipeCards = cards
                 )
+            },
+            onResetFilters = {
+                Log.v("RecipeListScreen", "onResetFilters impl")
+                viewModel.resetCardsList()
             }
         )
         RecipeList(recipeCards = cards, onNavigateToRecipe = {}, modifier = Modifier)
 
     }
 }
+*/
+
 /*@Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
 
