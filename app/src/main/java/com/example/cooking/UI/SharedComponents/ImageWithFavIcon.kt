@@ -110,7 +110,9 @@ fun ImageWithFavIcon(
     onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     cardFormat: CardFormats
+
 ) {
+
     Box(
         // contentAlignment = Alignment.BottomEnd
     ) {
@@ -128,6 +130,12 @@ fun ImageWithFavIcon(
             //onFavoriteButtonClicked = onFavoriteButtonClicked,
             cardFormat = cardFormat,
         )
+        // Create a RecipeCard instance with the provided details
+        val recipeCard = RecipeCard(
+            id = recipeId,
+            thumbnail_url = imageUrl,
+            name = "Recipe Name", // You might need to pass this from outside
+            isFavorite = isFavorite)
 //=======
 //        AsyncImage(
 //            model = imageUrl,
@@ -152,7 +160,7 @@ fun ImageWithFavIcon(
         ) {
             FavButton(
                 onClick = {
-                          onFavoriteButtonClicked
+                          onFavoriteButtonClicked(recipeCard)
                           //onFavoriteButtonClicked
                 },
                 isFavorite = isFavorite,
