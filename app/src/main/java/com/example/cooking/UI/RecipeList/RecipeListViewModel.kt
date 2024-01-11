@@ -40,7 +40,6 @@ class RecipeListViewModel: ViewModel() {
     val recipeCards = _recipeCards.asStateFlow()
 
     private val _unfilteredRecipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
-    val unfilteredRecipeCards = _unfilteredRecipeCards.asStateFlow()
 
     private val _collectionName = MutableStateFlow("")
 
@@ -66,7 +65,7 @@ class RecipeListViewModel: ViewModel() {
     }
 
     fun resetCardsList(){
-        _recipeCards.value = unfilteredRecipeCards.value
+        _recipeCards.value = _unfilteredRecipeCards.value
     }
     init {
         viewModelScope.launch(Dispatchers.IO) {
