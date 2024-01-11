@@ -102,21 +102,9 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
     }
 }
 
-@Preview
-@Composable
-private fun printMap() {
-    //val map = getFiltersMap()
-
-    val filters = getFiltersList()
-
-    filters.groupBy { it.type }.forEach {println("${it.key} -> ${it.value}")}
-
-}
-
 @Composable
 fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFilters: () -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
-    var filters by remember {  mutableStateOf(emptySet<String>()) }
     Box(
         modifier = Modifier
             .padding(16.dp)
@@ -166,68 +154,6 @@ fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFi
 
             }
         }
-
-
-        /* Column{
-             Button(
-                 onClick = {
-                     isVisible = !isVisible
-                 }
-             ) {
-                 Text(
-                     text = "filters"
-                 )
-             }
-             if(isVisible) {
-                 UppercaseHeadingSmall(heading = "difficulty")
-                 var isSelected by remember { mutableStateOf(false) }
-                 FilterButton(
-                     label = "TEST 5 INGRE",
-                     onClick = {
-                         isSelected = !isSelected
-                         if(isSelected)
-                             filters += "5_ingredients_or_less"
-                         else
-                             filters -= "5_ingredients_or_less"
-                     },
-                     isSelected
-                 )
-
-                 UppercaseHeadingSmall(heading = "dietary")
-                 var isSelected2 by remember { mutableStateOf(false) }
-                 FilterButton(
-                     label = "TEST DAIRY FREE",
-                     onClick = {
-                         isSelected2 = !isSelected2
-                         if(isSelected2)
-                             filters += "dairy_free"
-                         else
-                             filters -= "dairy_free"
-                     },
-                     isSelected2
-                 )
-
-                 var isSelected3 by remember { mutableStateOf(false) }
-                 FilterButton(
-                     label = "TEST GLUTEN FREE",
-                     onClick = {
-                         isSelected3 = !isSelected3
-                         if(isSelected3)
-                             filters += "gluten_free"
-                         else
-                             filters -= "gluten_free"
-                     },
-                     isSelected3
-                 )
-
-                 Button(onClick = { onApplyFilters(filters) }) {
-                     Text(text = "Apply")
-                 }
-
-             }
-
-         }*/
-
     }
 
 }
