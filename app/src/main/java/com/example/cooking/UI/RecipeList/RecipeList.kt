@@ -41,9 +41,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.UppercaseHeadingSmall
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.UI.theme.CookingTheme
 import com.example.cooking.model.RecipeCard
+import com.example.cooking.model.Tag
 
 @Composable
 fun RecipeList(
@@ -100,6 +101,17 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
     }
 }
 
+@Preview
+@Composable
+private fun printMap() {
+    //val map = getFiltersMap()
+
+    val filters = getFiltersList()
+
+    filters.groupBy { it.type }.forEach {println("${it.key} -> ${it.value}")}
+
+}
+
 @Composable
 fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
@@ -109,65 +121,97 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit) {
             .padding(16.dp)
             .background(color = MaterialTheme.colorScheme.primaryContainer)
     ) {
-        Column{
-            Button(
-                onClick = {
-                    isVisible = !isVisible
+        LazyColumn {
+            getFiltersList()
+                .groupBy { it.type }
+                .forEach {
+                    item {
+                        UppercaseHeadingMedium(heading = it.key)
+                    }
+                    items(it.value) { value ->
+                        var isSelected by remember { mutableStateOf(false) }
+                        FilterButton(
+                            label = value.displayName,
+                            onClick = {
+                                isSelected = !isSelected
+                                if(isSelected)
+                                    filters += value.name
+                                else
+                                    filters -= value.name
+                            },
+                            isSelected = isSelected
+                        )
+                    }
                 }
-            ) {
-                Text(
-                    text = "filters"
-                )
-            }
-            if(isVisible) {
-                UppercaseHeadingSmall(heading = "difficulty")
-                var isSelected by remember { mutableStateOf(false) }
-                FilterButton(
-                    label = "TEST 5 INGRE",
-                    onClick = {
-                        isSelected = !isSelected
-                        if(isSelected)
-                            filters += "5_ingredients_or_less"
-                        else
-                            filters -= "5_ingredients_or_less"
-                    },
-                    isSelected
-                )
-                  
-                UppercaseHeadingSmall(heading = "dietary")
-                var isSelected2 by remember { mutableStateOf(false) }
-                FilterButton(
-                    label = "TEST DAIRY FREE",
-                    onClick = {
-                        isSelected2 = !isSelected2
-                        if(isSelected2)
-                            filters += "dairy_free"
-                        else
-                            filters -= "dairy_free"
-                    },
-                    isSelected2
-                )
 
-                var isSelected3 by remember { mutableStateOf(false) }
-                FilterButton(
-                    label = "TEST GLUTEN FREE",
-                    onClick = {
-                        isSelected3 = !isSelected3
-                        if(isSelected3)
-                            filters += "gluten_free"
-                        else
-                            filters -= "gluten_free"
-                    },
-                    isSelected3
-                )
-                
+            item {
                 Button(onClick = { onApplyFilters(filters) }) {
                     Text(text = "Apply")
                 }
-
             }
-
         }
+
+
+
+        /* Column{
+             Button(
+                 onClick = {
+                     isVisible = !isVisible
+                 }
+             ) {
+                 Text(
+                     text = "filters"
+                 )
+             }
+             if(isVisible) {
+                 UppercaseHeadingSmall(heading = "difficulty")
+                 var isSelected by remember { mutableStateOf(false) }
+                 FilterButton(
+                     label = "TEST 5 INGRE",
+                     onClick = {
+                         isSelected = !isSelected
+                         if(isSelected)
+                             filters += "5_ingredients_or_less"
+                         else
+                             filters -= "5_ingredients_or_less"
+                     },
+                     isSelected
+                 )
+
+                 UppercaseHeadingSmall(heading = "dietary")
+                 var isSelected2 by remember { mutableStateOf(false) }
+                 FilterButton(
+                     label = "TEST DAIRY FREE",
+                     onClick = {
+                         isSelected2 = !isSelected2
+                         if(isSelected2)
+                             filters += "dairy_free"
+                         else
+                             filters -= "dairy_free"
+                     },
+                     isSelected2
+                 )
+
+                 var isSelected3 by remember { mutableStateOf(false) }
+                 FilterButton(
+                     label = "TEST GLUTEN FREE",
+                     onClick = {
+                         isSelected3 = !isSelected3
+                         if(isSelected3)
+                             filters += "gluten_free"
+                         else
+                             filters -= "gluten_free"
+                     },
+                     isSelected3
+                 )
+
+                 Button(onClick = { onApplyFilters(filters) }) {
+                     Text(text = "Apply")
+                 }
+
+             }
+
+         }*/
 
     }
 
@@ -196,25 +240,15 @@ fun FilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
     }
 }
 
-private fun getFiltersMap(): Map<String,String> {
-    return mapOf(
-        "difficulty" to "easy",
-        "difficulty" to "5_ingredients_or_less",
-        "dietary" to "dairy_free",
-        "dietary" to "gluten_free",
-        "cuisine" to "asian",
-        "cuisine" to "middle_eastern"
+private fun getFiltersList(): List<Tag> {
+    //TODO figure out where to put this function
+    return listOf(
+        Tag(name = "easy", displayName = "Easy", type = "Difficulty"),
+        Tag(name = "5_ingredients_or_less", displayName = "5 ingredients or less", type = "Difficulty"),
+        Tag(name = "dairy_free", displayName = "Dairy Free", type = "Dietary"),
+        Tag(name = "gluten_free", displayName = "Gluten Free", type = "Dietary"),
+        Tag(name = "asian", displayName = "Asian", type = "Cuisine")
     )
-}
-
-@Preview
-@Composable
-private fun printMap() {
-    val map = getFiltersMap()
-    map.forEach { (key,value) ->
-        Text( text = "Key: $key, Value: $value")
-
-    }
 }
 
 @Preview
