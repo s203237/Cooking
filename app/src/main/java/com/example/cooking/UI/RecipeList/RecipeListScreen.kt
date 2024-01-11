@@ -37,7 +37,7 @@ import com.example.cooking.model.Tag
  * @see RecipeList
  */
 @Composable
-fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Unit, tags: String = "") {
+fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Unit) {
     Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect(key1 = collectionName){

@@ -146,10 +146,6 @@ fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFi
                                 onClick = {
                                     isSelected = !isSelected
                                     onSelect(value.name)
-                                    /*if (isSelected)
-                                        filters += value.name
-                                    else
-                                        filters -= value.name*/
                                 },
                                 isSelected = isSelected
                             )

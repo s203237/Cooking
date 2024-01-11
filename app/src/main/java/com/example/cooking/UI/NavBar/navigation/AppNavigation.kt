@@ -242,10 +242,9 @@ fun AppNavigation(){
                         // if(collectionName != null) {
                         ListAllRecipesScreen(
                             "salad",
-                            onNavigateToRecipe = { recipeId ->
-                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                            },
-                        )
+                        ) { recipeId ->
+                            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                        }
                         Log.v("In favs", "salad")
                         displayBottomBar = true
                         displayTopBar = true
@@ -266,11 +265,10 @@ fun AppNavigation(){
                         if (collectionName != null) {
                             ListAllRecipesScreen(
                                 collectionName,
-                                onNavigateToRecipe = { recipeId ->
-                                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                                },
-                            )
-                           // printBackStack(navController.currentBackStack, "Recipe List: ")
+                            ) { recipeId ->
+                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                            }
+                            // printBackStack(navController.currentBackStack, "Recipe List: ")
                         } else {
                             Text("Collection not found")
                         }
