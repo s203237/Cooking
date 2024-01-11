@@ -113,6 +113,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
         val updatedFavorites = if (isFavorite) {
             //currentFavorites - recipeCard
             currentFavorites.filter { it.id != recipeCard.id }
+            //currentFavorites - recipeCard
         } else {
             currentFavorites + recipeCard
         }
