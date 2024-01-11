@@ -15,7 +15,7 @@
  */
 package com.example.cooking.UI.RecipeList
 
-import android.util.Log
+//import com.example.cooking.data.remote.mock_datasource.RecipeData
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-//import com.example.cooking.data.remote.mock_datasource.RecipeData
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -39,7 +38,7 @@ import com.example.cooking.model.RecipeCard
 fun RecipeList(
     recipes: List<RecipeCard>,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit ) {
+    onFavoriteButtonClicked: (RecipeCard) -> Unit ) {
     Column (
        /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
@@ -64,7 +63,7 @@ fun RecipeList(
 fun RecipeItem(
     recipe: RecipeCard,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit){
+    onFavoriteButtonClicked: (RecipeCard) -> Unit){
     println("Composing RecipeItem: ${recipe.id}, isFavorite: ${recipe.isFavorite}")
 Column(
     modifier = Modifier
@@ -77,7 +76,7 @@ Column(
         isFavorite = recipe.isFavorite,
         onFavoriteButtonClicked = {
             println("Favorite button clicked for recipeId: ${recipe.id}")
-            onFavoriteButtonClicked(recipe.id)},
+            onFavoriteButtonClicked(recipe)},
         cardFormat = CardFormats.LANDSCAPE
     )
     Text(

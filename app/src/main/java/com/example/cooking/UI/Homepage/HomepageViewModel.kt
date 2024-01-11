@@ -74,11 +74,11 @@ class HomePageViewModel : ViewModel() {
         return collection.copy(results = updatedRecipes)
     }
 
-    fun onFavoriteButtonClicked(recipeId: Int) {
+    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                favoritesDataSource.toggleFavorite(recipeId)
-                println("Favorite toggled for image URL: $recipeId")
+                favoritesDataSource.toggleFavorite(recipeCard)
+                println("Favorite toggled for image URL: $recipeCard")
             } catch (e: Exception) {
                 println("Error toggling favorite: $e")
             }

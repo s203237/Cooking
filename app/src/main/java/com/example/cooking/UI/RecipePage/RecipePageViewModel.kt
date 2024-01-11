@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -50,9 +51,9 @@ class RecipePageViewModel: ViewModel() {
             }
         }
     }
-    fun onFavoriteButtonClicked(recipeId: Int) {
+    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
-            DependencyProvider.favoritesDataSource.toggleFavorite(recipeId)
+            DependencyProvider.favoritesDataSource.toggleFavorite(recipeCard)
         }
     }
 

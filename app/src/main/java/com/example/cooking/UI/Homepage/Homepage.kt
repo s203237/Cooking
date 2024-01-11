@@ -51,7 +51,7 @@ fun DailyCard(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit
+    onFavoriteButtonClicked: (RecipeCard) -> Unit
 ) {
     ImageWithFavIcon(
         recipeId = dailyRecipe.id,
@@ -82,7 +82,7 @@ fun scrollableList(
     modifier: Modifier,
     dailyRecipe: RecipeCard,
     listOfCollections: List<RecipeCollection>,
-    onFavoriteButtonClicked: (Int) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
     onNavigateToRecipe: (Int) -> Unit
 ) {
 
@@ -179,7 +179,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (I
         modifier: Modifier,
         recipe: RecipeCard,
         onNavigateToRecipe: (Int) -> Unit,
-        onFavoriteButtonClicked: (Int) -> Unit,
+        onFavoriteButtonClicked: (RecipeCard) -> Unit,
         subtitle: String = ""
     ) {
         Column(
@@ -231,7 +231,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (I
         title: String,
         recipe: RecipeCard,
         onNavigateToRecipe: (Int) -> Unit,
-        onFavoriteButtonClicked: (Int) -> Unit,
+        onFavoriteButtonClicked: (RecipeCard) -> Unit,
         modifier: Modifier
     ) {
         Column(modifier = modifier) {
@@ -251,7 +251,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (I
 fun RecipeCardRow(
     collection: RecipeCollection,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -304,7 +304,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (Int) -> Uni
     fun RecipeCardListItem(
         recipeCard: RecipeCard,
         onNavigateToRecipe: (Int) -> Unit,
-        onFavoriteButtonClicked: (Int) -> Unit)
+        onFavoriteButtonClicked: (RecipeCard) -> Unit)
     {
         Row(
             modifier = Modifier
@@ -326,7 +326,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (Int) -> Uni
                     recipeId = recipeCard.id,
                     imageUrl = recipeCard.thumbnail_url,
                     onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked = onFavoriteButtonClicked,
+                    //onFavoriteButtonClicked = onFavoriteButtonClicked,
                     //onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked,
                     cardFormat = CardFormats.SQUARE,
                     sizeFraction = 0.35f
@@ -338,7 +338,7 @@ fun RecipeCardRow(collection: RecipeCollection, onNavigateToRecipe: (Int) -> Uni
                 )
 
             }
-            FavButton(0.35f, isFavorite = recipeCard.isFavorite , onClick = {onFavoriteButtonClicked(recipeCard.id)})
+            FavButton(0.35f, isFavorite = recipeCard.isFavorite , onClick = {onFavoriteButtonClicked(recipeCard)})
         }
         Spacer(Modifier.height(16.dp))
     }
@@ -350,7 +350,7 @@ fun RecipeCardList(
     onNavigateToRecipe: (Int) -> Unit,
     modifier: Modifier,
     //onNavigateToRecipe: (String) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit
+    onFavoriteButtonClicked: (RecipeCard) -> Unit
 ) {
     val recipeCards = collection.results
     Column (modifier = modifier) {

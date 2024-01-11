@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,13 +20,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.cooking.model.RecipeCard
 
 @Composable
 fun RecipeImage(
     recipeId: Int,
     imageUrl: String,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit,
+    //onFavoriteButtonClicked: (RecipeCard) -> Unit,
     cardFormat: CardFormats,
     sizeFraction: Float = 1f
 
@@ -49,7 +49,7 @@ fun RecipeImage(
                 .aspectRatio(aspectRatioImg)
                 .clickable {
                     onNavigateToRecipe(recipeId)
-                    onFavoriteButtonClicked(recipeId)
+                    //onFavoriteButtonClicked
                 },
             contentScale = ContentScale.Crop,
 
@@ -108,7 +108,7 @@ fun ImageWithFavIcon(
     imageUrl: String,
     isFavorite: Boolean,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (Int) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
     cardFormat: CardFormats
 ) {
     Box(
@@ -125,7 +125,7 @@ fun ImageWithFavIcon(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = onFavoriteButtonClicked,
+            //onFavoriteButtonClicked = onFavoriteButtonClicked,
             cardFormat = cardFormat,
         )
 //=======
@@ -152,7 +152,7 @@ fun ImageWithFavIcon(
         ) {
             FavButton(
                 onClick = {
-                          onFavoriteButtonClicked(recipeId)
+                          onFavoriteButtonClicked
                           //onFavoriteButtonClicked
                 },
                 isFavorite = isFavorite,

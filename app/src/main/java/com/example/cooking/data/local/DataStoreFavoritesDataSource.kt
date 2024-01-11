@@ -6,8 +6,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.cooking.data.local.FavoritesDataSource
-import com.example.cooking.data.remote.RecipeCardRepo
-import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -16,7 +14,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 
-class DataStoreFavoritesDataSource(
+/*class DataStoreFavoritesDataSource(
     private val context: Context,
     private val recipeCardRepo: RecipeDataRepo<RecipeCard>
 ) : FavoritesDataSource {
@@ -85,8 +83,8 @@ class DataStoreFavoritesDataSource(
 
         Log.d("FavoritesScreenViewModel", "Updated Favorites: $updatedFavorites")
     }
-}
-/*class DataStoreFavoritesDataSource(private val context: Context) : FavoritesDataSource {
+}*/
+class DataStoreFavoritesDataSource(private val context: Context) : FavoritesDataSource {
     private val Context.dataStore by preferencesDataStore("favorites")
     private val favoritesKey = stringPreferencesKey("favorites")
 
@@ -95,34 +93,33 @@ class DataStoreFavoritesDataSource(
         return context.dataStore.data.map { prefs ->
             val jsonString = prefs[favoritesKey].orEmpty()
             try {
-                Json.decodeFromString<List<String>>(jsonString)
+                Json.decodeFromString<List<RecipeCard>>(jsonString)
             } catch (error: Throwable) {
-                emptyList<String>()
+                emptyList<RecipeCard>()
             }
         }
     }
 
-    override suspend fun toggleFavorite(recipeId: Int) {
+    override suspend fun toggleFavorite(recipeCard: RecipeCard) {
         val currentJsonString = context.dataStore.data.first()[favoritesKey].orEmpty()
-        val currentFavorites: List<String> = try {
-            Json.decodeFromString<List<String>>(currentJsonString)
+        val currentFavorites: List<RecipeCard> = try {
+            Json.decodeFromString<List<RecipeCard>>(currentJsonString)
         } catch (error: Throwable) {
             emptyList()
         }
 
-        val recipeIdString = recipeId.toString()
-        val isFavorite = currentFavorites.contains(recipeIdString)
+       // val recipeIdString = recipeId.toString()
+        val isFavorite = currentFavorites.contains(recipeCard)
         val updatedFavorites = if (isFavorite) {
-            currentFavorites - recipeIdString
+            currentFavorites - recipeCard
         } else {
-            currentFavorites + recipeIdString
+            currentFavorites + recipeCard
         }
 
         val updatedJsonString = Json.encodeToString(updatedFavorites)
-        context.dataStore.edit { preferences ->
-            preferences[favoritesKey] = updatedJsonString
+        context.dataStore.edit {
+            it[favoritesKey] = updatedJsonString
         }
         Log.d("DataStoreFavoritesDataSource", "Updated Favorites: $updatedFavorites")
     }
 }
-*/

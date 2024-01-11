@@ -7,8 +7,6 @@ import com.example.cooking.DependencyProvider
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -69,11 +67,11 @@ class FavoritesScreenViewModel: ViewModel() {
             }
         }
 
-    fun onFavoriteButtonClicked(recipeId: Int) {
+    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d("FavoritesVM", "Toggling favorite for recipeId: $recipeId")
-            favoritesDataSource.toggleFavorite(recipeId)
-            Log.d("FavoritesVM", "Favorite toggled for recipeId: $recipeId")
+            Log.d("FavoritesVM", "Toggling favorite for recipeId: $recipeCard")
+            favoritesDataSource.toggleFavorite(recipeCard)
+            Log.d("FavoritesVM", "Favorite toggled for recipeId: $recipeCard")
         }
     }
 }

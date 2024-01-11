@@ -62,7 +62,7 @@ object DependencyProvider {
         private set
 
     fun initialize(context: Context) {
-        favoritesDataSource = DataStoreFavoritesDataSource(context , recipeSingleCardRepo)
+        favoritesDataSource = DataStoreFavoritesDataSource(context)
     }
 
 }
