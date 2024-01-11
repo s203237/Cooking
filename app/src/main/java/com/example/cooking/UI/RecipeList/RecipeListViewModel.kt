@@ -65,8 +65,7 @@ class RecipeListViewModel: ViewModel() {
         }
     }
 
-    fun resetCardsList(currentCards: List<RecipeCard>){
-        println(currentCards.toString())
+    fun resetCardsList(){
         _recipeCards.value = unfilteredRecipeCards.value
     }
     init {

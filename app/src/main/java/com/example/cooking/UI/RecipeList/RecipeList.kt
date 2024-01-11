@@ -162,7 +162,11 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit, onResetFilters: () -> Unit
                         Button(onClick = { onApplyFilters(filters) }) {
                             Text(text = "Apply")
                         }
-                        Button(onClick = { onResetFilters() }) {
+                        Button(onClick = {
+                            filters = emptySet()
+                            onResetFilters()
+                        }
+                        ) {
                             Text(text = "Reset")
                         }
                     }

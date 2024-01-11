@@ -45,7 +45,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
     }
 
     val cards by viewModel.recipeCards.collectAsState()
-    Log.v("Recipe List Screen", cards.toString())
+
     Column{
          FilterMenu(
             onApplyFilters = { tagList ->
@@ -55,7 +55,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
                 )
             },
              onResetFilters = {
-                 viewModel.resetCardsList(cards)
+                 viewModel.resetCardsList()
              }
         )
         RecipeList(
