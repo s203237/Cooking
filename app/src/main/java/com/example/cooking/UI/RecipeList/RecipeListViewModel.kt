@@ -35,6 +35,8 @@ import kotlinx.coroutines.launch
  * @see DependencyProvider
  */
 class RecipeListViewModel: ViewModel() {
+    private val _tagsList = MutableStateFlow<Set<String>>(emptySet())
+    val tagsList = _tagsList.asStateFlow()
 
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
@@ -65,8 +67,14 @@ class RecipeListViewModel: ViewModel() {
     }
 
     fun resetCardsList(){
+        _tagsList.value = emptySet()
         _recipeCards.value = _unfilteredRecipeCards.value
     }
+
+    fun addToFilters(tag: String) {
+         _tagsList.value += tag
+    }
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
               _collectionName.dropWhile { it.isEmpty() }.collect{newCollectionName ->

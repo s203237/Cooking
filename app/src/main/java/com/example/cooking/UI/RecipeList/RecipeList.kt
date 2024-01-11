@@ -114,7 +114,7 @@ private fun printMap() {
 }
 
 @Composable
-fun FilterMenu(onApplyFilters: (Set<String>) -> Unit, onResetFilters: () -> Unit) {
+fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFilters: () -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
     var filters by remember {  mutableStateOf(emptySet<String>()) }
     Box(
@@ -138,19 +138,18 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit, onResetFilters: () -> Unit
                 getFiltersList()
                     .groupBy { it.type }
                     .forEach {
-                        item {
-                            UppercaseHeadingMedium(heading = it.key)
-                        }
+                        item { UppercaseHeadingMedium(heading = it.key) }
                         items(it.value) { value ->
                             var isSelected by remember { mutableStateOf(false) }
                             FilterButton(
                                 label = value.displayName,
                                 onClick = {
                                     isSelected = !isSelected
-                                    if (isSelected)
+                                    onSelect(value.name)
+                                    /*if (isSelected)
                                         filters += value.name
                                     else
-                                        filters -= value.name
+                                        filters -= value.name*/
                                 },
                                 isSelected = isSelected
                             )
@@ -159,14 +158,10 @@ fun FilterMenu(onApplyFilters: (Set<String>) -> Unit, onResetFilters: () -> Unit
 
                 item {
                     Row(modifier = Modifier.fillMaxWidth()) {
-                        Button(onClick = { onApplyFilters(filters) }) {
+                        Button(onClick = { onApplyFilters() }) {
                             Text(text = "Apply")
                         }
-                        Button(onClick = {
-                            filters = emptySet()
-                            onResetFilters()
-                        }
-                        ) {
+                        Button(onClick = { onResetFilters() }) {
                             Text(text = "Reset")
                         }
                     }
