@@ -29,7 +29,8 @@ data class RecipeCard(
     val name: String = "defaultName",
     val thumbnail_url: String = "",
     var isFavorite: Boolean = false
-){
+)
+/*{
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -44,7 +45,7 @@ data class RecipeCard(
     override fun hashCode(): Int {
         return id.hashCode()
     }
-}
+}*/
 
 
 /*@Serializable
