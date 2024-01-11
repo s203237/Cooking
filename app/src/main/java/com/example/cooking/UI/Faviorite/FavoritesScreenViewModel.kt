@@ -7,6 +7,10 @@ import com.example.cooking.DependencyProvider
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -75,6 +79,9 @@ class FavoritesScreenViewModel: ViewModel() {
         }
     }
 }
+
+
+
 
 /*class FavoritesScreenViewModel : ViewModel() {
     private val favoritesDataSource = DependencyProvider.favoritesDataSource
