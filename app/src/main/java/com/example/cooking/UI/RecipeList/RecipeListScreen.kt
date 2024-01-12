@@ -49,8 +49,8 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 
     Column{
          FilterMenu(
-             onSelect = { tag ->
-                 viewModel.addToFilters(tag)
+             onSelect = { id, tag ->
+                 viewModel.toggleButton(id, tag)
              },
              onApplyFilters = {
                  viewModel.getCardsByTags(

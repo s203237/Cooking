@@ -102,7 +102,7 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
 }
 
 @Composable
-fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFilters: () -> Unit) {
+fun FilterMenu(onSelect: (Int, String) -> Unit, onApplyFilters: () -> Unit, onResetFilters: () -> Unit) {
     var isVisible by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
@@ -132,7 +132,7 @@ fun FilterMenu(onSelect: (String) -> Unit, onApplyFilters: () -> Unit, onResetFi
                                 label = button.tag.displayName,
                                 onClick = {
                                     isSelected = !isSelected
-                                    onSelect(button.tag.name)
+                                    onSelect(button.id, button.tag.name)
                                 },
                                 isSelected = isSelected
                             )
