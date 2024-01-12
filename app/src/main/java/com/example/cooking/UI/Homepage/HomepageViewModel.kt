@@ -63,9 +63,12 @@ class HomePageViewModel : ViewModel() {
     }
     private fun updateCollectionsWithFavorites(favorites: List<RecipeCard>) {
         _recipeCollections.value = _recipeCollections.value.map { collection ->
-            updateFavoriteStatus(collection, favorites)
+            collection.copy(results = collection.results.map { recipe ->
+                recipe.copy(isFavorite = favorites.any { it.id == recipe.id })
+            })
         }
     }
+
 
     private fun updateFavoriteStatus(collection: RecipeCollection, favorites: List<RecipeCard>): RecipeCollection {
         val updatedRecipes = collection.results.map { recipe ->

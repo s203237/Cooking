@@ -9,6 +9,7 @@ import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 /**
@@ -40,21 +41,32 @@ class RecipePageViewModel: ViewModel() {
     fun updateRecipeId(newRecipeId: String) {
         _recipeId.value = newRecipeId
         val printoutValue = _recipeId.value
-        Log.v("RecipeId Trace","RecipeId in viewModel.updateRecipeId: $printoutValue")
+        Log.v("RecipeId Trace", "RecipeId in viewModel.updateRecipeId: $printoutValue")
     }
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             _recipeId.collect { newRecipeId ->
-                Log.v("RecipeId Trace", "RecipeId in viewModel.launch: $newRecipeId")
-                val recipeData = DependencyProvider.recipeRepo.fetchData(_recipeId.value)
-                _recipe.value = recipeData
+                val recipeData = DependencyProvider.recipeRepo.fetchData(newRecipeId)
+                val favorites = DependencyProvider.favoritesDataSource.getFavorites().first()
+                val isFavorite = favorites.any { it.id == recipeData.id }
+
+                _recipe.value = recipeData.copy(isFavorite = isFavorite)
             }
         }
     }
+
     fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
             DependencyProvider.favoritesDataSource.toggleFavorite(recipeCard)
+            // Fetch the updated recipe to ensure all data, including favorite status, is current
+            val updatedRecipe = DependencyProvider.recipeRepo.fetchData(recipeCard.id.toString())
+
+            // Get the latest favorites to check if the recipe is still favorited
+            val favorites = DependencyProvider.favoritesDataSource.getFavorites().first()
+            val isFavorite = favorites.any { it.id == recipeCard.id }
+
+            _recipe.value = updatedRecipe.copy(isFavorite = isFavorite)
         }
     }
-
 }

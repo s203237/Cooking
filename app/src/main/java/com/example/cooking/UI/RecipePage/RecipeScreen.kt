@@ -32,6 +32,11 @@ fun DisplayRecipeScreen(recipeId: String) {
         Log.v("RecipeId Trace","RecipeId in Launched effect: $recipeId")
         viewModel.updateRecipeId(recipeId)
     }
-    RecipePage(recipe = recipe)
+    RecipePage(
+        recipe = recipe,
+        onFavoriteButtonClicked = { recipeCard ->
+            viewModel.onFavoriteButtonClicked(recipeCard)
+        }
+    )
 }
 
