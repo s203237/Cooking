@@ -35,28 +35,37 @@ import kotlinx.coroutines.launch
  * @see DependencyProvider
  */
 class RecipeListViewModel: ViewModel() {
-    private val _tagsList = MutableStateFlow<Set<String>>(emptySet())
-    val tagsList = _tagsList.asStateFlow()
+    private val _collectionName = MutableStateFlow("")
 
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
 
     private val _unfilteredRecipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
 
-    private val _collectionName = MutableStateFlow("")
+    private val _tagsList = MutableStateFlow<Set<String>>(emptySet())
+    val tagsList = _tagsList.asStateFlow()
+
+    private val _buttonStates = MutableStateFlow<Map<Int, Boolean>>(emptyMap())
 
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
     }
 
-    fun toggleButton(id: Int) {
+    fun toggleButton(id: Int, tag: String) {
+        val isCurrentlySelected: Boolean? = _buttonStates.value[id]
+        val updatedIsSelected = isCurrentlySelected?.not() ?: false // default to false if null
+        if(updatedIsSelected) {
+            addToFilters(tag)
+        } else {
+            removeFromFilters(tag)
+        }
 
     }
-    fun addToFilters(tag: String) {
+    private fun addToFilters(tag: String) {
         _tagsList.value += tag
     }
 
-    fun removeFromFilters(tag: String) {
+    private fun removeFromFilters(tag: String) {
         _tagsList.value -= tag
     }
 
