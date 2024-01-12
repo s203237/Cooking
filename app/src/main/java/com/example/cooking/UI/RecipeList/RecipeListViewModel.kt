@@ -49,16 +49,27 @@ class RecipeListViewModel: ViewModel() {
         _collectionName.value = newCollectionName
     }
 
-    fun filterByTags(tags: Set<String>, recipeCards: List<RecipeCard>) {
+    fun toggleButton(id: Int) {
+
+    }
+    fun addToFilters(tag: String) {
+        _tagsList.value += tag
+    }
+
+    fun removeFromFilters(tag: String) {
+        _tagsList.value -= tag
+    }
+
+    fun getCardsByTags(tags: Set<String>, recipeCards: List<RecipeCard>) {
         if (_unfilteredRecipeCards.value.isEmpty())
             _unfilteredRecipeCards.value = recipeCards
 
-        val filteredRecipeCards = getCardsByTags(tags, recipeCards)
+        val filteredRecipeCards = filterByTags(tags, recipeCards)
         println(filteredRecipeCards.toString())
         _recipeCards.value = filteredRecipeCards
     }
 
-    fun getCardsByTags(tagsList: Set<String>, cards: List<RecipeCard>): List<RecipeCard> {
+    fun filterByTags(tagsList: Set<String>, cards: List<RecipeCard>): List<RecipeCard> {
         return cards.filter { card ->
             val cardTagNames = card.tags.map{ it.name }
             val intersection = tagsList.intersect(cardTagNames.toSet())
@@ -69,10 +80,6 @@ class RecipeListViewModel: ViewModel() {
     fun resetCardsList(){
         _tagsList.value = emptySet()
         _recipeCards.value = _unfilteredRecipeCards.value
-    }
-
-    fun addToFilters(tag: String) {
-         _tagsList.value += tag
     }
 
     init {

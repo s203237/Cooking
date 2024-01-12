@@ -53,7 +53,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
                  viewModel.addToFilters(tag)
              },
              onApplyFilters = {
-                 viewModel.filterByTags(
+                 viewModel.getCardsByTags(
                      tags = filters,
                      recipeCards = cards
                  )
@@ -82,7 +82,7 @@ fun TestTagFilterIsInTags(){
     val vm: RecipeListViewModel = viewModel()
     val tagsList = setOf("dairy_free", "gluten_free")
     val recipesCardList = loadTestCardsWithTags()
-    val recipeCardList = vm.getCardsByTags(tagsList, recipesCardList)
+    val recipeCardList = vm.filterByTags(tagsList, recipesCardList)
     Column{
         Text(
             text = "Expecting card 'dairy-free gluten-free'"
