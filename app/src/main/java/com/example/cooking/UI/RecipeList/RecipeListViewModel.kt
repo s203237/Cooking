@@ -66,7 +66,6 @@ class RecipeListViewModel: ViewModel() {
         }
 
     }
-
     fun getButtonState(buttonId: Int): Boolean {
         if(!buttonStates.containsKey(buttonId))
             buttonStates[buttonId] = false
@@ -85,7 +84,7 @@ class RecipeListViewModel: ViewModel() {
         if (_unfilteredRecipeCards.value.isEmpty())
             _unfilteredRecipeCards.value = recipeCards
 
-        val filteredRecipeCards = filterByTags(tags, recipeCards)
+        val filteredRecipeCards = filterByTags(tags, _unfilteredRecipeCards.value)
         println(filteredRecipeCards.toString())
         _recipeCards.value = filteredRecipeCards
     }
@@ -100,6 +99,7 @@ class RecipeListViewModel: ViewModel() {
 
     fun resetCardsList(){
         _tagsList.value = emptySet()
+        buttonStates.mapValues{ (_,_) -> false }
         _recipeCards.value = _unfilteredRecipeCards.value
     }
 

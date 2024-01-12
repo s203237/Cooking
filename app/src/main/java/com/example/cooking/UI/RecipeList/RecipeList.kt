@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -138,10 +139,21 @@ fun FilterMenu(
                             CreateFilterButton(
                                 label = button.tag.displayName,
                                 id = button.id,
-                                tagName = button.tag.name,
-                                onSelect = onSelect,
-                                isSelected = isSelected
-                            )
+                                //tagName = button.tag.name,
+                                onClick = { onSelect(button.id, button.tag.name) },
+                                buttonColors = if (isSelected(button.id)) {
+                                    ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.secondary,
+                                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                                    )
+
+                                } else {
+                                    ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.primary,
+                                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                                    )
+                                }
+                                )
                         }
                     }
 
@@ -167,17 +179,20 @@ fun FilterMenu(
 fun CreateFilterButton(
     label: String,
     id: Int,
-    tagName: String,
-    onSelect: (Int, String) -> Unit,
-    isSelected: (Int) -> Boolean /* TODO ask about the recomposing with correct color */
+    onClick: () -> Unit,
+    buttonColors: ButtonColors
+    //isSelected: Boolean
+    //tagName: String,
+    //onSelect: (Int, String) -> Unit,
+    //isSelected: (Int) -> Boolean /* TODO ask about the recomposing with correct color */
 ) {
-    var isSelected by remember {mutableStateOf(false)}
+    //var isSelected by remember {mutableStateOf(false)}
     Button(
-        onClick = {
-            isSelected = !isSelected
-            onSelect(id, tagName)
-        },
-        colors = if (isSelected) {
+        onClick = onClick, /*{
+            isSelected = isSelected(id)
+            //onSelect(id, tagName)
+        },*/
+        colors = buttonColors /*if (isSelected) {
             ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.secondary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -188,7 +203,7 @@ fun CreateFilterButton(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
             )
-        }
+        }*/
 
     ) {
         Text(text = label)
