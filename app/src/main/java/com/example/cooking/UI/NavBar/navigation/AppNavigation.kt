@@ -40,13 +40,12 @@ import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
-import com.example.cooking.UI.Profile.HelpPage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
-import com.example.cooking.UI.Search.SearchBar
 import kotlinx.coroutines.flow.StateFlow
+import com.example.cooking.UI.Search.SearchBar
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -69,8 +68,6 @@ import kotlinx.coroutines.flow.StateFlow
  * @see ListAllRecipesScreen
  * @see ProfileBox
  * @see DisplayRecipeScreen
- * @see HelpPage
- * @see PrivacyPolicy
  */
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -86,8 +83,6 @@ fun AppNavigation(function: () -> Unit) {
         "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
         "Appetizers", "Seasonal"
     )
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
     val commonRoute = Screens.Favorites.name
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -106,13 +101,11 @@ fun AppNavigation(function: () -> Unit) {
                         )
                     },
                     navigationIcon = {
-                        if(currentRoute != Screens.HomeScreen.name) {
-                            IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(
-                                    imageVector = Icons.Default.ArrowBack,
-                                    contentDescription = "Go Back Icon"
-                                )
-                            }
+                        IconButton(onClick = {navController.popBackStack() }) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "Go Back Icon"
+                            )
                         }
                     },
                     actions = {
@@ -141,9 +134,10 @@ fun AppNavigation(function: () -> Unit) {
                                     onClick = {
                                         selectedItem = item
                                         expanded = false
-                                        navController.navigate(route = commonRoute)
-                                    }
+                                         navController.navigate(route ="Screens.RecipeList.name/$item" )
 
+
+                                    }
                                 )
                             }
                         }
@@ -249,53 +243,30 @@ fun AppNavigation(function: () -> Unit) {
                     Text("Collection not found")
                 }*/
             }
-//            composable(
-//                route=Screens.RecipeList.name, arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-//            ){backStackEntry ->
-//                 val collectionName = backStackEntry.arguments?.getString("collectionName")
-//                 if(collectionName != null) {
-//                ListAllRecipesScreen(collectionName,
-//                    onNavigateToRecipe = { recipeId ->
-//                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-//                    })
-//                     printBackStack(navController.currentBackStack, "Recipe List: ")
-//                } else {
-//                    Text("Collection not found")
-//                }
-//                displayBottomBar=true
-//                displayTopBar=true
-//            }
+
             composable(route = Screens.Profile.name) {
                 displayBottomBar=true
                 displayTopBar=true
-                ProfileBox(
-                    onNavigateToHelpPage = {
-                        navController.navigate(
-                            route = Screens.HelpPage.name
-                        )
-                    }
-                )
-
+                ProfileBox()
                 printBackStack(navController.currentBackStack, "Profile: ")
             }
-
-            composable(route = Screens.HelpPage.name) {
+            composable(
+                route = "Screens.RecipeList.name/{item}",
+                arguments = listOf(navArgument("item") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val item = backStackEntry.arguments?.getString("item")
+                if (item != null) {
+                    ListAllRecipesScreen(item,
+                    onNavigateToRecipe = { recipeId ->
+                        navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                    })
+                    printBackStack(navController.currentBackStack, "Recipe Screen: ")
+                } else {
+                    Text("Recipe not found")
+                }
                 displayBottomBar=true
                 displayTopBar=true
-                HelpPage()
-
-
-                printBackStack(navController.currentBackStack, "HelpPage: ")
             }
-
-            composable(route = Screens.PrivacyPolicy.name) {
-                displayBottomBar=true
-                displayTopBar=true
-                PrivacyPolicy()
-
-                printBackStack(navController.currentBackStack, "PrivacyPolicy: ")
-            }
-
             composable(
                 route = "Screens.RecipeItem.name/{recipeId}",
                 arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
@@ -311,6 +282,7 @@ fun AppNavigation(function: () -> Unit) {
                 displayTopBar=true
             }
         }
+
 
     }
 }

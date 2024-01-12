@@ -47,7 +47,7 @@ import com.example.cooking.R
 @Composable
 fun MyPrivacy() {
         Button(
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(70.dp),
             onClick = {}
         ) {
             Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
@@ -261,7 +261,7 @@ fun FavouriteImage() {
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(
         if (imageUri.value.isEmpty())
-            R.drawable.comment
+            R.drawable.baseline_comment_24
         else
             imageUri.value
     )
@@ -304,7 +304,7 @@ fun CreateImage() {
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(
         if (imageUri.value.isEmpty())
-            R.drawable.favorite
+            R.drawable.favourite
         else
             imageUri.value
     )
@@ -338,6 +338,6 @@ fun CreateImage() {
                 contentScale = ContentScale.Crop)
 
         }
-        Text(text = "Favorite")
+        Text(text = "Favourite")
     }
 }

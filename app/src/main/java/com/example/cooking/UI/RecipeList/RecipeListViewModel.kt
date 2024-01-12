@@ -48,8 +48,11 @@ class RecipeListViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _collectionName.collect{newCollectionName ->
                 Log.v("CollectionName Trace", "CollectionName in viewModel.launch: $newCollectionName")
-                val recipeCards = DependencyProvider.recipeCardRepo.fetchData(_collectionName.value)
-                _recipeCards.value = recipeCards
+                if(_collectionName.value!="") {
+                    val recipeCards =
+                        DependencyProvider.recipeCardRepo.fetchData(_collectionName.value)
+                    _recipeCards.value = recipeCards
+                }
             }
 
         }
@@ -64,8 +67,11 @@ class RecipeListViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             query.collect{newSearchKeyword ->
                 Log.v("SearchKeyword Trace", "SearchKeyword in viewModel.launch: $newSearchKeyword")
-                val recipeCards = DependencyProvider.recipeCardsRepoSearch.fetchData(query.value)
-                _recipeCards.value = recipeCards
+                if(query.value!="") {
+                    val recipeCards =
+                        DependencyProvider.recipeCardsRepoSearch.fetchData(query.value)
+                    _recipeCards.value = recipeCards
+                }
             }
 
         }

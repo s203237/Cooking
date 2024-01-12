@@ -39,4 +39,7 @@ val listOfNavItem: List<NavItem> = listOf(
         route= Screens.Profile.name
 
     )
+
+
+
 )

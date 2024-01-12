@@ -1,6 +1,5 @@
 package com.example.cooking.UI.Login
 
-//import coil.compose.rememberAsyncImagePainter
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -9,9 +8,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -46,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+//import coil.compose.rememberAsyncImagePainter
 import com.example.cooking.R
 import com.example.cooking.UI.NavBar.navigation.Navigator
 import com.example.cooking.UI.NavBar.navigation.Screens
@@ -288,7 +290,7 @@ fun FavouriteImage() {
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(
         if (imageUri.value.isEmpty())
-            R.drawable.comment
+            R.drawable.baseline_comment_24
         else
             imageUri.value
     )
@@ -332,7 +334,7 @@ fun CreateImage() {
     val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = rememberAsyncImagePainter(
         if (imageUri.value.isEmpty())
-            R.drawable.favorite
+            R.drawable.favourite
         else
             imageUri.value
     )
@@ -367,6 +369,6 @@ fun CreateImage() {
             )
 
         }
-        Text(text = "Favorite")
+        Text(text = "Favourite")
     }
 }
