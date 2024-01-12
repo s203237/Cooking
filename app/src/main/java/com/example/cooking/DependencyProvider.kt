@@ -12,7 +12,7 @@ import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import dk.shape.dtu.networkrequestsandlocalstorage.data.local.DataStoreFavoritesDataSource
+import com.example.cooking.data.local.DataStoreFavoritesDataSource
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType

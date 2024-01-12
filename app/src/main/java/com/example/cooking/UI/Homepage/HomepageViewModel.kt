@@ -91,15 +91,10 @@ class HomePageViewModel : ViewModel() {
     fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                // Assuming toggleFavorite updates the data source
                 favoritesDataSource.toggleFavorite(recipeCard)
-
                 val updatedCollections = _recipeCollections.value.map { collection ->
-                    // Map each collection
                     val updatedRecipes = collection.results.map { recipe ->
-                        // Check if this is the recipe to update
                         if (recipe.id == recipeCard.id) {
-                            // Update the isFavorite status
                             recipe.copy(isFavorite = !recipe.isFavorite)
                         } else {
                             recipe
@@ -107,9 +102,13 @@ class HomePageViewModel : ViewModel() {
                     }
                     collection.copy(results = updatedRecipes)
                 }
-
-                // Update the StateFlow
                 _recipeCollections.value = updatedCollections
+
+                // Update the dailyRecipe if it's the one being favorited
+                if (_dailyRecipe.value.id == recipeCard.id) {
+                    val updatedDailyRecipe = _dailyRecipe.value.copy(isFavorite = !recipeCard.isFavorite)
+                    _dailyRecipe.value = updatedDailyRecipe
+                }
             } catch (e: Exception) {
                 println("Error toggling favorite: $e")
             }

@@ -1,11 +1,10 @@
-package dk.shape.dtu.networkrequestsandlocalstorage.data.local
+package com.example.cooking.data.local
 
 import android.content.Context
 import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.cooking.data.local.FavoritesDataSource
 import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

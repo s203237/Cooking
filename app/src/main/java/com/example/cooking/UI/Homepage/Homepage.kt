@@ -58,7 +58,7 @@ fun DailyCard(
         imageUrl = dailyRecipe.thumbnail_url,
         isFavorite = dailyRecipe.isFavorite,
         onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = onFavoriteButtonClicked,
+        onFavoriteButtonClicked = {onFavoriteButtonClicked(dailyRecipe)},
         cardFormat = CardFormats.SQUARE
     )
     Column (modifier = modifier) {

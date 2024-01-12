@@ -36,7 +36,7 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
 
     //val collections by viewModel.recipeCollections.collectAsState()
     collections.forEach { coll ->
-        Log.v("HomepageScreena", coll.collectionName)
+        Log.v("HomepageScreen", coll.collectionName)
     }
 
 //<<<<<<< HEAD
