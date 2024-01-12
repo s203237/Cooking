@@ -10,4 +10,6 @@ enum class Screens {
     RecipeList,
     HelpPage,
     PrivacyPolicy,
+    AboutUsPage,
+
 }

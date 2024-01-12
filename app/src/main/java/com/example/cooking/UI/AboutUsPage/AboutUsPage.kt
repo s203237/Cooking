@@ -28,7 +28,7 @@ import com.example.cooking.R
 import com.example.cooking.R.drawable.apple
 
 @Composable
-fun AboutUsPage() {
+fun AboutUsPage(onNavigateToPrivacyPolicy: () -> Unit) {
     Box (
 
         modifier= Modifier
@@ -98,17 +98,18 @@ fun AboutUsPage() {
             fontWeight = FontWeight.Normal
         )
         Button(
-            onClick = {},
-            // Spacer(modifier = Modifier.height(50.dp))
             modifier = Modifier
-                .padding(horizontal = 35.dp, vertical = 45.dp)
-                .align(Alignment.CenterHorizontally),
+            .padding(horizontal = 35.dp, vertical = 45.dp)
+            .align(Alignment.CenterHorizontally),
             colors = ButtonDefaults.buttonColors(
 
                 containerColor = Color.White,
                 contentColor = Color.Red,
             ),
             shape = RoundedCornerShape(40),
+            onClick = onNavigateToPrivacyPolicy
+            // Spacer(modifier = Modifier.height(50.dp))
+
 
             ) {
             Text(
@@ -123,5 +124,5 @@ fun AboutUsPage() {
 @Preview
 @Composable
 fun PreviewAboutUsPage(){
-    AboutUsPage()
+    AboutUsPage(onNavigateToPrivacyPolicy = {})
 }

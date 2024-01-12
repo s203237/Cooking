@@ -36,6 +36,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.cooking.UI.AboutUsPage.AboutUsPage
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
@@ -70,6 +71,7 @@ import kotlinx.coroutines.flow.StateFlow
  * @see DisplayRecipeScreen
  * @see HelpPage
  * @see PrivacyPolicy
+ * @see AboutUsPage
  */
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -255,8 +257,20 @@ fun AppNavigation(function: () -> Unit) {
                     )
                 }
                 )
-                printBackStack(navController.currentBackStack, "Profile: ")
+                printBackStack(navController.currentBackStack, "AboutUsPage: ")
             }
+            composable(route = Screens.AboutUsPage.name) {
+                displayBottomBar=true
+                displayTopBar=true
+                AboutUsPage(onNavigateToPrivacyPolicy = {
+                    navController.navigate(
+                        route = Screens.PrivacyPolicy.name
+                    )
+                }
+                )
+                printBackStack(navController.currentBackStack, "AboutUsPage: ")
+            }
+
             composable(
                 route = "Screens.RecipeList.name/{item}",
                 arguments = listOf(navArgument("item") { type = NavType.StringType })
