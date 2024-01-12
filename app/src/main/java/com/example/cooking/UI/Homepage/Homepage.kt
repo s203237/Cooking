@@ -105,7 +105,9 @@ fun scrollableList(
                     modifier = modifier,
                     dailyRecipe = dailyRecipe,
                     onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked = onFavoriteButtonClicked)}
+                    onFavoriteButtonClicked = onFavoriteButtonClicked
+                )
+            }
                 //UppercaseHeadingMedium(heading = "daily pick")
                 //Spacer(Modifier.height(16.dp))
                /* RecipeRowItem(
@@ -170,7 +172,7 @@ fun scrollableList(
 
 
 
-fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (Int) -> Unit) {
+fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit, subtitle: String = "",onFavoriteButtonClicked: (RecipeCard) -> Unit) {
 
 }
 

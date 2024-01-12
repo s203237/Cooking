@@ -28,7 +28,8 @@ data class RecipeCard(
     val id: Int = 0,
     val name: String = "defaultName",
     val thumbnail_url: String = "",
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean = false,
+    var isDailyRecipe:Boolean=false
 )
 /*{
     override fun equals(other: Any?): Boolean {

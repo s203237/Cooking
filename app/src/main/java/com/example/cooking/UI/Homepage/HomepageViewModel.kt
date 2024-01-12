@@ -74,7 +74,7 @@ class HomePageViewModel : ViewModel() {
         return collection.copy(results = updatedRecipes)
     }
 
-    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
+    /*fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 favoritesDataSource.toggleFavorite(recipeCard)
@@ -87,12 +87,40 @@ class HomePageViewModel : ViewModel() {
                 println("Error toggling favorite: $e")
             }
         }
+    }*/
+    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                // Assuming toggleFavorite updates the data source
+                favoritesDataSource.toggleFavorite(recipeCard)
+
+                val updatedCollections = _recipeCollections.value.map { collection ->
+                    // Map each collection
+                    val updatedRecipes = collection.results.map { recipe ->
+                        // Check if this is the recipe to update
+                        if (recipe.id == recipeCard.id) {
+                            // Update the isFavorite status
+                            recipe.copy(isFavorite = !recipe.isFavorite)
+                        } else {
+                            recipe
+                        }
+                    }
+                    collection.copy(results = updatedRecipes)
+                }
+
+                // Update the StateFlow
+                _recipeCollections.value = updatedCollections
+            } catch (e: Exception) {
+                println("Error toggling favorite: $e")
+            }
+        }
     }
+
 }
 
 fun getDailyRecipe(collection: RecipeCollection): RecipeCard {
     if (collection.results.isEmpty()) {
-        return RecipeCard() // or handle appropriately
+        return RecipeCard()
     }
     val calendar = Calendar.getInstance()
     val currentDate = calendar.get(Calendar.DAY_OF_MONTH)
