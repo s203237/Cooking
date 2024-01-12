@@ -102,7 +102,12 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
 }
 
 @Composable
-fun FilterMenu(onSelect: (Int, String) -> Unit, onApplyFilters: () -> Unit, onResetFilters: () -> Unit) {
+fun FilterMenu(
+   // onCreateButton: (id: Int, isSelected: Boolean) -> Unit,
+    onSelect: (Int, String) -> Unit,
+    onApplyFilters: () -> Unit,
+    onResetFilters: () -> Unit
+) {
     var isVisible by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
@@ -127,7 +132,8 @@ fun FilterMenu(onSelect: (Int, String) -> Unit, onApplyFilters: () -> Unit, onRe
                     .forEach {
                         item { UppercaseHeadingMedium(heading = it.key) }
                         items(it.value) { button ->
-                            var isSelected by remember { mutableStateOf(false) }
+                           // onCreateButton(button.id, button.isSelected)
+                           // var isSelected by remember { mutableStateOf(false) }
                             CreateFilterButton(
                                 label = button.tag.displayName,
                                 onClick = {

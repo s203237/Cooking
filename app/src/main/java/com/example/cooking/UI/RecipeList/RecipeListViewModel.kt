@@ -45,20 +45,37 @@ class RecipeListViewModel: ViewModel() {
     private val _tagsList = MutableStateFlow<Set<String>>(emptySet())
     val tagsList = _tagsList.asStateFlow()
 
-    private val _buttonStates = MutableStateFlow<Map<Int, Boolean>>(emptyMap())
+    private val buttonStates = mutableMapOf<Int,Boolean>()
+    /*private val _buttonStates = MutableStateFlow<Map<Int, Boolean>>(emptyMap())
+    val buttonStates = _buttonStates.asStateFlow()*/
 
     fun updateCollectionName(newCollectionName: String) {
         _collectionName.value = newCollectionName
     }
 
     fun toggleButton(id: Int, tag: String) {
-        val isCurrentlySelected: Boolean? = _buttonStates.value[id]
-        val updatedIsSelected = isCurrentlySelected?.not() ?: false // default to false if null
-        if(updatedIsSelected) {
+        if(!buttonStates.containsKey(id))
+            buttonStates[id] = false
+       /* if(_buttonStates.value.containsKey(id).not())
+            _buttonStates.value[id] = false*/
+
+        val isCurrentlySelected = buttonStates[id]?.not() ?: false /* _buttonStates.value[id]?.not() */ // default to false if null
+        if(isCurrentlySelected) {
             addToFilters(tag)
         } else {
             removeFromFilters(tag)
         }
+
+
+
+        /*var isCurrentlySelected: Boolean? = _buttonStates.value[id]
+        isCurrentlySelected = isCurrentlySelected?.not() ?: false
+        //val updatedIsSelected = isCurrentlySelected?.not() ?: false
+        if(isCurrentlySelected) {
+            addToFilters(tag)
+        } else {
+            removeFromFilters(tag)
+        }*/
 
     }
     private fun addToFilters(tag: String) {
