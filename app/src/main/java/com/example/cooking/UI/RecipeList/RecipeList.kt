@@ -18,6 +18,7 @@ package com.example.cooking.UI.RecipeList
 //import com.example.cooking.data.remote.mock_datasource.RecipeData
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +26,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -111,28 +113,44 @@ fun FilterMenu(
     isSelected: (Int) -> Boolean
 ) {
     var isVisible by remember { mutableStateOf(false) }
+    val accentButtonColors = ButtonDefaults.buttonColors(
+        containerColor = MaterialTheme.colorScheme.secondary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+    )
+    val defaultButtonColors = ButtonDefaults.buttonColors(
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+    )
     Box(
         modifier = Modifier
-            .padding(16.dp)
             .background(color = MaterialTheme.colorScheme.primaryContainer)
+            .fillMaxWidth()
     ) {
-        LazyColumn {
+        LazyColumn (
+            modifier = Modifier.padding(16.dp)
+        ) {
             item {
-                Button(
-                    onClick = {
-                        isVisible = !isVisible
-                    }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
                 ) {
-                    Text(
-                        text = "filters"
-                    )
+                    Button(
+                        onClick = { isVisible = !isVisible },
+                        colors = accentButtonColors
+
+                    ) {
+                        Text(text = "filters")
+                    }
                 }
             }
             if(isVisible) {
                 getFiltersList()
                     .groupBy { it.tag.type } //note to self: becomes key of map created by grouping
                     .forEach {
-                        item { UppercaseHeadingMedium(heading = it.key) }
+                        item {
+                            Spacer( modifier = Modifier.height(16.dp))
+                            UppercaseHeadingMedium(heading = it.key)
+                        }
                         items(it.value) { button ->
                            // onCreateButton(button.id, button.isSelected)
                            // var isSelected by remember { mutableStateOf(false) }
@@ -142,29 +160,34 @@ fun FilterMenu(
                                 //tagName = button.tag.name,
                                 onClick = { onSelect(button.id, button.tag.name) },
                                 buttonColors = if (isSelected(button.id)) {
-                                    ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.secondary,
-                                        contentColor = MaterialTheme.colorScheme.onPrimary,
-                                    )
-
+                                    accentButtonColors
                                 } else {
-                                    ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.primary,
-                                        contentColor = MaterialTheme.colorScheme.onPrimary,
-                                    )
+                                    defaultButtonColors
                                 }
                                 )
                         }
                     }
 
                 item {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Button(onClick = { onApplyFilters() }) {
-                            Text(text = "Apply")
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Button(
+                            onClick = { onApplyFilters() },
+                            colors = accentButtonColors
+                        ) {
+                            Text(text = "apply")
                         }
-                        Button(onClick = { onResetFilters() }) {
-                            Text(text = "Reset")
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Button(
+                            onClick = { onApplyFilters() },
+                            colors = accentButtonColors
+                        ) {
+                            Text(text = "reset")
                         }
+
+
                     }
 
                 }
