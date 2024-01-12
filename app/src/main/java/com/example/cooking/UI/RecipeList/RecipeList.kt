@@ -181,7 +181,7 @@ fun FilterMenu(
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Button(
-                            onClick = { onApplyFilters() },
+                            onClick = { onResetFilters() },
                             colors = accentButtonColors
                         ) {
                             Text(text = "reset")
