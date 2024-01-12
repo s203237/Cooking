@@ -152,9 +152,15 @@ fun FilterMenu(
                             UppercaseHeadingMedium(heading = it.key)
                         }
                         items(it.value) { button ->
+
+                            Button (
+                                onClick = { onSelect(button.id, button.tag.name) }
+                            ) {
+                                Text( text = button.tag.displayName)
+                            }
                            // onCreateButton(button.id, button.isSelected)
                            // var isSelected by remember { mutableStateOf(false) }
-                            CreateFilterButton(
+                           /* CreateFilterButton(
                                 label = button.tag.displayName,
                                 id = button.id,
                                 //tagName = button.tag.name,
@@ -164,7 +170,7 @@ fun FilterMenu(
                                 } else {
                                     defaultButtonColors
                                 }
-                                )
+                            )*/
                         }
                     }
 
