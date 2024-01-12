@@ -196,7 +196,7 @@ fun RecipeRowItem(modifier: Modifier, recipe: RecipeCard, onNavigateToRecipe: (I
                     recipeId = recipe.id,
                     imageUrl = recipe.thumbnail_url,
                     onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked=onFavoriteButtonClicked,
+                    onFavoriteButtonClicked={onFavoriteButtonClicked(recipe)},
                     cardFormat = CardFormats.SQUARE,
                     isFavorite=recipe.isFavorite
                 )
@@ -273,7 +273,7 @@ fun RecipeCardRow(
                         .width(200.dp),
                     recipe = recipe,
                     onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked = onFavoriteButtonClicked
+                    onFavoriteButtonClicked ={onFavoriteButtonClicked(recipe)}
                 )
 
                 Log.v("Homepage Row", "recipeId: $recipe.recipeId")
@@ -361,7 +361,7 @@ fun RecipeCardList(
         Spacer(Modifier.height(16.dp))
 
         for(i in 0 until min(listSize, recipeCards.size)) {
-            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked = onFavoriteButtonClicked)
+            RecipeCardListItem(recipeCard = recipeCards[i], onNavigateToRecipe = onNavigateToRecipe, onFavoriteButtonClicked =onFavoriteButtonClicked)
         }
     }
 }
