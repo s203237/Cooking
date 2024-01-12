@@ -5,7 +5,7 @@ import com.example.cooking.model.Tag
 data class FilterButton(
     val id: Int,
     val tag: Tag,
-    val isSelected: Boolean = false
+    var isSelected: Boolean = false
 )
 fun getFiltersList(): List<FilterButton> {
     //TODO figure out where to put this function

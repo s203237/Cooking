@@ -131,10 +131,10 @@ fun FilterMenu(onSelect: (Int, String) -> Unit, onApplyFilters: () -> Unit, onRe
                             CreateFilterButton(
                                 label = button.tag.displayName,
                                 onClick = {
-                                    isSelected = !isSelected
+                                    //isSelected = !isSelected
                                     onSelect(button.id, button.tag.name)
                                 },
-                                isSelected = isSelected
+                                isSelected = button.isSelected
                             )
                         }
                     }
