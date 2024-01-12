@@ -44,8 +44,8 @@ import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.PreviewSearchBar
-import kotlinx.coroutines.flow.StateFlow
 import com.example.cooking.UI.Search.SearchBar
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -68,6 +68,8 @@ import com.example.cooking.UI.Search.SearchBar
  * @see ListAllRecipesScreen
  * @see ProfileBox
  * @see DisplayRecipeScreen
+ * @see HelpPage
+ * @see PrivacyPolicy
  */
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -247,7 +249,12 @@ fun AppNavigation(function: () -> Unit) {
             composable(route = Screens.Profile.name) {
                 displayBottomBar=true
                 displayTopBar=true
-                ProfileBox()
+                ProfileBox(onNavigateToHelpPage = {
+                    navController.navigate(
+                        route = Screens.HelpPage.name
+                    )
+                }
+                )
                 printBackStack(navController.currentBackStack, "Profile: ")
             }
             composable(
