@@ -46,12 +46,16 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 
     val cards by viewModel.recipeCards.collectAsState()
     val filters by viewModel.tagsList.collectAsState()
+    //val isSelected by viewModel.isSelected.collectAsState()
     //val buttonStates by viewModel.buttonStates.collectAsState()
 
     Column{
          FilterMenu(
              onSelect = { id, tag ->
                  viewModel.toggleButton(id, tag)
+             },
+             isSelected = { buttonId ->
+                 viewModel.getButtonState(buttonId)
              },
              onApplyFilters = {
                  viewModel.getCardsByTags(

@@ -106,7 +106,8 @@ fun FilterMenu(
    // onCreateButton: (id: Int, isSelected: Boolean) -> Unit,
     onSelect: (Int, String) -> Unit,
     onApplyFilters: () -> Unit,
-    onResetFilters: () -> Unit
+    onResetFilters: () -> Unit,
+    isSelected: (Int) -> Boolean
 ) {
     var isVisible by remember { mutableStateOf(false) }
     Box(
@@ -136,11 +137,10 @@ fun FilterMenu(
                            // var isSelected by remember { mutableStateOf(false) }
                             CreateFilterButton(
                                 label = button.tag.displayName,
-                                onClick = {
-                                    //isSelected = !isSelected
-                                    onSelect(button.id, button.tag.name)
-                                },
-                                isSelected = button.isSelected
+                                id = button.id,
+                                tagName = button.tag.name,
+                                onSelect = onSelect,
+                                isSelected = isSelected
                             )
                         }
                     }
@@ -164,22 +164,31 @@ fun FilterMenu(
 }
 
 @Composable
-fun CreateFilterButton(label: String, onClick: () -> Unit, isSelected: Boolean) {
-    var color = if (isSelected) {
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.onSecondary,
-        )
-
-    } else {
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-        )
-    }
+fun CreateFilterButton(
+    label: String,
+    id: Int,
+    tagName: String,
+    onSelect: (Int, String) -> Unit,
+    isSelected: (Int) -> Boolean /* TODO ask about the recomposing with correct color */
+) {
+    var isSelected by remember {mutableStateOf(false)}
     Button(
-        onClick = onClick,
-        colors = color
+        onClick = {
+            isSelected = !isSelected
+            onSelect(id, tagName)
+        },
+        colors = if (isSelected) {
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.secondary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            )
+
+        } else {
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
 
     ) {
         Text(text = label)
