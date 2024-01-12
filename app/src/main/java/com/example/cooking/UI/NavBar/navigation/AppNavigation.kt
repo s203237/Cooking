@@ -1,4 +1,5 @@
 package com.example.cooking.UI.NavBar.navigation
+import PrivacyPolicy
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
