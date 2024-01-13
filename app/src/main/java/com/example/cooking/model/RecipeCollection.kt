@@ -9,7 +9,7 @@ data class RecipeCollection(
 )
 @Serializable
 data class RecipeCard(
-    val id: Int = 0,
+    val id: Int =0,
     val name: String = "defaultName",
     val thumbnail_url: String = ""
 )

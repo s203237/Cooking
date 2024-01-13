@@ -47,11 +47,11 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Uni
 @Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
     val key = listOf(
-        "beef", "chicken", "pork", "fish", "goat", "lamb", "shirmp", "snake", "cat", "dog",
+        "beef", "chicken", "pork", "fish", "goat", "lamb", "shirmp", "snake", "cat", "dog","rabbit","venison","deer"
     )
     if (key.contains(query)) {
         Text(
-            text = " Recipe not found",
+            text = " Recipe not found \n Sorry! This is a vegan app",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(20.dp)
