@@ -167,7 +167,7 @@ fun SingleCard(
     title: String,
     recipe: RecipeCard,
     onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (RecipeCard) -> Unit,,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
     modifier: Modifier
 ) {
     Column(modifier = modifier) {
@@ -235,6 +235,7 @@ fun RowItem(
             ImageWithFavIcon(
                 recipeId = recipe.id,
                 imageUrl = recipe.thumbnail_url,
+                isFavorite = recipe.isFavorite,
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked = onFavoriteButtonClicked,
                 cardFormat = CardFormats.SQUARE
