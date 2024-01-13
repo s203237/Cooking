@@ -10,19 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import com.example.cooking.UI.Faviorite.FavoritesScreenViewModel
 
 
 @Composable
 fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
-
     val viewModel: HomePageViewModel = viewModel()
     val collections by viewModel.recipeCollections.collectAsState()
     val dailyRecipe by viewModel.dailyRecipe.collectAsState()
-
-    collections.forEach { coll ->
-        Log.v("HomepageScreena", coll.collectionName)
-    }
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
+    val favorites by favoritesViewModel.favorites.collectAsState()
 
     scrollableList(
             modifier = Modifier
@@ -33,8 +30,10 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
                 ),
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
-            onNavigateToRecipe = onNavigateToRecipe
-        )
+            onNavigateToRecipe = onNavigateToRecipe,
+        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
+
+    )
 
 }
 

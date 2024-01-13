@@ -49,58 +49,55 @@ import com.example.cooking.UI.theme.getDefaultButtonColors
 import com.example.cooking.model.RecipeCard
 
 @Composable
+
 fun RecipeList(
-    recipeCards: List<RecipeCard>,
+    recipes: List<RecipeCard>,
     onNavigateToRecipe: (Int) -> Unit,
-    modifier: Modifier
-) {
-    Log.v("RecipeList", recipeCards.toString())
-    Column {
-        /*Spacer(Modifier.height(16.dp))
-        Text(
-            text = "Recipe List",
-            textAlign = TextAlign.Left,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = modifier
-        )
+    onFavoriteButtonClicked: (RecipeCard) -> Unit
+    modifier: Modifier) {
+    Column (
+       /* modifier = Modifier
+            .background(color = Color(0xFFFFFBEF))*/
+    ) {
 
-        Spacer(Modifier.height(16.dp))
-
-*/
-        Spacer(Modifier.height(16.dp))
         LazyColumn {
-            items(recipeCards) { recipe ->
-                RecipeItem(recipe, onNavigateToRecipe)
+            items(recipes) { recipe ->
+                RecipeItem(recipe, onNavigateToRecipe , onFavoriteButtonClicked )
                 println("Composed recipe item")
             }
         }
     }
 }
 @Composable
-fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        ImageWithFavIcon(
-            recipeId = recipe.id,
-            imageUrl = recipe.thumbnail_url,
-            onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = {},
-            cardFormat = CardFormats.LANDSCAPE
+fun RecipeItem(
+    recipe: RecipeCard,
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit){
+    println("Composing RecipeItem: ${recipe.id}, isFavorite: ${recipe.isFavorite}")
+Column(
+    modifier = Modifier
+        .fillMaxWidth()
+){
+    ImageWithFavIcon(
+        recipeId = recipe.id,
+        imageUrl = recipe.thumbnail_url,
+        onNavigateToRecipe = onNavigateToRecipe,
+        isFavorite = recipe.isFavorite,
+        onFavoriteButtonClicked = {
+            println("Favorite button clicked for recipeId: ${recipe.id}")
+            onFavoriteButtonClicked(recipe)},
+        cardFormat = CardFormats.LANDSCAPE
+    )
+    Text(
+        text = recipe.name ,
+        fontSize = 20.sp,
+        modifier = Modifier.padding(
+            top = 16.dp,
+            start = 16.dp,
+            end = 16.dp,
+            bottom = 32.dp
         )
-        Text(
-            text = recipe.name,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(
-                top = 16.dp,
-                start = 16.dp,
-                end = 16.dp,
-                bottom = 32.dp
-            )
-        )
-    }
+    )
 }
 
 @Composable

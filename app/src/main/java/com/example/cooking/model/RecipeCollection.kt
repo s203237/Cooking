@@ -23,7 +23,8 @@ data class RecipeCard(
     val id: Int = 0,
     val name: String = "defaultName",
     val thumbnail_url: String = "",
-    val tags: List<Tag> = emptyList()
+    val tags: List<Tag> = emptyList(),
+    var isFavorite: Boolean = false
 )
 
 data class Tag(

@@ -9,26 +9,31 @@ class MockApiService: ApiService {
                 RecipeCard(
                     recipeId = "mockId1",
                     title = "Mock Recipe 1",
+                    isFavorite = false,
                     imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg"
                 ),
                 RecipeCard(
                     recipeId = "mockId2",
                     title = "Mock Recipe 2",
+                    isFavorite = false,
                     imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg"
                 ),
                 RecipeCard(
                     recipeId = "mockId3",
                     title = "Mock Recipe 3",
+                    isFavorite = false,
                     imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg"
                 ),
                 RecipeCard(
                     recipeId = "mockId4",
                     title = "Mock Recipe 4",
+                    isFavorite = false,
                     imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg"
                 ),
                 RecipeCard(
                     recipeId = "mockId5",
                     title = "Mock Recipe 5",
+                    isFavorite = false,
                     imageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg"
                 ),
                 // Add more mock recipes as needed
@@ -49,11 +54,12 @@ class MockApiService: ApiService {
             rating = 4.5f,
             recipeDescription = "Mock recipe description",
             ingredients = listOf("Ingredient 1", "Ingredient 2"),
-            steps = mapOf("Step 1" to "Do something", "Step 2" to "Do something else")
+            steps = mapOf("Step 1" to "Do something", "Step 2" to "Do something else"),
+            isFavorite = false
         )
     }
 
-    override suspend fun fetchRecipeList(temp: String): RecipeCollection {
+    suspend fun fetchRecipeList(temp: String): RecipeCollection {
         TODO("Not yet implemented")
     }
 

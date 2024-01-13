@@ -1,10 +1,12 @@
 package com.example.cooking.UI.NavBar.navigation
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
@@ -20,13 +22,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -37,6 +42,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cooking.UI.AccountCreationPage.AccountCreationPage
+import com.example.cooking.UI.Faviorite.FavoritesScreen
 import com.example.cooking.UI.Homepage.HomepageScreen
 import com.example.cooking.UI.NavBar.listOfNavItem
 import com.example.cooking.UI.Onboarding.OnBoardingPage
@@ -44,7 +50,9 @@ import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
 import com.example.cooking.UI.Search.SearchBar
+import com.example.cooking.model.RecipeCard
 import kotlinx.coroutines.flow.StateFlow
+import okhttp3.Route
 
 /**
  * Composable function `AppNavigation` defines the navigation structure for the cooking app using
@@ -68,6 +76,7 @@ import kotlinx.coroutines.flow.StateFlow
  * @see ProfileBox
  * @see DisplayRecipeScreen
  */
+@SuppressLint("RestrictedApi")
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
@@ -82,7 +91,9 @@ fun AppNavigation(){
                 "Vegan", "One-Pot Meal", "High Protein", "Under 30 min", "Weeknight Dinner",
                 "Appetizers", "Seasonal"
             )
-            val commonRoute = "Screens.RecipeList.name/{collectionName}"
+
+
+            val commonRoute = Screens.Favorites.name
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 topBar = {
@@ -133,7 +144,7 @@ fun AppNavigation(){
                                             onClick = {
                                                 selectedItem = item
                                                 expanded = false
-                                                navController.navigate(route = "Screens.RecipeList.name/$item")
+                                                navController.navigate(route = commonRoute)
                                             }
 
                                         )
@@ -183,7 +194,7 @@ fun AppNavigation(){
             ) { paddingValues ->
                 NavHost(
                     navController = navController,
-                    startDestination = Screens.SearchScreen.name,
+                    startDestination = Screens.HomeScreen.name,
                     modifier = Modifier
                         .padding(paddingValues)
                 ) {
@@ -237,17 +248,23 @@ fun AppNavigation(){
                     composable(
                         route = Screens.Favorites.name,
                         //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
-                    ) {//backStackEntry ->
+                    ) {
+                        displayBottomBar = true
+                        displayTopBar=true
+                        FavoritesScreen(onNavigateToRecipe = { recipeId ->
+                            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                        })
+                       printBackStack(navController.currentBackStack, "Favorites : ")
+                    //backStackEntry ->
                         // val collectionName = backStackEntry.arguments?.getString("collectionName")
                         // if(collectionName != null) {
-                        ListAllRecipesScreen(
-                            "salad",
-                        ) { recipeId ->
-                            navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                        }
+                       /* ListAllRecipesScreen("salad",
+                            onNavigateToRecipe = { recipeId ->
+                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                            })
                         Log.v("In favs", "salad")
                         displayBottomBar = true
-                        displayTopBar = true
+                        displayTopBar = true*/
                         //printBackStack(navController.currentBackStack, "Favourites: ")
                         /*} else {
                     Text("Collection not found")
@@ -263,12 +280,11 @@ fun AppNavigation(){
                         val collectionName = backStackEntry.arguments?.getString("collectionName")
                         Log.v("Navigation", "In RecipeList, coll name : $collectionName")
                         if (collectionName != null) {
-                            ListAllRecipesScreen(
-                                collectionName,
-                            ) { recipeId ->
-                                navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                            }
-                            // printBackStack(navController.currentBackStack, "Recipe List: ")
+                            ListAllRecipesScreen(collectionName,
+                                onNavigateToRecipe = { recipeId ->
+                                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                                })
+                           // printBackStack(navController.currentBackStack, "Recipe List: ")
                         } else {
                             Text("Collection not found")
                         }
@@ -281,6 +297,7 @@ fun AppNavigation(){
                         ProfileBox()
                         //printBackStack(navController.currentBackStack, "Profile: ")
                     }
+
 
                     composable(
                         route = "Screens.RecipeItem.name/{recipeId}",
@@ -303,9 +320,9 @@ fun AppNavigation(){
 
 fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: String) {
 
-    for(entry in entryList.value){
-        val stringEntry =  entry.toString()
-        Log.v("Backstack" , "$screenName: $stringEntry")
+    for (entry in entryList.value) {
+        val stringEntry = entry.toString()
+        Log.v("Backstack", "$screenName: $stringEntry")
 
     }
 
@@ -314,9 +331,13 @@ fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: S
         Log.v("Backstack", "Entry: $stringEntry")
     }
 
-
 }
 
+    data class Tab(
+    val title: String,
+    val icon: ImageVector,
+    val rootRoute: Screens
+)
 
 
 

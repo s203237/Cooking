@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+import com.example.cooking.UI.Faviorite.FavoritesScreenViewModel
+
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
  * collection name. It interacts with a [RecipeListViewModel] to fetch and observe the list of
@@ -33,8 +35,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
  * @see RecipeList
  */
 @Composable
-fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Unit) {
+fun ListAllRecipesScreen(
+    collectionName:String,
+    onNavigateToRecipe: (Int) -> Unit) {
     Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     val viewModel: RecipeListViewModel = viewModel()
     LaunchedEffect(key1 = collectionName){
         viewModel.updateCollectionName(collectionName)
@@ -69,8 +74,8 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
                 .padding(16.dp)
                 .background(color = MaterialTheme.colorScheme.background)
                 .fillMaxWidth(),
-
-            )
+            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
+        )
     }
 
 }

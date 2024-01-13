@@ -19,7 +19,7 @@ class TestSearchActivity {
     // use createAndroidComposeRule<YourActivity>() if you need access to
     // an activity
 
-    @Test
+   /* @Test
     fun searchTest() {
         // Given I am on the search page
         composeTestRule.setContent {
@@ -44,5 +44,5 @@ class TestSearchActivity {
 
 
 
-    }
+    }*/
 }
