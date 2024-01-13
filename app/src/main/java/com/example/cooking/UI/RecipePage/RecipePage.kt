@@ -51,7 +51,17 @@ fun RecipePage(
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                 } ,*/
                 onNavigateToRecipe = {},
-                onFavoriteButtonClicked ={ onFavoriteButtonClicked(RecipeCard(recipe.id,recipe.name,recipe.thumbnail_url,recipe.isFavorite)) },
+                onFavoriteButtonClicked = {
+                    onFavoriteButtonClicked(
+                        RecipeCard(
+                            recipe.id,
+                            recipe.name,
+                            recipe.thumbnail_url,
+                            emptyList(), //TODO NOT EMPTY LIST! PLACEHOLDER ONLY!
+                            recipe.isFavorite
+                        )
+                    )
+                },
                 cardFormat = CardFormats.PORTRAIT
             )
             TabLayout(recipe = recipe)

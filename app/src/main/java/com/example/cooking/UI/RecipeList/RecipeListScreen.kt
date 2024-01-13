@@ -70,7 +70,7 @@ fun ListAllRecipesScreen(
         RecipeList(
             recipeCards = cards,
             onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked,
+            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked,
             modifier = Modifier
                 .padding(16.dp)
                 .background(color = MaterialTheme.colorScheme.background)

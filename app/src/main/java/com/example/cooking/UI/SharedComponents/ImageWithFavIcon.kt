@@ -127,7 +127,7 @@ fun ImageWithFavIcon(
             onNavigateToRecipe = onNavigateToRecipe,
             cardFormat = cardFormat,
             )
-
+        val recipeCard = RecipeCard() // what's this? A blank recipe card?
         Box(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier

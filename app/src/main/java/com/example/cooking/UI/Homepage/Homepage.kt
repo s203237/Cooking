@@ -36,9 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.BackToTop
 import com.example.cooking.UI.SharedComponents.CardFormats
-import com.example.cooking.UI.SharedComponents.FavButton
-import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.RecipeImage
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.model.ListType
 import com.example.cooking.model.RecipeCard
