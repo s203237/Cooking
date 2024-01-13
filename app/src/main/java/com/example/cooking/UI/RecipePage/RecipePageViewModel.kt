@@ -61,7 +61,7 @@ class RecipePageViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             DependencyProvider.favoritesDataSource.toggleFavorite(recipeCard)
             // Fetch the updated recipe to ensure all data, including favorite status, is current
-            val updatedRecipe = DependencyProvider.recipeRepo.fetchData(recipeCard.id.toString())
+            val updatedRecipe = DependencyProvider.recipeRepo.fetchData(FetchParameters(recipeCard.id.toString()))
 
             // Get the latest favorites to check if the recipe is still favorited
             val favorites = DependencyProvider.favoritesDataSource.getFavorites().first()

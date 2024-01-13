@@ -114,7 +114,6 @@ fun ImageWithFavIcon(
 ) {
 
     Box(
-        // contentAlignment = Alignment.BottomEnd
     ) {
         val aspectRatioFavBox: Float = when (cardFormat) {
             CardFormats.SQUARE -> 1f
@@ -122,35 +121,12 @@ fun ImageWithFavIcon(
             CardFormats.PORTRAIT -> 1f
         }
 
-//<<<<<<< HEAD
         RecipeImage(
             recipeId = recipeId,
             imageUrl = imageUrl,
             onNavigateToRecipe = onNavigateToRecipe,
-            //onFavoriteButtonClicked = onFavoriteButtonClicked,
             cardFormat = cardFormat,
-        )
-        // Create a RecipeCard instance with the provided details
-        val recipeCard = RecipeCard(
-           // id = recipeId,
-           // thumbnail_url = imageUrl,
-            //name = "Recipe Name", // You might need to pass this from outside
-            //isFavorite = isFavorite
             )
-//=======
-//        AsyncImage(
-//            model = imageUrl,
-//            contentDescription = null, //TODO give content description
-//            modifier = Modifier.testTag("itemImage")
-//                .fillMaxWidth()
-//                .aspectRatio(aspectRatioImg)
-//                .clickable {
-//                    onNavigateToRecipe(recipeId)
-//                },
-//            contentScale = ContentScale.Crop,
-//
-//            )
-//>>>>>>> main
 
         Box(
             contentAlignment = Alignment.BottomEnd,
