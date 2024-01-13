@@ -11,10 +11,14 @@ fun getFiltersList(): List<FilterButton> {
     //TODO figure out where to put this function
     val listOfTags = listOf(
         Tag(name = "easy", displayName = "Easy", type = "Difficulty"),
+        Tag(name = "medium", displayName = "Medium", type = "Difficulty"),
         Tag(name = "5_ingredients_or_less", displayName = "5 ingredients or less", type = "Difficulty"),
         Tag(name = "dairy_free", displayName = "Dairy Free", type = "Dietary"),
         Tag(name = "gluten_free", displayName = "Gluten Free", type = "Dietary"),
-        Tag(name = "asian", displayName = "Asian", type = "Cuisine")
+        Tag(name = "asian", displayName = "Asian", type = "Cuisine"),
+        Tag(name = "middle_eastern", displayName = "Middle Eastern", type = "Cuisine"),
+        Tag(name = "north_american", displayName = "North American", type = "Cuisine"),
+        Tag(name = "european", displayName = "European", type = "Cuisine")
 
     )
 
