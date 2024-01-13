@@ -24,10 +24,10 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
     val recipeList3 by viewModel.recipeCards3.collectAsState()
     val recipeList4 by viewModel.recipeCards4.collectAsState()
 
-    val food1 = FoodCategories(categoryName = "high protein vegan recipes", categoryListOfRecipe = recipeList1)
-    val food2 = FoodCategories(categoryName = "vegan winter recipes", categoryListOfRecipe = recipeList2)
-    val food3 = FoodCategories(categoryName = "vegan lentil recipes", categoryListOfRecipe = recipeList3)
-    val food4 = FoodCategories(categoryName = "vegan slow cooker recipes", categoryListOfRecipe = recipeList4)
+    val food1 = FoodCategories(categoryName = "High protein vegan recipes", categoryListOfRecipe = recipeList1)
+    val food2 = FoodCategories(categoryName = "Vegan winter recipes", categoryListOfRecipe = recipeList2)
+    val food3 = FoodCategories(categoryName = "Vegan lentil recipes", categoryListOfRecipe = recipeList3)
+    val food4 = FoodCategories(categoryName = "Vegan slow cooker recipes", categoryListOfRecipe = recipeList4)
 
 
     val listOfList: List<FoodCategories> = listOf(

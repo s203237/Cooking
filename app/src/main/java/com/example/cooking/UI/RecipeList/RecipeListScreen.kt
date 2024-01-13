@@ -5,7 +5,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import android.util.Log
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
  * collection name. It interacts with a [RecipeListViewModel] to fetch and observe the list of
@@ -39,15 +46,26 @@ fun ListAllRecipesScreen(collectionName:String, onNavigateToRecipe: (Int) -> Uni
 }
 @Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
-
-    Log.v("Recipes Trace", "RecipeId in viewModel.launch: $query")
-    val viewModel: RecipeListViewModel = viewModel()
-    LaunchedEffect( key1 = query){
-        viewModel.updateSearchKey(query)
-    }
-    val recipes by viewModel.recipeCards.collectAsState()
-    RecipeList(
-        recipes = recipes,
-        onNavigateToRecipe = onNavigateToRecipe,
+    val key = listOf(
+        "beef", "chicken", "pork", "fish", "goat", "lamb", "shirmp", "snake", "cat", "dog",
     )
+    if (key.contains(query)) {
+        Text(
+            text = " Recipe not found",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(20.dp)
+        )
+    } else {
+        Log.v("Recipes Trace", "RecipeId in viewModel.launch: $query")
+        val viewModel: RecipeListViewModel = viewModel()
+        LaunchedEffect(key1 = query) {
+            viewModel.updateSearchKey(query)
+        }
+        val recipes by viewModel.recipeCards.collectAsState()
+        RecipeList(
+            recipes = recipes,
+            onNavigateToRecipe = onNavigateToRecipe,
+        )
+    }
 }
