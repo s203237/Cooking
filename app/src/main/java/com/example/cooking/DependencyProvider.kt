@@ -2,9 +2,9 @@ package com.example.cooking
 
 import com.example.cooking.data.remote.ApiService
 import com.example.cooking.data.remote.CollectionDto
+import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
 import com.example.cooking.data.remote.RecipesRepo
-import com.example.cooking.data.remote.mock.MockCollectionRepo
 import com.example.cooking.model.Recipe
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -44,8 +44,8 @@ object DependencyProvider {
     private val apiService = retrofit.create(ApiService::class.java)
 
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
-    //val recipeCollectionRepo : RecipeDataRepo<CollectionDto> = RecipeCollectionRepo(apiService)
-    val recipeCollectionRepo: RecipeDataRepo<CollectionDto> = MockCollectionRepo(apiService)
+    val recipeCollectionRepo : RecipeDataRepo<CollectionDto> = RecipeCollectionRepo(apiService)
+    //val recipeCollectionRepo: RecipeDataRepo<CollectionDto> = MockCollectionRepo(apiService)
 }
 
 /* NOTE ON DEPENDENCY PROVIDER
