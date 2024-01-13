@@ -6,17 +6,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.Tag
 
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
@@ -45,12 +41,27 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
     }
 
     val cards by viewModel.recipeCards.collectAsState()
-    val filters by viewModel.tagsList.collectAsState()
+    //val filters by viewModel.filters.collectAsState()
     //val isSelected by viewModel.isSelected.collectAsState()
-    //val buttonStates by viewModel.buttonStates.collectAsState()
+    val buttonStates by viewModel.buttonStates.collectAsState()
 
     Column{
-         FilterMenu(
+        FilterMenu(
+           // filtersList = filters,
+            buttonStates = buttonStates,
+            onSelect = { id, tag ->
+                viewModel.toggleButton(id, tag)
+            },
+
+            onResetFilters = {
+                viewModel.resetCardsList()
+            },
+
+            onApplyFilters = {
+                viewModel.setCardsByTags()
+            }
+        )
+        /* FilterMenu(
              onSelect = { id, tag ->
                  viewModel.toggleButton(id, tag)
              },
@@ -66,7 +77,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
              onResetFilters = {
                  viewModel.resetCardsList()
              }
-         )
+         )*/
         RecipeList(
             recipeCards = cards,
             onNavigateToRecipe = onNavigateToRecipe,
@@ -81,7 +92,7 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 }
 
 // makeshift test...
-@Preview
+/*@Preview
 @Composable
 fun TestTagFilterIsInTags(){
     val vm: RecipeListViewModel = viewModel()
@@ -150,9 +161,9 @@ fun PreviewRecipeListScreen() {
 
     }
 }
-*/
 
-/*@Composable
+
+@Composable
 fun ListAllRecipes(query:String, onNavigateToRecipe: (Int) -> Unit) {
 
     Log.v("Recipes Trace", "RecipeId in viewModel.launch: $query")

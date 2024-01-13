@@ -40,12 +40,19 @@ class RecipeListViewModel: ViewModel() {
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
 
+
     private val _unfilteredRecipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
 
-    private val _tagsList = MutableStateFlow<Set<String>>(emptySet())
-    val tagsList = _tagsList.asStateFlow()
+   /* private val _filters = MutableStateFlow<Set<String>>(emptySet())
+    val filters = _filters.asStateFlow()*/
+    private val filters = mutableSetOf<String>()
 
-    private val buttonStates = mutableMapOf<Int,Boolean>()
+    private val _buttonStates = MutableStateFlow((1..getFiltersList().size).associateWith { false })
+    val buttonStates = _buttonStates.asStateFlow()
+
+    private val _buttonId = MutableStateFlow(0)
+
+    //private val buttonStates = mutableMapOf<Int,Boolean>()
     /*private val _isSelected = MutableStateFlow<Boolean>(false)
     val isSelected = _isSelected.asStateFlow()*/
     fun updateCollectionName(newCollectionName: String) {
@@ -53,12 +60,15 @@ class RecipeListViewModel: ViewModel() {
     }
 
     fun toggleButton(id: Int, tag: String) {
-        if(!buttonStates.containsKey(id))
-            buttonStates[id] = false
 
-        buttonStates[id] = !buttonStates[id]!!
-        val isCurrentlySelected = buttonStates[id] /*?.not() ?: false*/ // default to false if null
-        Log.v("ToggleButton", buttonStates.toString())
+        /*val states = _buttonStates.value
+        if(!states.containsKey(id))
+            states[id] = false
+
+        states[id] = !buttonStates[id]!!
+         */
+        val isCurrentlySelected = _buttonStates.value[id] /*?.not() ?: false*/ // default to false if null
+        Log.v("ToggleButton", buttonStates.value.toString())
         if(isCurrentlySelected == true) {
             addToFilters(tag)
         } else {
@@ -66,30 +76,30 @@ class RecipeListViewModel: ViewModel() {
         }
 
     }
-    fun getButtonState(buttonId: Int): Boolean {
+    /*fun getButtonState(buttonId: Int): Boolean {
         if(!buttonStates.containsKey(buttonId))
             buttonStates[buttonId] = false
         Log.v("ButtonState", "id: $buttonId isSelected: ${buttonStates[buttonId]}" )
         return buttonStates[buttonId] ?: false
-    }
+    }*/
     private fun addToFilters(tag: String) {
-        _tagsList.value += tag
+        filters += tag
     }
 
     private fun removeFromFilters(tag: String) {
-        _tagsList.value -= tag
+        filters -= tag
     }
 
-    fun getCardsByTags(tags: Set<String>, recipeCards: List<RecipeCard>) {
+    fun setCardsByTags() {
         if (_unfilteredRecipeCards.value.isEmpty())
-            _unfilteredRecipeCards.value = recipeCards
+            _unfilteredRecipeCards.value = recipeCards.value
 
-        val filteredRecipeCards = filterByTags(tags, _unfilteredRecipeCards.value)
+        val filteredRecipeCards = filterByTags(filters, _unfilteredRecipeCards.value)
         println(filteredRecipeCards.toString())
         _recipeCards.value = filteredRecipeCards
     }
 
-    fun filterByTags(tagsList: Set<String>, cards: List<RecipeCard>): List<RecipeCard> {
+    private fun filterByTags(tagsList: Set<String>, cards: List<RecipeCard>): List<RecipeCard> {
         return cards.filter { card ->
             val cardTagNames = card.tags.map{ it.name }
             val intersection = tagsList.intersect(cardTagNames.toSet())
@@ -98,23 +108,37 @@ class RecipeListViewModel: ViewModel() {
     }
 
     fun resetCardsList(){
-        _tagsList.value = emptySet()
-        buttonStates.mapValues{ (_,_) -> false }
+        filters.clear()
         _recipeCards.value = _unfilteredRecipeCards.value
+        /*_tagsList.value = emptySet()
+        buttonStates.mapValues{ (_,_) -> false }
+        _recipeCards.value = _unfilteredRecipeCards.value*/
     }
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
               _collectionName.dropWhile { it.isEmpty() }.collect{newCollectionName ->
-                  println("RecipeListVM init newCollectionName: $newCollectionName")
                   val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(
                     FetchParameters(
                         id = newCollectionName
                     )
                 ).results
-                Log.v("RecipeListViewModel", cardDtoList.toString())
+
                 val recipeCards = createCardsFromDto(cardDtoList)
                 _recipeCards.value = recipeCards
+            }
+
+          /*  _filters.collect { updatedFilters ->
+                _recipeCards.value = getCardsByTags(updatedFilters)
+            }*/
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            _buttonId.collect { buttonId ->
+                val updatedMap = mapOf(
+                    buttonId to false
+                )
+                _buttonStates.value = updatedMap
             }
         }
     }

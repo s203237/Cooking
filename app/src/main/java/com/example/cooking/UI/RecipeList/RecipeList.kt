@@ -30,23 +30,22 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.CardFormats
 import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
 import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
-import com.example.cooking.UI.theme.CookingTheme
+import com.example.cooking.UI.theme.getAccentButtonColors
+import com.example.cooking.UI.theme.getDefaultButtonColors
 import com.example.cooking.model.RecipeCard
 
 @Composable
@@ -105,6 +104,122 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
 }
 
 @Composable
+fun FilterMenu(
+    //filtersList: Set<String>,
+    buttonStates: Map<Int, Boolean>,
+    onSelect: (Int,String) -> Unit,
+    onResetFilters: () -> Unit,
+    onApplyFilters: () -> Unit,
+) {
+    var isVisible by remember { mutableStateOf(false) }
+    Box(
+        modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.primaryContainer)
+            .fillMaxWidth()
+    ) {
+        LazyColumn(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Button(
+                        onClick = { isVisible = !isVisible },
+                        colors = getAccentButtonColors()
+
+                    ) {
+                        Text(text = "filters")
+                    }
+                }
+            }
+            if (isVisible) {
+                getFiltersList()
+                    .groupBy { it.tag.type } //note to self: becomes key of map created by grouping
+                    .forEach {
+                        item {
+                            Spacer(modifier = Modifier.height(16.dp))
+                            UppercaseHeadingMedium(heading = it.key)
+                        }
+
+                        items(it.value) { button ->
+                           CreateFilterButton(
+                               id = button.id,
+                               label = button.tag.displayName,
+                               buttonStates = buttonStates,
+                               onSelect = { onSelect(button.id, button.tag.name) }
+                           )
+
+                        }
+                    }
+
+
+                item {
+                    DisplayActionButtons(
+                        onApplyFilters = onApplyFilters,
+                        onResetFilters = onResetFilters
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun DisplayActionButtons(
+    onApplyFilters: () -> Unit,
+    onResetFilters: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Button(
+            onClick = { onApplyFilters() },
+            colors = getAccentButtonColors()
+        ) {
+            Text(text = "apply")
+        }
+        Spacer(modifier = Modifier.width(16.dp))
+        Button(
+            onClick = { onResetFilters() },
+            colors = getAccentButtonColors()
+        ) {
+            Text(text = "reset")
+        }
+    }
+}
+
+@Composable
+fun CreateFilterButton(
+    id: Int,
+    label: String,
+    buttonStates: Map<Int, Boolean>,
+    onSelect: (String) -> Unit
+) {
+    var selected by rememberSaveable { mutableStateOf(false) }
+
+        Button(
+            onClick = { selected = !selected },
+            colors = if (selected) getAccentButtonColors() else getDefaultButtonColors()
+        ) {
+            Text(text = label)
+        }
+    }
+/*
+    Button(
+        onClick = { onSelect },
+        colors =  if(buttonStates[id] == true) {
+            getAccentButtonColors()
+        } else {
+            getDefaultButtonColors()
+        }
+    ) {
+        Text( text = label)
+    }
+}*/
+/*@Composable
 fun FilterMenu(
    // onCreateButton: (id: Int, isSelected: Boolean) -> Unit,
     onSelect: (Int, String) -> Unit,
@@ -257,4 +372,4 @@ fun PreviewRecipeList(){
 
 }
 
-
+*/
