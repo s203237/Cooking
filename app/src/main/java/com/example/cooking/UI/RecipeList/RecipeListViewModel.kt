@@ -1,6 +1,5 @@
 package com.example.cooking.UI.RecipeList
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -59,7 +58,23 @@ class RecipeListViewModel: ViewModel() {
         _collectionName.value = newCollectionName
     }
 
-    fun toggleButton(id: Int, tag: String) {
+    fun toggleButton(isSelected: Boolean, tag: String) {
+
+        /*val states = _buttonStates.value
+        if(!states.containsKey(id))
+            states[id] = false
+
+        states[id] = !buttonStates[id]!!
+         */
+        if(isSelected) {
+            addToFilters(tag)
+        } else {
+            removeFromFilters(tag)
+        }
+
+    }
+
+    /*fun toggleButton(id: Int, tag: String) {
 
         /*val states = _buttonStates.value
         if(!states.containsKey(id))
@@ -75,7 +90,7 @@ class RecipeListViewModel: ViewModel() {
             removeFromFilters(tag)
         }
 
-    }
+    }*/
     /*fun getButtonState(buttonId: Int): Boolean {
         if(!buttonStates.containsKey(buttonId))
             buttonStates[buttonId] = false

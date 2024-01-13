@@ -47,10 +47,10 @@ fun ListAllRecipesScreen(collectionName: String, onNavigateToRecipe: (Int) -> Un
 
     Column{
         FilterMenu(
-           // filtersList = filters,
-            buttonStates = buttonStates,
-            onSelect = { id, tag ->
-                viewModel.toggleButton(id, tag)
+            // filtersList = filters,
+            // buttonStates = buttonStates,
+            onSelect = { isSelected, tag ->
+                viewModel.toggleButton(isSelected, tag)
             },
 
             onResetFilters = {

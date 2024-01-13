@@ -106,8 +106,8 @@ fun RecipeItem(recipe: RecipeCard, onNavigateToRecipe: (Int) -> Unit) {
 @Composable
 fun FilterMenu(
     //filtersList: Set<String>,
-    buttonStates: Map<Int, Boolean>,
-    onSelect: (Int,String) -> Unit,
+    //buttonStates: Map<Int, Boolean>,
+    onSelect: (Boolean,String) -> Unit,
     onResetFilters: () -> Unit,
     onApplyFilters: () -> Unit,
 ) {
@@ -145,10 +145,11 @@ fun FilterMenu(
 
                         items(it.value) { button ->
                            CreateFilterButton(
-                               id = button.id,
+                               //id = button.id,
                                label = button.tag.displayName,
-                               buttonStates = buttonStates,
-                               onSelect = { onSelect(button.id, button.tag.name) }
+                               tagName = button.tag.name,
+                               //buttonStates = buttonStates,
+                               onSelect = onSelect
                            )
 
                         }
@@ -193,20 +194,23 @@ fun DisplayActionButtons(
 
 @Composable
 fun CreateFilterButton(
-    id: Int,
+    //id: Int,
     label: String,
-    buttonStates: Map<Int, Boolean>,
-    onSelect: (String) -> Unit
+    tagName: String,
+    //buttonStates: Map<Int, Boolean>,
+    onSelect: (Boolean, String) -> Unit
 ) {
     var selected by rememberSaveable { mutableStateOf(false) }
-
-        Button(
-            onClick = { selected = !selected },
-            colors = if (selected) getAccentButtonColors() else getDefaultButtonColors()
-        ) {
-            Text(text = label)
-        }
+    Button(
+        onClick = {
+            selected = !selected
+            onSelect(selected, tagName)
+        },
+        colors = if (selected) getAccentButtonColors() else getDefaultButtonColors()
+    ) {
+        Text(text = label)
     }
+}
 /*
     Button(
         onClick = { onSelect },
