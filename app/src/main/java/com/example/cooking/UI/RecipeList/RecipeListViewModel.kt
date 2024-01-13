@@ -59,13 +59,6 @@ class RecipeListViewModel: ViewModel() {
     }
 
     fun toggleButton(isSelected: Boolean, tag: String) {
-
-        /*val states = _buttonStates.value
-        if(!states.containsKey(id))
-            states[id] = false
-
-        states[id] = !buttonStates[id]!!
-         */
         if(isSelected) {
             addToFilters(tag)
         } else {
@@ -74,29 +67,6 @@ class RecipeListViewModel: ViewModel() {
 
     }
 
-    /*fun toggleButton(id: Int, tag: String) {
-
-        /*val states = _buttonStates.value
-        if(!states.containsKey(id))
-            states[id] = false
-
-        states[id] = !buttonStates[id]!!
-         */
-        val isCurrentlySelected = _buttonStates.value[id] /*?.not() ?: false*/ // default to false if null
-        Log.v("ToggleButton", buttonStates.value.toString())
-        if(isCurrentlySelected == true) {
-            addToFilters(tag)
-        } else {
-            removeFromFilters(tag)
-        }
-
-    }*/
-    /*fun getButtonState(buttonId: Int): Boolean {
-        if(!buttonStates.containsKey(buttonId))
-            buttonStates[buttonId] = false
-        Log.v("ButtonState", "id: $buttonId isSelected: ${buttonStates[buttonId]}" )
-        return buttonStates[buttonId] ?: false
-    }*/
     private fun addToFilters(tag: String) {
         filters += tag
     }
@@ -143,9 +113,6 @@ class RecipeListViewModel: ViewModel() {
                 _recipeCards.value = recipeCards
             }
 
-          /*  _filters.collect { updatedFilters ->
-                _recipeCards.value = getCardsByTags(updatedFilters)
-            }*/
         }
 
         viewModelScope.launch(Dispatchers.IO) {
