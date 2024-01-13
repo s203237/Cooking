@@ -1,6 +1,5 @@
 package com.example.cooking.UI.Homepage
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -31,7 +30,7 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
             onNavigateToRecipe = onNavigateToRecipe,
-        onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
+        onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked
 
     )
 
