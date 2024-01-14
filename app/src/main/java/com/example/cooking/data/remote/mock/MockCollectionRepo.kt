@@ -34,16 +34,19 @@ class MockCollectionRepo(apiService: ApiService): RecipeDataRepo<CollectionDto> 
 
         return listOf(
             CardDto(
+                recipeId = 1,
                 title = "dairy-free gluten-free easy",
                 tags = card1Tags,
                 imageUrl = "https://img.buzzfeed.com/video-api-prod/assets/eafca7a493d244788666b29cc4f0b017/BFV5191_CarrotCakeOatmeal-Thumb1080.jpg?resize=600:*&output-format=auto&output-quality=auto"
             ),
             CardDto(
+                recipeId = 2,
                 title = "asian 5 ingredients or less",
                 tags = card2Tags,
                 imageUrl = "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/448826.jpg?resize=600:*&output-format=auto&output-quality=auto"
             ),
             CardDto(
+                recipeId = 3,
                 title = "dairy-free middle eastern 5 ingredients or less",
                 tags = card3Tags,
                 imageUrl = "https://img.buzzfeed.com/video-api-prod/assets/6ec1a985f82149b78146cda38ec2f9bc/BFV6636_One-PanMoroccanChicken_THUMB_A.jpg?resize=600:*&output-format=auto&output-quality=auto"

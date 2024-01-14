@@ -1,8 +1,10 @@
 package com.example.cooking.UI.RecipeList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.data.remote.FetchParameters
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.createCardsFromDto
@@ -108,9 +110,27 @@ class RecipeListViewModel: ViewModel() {
                         id = newCollectionName
                     )
                 ).results
+                  val recipeCards = createCardsFromDto(cardDtoList)
 
-                val recipeCards = createCardsFromDto(cardDtoList)
-                _recipeCards.value = recipeCards
+                  favoritesDataSource
+                      .getFavorites()
+                      .collect { favorites ->
+                          _recipeCards.value = recipeCards.map { card ->
+                              Log.v("isFavorite", "${card.name}: ${favorites.any { it.id == card.id }}")
+                              RecipeCard(
+                                  id = card.id,
+                                  name = card.name,
+                                  thumbnail_url = card.thumbnail_url,
+                                  tags = card.tags,
+                                  isFavorite = favorites.any { it.id == card.id }
+                              )
+                          }
+
+
+                      }
+
+
+                //_recipeCards.value = recipeCards
             }
 
         }
