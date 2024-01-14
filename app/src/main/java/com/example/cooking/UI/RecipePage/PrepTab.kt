@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
-import com.example.cooking.UI.SharedComponents.CustomHeading1
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
 import com.example.cooking.model.Instructions
 import com.example.cooking.model.Recipe
 
@@ -48,19 +50,17 @@ fun PrepTab(recipe: Recipe) {
             modifier = Modifier
                 .fillMaxWidth()
         ){
+            Spacer(Modifier.height(20.dp))
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
                         color = Color(0xFFF2ECE3)
                     )
-                    .padding(
-                            top = 36.dp,
-                            start = 16.dp,
-                            end = 16.dp,
-                            bottom = 16.dp)
+                    .padding(16.dp)
             ) {
-                CustomHeading1(heading = "steps")
+                Spacer(Modifier.height(32.dp))
+                UppercaseHeadingMedium(heading = "steps")
                 StepsList(list = recipe.instructions)
             }
 

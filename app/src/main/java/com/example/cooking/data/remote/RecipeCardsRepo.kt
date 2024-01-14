@@ -3,7 +3,6 @@ package com.example.cooking.data.remote
 import com.example.cooking.model.RecipeCard
 import retrofit2.HttpException
 import java.io.IOException
-import java.net.UnknownHostException
 
 /**
  * This class, `RecipeCardsRepo`, is an implementation of the `RecipeDataRepo` interface
@@ -25,15 +24,18 @@ import java.net.UnknownHostException
  *
  *   - A list of [RecipeCard] objects if the data retrieval is successful.
  *   - An empty list if an error occurs during the retrieval process.
- *
- *   Similar explanation for class 'RecipeCardsRepoSearch' and functions 'fetchData(query: String)'
  */
-class RecipeCardsRepo(private val apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
-    override suspend fun fetchData(collectionName: String): List<RecipeCard> {
+class RecipeCardsRepo(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
+    private val apiService = apiService
+    override suspend fun fetchData(parameters: FetchParameters): List<RecipeCard> {
 
         try {
-            val recipeCollection = apiService.fetchRecipeCollection(collectionName)
-            return recipeCollection.results
+            val recipeCollection = apiService.fetchRecipeCollection(
+                searchTerm = parameters.id,
+                size = parameters.size,
+                tag = parameters.tag
+            )
+            return recipeCollection.results.map{ RecipeCard(it.recipeId, it.title, it.imageUrl)}
         } catch (e : IOException) {
             println("It broke :((( ${e.message}")
         } catch (e: HttpException) {
@@ -43,24 +45,4 @@ class RecipeCardsRepo(private val apiService: ApiService) : RecipeDataRepo<List<
         }
         return emptyList()
     }
-}
-class RecipeCardsRepoSearch(apiService: ApiService) : RecipeDataRepo<List<RecipeCard>> {
-    private val apiService = apiService
-    override suspend fun fetchData(q: String): List<RecipeCard> {
-        try {
-            val recipeCollection = apiService.fetchRecipeCollection(q)
-            return recipeCollection.results
-        }
-        catch (e : IOException) {
-            println("It broke :((( ${e.message}")
-        } catch (e: HttpException) {
-            val errorCode = e.code()
-            val errorResponse = e.response()?.errorBody()?.string()
-            println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
-        }
-        return emptyList()
-
-    }
-
-
 }

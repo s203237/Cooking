@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,10 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
-import com.example.cooking.UI.SharedComponents.CustomHeading1
-import com.example.cooking.UI.SharedComponents.CustomHeading2
 import com.example.cooking.UI.SharedComponents.CustomTitle
-import com.example.cooking.data.RecipeData
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingSmall
 import com.example.cooking.model.Component
 import com.example.cooking.model.Recipe
 import kotlin.math.roundToInt
@@ -62,22 +64,20 @@ fun InfoTab(recipe: Recipe) {
         ) {
             DisplayRecipeInfo(recipe = recipe)
             CustomTitle(title = recipe.name, textAlign = TextAlign.Center)
-
             val headingText = if(recipe.credits.isNotEmpty()){
                 recipe.credits[0].name
             }else{
                 "Default Name"
             }
-            CustomHeading2(heading = headingText, textAlign = TextAlign.Center)
-            CustomHeading1(heading = "description")
+            UppercaseHeadingSmall(heading = headingText, textAlign = TextAlign.Center)
+            UppercaseHeadingMedium(heading = "description")
             Text(
                 text = recipe.description,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Justify
             )
-
-            CustomHeading1(heading = "ingredients")
-
+            Spacer(Modifier.height(16.dp))
+            UppercaseHeadingMedium(heading = "ingredients")
             val ingrList = if(recipe.sections.isNotEmpty()){
                 recipe.sections[0].components
             }else{
@@ -89,14 +89,12 @@ fun InfoTab(recipe: Recipe) {
 }
 @Composable
 private fun DisplayRecipeInfo(recipe: Recipe) {
-    Column(
+    Spacer(
         modifier = Modifier
-            .padding(
-                top = 16.dp,
-                start = 16.dp,
-                end = 16.dp
-            )
-    ) {
+            .height(16.dp)
+    )
+
+    Column {
        // val prepTime =  formatTime(recipe.timeToCook.prepTime)
        // val cookingTime = formatTime(recipe.timeToCook.cookTime)
 
@@ -106,9 +104,14 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             icon2 = painterResource(id = R.drawable.outline_local_fire_department_24),
             infoType2 = "COOK", infoVal2 = recipe.cook_time_minutes.toString()
         )
+        Spacer(
+            modifier = Modifier
+                .height(16.dp)
+        )
 
         val diff = recipe.difficulty
         val serv = recipe.num_servings.toString()
+
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_thermostat_24),
             infoType1 = "DIFFICULTY", infoVal1 = diff,
@@ -116,15 +119,18 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
             infoType2 = "SERVING SIZE", infoVal2 = serv
         )
 
+
+        Spacer(Modifier.height(16.dp))
+
         DisplayRating(recipe.user_ratings.score);
+
     }
 }
 @Composable
 private fun InfoRowWithIcons(icon1: Painter, infoType1: String, infoVal1: String, icon2: Painter? = null, infoType2: String? = null, infoVal2: String? = null) {
     Row (
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ){
@@ -132,22 +138,40 @@ private fun InfoRowWithIcons(icon1: Painter, infoType1: String, infoVal1: String
             icon1,
             contentDescription = "$infoType1 icon",
         )
-        Text(
-            text =  "$infoType1: $infoVal1",
+
+        Spacer(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(start = 16.dp)
+                .width(16.dp)
         )
+
+        Column {
+            UppercaseHeadingMedium(heading = infoType1)
+            Text(
+                text =  infoVal1,
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+            )
+        }
 
         if(icon2 != null && infoType2 != null && infoVal2 != null) {
             Icon(
                 icon2,
                 contentDescription = "$infoType2 icon",
             )
-            Text(
-                text = "$infoType2: $infoVal2",
-                modifier = Modifier.padding(start = 16.dp)
+
+            Spacer(
+                modifier = Modifier
+                    .width(16.dp)
             )
+
+            Column {
+                UppercaseHeadingMedium(heading = infoType2)
+                Text(
+                    text =  infoVal2,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }
@@ -208,6 +232,6 @@ private fun BulletList(list: List<Component>) {
 @Preview
 @Composable
 fun PreviewInfoTab() {
-    val recipeList = RecipeData().loadRecipes()
-    InfoTab(recipe = recipeList[2])
+    val recipe = Recipe(num_servings = 10000)
+    InfoTab(recipe = recipe)
 }

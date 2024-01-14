@@ -1,12 +1,14 @@
 package com.example.cooking
 
+import android.content.Context
+import com.example.cooking.data.local.DataStoreFavoritesDataSource
+import com.example.cooking.data.local.FavoritesDataSource
 import com.example.cooking.data.remote.ApiService
+import com.example.cooking.data.remote.CollectionDto
+import com.example.cooking.data.remote.RecipeCollectionRepo
 import com.example.cooking.data.remote.RecipeDataRepo
-import com.example.cooking.data.remote.RecipeCardsRepo
-import com.example.cooking.data.remote.RecipeCardsRepoSearch
 import com.example.cooking.data.remote.RecipesRepo
 import com.example.cooking.model.Recipe
-import com.example.cooking.model.RecipeCard
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -28,6 +30,7 @@ object DependencyProvider {
         chain.proceed(request)
     }
 
+
     val client = OkHttpClient.Builder()
         .addInterceptor(apiKeyInterceptor)
         .build()
@@ -44,9 +47,16 @@ object DependencyProvider {
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    val recipeCardRepo: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepo(apiService)
     val recipeRepo: RecipeDataRepo<Recipe> = RecipesRepo(apiService)
-    val recipeCardsRepoSearch: RecipeDataRepo<List<RecipeCard>> = RecipeCardsRepoSearch(apiService)
+    val recipeCollectionRepo : RecipeDataRepo<CollectionDto> = RecipeCollectionRepo(apiService)
+    //val recipeCollectionRepo: RecipeDataRepo<CollectionDto> = MockCollectionRepo(apiService)
+    lateinit var favoritesDataSource: FavoritesDataSource
+        private set
+
+    fun initialize(context: Context) {
+        favoritesDataSource = DataStoreFavoritesDataSource(context)
+    }
+
 }
 
 /* NOTE ON DEPENDENCY PROVIDER

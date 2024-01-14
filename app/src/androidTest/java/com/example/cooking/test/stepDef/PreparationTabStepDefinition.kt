@@ -1,10 +1,10 @@
 package com.example.cooking.test.stepDef
-
+/*
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-
+*/
 class PreparationTabStepDefinition {
-    @Given("I am on recipe page for miso and butternut soup")
+  /*  @Given("I am on recipe page for miso and butternut soup")
     fun theAppIsOpen() {
         // Implementation for opening the app
     }
@@ -18,5 +18,5 @@ class PreparationTabStepDefinition {
     fun iShouldSeeTheResult() {
         // Implementation for verifying the result
     }
-
+*/
 }

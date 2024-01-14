@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cooking.UI.Favorite.FavoritesScreenViewModel
 
 /**
  * Composable function `DisplayRecipeScreen` displays a detailed view of a recipe based on the
@@ -27,10 +28,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun DisplayRecipeScreen(recipeId: String) {
     val viewModel: RecipePageViewModel = viewModel()
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     val recipe by viewModel.recipe.collectAsState()
     LaunchedEffect(key1 = recipeId) {
         Log.v("RecipeId Trace","RecipeId in Launched effect: $recipeId")
         viewModel.updateRecipeId(recipeId)
     }
-    RecipePage(recipe = recipe)
+    RecipePage(
+        recipe = recipe,
+        onFavoriteButtonClicked = { recipeCard ->
+            favoritesViewModel.onFavoriteButtonClicked(recipeCard)
+        }
+    )
 }
+

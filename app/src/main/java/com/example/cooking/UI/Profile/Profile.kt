@@ -56,10 +56,10 @@ fun MyPrivacy() {
 
 
 @Composable
-fun MyHelp() {
+fun MyHelp(onNavigateToHelpPage: () -> Unit) {
         Button(
             modifier = Modifier.padding(10.dp),
-            onClick = {}
+            onClick = onNavigateToHelpPage
         ) {
             Text("Help", fontSize = 30.sp, fontWeight = FontWeight.Bold)
         }
@@ -70,7 +70,8 @@ fun MyHelp() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileBox(){
+fun ProfileBox(onNavigateToHelpPage:() -> Unit){
+
 
 
 
@@ -138,9 +139,8 @@ fun ProfileBox(){
             .fillMaxWidth()
             .padding(2.dp),
             verticalArrangement = Arrangement.SpaceEvenly) {
-            MyHelp()
+            MyHelp(onNavigateToHelpPage)
             Spacer(modifier = Modifier.height(10.dp))
-            MyPrivacy()
         }
 
 
@@ -156,7 +156,7 @@ fun ProfileButtons(){
 
     ){
         Spacer(modifier = Modifier.height(20.dp))
-        MyHelp()
+        MyHelp(onNavigateToHelpPage = {})
         Spacer(modifier = Modifier.height(20.dp))
         MyPrivacy()}
 }
@@ -167,7 +167,7 @@ fun ProfileButtons(){
 @Preview
 @Composable
 fun PreviewBox(){
-    ProfileBox()
+    ProfileBox(onNavigateToHelpPage = {})
 }
 
 

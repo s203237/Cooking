@@ -1,11 +1,14 @@
 package com.example.cooking.UI.RecipePage
 
+//import com.example.cooking.data.remote.mock_datasource.RecipeData
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -16,34 +19,49 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.cooking.model.Recipe
-import com.example.cooking.data.RecipeData
-import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
-import com.example.cooking.UI.SharedComponents.CustomHeading1
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.example.cooking.UI.SharedComponents.CardFormats
+import com.example.cooking.UI.SharedComponents.ImageWithFavIcon
+import com.example.cooking.UI.SharedComponents.UppercaseHeadingMedium
+import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
 
 @Composable
-fun RecipePage(recipe: Recipe) {
+fun RecipePage(
+    recipe: Recipe,
+    onFavoriteButtonClicked:(RecipeCard)->Unit
+) {
     Column(
-        modifier = Modifier.testTag("recipePage")
+        modifier = Modifier
+            .testTag("recipePage")
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+            val recipeCard = RecipeCard(
+                recipe.id,
+                recipe.name,
+                recipe.thumbnail_url,
+                emptyList(), //TODO NOT EMPTY LIST! PLACEHOLDER ONLY!
+                recipe.isFavorite
+            )
             ImageWithFavIcon(
-                recipeId = recipe.id,
-                imageUrl = recipe.thumbnail_url,
-                {},
-                {},
-                CardFormats.PORTRAIT
+                recipeCard,
+                /*onNavigateToRecipe = { recipeId ->
+                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
+                } ,*/
+                onNavigateToRecipe = {},
+                onFavoriteButtonClicked = {
+                    onFavoriteButtonClicked(
+                        recipeCard
+                    )
+                },
+                cardFormat = CardFormats.PORTRAIT
             )
             TabLayout(recipe = recipe)
         }
@@ -69,7 +87,7 @@ fun TabLayout(recipe: Recipe) {
     Box (
         modifier = Modifier
             .fillMaxWidth()
-            .padding( top = screenWidth)
+            .padding(top = screenWidth)
 
     ){
         when (selectedTabIndex) {
@@ -82,32 +100,34 @@ fun TabLayout(recipe: Recipe) {
         ) {
             Box(
                 modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(top = 8.dp)
-                .clickable { selectedTabIndex = 0 },
+                    .fillMaxWidth(0.5f)
+                    .padding(top = 8.dp)
+                    .clickable { selectedTabIndex = 0 },
                 contentAlignment = Alignment.Center
 
             )
             {
-                CustomHeading1(heading = "information")
+                Spacer(Modifier.height(32.dp))
+                UppercaseHeadingMedium(heading = "information")
             }
             Box(
                 modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp)
-                .clickable { selectedTabIndex = 1 },
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+                    .clickable { selectedTabIndex = 1 },
                 contentAlignment = Alignment.Center
             )
             {
-                CustomHeading1(heading = "preparation")
+                Spacer(Modifier.height(32.dp))
+                UppercaseHeadingMedium(heading = "preparation")
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun PreviewRecipePage() {
-    val recipeList = RecipeData().loadRecipes()
-    RecipePage(recipe = recipeList[2])
-}
+//@Preview
+//@Composable
+//fun PreviewRecipePage() {
+//    val recipeList = RecipeData().loadRecipes()
+//    RecipePage(recipe = recipeList[2])
+//}

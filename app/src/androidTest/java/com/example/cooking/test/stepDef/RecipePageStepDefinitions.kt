@@ -1,11 +1,11 @@
 package com.example.cooking.test.stepDef
-
+/*
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-
+*/
 class RecipePageStepDefinitions {
-    @Given("I am on the home page")
+  /*  @Given("I am on the home page")
     fun theAppIsOpen() {
         // Implementation for opening the app
     }
@@ -24,5 +24,5 @@ class RecipePageStepDefinitions {
         // Implementation for verifying the result
     }
 
-
+*/
 }

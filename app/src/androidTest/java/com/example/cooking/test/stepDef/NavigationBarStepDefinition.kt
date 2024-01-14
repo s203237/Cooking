@@ -1,10 +1,10 @@
 package com.example.cooking.test.stepDef
-
+/*
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-
+*/
 class NavigationBarStepDefinition {
-    @Given("I am on the homepage")
+  /*  @Given("I am on the homepage")
     fun theAppIsOpen() {
         // Implementation for opening the app
     }
@@ -18,5 +18,5 @@ class NavigationBarStepDefinition {
     fun iShouldSeeTheResult() {
         // Implementation for verifying the result
     }
-
+*/
 }

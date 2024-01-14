@@ -1,11 +1,10 @@
 package com.example.cooking.test
 
-import io.cucumber.junit.Cucumber
-import org.junit.runner.RunWith
+//import io.cucumber.junit.Cucumber
 
 
 
-@RunWith(Cucumber::class)
+/*@RunWith(Cucumber::class)
 @io.cucumber.junit.CucumberOptions(
     features = ["src/androidTest/assets/features"],
     glue = ["com.example.app"],
@@ -16,4 +15,4 @@ import org.junit.runner.RunWith
 class CucumberTest{
 
 }
-
+*/
