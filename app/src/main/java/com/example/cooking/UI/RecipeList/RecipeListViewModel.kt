@@ -1,6 +1,5 @@
 package com.example.cooking.UI.RecipeList
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -41,6 +40,8 @@ class RecipeListViewModel: ViewModel() {
     private val _recipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
     val recipeCards = _recipeCards.asStateFlow()
 
+    private val _noResults = MutableStateFlow(false)
+    val noResults = _noResults.asStateFlow()
 
     private val _unfilteredRecipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
 
@@ -111,7 +112,7 @@ class RecipeListViewModel: ViewModel() {
                     )
                 ).results
                   val recipeCards = createCardsFromDto(cardDtoList)
-
+                  _noResults.value = recipeCards.isEmpty()
                   favoritesDataSource
                       .getFavorites()
                       .collect { favorites ->
@@ -125,9 +126,7 @@ class RecipeListViewModel: ViewModel() {
                                   isFavorite = favorites.any { it.id == card.id }
                               )
                           }
-
                       }
-
 
                 //_recipeCards.value = recipeCards
             }

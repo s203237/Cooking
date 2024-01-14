@@ -55,18 +55,18 @@ fun RecipeList(
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     modifier: Modifier
 ) {
-    Column (
-       /* modifier = Modifier
+        Column(
+            /* modifier = Modifier
             .background(color = Color(0xFFFFFBEF))*/
-    ) {
+        ) {
 
-        LazyColumn {
-            items(recipeCards) { recipe ->
-                RecipeItem(recipe, onNavigateToRecipe , onFavoriteButtonClicked )
-                println("Composed recipe item")
+            LazyColumn {
+                items(recipeCards) { recipe ->
+                    RecipeItem(recipe, onNavigateToRecipe, onFavoriteButtonClicked)
+                    println("Composed recipe item")
+                }
             }
         }
-    }
 }
 @Composable
 fun RecipeItem(
@@ -108,11 +108,15 @@ fun FilterMenu(
     var isVisible by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.primaryContainer)
+            .background(color = MaterialTheme.colorScheme.background)
             .fillMaxWidth()
     ) {
         LazyColumn(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp
+            )
         ) {
             item {
                 Row(

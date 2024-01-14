@@ -13,8 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
 import com.example.cooking.UI.Favorite.FavoritesScreenViewModel
+import com.example.cooking.UI.SharedComponents.CustomTitle
 
 /**
  * Composable function `ListAllRecipesScreen` displays a list of recipes based on the specified
@@ -41,16 +41,18 @@ fun ListAllRecipesScreen(
     Log.v("CollectionName Trace", "CollectionName in List Screen Composable: $collectionName")
     val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     val viewModel: RecipeListViewModel = viewModel()
+
+
     LaunchedEffect(key1 = collectionName){
         viewModel.updateCollectionName(collectionName)
     }
-
+    val noResults by viewModel.noResults.collectAsState()
     val cards by viewModel.recipeCards.collectAsState()
     //val filters by viewModel.filters.collectAsState()
     //val isSelected by viewModel.isSelected.collectAsState()
     val buttonStates by viewModel.buttonStates.collectAsState()
 
-    Column{
+    Column {
         FilterMenu(
             // filtersList = filters,
             // buttonStates = buttonStates,
@@ -67,17 +69,26 @@ fun ListAllRecipesScreen(
             }
         )
 
-        RecipeList(
-            recipeCards = cards,
-            onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked,
-            modifier = Modifier
-                .padding(16.dp)
-                .background(color = MaterialTheme.colorScheme.background)
-                .fillMaxWidth()
-        )
+        if (noResults) {
+            Column (
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(16.dp)
+            ) {
+                CustomTitle(title = "Recipe not found")
+            }
+        } else {
+            RecipeList(
+                recipeCards = cards,
+                onNavigateToRecipe = onNavigateToRecipe,
+                onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .background(color = MaterialTheme.colorScheme.background)
+                    .fillMaxWidth()
+            )
+        }
     }
-
 }
 
 // makeshift test...
