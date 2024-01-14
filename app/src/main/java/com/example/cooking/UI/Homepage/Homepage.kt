@@ -76,34 +76,12 @@ fun scrollableList(
                     onFavoriteButtonClicked = onFavoriteButtonClicked
                 )
             }
-                //UppercaseHeadingMedium(heading = "daily pick")
-                //Spacer(Modifier.height(16.dp))
-               /* RecipeRowItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    recipe = dailyRecipe,
-                    onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked=onFavoriteButtonClicked,
-                )
-
-            }
-            item{
-                RecipeCardRow(collection = listOfCollections[0], onNavigateToRecipe = onNavigateToRecipe,onFavoriteButtonClicked=onFavoriteButtonClicked)
-            }
-
-            item {
-                RecipeCardList(
-                    collection = listOfCollections[1],
-                    listSize = 3,
-                    onNavigateToRecipe = onNavigateToRecipe,
-                    onFavoriteButtonClicked=onFavoriteButtonClicked
-                )
-            }*/
 
             items(listOfCollections) { collection ->
                 when (collection.type) {
                     ListType.CARD -> SingleCard(
                         title = collection.collectionName,
-                        recipe = collection.results[0],
+                        recipeCard = collection.results[0],
                         onNavigateToRecipe = onNavigateToRecipe,
                         onFavoriteButtonClicked = onFavoriteButtonClicked,
                         modifier = modifier
@@ -164,7 +142,7 @@ fun DailyCard(
 @Composable
 fun SingleCard(
     title: String,
-    recipe: RecipeCard,
+    recipeCard: RecipeCard,
     onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     modifier: Modifier
@@ -175,7 +153,7 @@ fun SingleCard(
         Spacer(Modifier.height(16.dp))
         RowItem(
             modifier = Modifier.fillMaxWidth(),
-            recipeCard = recipe,
+            recipeCard = recipeCard,
             onNavigateToRecipe = onNavigateToRecipe,
             onFavoriteButtonClicked = onFavoriteButtonClicked
         )
@@ -326,9 +304,10 @@ fun RecipeCardListItem(
 
         }
         FavButton(
-            0.35f,
-            isFavorite = recipeCard.isFavorite ,
-            onClick = {onFavoriteButtonClicked(recipeCard)}
+            sizeFraction = 0.35f,
+            recipeCard = recipeCard,
+            isFavorite = recipeCard.isFavorite,
+            onFavoriteButtonClicked = { onFavoriteButtonClicked(recipeCard) }
         )
 
     }

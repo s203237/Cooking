@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -53,10 +54,8 @@ fun ImageWithFavIcon(
                 .padding(16.dp)
         ) {
             FavButton(
-                onClick = {
-                    onFavoriteButtonClicked(recipeCard)
-                    //onFavoriteButtonClicked
-                },
+                recipeCard = recipeCard,
+                onFavoriteButtonClicked = onFavoriteButtonClicked,
                 isFavorite = recipeCard.isFavorite,
 
                 )
@@ -101,7 +100,12 @@ fun RecipeImage(
 
 }
 @Composable
-fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> Unit) {
+fun FavButton(
+    sizeFraction: Float = 0.15f,
+    isFavorite: Boolean,
+    recipeCard: RecipeCard,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
+) {
 //var isFavorite by remember { mutableStateOf(false) }
 
     Box(
@@ -115,7 +119,7 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick = onClick
+            onClick = { onFavoriteButtonClicked(recipeCard) }
 
 
             //onClick = {isFavorite = !isFavorite}
@@ -132,6 +136,7 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
                 Icon(
                     Icons.Outlined.FavoriteBorder,
                     contentDescription = "Favourite Heart Outlined",
+                    tint = Color.White
                 )
         }
         /* val icon = if (isFavorite) {

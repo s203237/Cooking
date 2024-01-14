@@ -1,4 +1,4 @@
-package com.example.cooking.UI.Faviorite
+package com.example.cooking.UI.Favorite
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
