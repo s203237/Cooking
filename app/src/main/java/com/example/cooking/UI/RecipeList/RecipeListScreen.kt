@@ -55,7 +55,7 @@ fun ListAllRecipesScreen(
             // filtersList = filters,
             // buttonStates = buttonStates,
             onSelect = { isSelected, tag ->
-                viewModel.toggleButton(isSelected, tag)
+                viewModel.toggleFilter(isSelected, tag)
             },
 
             onResetFilters = {

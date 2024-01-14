@@ -116,7 +116,13 @@ fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
     val calendar = Calendar.getInstance()
     val currentDate = calendar.get(Calendar.DAY_OF_MONTH)
     val i = currentDate % collection.results.size
-    return collection.results[i]
+    return RecipeCard(
+        id = collection.results[i].id,
+        name = collection.results[i].name,
+        thumbnail_url = collection.results[i].thumbnail_url,
+        tags = collection.results[i].tags,
+        isFavorite = collection.results[i].isFavorite
+    )
 }
 
 fun createRecipeCollection(dto: CollectionDto, collectionData: HomepageCollection) : RecipeCollection {

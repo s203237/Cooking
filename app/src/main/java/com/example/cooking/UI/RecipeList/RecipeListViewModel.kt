@@ -58,7 +58,7 @@ class RecipeListViewModel: ViewModel() {
         _collectionName.value = newCollectionName
     }
 
-    fun toggleButton(isSelected: Boolean, tag: String) {
+    fun toggleFilter(isSelected: Boolean, tag: String) {
         if(isSelected) {
             addToFilters(tag)
         } else {
