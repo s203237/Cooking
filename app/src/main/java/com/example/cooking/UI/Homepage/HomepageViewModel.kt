@@ -12,7 +12,6 @@ import com.example.cooking.model.createCardsFromDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -40,18 +39,54 @@ class HomePageViewModel: ViewModel() {
                 DependencyProvider.recipeCollectionRepo.fetchData(parameters)
             }
 
-            _recipeCollections.value = collectionDtoList.mapIndexed { index, collection ->
+            val recipeCollections = collectionDtoList.mapIndexed { index, collection ->
                 createRecipeCollection(collection, collectionData[index])
             }
-            _dailyRecipe.value = getDailyRecipe(_recipeCollections.value[size-1])
+
+            favoritesDataSource
+                .getFavorites()
+                .collect { favorites ->
+                    _recipeCollections.value = recipeCollections.map { collection ->
+                        RecipeCollection(
+                            collectionName = collection.collectionName,
+                            results = collection.results.map { card ->
+                                RecipeCard(
+                                    id = card.id,
+                                    name = card.name,
+                                    thumbnail_url = card.thumbnail_url,
+                                    tags = card.tags,
+                                    isFavorite = favorites.any { it.id == card.id }
+                                )
+                            },
+                            type = collection.type
+                        )
+                    }
+                    val dailyRecipe = getDailyRecipe(_recipeCollections.value[size - 1])
+
+                        _dailyRecipe.value = RecipeCard(
+                            id = dailyRecipe.id,
+                            name = dailyRecipe.name,
+                            thumbnail_url = dailyRecipe.thumbnail_url,
+                            tags = dailyRecipe.tags,
+                            isFavorite = favorites.any { it.id == dailyRecipe.id }
+                        )
+                    }
+                }
+
+
+
+            /*_recipeCollections.value = collectionDtoList.mapIndexed { index, collection ->
+                createRecipeCollection(collection, collectionData[index])
+            }*/
+
 //
-            val favoritesCards = favoritesDataSource.getFavorites().first()
+  /*          val favoritesCards = favoritesDataSource.getFavorites().first()
             val favoriteIds = favoritesCards.map { it } // Assuming 'id' is the property that holds the recipe ID
             updateCollectionsWithFavorites(favoriteIds)
-
+*/
         }
     }
-    private fun updateCollectionsWithFavorites(favorites: List<RecipeCard>) {
+  /*  private fun updateCollectionsWithFavorites(favorites: List<RecipeCard>) {
         _recipeCollections.value = _recipeCollections.value.map { collection ->
             collection.copy(results = collection.results.map { recipe ->
                 recipe.copy(isFavorite = favorites.any { it.id == recipe.id })
@@ -66,7 +101,7 @@ class HomePageViewModel: ViewModel() {
         }
         return collection.copy(results = updatedRecipes)
     }
-
+*/
     /*fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -80,7 +115,7 @@ class HomePageViewModel: ViewModel() {
                 println("Error toggling favorite: $e")
             }
         }
-    }*/
+    }
     fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -111,7 +146,7 @@ class HomePageViewModel: ViewModel() {
     }
 
 }
-
+*/
 fun getDailyRecipe(collection : RecipeCollection) : RecipeCard {
     val calendar = Calendar.getInstance()
     val currentDate = calendar.get(Calendar.DAY_OF_MONTH)
