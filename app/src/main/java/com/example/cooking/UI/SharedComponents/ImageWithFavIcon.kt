@@ -23,6 +23,52 @@ import coil.compose.AsyncImage
 import com.example.cooking.model.RecipeCard
 
 @Composable
+fun ImageWithFavIcon(
+    recipeId: Int,
+    imageUrl: String,
+    isFavorite: Boolean,
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
+    cardFormat: CardFormats
+
+) {
+
+    Box(
+    ) {
+        val aspectRatioFavBox: Float = when (cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 1f
+        }
+
+        RecipeImage(
+            recipeId = recipeId,
+            imageUrl = imageUrl,
+            onNavigateToRecipe = onNavigateToRecipe,
+            cardFormat = cardFormat,
+        )
+        val recipeCard = RecipeCard() // what's this? A blank recipe card?
+        Box(
+            contentAlignment = Alignment.BottomEnd,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatioFavBox)
+                .padding(16.dp)
+        ) {
+            FavButton(
+                onClick = {
+                    onFavoriteButtonClicked(recipeCard)
+                    //onFavoriteButtonClicked
+                },
+                isFavorite = isFavorite,
+
+                )
+        }
+
+    }
+}
+
+@Composable
 fun RecipeImage(
     recipeId: Int,
     imageUrl: String,
@@ -99,52 +145,6 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
             }
             Icon(imageVector = icon, contentDescription = null)
         }*/
-    }
-}
-
-@Composable
-fun ImageWithFavIcon(
-    recipeId: Int,
-    imageUrl: String,
-    isFavorite: Boolean,
-    onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (RecipeCard) -> Unit,
-    cardFormat: CardFormats
-
-) {
-
-    Box(
-    ) {
-        val aspectRatioFavBox: Float = when (cardFormat) {
-            CardFormats.SQUARE -> 1f
-            CardFormats.LANDSCAPE -> 2f
-            CardFormats.PORTRAIT -> 1f
-        }
-
-        RecipeImage(
-            recipeId = recipeId,
-            imageUrl = imageUrl,
-            onNavigateToRecipe = onNavigateToRecipe,
-            cardFormat = cardFormat,
-            )
-        val recipeCard = RecipeCard() // what's this? A blank recipe card?
-        Box(
-            contentAlignment = Alignment.BottomEnd,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(aspectRatioFavBox)
-                .padding(16.dp)
-        ) {
-            FavButton(
-                onClick = {
-                          onFavoriteButtonClicked(recipeCard)
-                          //onFavoriteButtonClicked
-                },
-                isFavorite = isFavorite,
-
-            )
-        }
-
     }
 }
 

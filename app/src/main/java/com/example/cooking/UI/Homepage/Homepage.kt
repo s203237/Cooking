@@ -41,6 +41,7 @@ import com.example.cooking.model.ListType
 import com.example.cooking.model.RecipeCard
 import com.example.cooking.model.RecipeCollection
 
+
 @Composable
 fun scrollableList(
     modifier: Modifier,
@@ -141,10 +142,11 @@ fun DailyCard(
     ImageWithFavIcon(
         recipeId = dailyRecipe.id,
         imageUrl = dailyRecipe.thumbnail_url,
+        isFavorite=dailyRecipe.isFavorite,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = onFavoriteButtonClicked,
         cardFormat = CardFormats.SQUARE,
-        isFavorite=dailyRecipe.isFavorite
+
     )
     Column (modifier = modifier) {
         Spacer(Modifier.height(16.dp))
