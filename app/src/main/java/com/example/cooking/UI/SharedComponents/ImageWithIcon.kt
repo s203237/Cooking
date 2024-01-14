@@ -1,5 +1,5 @@
 package com.example.cooking.UI.SharedComponents
-
+/*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -14,24 +14,66 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.cooking.model.RecipeCard
+
+@Composable
+fun ImageWithFavIcon(
+    recipeId: Int,
+    imageUrl: String,
+    isFavorite: Boolean,
+    onNavigateToRecipe: (Int) -> Unit,
+    onFavoriteButtonClicked: (RecipeCard) -> Unit,
+    cardFormat: CardFormats
+
+) {
+
+    Box(
+    ) {
+        val aspectRatioFavBox: Float = when (cardFormat) {
+            CardFormats.SQUARE -> 1f
+            CardFormats.LANDSCAPE -> 2f
+            CardFormats.PORTRAIT -> 1f
+        }
+
+        RecipeImage(
+            recipeId = recipeId,
+            imageUrl = imageUrl,
+            onNavigateToRecipe = onNavigateToRecipe,
+            cardFormat = cardFormat,
+        )
+        val recipeCard = RecipeCard() // what's this? A blank recipe card?
+        Box(
+            contentAlignment = Alignment.BottomEnd,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(aspectRatioFavBox)
+                .padding(16.dp)
+        ) {
+            FavButton(
+                onClick = {
+                    onFavoriteButtonClicked(recipeCard)
+                    //onFavoriteButtonClicked
+                },
+                isFavorite = isFavorite,
+
+                )
+        }
+
+    }
+}
 
 @Composable
 fun RecipeImage(
     recipeId: Int,
     imageUrl: String,
     onNavigateToRecipe: (Int) -> Unit,
+    //onFavoriteButtonClicked: (RecipeCard) -> Unit,
     cardFormat: CardFormats,
     sizeFraction: Float = 1f
 
@@ -53,16 +95,18 @@ fun RecipeImage(
                 .aspectRatio(aspectRatioImg)
                 .clickable {
                     onNavigateToRecipe(recipeId)
+                    //onFavoriteButtonClicked
                 },
             contentScale = ContentScale.Crop,
 
             )
     }
-}
 
+}
 @Composable
-fun FavButton(sizeFraction: Float = 0.15f) {
-    var isFavorite by remember { mutableStateOf(false) }
+fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> Unit) {
+//var isFavorite by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxWidth(sizeFraction)
@@ -74,13 +118,18 @@ fun FavButton(sizeFraction: Float = 0.15f) {
         contentAlignment = Alignment.Center,
     ) {
         IconButton(
-            onClick = { isFavorite = !isFavorite }
+            onClick = onClick
+
+
+            //onClick = {isFavorite = !isFavorite}
+
+
         ) {
             if (isFavorite)
                 Icon(
                     Icons.Filled.Favorite,
                     contentDescription = "Favourite Heart Filled",
-                    tint = Color.White
+                    tint = Color.Green
                 )
             else
                 Icon(
@@ -89,95 +138,52 @@ fun FavButton(sizeFraction: Float = 0.15f) {
                     tint = Color.White
                 )
         }
+           /* val icon = if (isFavorite) {
+                Icons.Default.Favorite
+            } else {
+                Icons.Default.FavoriteBorder
+            }
+            Icon(imageVector = icon, contentDescription = null)
+        }*/
     }
 }
-
-
-@Composable
-fun ImageWithFavIcon(
-    recipeId: Int,
-    imageUrl: String,
-    onNavigateToRecipe: (Int) -> Unit,
-    onFavoriteButtonClicked: (String) -> Unit,
-    cardFormat: CardFormats
-) {
-    Box(
-        // contentAlignment = Alignment.BottomEnd
-    ) {
-        val aspectRatioFavBox: Float = when (cardFormat) {
-            CardFormats.SQUARE -> 1f
-            CardFormats.LANDSCAPE -> 2f
-            CardFormats.PORTRAIT -> 1f
-        }
-
-//<<<<<<< HEAD
-        RecipeImage(
-            recipeId = recipeId,
-            imageUrl = imageUrl,
-            onNavigateToRecipe = onNavigateToRecipe,
-            cardFormat = cardFormat,
-        )
-//=======
-//        AsyncImage(
-//            model = imageUrl,
-//            contentDescription = null, //TODO give content description
-//            modifier = Modifier.testTag("itemImage")
-//                .fillMaxWidth()
-//                .aspectRatio(aspectRatioImg)
-//                .clickable {
-//                    onNavigateToRecipe(recipeId)
-//                },
-//            contentScale = ContentScale.Crop,
-//
-//            )
-//>>>>>>> main
-
-        Box(
-            contentAlignment = Alignment.BottomEnd,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(aspectRatioFavBox)
-                .padding(16.dp)
-        ) {
-            FavButton()
-        }
-
-    }
-}
-
-@Preview
+*/
+/*@Preview
 @Composable
 fun previewImageWithFavIconPortrait() {
     ImageWithFavIcon(
         0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+        isFavorite =false,
         {},
         {},
         CardFormats.PORTRAIT
     )
-}
+}*/
 
-@Preview
+/*@Preview
 @Composable
 fun previewImageWithFavIconLandscape() {
     ImageWithFavIcon(
         0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+       isFavorite = false,
         {},
         {},
         CardFormats.LANDSCAPE
     )
-}
+}*/
 
-@Preview
+/*@Preview
 @Composable
 fun previewImageWithFavIconSqr() {
     ImageWithFavIcon(
         0,
         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
+       isFavorite = false,
         {},
         {},
         CardFormats.SQUARE
     )
-}
+}*/
 

@@ -3,6 +3,7 @@ package com.example.cooking.UI.theme
 import androidx.compose.ui.graphics.Color
 
 val Green = Color(0xFFB8C75E)
+val LightGreen = Color(0xFFDAE0B4)
 val LightBeige = Color(0xFFF2ECE3)
 val Pink80 = Color(0xFFEFB8C8)
 

@@ -3,25 +3,24 @@ package com.example.cooking.UI.Search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.*
-import com.example.cooking.DependencyProvider
-import com.example.cooking.UI.RecipeList.ListAllRecipes
-import com.example.cooking.model.RecipeCard
 
 
 @Composable
-fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
+fun SearchBar(onSearch:(String) -> Unit/*onNavigateToRecipe:(Int)-> Unit*/) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
     val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
-    if(onSearching !=true){
+    if(!onSearching){
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -35,10 +34,10 @@ fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
                 onQueryChange = { newQuery ->
                     setSearchQuery(newQuery)
                 },
-                onSearch = { query ->
+                onSearch = onSearch/*{ query ->
                     setOnSearchValue(true)
 
-                },
+                },*/
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -56,19 +55,20 @@ fun SearchBar(onNavigateToRecipe:(Int)-> Unit) {
         }
 
     } else {
-        ListAllRecipes(query = searchQuery, onNavigateToRecipe = onNavigateToRecipe
-         )
+       // ListAllRecipesScreen(collectionName = searchQuery, onNavigateToRecipe = onNavigateToRecipe)
+        //ListAllRecipes(query = searchQuery, onNavigateToRecipe = onNavigateToRecipe
+        // )
     }
 
 }
 
-suspend fun callRecipeList(query: String): List<RecipeCard> {
+/*suspend fun callRecipeList(query: String): List<RecipeCard> {
     val listRepoCard = DependencyProvider.recipeCardsRepoSearch.fetchData(query)
     return listRepoCard
-}
+}*/
 
-@Preview
+/*@Preview
 @Composable
 fun PreviewSearchBar() {
     SearchBar({})
-}
+}*/

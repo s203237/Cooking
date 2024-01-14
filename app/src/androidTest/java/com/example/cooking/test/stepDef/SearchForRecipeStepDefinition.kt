@@ -1,13 +1,13 @@
 package com.example.cooking.test.stepDef
-
+/*
 import com.example.cooking.UI.Search.SearchBar
 import io.cucumber.java.en.And
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
-
+*/
 
 class SearchForRecipeStepDefinition {
-
+/*
     @Given("I am on the search page")
     fun theAppIsOpen() {
         // Implementation for opening the app
@@ -27,6 +27,6 @@ class SearchForRecipeStepDefinition {
     fun iShouldSeeTheResult() {
         // Implementation for verifying the result
     }
-
+*/
 }
 

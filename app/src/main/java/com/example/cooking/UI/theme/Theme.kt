@@ -16,6 +16,7 @@ import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
     primary = Green,
+    primaryContainer = LightGreen,
     secondary = Blue,
     onSecondary = LightBlue,
     tertiary = Yellow,
@@ -25,6 +26,7 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Green,
+    primaryContainer = LightGreen,
     secondary = Blue,
     onSecondary = LightBlue,
     tertiary = Yellow,

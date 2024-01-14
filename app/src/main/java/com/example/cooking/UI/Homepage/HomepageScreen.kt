@@ -1,60 +1,37 @@
 package com.example.cooking.UI.Homepage
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.model.FoodCategories
-import kotlin.random.Random
+import com.example.cooking.UI.Favorite.FavoritesScreenViewModel
 
 
 @Composable
 fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
-
     val viewModel: HomePageViewModel = viewModel()
+    val collections by viewModel.recipeCollections.collectAsState()
+    val dailyRecipe by viewModel.dailyRecipe.collectAsState()
+    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
+    val favorites by favoritesViewModel.favorites.collectAsState()
 
-    //val dailyRecipe by viewModel.dailyRecipe.collectAsState()
+    scrollableList(
+            modifier = Modifier
+                .background(color = Color(0xFFF2ECE3))
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp
+                ),
+            dailyRecipe = dailyRecipe,
+            listOfCollections = collections,
+            onNavigateToRecipe = onNavigateToRecipe,
+            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
 
-    //val dailyRecipe = RecipeData().loadRecipes()[0]
-
-    val recipeList1 by viewModel.recipeCards1.collectAsState()
-    val recipeList2 by viewModel.recipeCards2.collectAsState()
-    val recipeList3 by viewModel.recipeCards3.collectAsState()
-    val recipeList4 by viewModel.recipeCards4.collectAsState()
-
-    val food1 = FoodCategories(categoryName = "High protein vegan recipes", categoryListOfRecipe = recipeList1)
-    val food2 = FoodCategories(categoryName = "Vegan winter recipes", categoryListOfRecipe = recipeList2)
-    val food3 = FoodCategories(categoryName = "Vegan lentil recipes", categoryListOfRecipe = recipeList3)
-    val food4 = FoodCategories(categoryName = "Vegan slow cooker recipes", categoryListOfRecipe = recipeList4)
-
-
-    val listOfList: List<FoodCategories> = listOf(
-        food1, food2, food3, food4
     )
 
-    val randomNumber = (0..3).random()
-
-    var list = food1.getList()
-
-    when (randomNumber) {
-        0 -> list = food1.getList()
-        1 -> list = food2.getList()
-        2 -> list = food3.getList()
-        else -> list = food4.getList()
-    }
-
-    if(list.size > 0) {
-        val dailyRecipe = list[Random.nextInt(list.size)]
-
-        scrollableList(
-            dailyRecipe = dailyRecipe,
-            listOfList = listOfList,
-            onNavigateToRecipe =onNavigateToRecipe
-        )
-    }
-
-
-
 }
+
