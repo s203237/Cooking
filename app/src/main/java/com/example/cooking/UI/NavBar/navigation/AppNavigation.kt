@@ -17,7 +17,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -27,7 +26,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
@@ -48,7 +46,6 @@ import com.example.cooking.UI.Onboarding.OnBoardingPage
 import com.example.cooking.UI.Profile.ProfileBox
 import com.example.cooking.UI.RecipeList.ListAllRecipesScreen
 import com.example.cooking.UI.RecipePage.DisplayRecipeScreen
-import com.example.cooking.UI.Search.PreviewSearchBar
 import com.example.cooking.UI.Search.SearchBar
 import kotlinx.coroutines.flow.StateFlow
 
@@ -81,8 +78,8 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun AppNavigation(function: () -> Unit) {
-    val navController= rememberNavController()
+fun AppNavigation() {
+    val navController = rememberNavController()
     var displayBottomBar by remember { mutableStateOf(false) }
     var displayTopBar by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
@@ -112,7 +109,7 @@ fun AppNavigation(function: () -> Unit) {
                         )
                     },
                     navigationIcon = {
-                        if(currentRoute!= Screens.HomeScreen.name) {
+                        if (currentRoute != Screens.HomeScreen.name) {
                             IconButton(onClick = { navController.popBackStack() }) {
                                 Icon(
                                     imageVector = Icons.Default.ArrowBack,
@@ -147,7 +144,7 @@ fun AppNavigation(function: () -> Unit) {
                                     onClick = {
                                         selectedItem = item
                                         expanded = false
-                                         navController.navigate(route ="Screens.RecipeList.name/$item" )
+                                        navController.navigate(route = "Screens.RecipeList.name/$item")
 
 
                                     }
@@ -160,7 +157,7 @@ fun AppNavigation(function: () -> Unit) {
             }
         }, bottomBar = {
             if (displayBottomBar) {
-                NavigationBar{
+                NavigationBar {
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     val currentDestination = navBackStackEntry?.destination
                     listOfNavItem.forEach { navItem ->
@@ -168,7 +165,7 @@ fun AppNavigation(function: () -> Unit) {
                             selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
                             onClick = {
                                 navController.navigate(navItem.route) {
-                                   /* popUpTo(navController.graph.findStartDestination().id) {
+                                    /* popUpTo(navController.graph.findStartDestination().id) {
                                         saveState = true
                                     }*/
                                     launchSingleTop = true
@@ -192,13 +189,13 @@ fun AppNavigation(function: () -> Unit) {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screens.Onboarding.name,
+            startDestination = Screens.SearchScreen.name,
             modifier = Modifier
                 .padding(paddingValues)
         ) {
             composable(route = Screens.Onboarding.name) {
-               displayBottomBar=false
-                displayTopBar=false
+                displayBottomBar = false
+                displayTopBar = false
 
                 OnBoardingPage(
                     onNavigateToAccountCreation = {
@@ -211,8 +208,8 @@ fun AppNavigation(function: () -> Unit) {
             }
 
             composable(route = Screens.AccountCreation.name) {
-                displayBottomBar=false
-                displayTopBar=false
+                displayBottomBar = false
+                displayTopBar = false
                 AccountCreationPage(
                     onNavigateToHomeScreen = {
                         navController.navigate(
@@ -222,57 +219,65 @@ fun AppNavigation(function: () -> Unit) {
                 )
                 printBackStack(navController.currentBackStack, "Account creation page: ")
             }
+
             composable(route = Screens.HomeScreen.name) {
                 displayBottomBar = true
-                displayTopBar=true
+                displayTopBar = true
 
                 HomepageScreen(onNavigateToRecipe = { recipeId ->
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                 })
                 printBackStack(navController.currentBackStack, "Home screen")
             }
+
             composable(route = Screens.SearchScreen.name) {
                 displayBottomBar = true
                 displayTopBar = true
                 SearchBar(onSearch = { query ->
-                    navController.navigate(route = "Screens.RecipeList.name/$query"
+                    navController.navigate(
+                        route = "Screens.RecipeList.name/$query"
                     )
                 }
                 )
-           }
+            }
+
             composable(
                 route = Screens.Favorites.name,
                 //arguments = listOf(navArgument("collectionName") { type = NavType.StringType })
             ) {
                 displayBottomBar = true
-                displayTopBar=true
+                displayTopBar = true
                 FavoritesScreen(onNavigateToRecipe = { recipeId ->
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                })
+                }
+                )
                 printBackStack(navController.currentBackStack, "Favorites : ")
+            }
+
 
                 composable(route = Screens.Profile.name) {
-                displayBottomBar=true
-                displayTopBar=true
-                ProfileBox(onNavigateToHelpPage = {
-                    navController.navigate(
-                        route = Screens.HelpPage.name
+                    displayBottomBar = true
+                    displayTopBar = true
+                    ProfileBox(onNavigateToHelpPage = {
+                        navController.navigate(
+                            route = Screens.HelpPage.name
+                        )
+                    }
                     )
+                    printBackStack(navController.currentBackStack, "AboutUsPage: ")
                 }
-                )
-                printBackStack(navController.currentBackStack, "AboutUsPage: ")
-            }
-            composable(route = Screens.AboutUsPage.name) {
-                displayBottomBar=true
-                displayTopBar=true
-                AboutUsPage(onNavigateToPrivacyPolicy = {
-                    navController.navigate(
-                        route = Screens.PrivacyPolicy.name
+
+                composable(route = Screens.AboutUsPage.name) {
+                    displayBottomBar = true
+                    displayTopBar = true
+                    AboutUsPage(onNavigateToPrivacyPolicy = {
+                        navController.navigate(
+                            route = Screens.PrivacyPolicy.name
+                        )
+                    }
                     )
+                    printBackStack(navController.currentBackStack, "AboutUsPage: ")
                 }
-                )
-                printBackStack(navController.currentBackStack, "AboutUsPage: ")
-            }
 
                 composable(
                     route = "Screens.RecipeList.name/{collectionName}",
@@ -295,25 +300,25 @@ fun AppNavigation(function: () -> Unit) {
                     displayTopBar = true
                 }
 
-            composable(
-                route = "Screens.RecipeItem.name/{recipeId}",
-                arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
-            ) { backStackEntry ->
-                val recipeId = backStackEntry.arguments?.getString("recipeId")
-                if (recipeId != null) {
-                   DisplayRecipeScreen(recipeId)
-                    printBackStack(navController.currentBackStack, "Recipe Screen: ")
-                } else {
-                    Text("Recipe not found")
+                composable(
+                    route = "Screens.RecipeItem.name/{recipeId}",
+                    arguments = listOf(navArgument("recipeId") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    val recipeId = backStackEntry.arguments?.getString("recipeId")
+                    if (recipeId != null) {
+                        DisplayRecipeScreen(recipeId)
+                        printBackStack(navController.currentBackStack, "Recipe Screen: ")
+                    } else {
+                        Text("Recipe not found")
+                    }
+                    displayBottomBar = true
+                    displayTopBar = true
                 }
-                displayBottomBar=true
-                displayTopBar=true
-            }
+
         }
-
-
     }
 }
+
 
 fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: String) {
 
@@ -329,14 +334,6 @@ fun printBackStack(entryList : StateFlow<List<NavBackStackEntry>>, screenName: S
     }
 
 }
-
-    data class Tab(
-    val title: String,
-    val icon: ImageVector,
-    val rootRoute: Screens
-)
-
-
 
 
 

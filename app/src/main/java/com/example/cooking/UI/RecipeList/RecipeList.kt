@@ -82,10 +82,7 @@ fun RecipeItem(
         ImageWithFavIcon(
             recipeCard = recipe,
             onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = {
-                println("Favorite button clicked for recipeId: ${recipe.id}")
-                onFavoriteButtonClicked(recipe)
-            },
+            onFavoriteButtonClicked = onFavoriteButtonClicked,
             cardFormat = CardFormats.LANDSCAPE
         )
         Text(

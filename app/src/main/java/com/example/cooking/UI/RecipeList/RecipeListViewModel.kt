@@ -115,9 +115,9 @@ class RecipeListViewModel: ViewModel() {
                   favoritesDataSource
                       .getFavorites()
                       .collect { favorites ->
-                          _recipeCards.value = recipeCards.map { card ->
-                              Log.v("isFavorite", "${card.name}: ${favorites.any { it.id == card.id }}")
-                              RecipeCard(
+                          val cardListForFavMapping = _recipeCards.value.ifEmpty { recipeCards }
+                          _recipeCards.value = cardListForFavMapping.map { card ->
+                               RecipeCard(
                                   id = card.id,
                                   name = card.name,
                                   thumbnail_url = card.thumbnail_url,
@@ -125,7 +125,6 @@ class RecipeListViewModel: ViewModel() {
                                   isFavorite = favorites.any { it.id == card.id }
                               )
                           }
-
 
                       }
 
@@ -135,14 +134,14 @@ class RecipeListViewModel: ViewModel() {
 
         }
 
-        viewModelScope.launch(Dispatchers.IO) {
+      /*  viewModelScope.launch(Dispatchers.IO) {
             _buttonId.collect { buttonId ->
                 val updatedMap = mapOf(
                     buttonId to false
                 )
                 _buttonStates.value = updatedMap
             }
-        }
+        }*/
     }
 
 }
