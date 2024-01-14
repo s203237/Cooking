@@ -138,52 +138,13 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
                     tint = Color.White
                 )
         }
-           /* val icon = if (isFavorite) {
-                Icons.Default.Favorite
-            } else {
-                Icons.Default.FavoriteBorder
-            }
-            Icon(imageVector = icon, contentDescription = null)
-        }*/
+        /* val icon = if (isFavorite) {
+             Icons.Default.Favorite
+         } else {
+             Icons.Default.FavoriteBorder
+         }
+         Icon(imageVector = icon, contentDescription = null)
+     }*/
     }
 }
-
-/*@Preview
-@Composable
-fun previewImageWithFavIconPortrait() {
-    ImageWithFavIcon(
-        0,
-        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
-        isFavorite =false,
-        {},
-        {},
-        CardFormats.PORTRAIT
-    )
-}*/
-
-/*@Preview
-@Composable
-fun previewImageWithFavIconLandscape() {
-    ImageWithFavIcon(
-        0,
-        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
-       isFavorite = false,
-        {},
-        {},
-        CardFormats.LANDSCAPE
-    )
-}*/
-
-/*@Preview
-@Composable
-fun previewImageWithFavIconSqr() {
-    ImageWithFavIcon(
-        0,
-        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/spiced-lentil-spinach-pies-a1ae301.jpg",
-       isFavorite = false,
-        {},
-        {},
-        CardFormats.SQUARE
-    )
-}*/
 

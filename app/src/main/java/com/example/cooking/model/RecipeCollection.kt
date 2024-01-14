@@ -1,6 +1,7 @@
 package com.example.cooking.model
 
 import com.example.cooking.data.remote.CardDto
+import kotlinx.serialization.Serializable
 
 
 /*enum class ListType(listType: Int) {
@@ -19,6 +20,7 @@ data class RecipeCollection(
     val results: List<RecipeCard> = emptyList(),
     var type: ListType = ListType.VERTICAL
 )
+@Serializable
 data class RecipeCard(
     val id: Int = 0,
     val name: String = "defaultName",
@@ -26,7 +28,7 @@ data class RecipeCard(
     val tags: List<Tag> = emptyList(),
     var isFavorite: Boolean = false
 )
-
+@Serializable
 data class Tag(
     val name: String = "defaultName",
     val displayName: String = "defaultDisplay",
