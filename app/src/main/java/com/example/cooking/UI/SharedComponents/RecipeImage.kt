@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -127,13 +126,12 @@ fun FavButton(sizeFraction: Float = 0.15f, isFavorite: Boolean, onClick: () -> U
                 Icon(
                     Icons.Filled.Favorite,
                     contentDescription = "Favourite Heart Filled",
-                    tint = Color.Green
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             else
                 Icon(
                     Icons.Outlined.FavoriteBorder,
                     contentDescription = "Favourite Heart Outlined",
-                    tint = Color.White
                 )
         }
         /* val icon = if (isFavorite) {
