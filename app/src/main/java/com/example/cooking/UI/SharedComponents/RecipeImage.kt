@@ -24,9 +24,7 @@ import com.example.cooking.model.RecipeCard
 
 @Composable
 fun ImageWithFavIcon(
-    recipeId: Int,
-    imageUrl: String,
-    isFavorite: Boolean,
+    recipeCard: RecipeCard,
     onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     cardFormat: CardFormats
@@ -42,12 +40,12 @@ fun ImageWithFavIcon(
         }
 
         RecipeImage(
-            recipeId = recipeId,
-            imageUrl = imageUrl,
+            recipeId = recipeCard.id,
+            imageUrl = recipeCard.thumbnail_url,
             onNavigateToRecipe = onNavigateToRecipe,
             cardFormat = cardFormat,
         )
-        val recipeCard = RecipeCard() // what's this? A blank recipe card?
+        //val recipeCard = RecipeCard() // what's this? A blank recipe card?
         Box(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier
@@ -60,7 +58,7 @@ fun ImageWithFavIcon(
                     onFavoriteButtonClicked(recipeCard)
                     //onFavoriteButtonClicked
                 },
-                isFavorite = isFavorite,
+                isFavorite = recipeCard.isFavorite,
 
                 )
         }

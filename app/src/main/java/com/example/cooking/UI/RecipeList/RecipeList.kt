@@ -16,7 +16,6 @@
 package com.example.cooking.UI.RecipeList
 
 //import com.example.cooking.data.remote.mock_datasource.RecipeData
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -81,10 +80,8 @@ fun RecipeItem(
             .fillMaxWidth()
     ) {
         ImageWithFavIcon(
-            recipeId = recipe.id,
-            imageUrl = recipe.thumbnail_url,
+            recipeCard = recipe,
             onNavigateToRecipe = onNavigateToRecipe,
-            isFavorite = recipe.isFavorite,
             onFavoriteButtonClicked = {
                 println("Favorite button clicked for recipeId: ${recipe.id}")
                 onFavoriteButtonClicked(recipe)

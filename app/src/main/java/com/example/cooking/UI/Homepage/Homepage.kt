@@ -143,13 +143,10 @@ fun DailyCard(
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
 ) {
     ImageWithFavIcon(
-        recipeId = dailyRecipe.id,
-        imageUrl = dailyRecipe.thumbnail_url,
-        isFavorite=dailyRecipe.isFavorite,
+        recipeCard = dailyRecipe,
         onNavigateToRecipe = onNavigateToRecipe,
         onFavoriteButtonClicked = onFavoriteButtonClicked,
         cardFormat = CardFormats.SQUARE,
-
     )
     Column (modifier = modifier) {
         Spacer(Modifier.height(16.dp))
@@ -178,7 +175,7 @@ fun SingleCard(
         Spacer(Modifier.height(16.dp))
         RowItem(
             modifier = Modifier.fillMaxWidth(),
-            recipe = recipe,
+            recipeCard = recipe,
             onNavigateToRecipe = onNavigateToRecipe,
             onFavoriteButtonClicked = onFavoriteButtonClicked
         )
@@ -207,7 +204,7 @@ fun RecipeCardRow(
                     modifier = Modifier
                         //.height(200.dp)
                         .width(200.dp),
-                    recipe = recipe,
+                    recipeCard = recipe,
                     onNavigateToRecipe = onNavigateToRecipe,
                     onFavoriteButtonClicked = onFavoriteButtonClicked
                 )
@@ -221,7 +218,7 @@ fun RecipeCardRow(
 @Composable
 fun RowItem(
     modifier: Modifier,
-    recipe: RecipeCard,
+    recipeCard: RecipeCard,
     onNavigateToRecipe: (Int) -> Unit,
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     subtitle: String = ""
@@ -235,19 +232,17 @@ fun RowItem(
             //modifier = modifier
         ){
             ImageWithFavIcon(
-                recipeId = recipe.id,
-                imageUrl = recipe.thumbnail_url,
-                isFavorite = recipe.isFavorite,
+                recipeCard = recipeCard,
                 onNavigateToRecipe = onNavigateToRecipe,
                 onFavoriteButtonClicked = onFavoriteButtonClicked,
                 cardFormat = CardFormats.SQUARE
             )
-            Log.v("HP RecipeId", recipe.id.toString())
+            Log.v("HP RecipeId", recipeCard.id.toString())
         }
-        val recipeTitle = recipe.name
+        val recipeTitle = recipeCard.name
         println("this is the recipe title: $recipeTitle")
         Text(
-            text = recipe.name,
+            text = recipeCard.name,
             fontSize = 16.sp,
             modifier = Modifier
                 .fillMaxWidth(0.85f)

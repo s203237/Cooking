@@ -17,7 +17,8 @@ data class Recipe(
     val description: String = "Default description",
     val sections: List<Section> = listOf(),
     val instructions: List<Instructions> = listOf(),
-    var isFavorite: Boolean =false
+    var isFavorite: Boolean =false,
+    val tags: List<Tag> = emptyList()
 )
 
 @Serializable

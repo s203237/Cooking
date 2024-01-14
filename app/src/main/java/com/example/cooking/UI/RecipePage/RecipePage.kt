@@ -43,23 +43,22 @@ fun RecipePage(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+            val recipeCard = RecipeCard(
+                recipe.id,
+                recipe.name,
+                recipe.thumbnail_url,
+                emptyList(), //TODO NOT EMPTY LIST! PLACEHOLDER ONLY!
+                recipe.isFavorite
+            )
             ImageWithFavIcon(
-                recipeId = recipe.id,
-                imageUrl = recipe.thumbnail_url,
-                isFavorite = recipe.isFavorite,
+                recipeCard,
                 /*onNavigateToRecipe = { recipeId ->
                     navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
                 } ,*/
                 onNavigateToRecipe = {},
                 onFavoriteButtonClicked = {
                     onFavoriteButtonClicked(
-                        RecipeCard(
-                            recipe.id,
-                            recipe.name,
-                            recipe.thumbnail_url,
-                            emptyList(), //TODO NOT EMPTY LIST! PLACEHOLDER ONLY!
-                            recipe.isFavorite
-                        )
+                        recipeCard
                     )
                 },
                 cardFormat = CardFormats.PORTRAIT
