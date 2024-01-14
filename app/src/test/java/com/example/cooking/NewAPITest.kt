@@ -19,7 +19,7 @@ import org.junit.Assert.assertEquals
 
 class NewAPITest {
     suspend fun getDataCollectionAPI(): List<RecipeCard>{
-        val recipeCards = DependencyProvider.recipeCardRepo.fetchData("High-protein-vegan-meals")
+        val recipeCards = DependencyProvider.newrecipeCardRepo.fetchData("High-protein-vegan-meals")
         return recipeCards
     }
 /*
