@@ -4,12 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
+import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.data.remote.FetchParameters
 import com.example.cooking.model.Recipe
+import com.example.cooking.model.RecipeCard
+import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
@@ -38,10 +43,13 @@ class RecipePageViewModel: ViewModel() {
     val recipe = _recipe.asStateFlow()
 
     private val _recipeId = MutableStateFlow("")
+    private val _recipeCollections = MutableStateFlow<List<RecipeCollection>>(emptyList())
+    val recipeCollections = _recipeCollections.asStateFlow()
+
     fun updateRecipeId(newRecipeId: String) {
         _recipeId.value = newRecipeId
         val printoutValue = _recipeId.value
-        Log.v("RecipeId Trace","RecipeId in viewModel.updateRecipeId: $printoutValue")
+        Log.v("RecipeId Trace", "RecipeId in viewModel.updateRecipeId: $printoutValue")
     }
 
     init {
@@ -49,26 +57,40 @@ class RecipePageViewModel: ViewModel() {
             _recipeId.collect { newRecipeId ->
                 val parameters = FetchParameters(id = newRecipeId)
                 val recipeData = DependencyProvider.recipeRepo.fetchData(parameters)
-                val favorites = DependencyProvider.favoritesDataSource.getFavorites().first()
+                val favorites = favoritesDataSource.getFavorites().first()
                 val isFavorite = favorites.any { it.id == recipeData.id }
                 _recipe.value = recipeData.copy(isFavorite = isFavorite)
             }
         }
-    }
-/*
-    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
+
         viewModelScope.launch(Dispatchers.IO) {
-            DependencyProvider.favoritesDataSource.toggleFavorite(recipeCard)
-            // Fetch the updated recipe to ensure all data, including favorite status, is current
-            val updatedRecipe = DependencyProvider.recipeRepo.fetchData(FetchParameters(recipeCard.id.toString()))
+            favoritesDataSource
+                .getFavorites()
+                .collect {favorites ->
+                    val currentRecipe = _recipe.value
+                    val isFavorite = favorites.any { it.id == currentRecipe.id }
+                    _recipe.value = currentRecipe.copy(isFavorite = isFavorite)
+                    }
+                }
 
-            // Get the latest favorites to check if the recipe is still favorited
-            val favorites = DependencyProvider.favoritesDataSource.getFavorites().first()
-            val isFavorite = favorites.any { it.id == recipeCard.id }
-
-            _recipe.value = updatedRecipe.copy(isFavorite = isFavorite)
         }
-    }
 
- */
 }
+
+        /*fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
+            viewModelScope.launch(Dispatchers.IO) {
+                favoritesDataSource.toggleFavorite(recipeCard)
+                // Fetch the updated recipe to ensure all data, including favorite status, is current
+                val updatedRecipe =
+                    DependencyProvider.recipeRepo.fetchData(FetchParameters(recipeCard.id.toString()))
+
+                // Get the latest favorites to check if the recipe is still favorited
+                val favorites = favoritesDataSource.getFavorites().first()
+                val isFavorite = favorites.any { it.id == recipeCard.id }
+
+                _recipe.value = updatedRecipe.copy(isFavorite = isFavorite)
+            }
+        }
+
+    }
+}*/
