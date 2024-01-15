@@ -18,7 +18,10 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun SearchBar(onSearch:(String) -> Unit/*onNavigateToRecipe:(Int)-> Unit*/) {
+fun SearchBar(
+    onClick: (String) -> Unit,
+    onSearch:(String) -> Unit/*onNavigateToRecipe:(Int)-> Unit*/
+) {
     val (searchQuery, setSearchQuery) = remember { mutableStateOf("") }
     val (onSearching, setOnSearchValue) = remember { mutableStateOf(false) }
     if(!onSearching){
@@ -51,8 +54,11 @@ fun SearchBar(onSearch:(String) -> Unit/*onNavigateToRecipe:(Int)-> Unit*/) {
 
         ) {
             DisplayTextBoxes(
-               onClickButton = {text ->setSearchQuery(text)
-                   setOnSearchValue(true)}
+               onClickButton = onClick/* {
+                   text ->setSearchQuery(text)
+                   setOnSearchValue(true)
+               }*/
+
             )
         }
 

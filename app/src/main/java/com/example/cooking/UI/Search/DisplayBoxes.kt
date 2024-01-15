@@ -21,7 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun  DisplayTextBoxes(onClickButton: (String) -> Unit ) {
+fun  DisplayTextBoxes(
+    onClickButton: (String) -> Unit ) {
     val categoriesList = CategoriesList()
     val colorList = ColorList()
     Column (
@@ -66,7 +67,8 @@ fun CreateButton(color:Color, text: String,onClickButton: (String) -> Unit){
             fontSize = 18.sp
 
         )
-    }}
+    }
+}
 
 
 

@@ -192,7 +192,7 @@ fun AppNavigation() {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screens.SearchScreen.name,
+            startDestination = Screens.Onboarding.name,
             modifier = Modifier
                 .padding(paddingValues)
         ) {
@@ -236,7 +236,11 @@ fun AppNavigation() {
             composable(route = Screens.SearchScreen.name) {
                 displayBottomBar = true
                 displayTopBar = true
-                SearchBar(onSearch = { query ->
+                SearchBar(onClick = { item ->
+                    navController.navigate(route = "Screens.RecipeList.name/$item")
+
+                },
+                    onSearch = { query ->
                     navController.navigate(
                         route = "Screens.RecipeList.name/$query"
                     )
