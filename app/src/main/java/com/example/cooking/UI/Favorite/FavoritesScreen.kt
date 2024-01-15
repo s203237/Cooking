@@ -22,7 +22,7 @@ import com.example.cooking.UI.RecipeList.RecipeList
 fun FavoritesScreen(onNavigateToRecipe:(Int)->Unit) {
 
     Text(
-        text = "Favorites:",
+        text = "Favorites",
         fontSize = 22.sp,
         fontWeight = FontWeight.ExtraBold,
         textAlign = TextAlign.Right

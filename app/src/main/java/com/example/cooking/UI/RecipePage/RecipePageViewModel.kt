@@ -43,8 +43,7 @@ class RecipePageViewModel: ViewModel() {
     val recipe = _recipe.asStateFlow()
 
     private val _recipeId = MutableStateFlow("")
-    private val _recipeCollections = MutableStateFlow<List<RecipeCollection>>(emptyList())
-    val recipeCollections = _recipeCollections.asStateFlow()
+
 
     fun updateRecipeId(newRecipeId: String) {
         _recipeId.value = newRecipeId
