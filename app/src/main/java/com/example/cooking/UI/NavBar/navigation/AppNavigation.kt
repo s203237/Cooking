@@ -269,7 +269,13 @@ fun AppNavigation() {
                         navController.navigate(
                             route = Screens.HelpPage.name
                         )
+                    }, onNavigateToPrivacyPolicy = {
+                        navController.navigate(
+                            route = Screens.PrivacyPolicy.name
+                        )
                     }
+
+
                     )
                     printBackStack(navController.currentBackStack, "AboutUsPage: ")
                 }

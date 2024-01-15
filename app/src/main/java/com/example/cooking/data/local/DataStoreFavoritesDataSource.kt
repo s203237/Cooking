@@ -24,7 +24,7 @@ class DataStoreFavoritesDataSource(private val context: Context) : FavoritesData
             try {
                 Json.decodeFromString(jsonString)
             } catch (error: Throwable) {
-                emptyList<RecipeCard>()
+                emptyList()
             }
         }
     }
