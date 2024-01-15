@@ -161,7 +161,10 @@ fun FilterMenu(
 
                 item {
                     DisplayActionButtons(
-                        onApplyFilters = onApplyFilters,
+                        onApplyFilters = {
+                            onApplyFilters()
+                            isVisible = false
+                        },
                         onResetFilters = {
                             buttonStates = mapOf() // or your initial state
                         }
