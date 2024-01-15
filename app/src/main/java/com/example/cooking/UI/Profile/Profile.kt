@@ -45,10 +45,10 @@ import com.example.cooking.R
 
 
 @Composable
-fun MyPrivacy() {
+fun MyPrivacy(onNavigateToPrivacyPolicy: () -> Unit) {
         Button(
             modifier = Modifier.padding(70.dp),
-            onClick = {}
+            onClick = onNavigateToPrivacyPolicy
         ) {
             Text("Privacy", fontSize = 30.sp, fontWeight = FontWeight.Bold)
         }
@@ -70,7 +70,7 @@ fun MyHelp(onNavigateToHelpPage: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileBox(onNavigateToHelpPage:() -> Unit){
+fun ProfileBox(onNavigateToHelpPage:() -> Unit,onNavigateToPrivacyPolicy: () -> Unit){
 
 
 
@@ -141,6 +141,7 @@ fun ProfileBox(onNavigateToHelpPage:() -> Unit){
             verticalArrangement = Arrangement.SpaceEvenly) {
             MyHelp(onNavigateToHelpPage)
             Spacer(modifier = Modifier.height(10.dp))
+            MyPrivacy(onNavigateToPrivacyPolicy)
         }
 
 
@@ -158,7 +159,7 @@ fun ProfileButtons(){
         Spacer(modifier = Modifier.height(20.dp))
         MyHelp(onNavigateToHelpPage = {})
         Spacer(modifier = Modifier.height(20.dp))
-        MyPrivacy()}
+        MyPrivacy(onNavigateToPrivacyPolicy = {})}
 }
 
 
@@ -167,7 +168,7 @@ fun ProfileButtons(){
 @Preview
 @Composable
 fun PreviewBox(){
-    ProfileBox(onNavigateToHelpPage = {})
+    ProfileBox(onNavigateToHelpPage = {}, onNavigateToPrivacyPolicy = {})
 }
 
 
