@@ -106,6 +106,7 @@ fun FilterMenu(
     onApplyFilters: () -> Unit,
 ) {
     var isVisible by remember { mutableStateOf(false) }
+    var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
     Box(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.background)
@@ -147,7 +148,11 @@ fun FilterMenu(
                                label = button.tag.displayName,
                                tagName = button.tag.name,
                                //buttonStates = buttonStates,
-                               onSelect = onSelect
+                               isSelected = buttonStates[button.tag.name] ?: false,
+                               onSelect = { selected, tagName ->
+                                   buttonStates = buttonStates.toMutableMap().apply { put(tagName, selected) }
+                               }
+                               //onSelect = onSelect
                            )
 
                         }
@@ -157,7 +162,10 @@ fun FilterMenu(
                 item {
                     DisplayActionButtons(
                         onApplyFilters = onApplyFilters,
-                        onResetFilters = onResetFilters
+                        onResetFilters = {
+                            buttonStates = mapOf() // or your initial state
+                        }
+                        //onResetFilters = onResetFilters
                     )
                 }
             }
@@ -196,15 +204,17 @@ fun CreateFilterButton(
     label: String,
     tagName: String,
     //buttonStates: Map<Int, Boolean>,
+    isSelected: Boolean,
     onSelect: (Boolean, String) -> Unit
 ) {
-    var selected by rememberSaveable { mutableStateOf(false) }
+    //var selected by rememberSaveable { mutableStateOf(false) }
     Button(
         onClick = {
-            selected = !selected
-            onSelect(selected, tagName)
+            //selected = !selected
+            //onSelect(selected, tagName)
+            onSelect(!isSelected, tagName)
         },
-        colors = if (selected) getAccentButtonColors() else getDefaultButtonColors()
+        colors = if (isSelected) getAccentButtonColors() else getDefaultButtonColors()
     ) {
         Text(text = label)
     }
