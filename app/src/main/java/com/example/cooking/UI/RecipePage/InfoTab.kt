@@ -196,7 +196,11 @@ private fun DisplayRating(rating: Float) {
     val filledStar: Painter = painterResource(id = R.drawable.baseline_star_24)
     val halfStar: Painter = painterResource(id = R.drawable.baseline_star_half_24)
     val borderStar: Painter = painterResource(id = R.drawable.baseline_star_border_24)
-    val halfStarIndex = rating.roundToInt()
+
+    val scaledRating = (rating * starCount * 2).roundToInt() / 2f
+    val fullStars = scaledRating.toInt()
+    val halfStars = if (scaledRating - fullStars >= 0.5) 1 else 0
+    val emptyStars = starCount - fullStars - halfStars
 
     Row( modifier = Modifier
         .fillMaxWidth()
@@ -204,15 +208,23 @@ private fun DisplayRating(rating: Float) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
-        var currentStar: Painter = filledStar
-        for(i in 1..starCount) {
-            if (i == halfStarIndex)
-                currentStar = halfStar
-            else if (i > halfStarIndex)
-                currentStar = borderStar
-
+        for (i in 1..fullStars) {
             Icon(
-                currentStar,
+                painter = filledStar,
+                contentDescription = "rating star"
+            )
+        }
+
+        if (halfStars > 0) {
+            Icon(
+                painter = halfStar,
+                contentDescription = "rating star"
+            )
+        }
+
+        for (i in 1..emptyStars) {
+            Icon(
+                painter = borderStar,
                 contentDescription = "rating star"
             )
         }
