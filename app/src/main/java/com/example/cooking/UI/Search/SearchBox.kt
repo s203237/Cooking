@@ -12,7 +12,9 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,6 +59,10 @@ fun SearchBox(
             topStart = 20.dp,
             topEnd = 20.dp
             ),
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color.White,
+            textColor = MaterialTheme.colorScheme.onBackground
+        ),
         /*onValueChange = { newValue ->
             text = newValue
             onQueryChange(newValue)
