@@ -1,8 +1,6 @@
 package com.example.cooking.data.remote
 
-import okhttp3.Interceptor
-import okhttp3.Response
-
+/*
 class AuthenticationInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -17,4 +15,4 @@ class AuthenticationInterceptor : Interceptor {
 
         return chain.proceed(newRequest)
     }
-}
+}*/

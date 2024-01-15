@@ -38,7 +38,7 @@ fun SearchBox(
     query: String,
     onQueryChange: (String) -> Unit,
     onSearch: (String) -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     leadingIcon: ImageVector = Icons.Outlined.Search
 ) {
     var text by remember {
@@ -53,7 +53,10 @@ fun SearchBox(
             onQueryChange(it)
         },
         //value = text,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(
+            topStart = 20.dp,
+            topEnd = 20.dp
+            ),
         /*onValueChange = { newValue ->
             text = newValue
             onQueryChange(newValue)

@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -36,8 +37,8 @@ fun  DisplayTextBoxes(
             ) {
                 for (j in i until if (i + 2 <= categoriesList.size) i + 2 else categoriesList.size) {
                     if (j < colorList.size) {
-                        val color = Color(android.graphics.Color.parseColor(colorList[j]))
-                        CreateButton(color, categoriesList[j],onClickButton)
+                        val color = colorList[j] /*Color(android.graphics.Color.parseColor(colorList[j]))*/
+                        CreateButton(color, categoriesList[j].displayName,onClickButton)
                     }
                 }
             }
@@ -64,7 +65,8 @@ fun CreateButton(color:Color, text: String,onClickButton: (String) -> Unit){
     ) {
         Text(
             text = text,
-            fontSize = 18.sp
+            fontSize = 18.sp,
+            textAlign = TextAlign.Center
 
         )
     }

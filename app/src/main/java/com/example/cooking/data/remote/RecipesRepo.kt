@@ -29,13 +29,14 @@ class RecipesRepo(apiService: ApiService) : RecipeDataRepo<Recipe> {
     override suspend fun fetchData(parameters: FetchParameters): Recipe {
         try {
             return apiService.fetchRecipeById(parameters.id)
-        } catch (e: IOException) {
-            println("It broke :((( ${e.message}")
         } catch (e: HttpException) {
             val errorCode = e.code()
             val errorResponse = e.response()?.errorBody()?.string()
             println("HTTP error occurred - Code: $errorCode, Response: $errorResponse")
-        }
+
+        } catch (e: IOException) {
+            println("It broke :((( ${e.message}")
+          }
         return Recipe()
     }
 }
