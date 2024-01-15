@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Login
 
+//import coil.compose.rememberAsyncImagePainter
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -8,11 +9,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -45,9 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-//import coil.compose.rememberAsyncImagePainter
 import com.example.cooking.R
 import com.example.cooking.UI.NavBar.navigation.Navigator
 import com.example.cooking.UI.NavBar.navigation.Screens
@@ -77,7 +74,7 @@ fun MyHelp() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileBox() {
+fun ProfileBox(onNavigateToHelpPage: () -> Unit, onNavigationToPrivacyPolicy: () -> Unit) {
     val notification = rememberSaveable { mutableStateOf("") }
     if (notification.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
@@ -194,7 +191,7 @@ fun ProfileButtons() {
 @Preview
 @Composable
 fun PreviewBox() {
-    ProfileBox()
+  //  ProfileBox()
 }
 
 
