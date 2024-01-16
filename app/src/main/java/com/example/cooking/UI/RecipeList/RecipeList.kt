@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -37,6 +36,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.UI.SharedComponents.CardFormats
@@ -54,18 +54,18 @@ fun RecipeList(
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     modifier: Modifier
 ) {
-        Column(
-            /* modifier = Modifier
-            .background(color = Color(0xFFFFFBEF))*/
-        ) {
+    Column(
+        /* modifier = Modifier
+        .background(color = Color(0xFFFFFBEF))*/
+    ) {
 
-            LazyColumn {
-                items(recipeCards) { recipe ->
-                    RecipeItem(recipe, onNavigateToRecipe, onFavoriteButtonClicked)
-                    println("Composed recipe item")
-                }
+        LazyColumn {
+            items(recipeCards) { recipe ->
+                RecipeItem(recipe, onNavigateToRecipe, onFavoriteButtonClicked)
+                println("Composed recipe item")
             }
         }
+    }
 }
 @Composable
 fun RecipeItem(
@@ -112,64 +112,76 @@ fun FilterMenu(
             .background(color = MaterialTheme.colorScheme.background)
             .fillMaxWidth()
     ) {
-        LazyColumn(
+        Column(
             modifier = Modifier.padding(
-                start = 16.dp,
-                end = 16.dp,
+                start = 8.dp,
+                end = 8.dp,
                 bottom = 16.dp
             )
         ) {
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    Button(
-                        onClick = { isVisible = !isVisible },
-                        colors = getAccentButtonColors()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Button(
+                    onClick = { isVisible = !isVisible },
+                    colors = getAccentButtonColors()
 
-                    ) {
-                        Text(text = "filters")
-                    }
+                ) {
+                    Text(text = "filters")
                 }
             }
             if (isVisible) {
-                getFiltersList()
-                    .groupBy { it.tag.type } //note to self: becomes key of map created by grouping
-                    .forEach {
-                        item {
-                            Spacer(modifier = Modifier.height(16.dp))
-                            UppercaseHeadingMedium(heading = it.key)
+                Column {
+                    getFiltersList()
+                        .groupBy { it.tag.type } //note to self: becomes key of map created by grouping
+                        .forEach {
+                            Box(
+                                modifier = Modifier.padding(
+                                    start = 8.dp,
+                                    top = 16.dp
+                                )
+                            ){
+                                UppercaseHeadingMedium(heading = it.key)
+                            }
+
+                            DisplayButtonsInGrid(
+                                onSelect = onSelect,
+                                list = it.value,
+                                buttonStates = buttonStates
+                            )
                         }
-
-                        items(it.value) { button ->
-                           CreateFilterButton(
-                               //id = button.id,
-                               label = button.tag.displayName,
-                               tagName = button.tag.name,
-                               //buttonStates = buttonStates,
-                               isSelected = buttonStates[button.tag.name] ?: false,
-                               /*onSelect = { selected, tagName ->
-                                   buttonStates = buttonStates.toMutableMap().apply { put(tagName, selected) }
-                               }*/
-                               onSelect = onSelect
-                           )
-
-                        }
-                    }
+                }
 
 
-                item {
-                    DisplayActionButtons(
-                        onApplyFilters = {
-                            onApplyFilters()
-                            isVisible = false
-                        },
-                       /* onResetFilters = {
-                            buttonStates = mapOf() // or your initial state
-                        }*/
-                        onResetFilters = onResetFilters
+                DisplayActionButtons(
+                    onApplyFilters = {
+                        onApplyFilters()
+                        isVisible = false
+                    },
+                    onResetFilters = onResetFilters
+                )
+            }
+        }
+    }
+}
+@Composable
+fun DisplayButtonsInGrid(
+    onSelect: (Boolean,String) -> Unit,
+    list: List<FilterButton>,
+    buttonStates: Map<String, Boolean>
+) {
+    Column {
+        list.chunked(3).forEach { rowList ->
+            Row {
+                rowList.forEach { button ->
+                    CreateFilterButton(
+                        label = button.tag.displayName,
+                        tagName = button.tag.name,
+                        isSelected = buttonStates[button.tag.name] ?: false,
+                        onSelect = onSelect
                     )
+                    Spacer(modifier = Modifier.width(8.dp))
                 }
             }
         }
@@ -191,7 +203,7 @@ fun DisplayActionButtons(
         ) {
             Text(text = "apply")
         }
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(8.dp))
         Button(
             onClick = { onResetFilters() },
             colors = getAccentButtonColors()
@@ -210,16 +222,51 @@ fun CreateFilterButton(
     isSelected: Boolean,
     onSelect: (Boolean, String) -> Unit
 ) {
-    //var selected by rememberSaveable { mutableStateOf(false) }
-    Button(
-        onClick = {
-            //selected = !selected
-            //onSelect(selected, tagName)
-            onSelect(!isSelected, tagName)
-        },
-        colors = if (isSelected) getAccentButtonColors() else getDefaultButtonColors()
-    ) {
-        Text(text = label)
+    Box{
+        //var selected by rememberSaveable { mutableStateOf(false) }
+        Button(
+            onClick = {
+                //selected = !selected
+                //onSelect(selected, tagName)
+                onSelect(!isSelected, tagName)
+            },
+            colors = if (isSelected) getAccentButtonColors() else getDefaultButtonColors()
+        ) {
+            Text(text = label)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewFiltersMenu() {
+    var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
+    FilterMenu(
+        onSelect = {_,_ ->},
+        onResetFilters = { /*TODO*/ },
+        onApplyFilters = { /*TODO*/ },
+        buttonStates = buttonStates
+    )
+}
+@Preview
+@Composable
+fun LazyVerticalGridDemo() {
+    val list = listOf("potato", "caramel", "cats", "sparkles", "plants", "blue sky", "marshmallow")
+
+    Column {
+        list.chunked(3).forEach { rowList ->
+            Row(
+                modifier = Modifier.padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                rowList.forEach { item ->
+                    Button(onClick = {}) {
+                        Text(text = item)
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+            }
+        }
     }
 }
 
