@@ -35,7 +35,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -104,9 +103,10 @@ fun FilterMenu(
     onSelect: (Boolean,String) -> Unit,
     onResetFilters: () -> Unit,
     onApplyFilters: () -> Unit,
+    buttonStates: Map<String, Boolean>
 ) {
     var isVisible by remember { mutableStateOf(false) }
-    var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
+    //var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
     Box(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.background)
@@ -149,10 +149,10 @@ fun FilterMenu(
                                tagName = button.tag.name,
                                //buttonStates = buttonStates,
                                isSelected = buttonStates[button.tag.name] ?: false,
-                               onSelect = { selected, tagName ->
+                               /*onSelect = { selected, tagName ->
                                    buttonStates = buttonStates.toMutableMap().apply { put(tagName, selected) }
-                               }
-                               //onSelect = onSelect
+                               }*/
+                               onSelect = onSelect
                            )
 
                         }
@@ -165,10 +165,10 @@ fun FilterMenu(
                             onApplyFilters()
                             isVisible = false
                         },
-                        onResetFilters = {
+                       /* onResetFilters = {
                             buttonStates = mapOf() // or your initial state
-                        }
-                        //onResetFilters = onResetFilters
+                        }*/
+                        onResetFilters = onResetFilters
                     )
                 }
             }

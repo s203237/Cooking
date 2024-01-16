@@ -10,6 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -50,23 +53,26 @@ fun ListAllRecipesScreen(
     val cards by viewModel.recipeCards.collectAsState()
     //val filters by viewModel.filters.collectAsState()
     //val isSelected by viewModel.isSelected.collectAsState()
-    val buttonStates by viewModel.buttonStates.collectAsState()
-
+    //val buttonStates by viewModel.buttonStates.collectAsState()
+    var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
     Column {
         FilterMenu(
             // filtersList = filters,
             // buttonStates = buttonStates,
             onSelect = { isSelected, tag ->
+                buttonStates = buttonStates.toMutableMap().apply { put(tag, isSelected) }
                 viewModel.toggleFilter(isSelected, tag)
             },
 
             onResetFilters = {
+                buttonStates = mapOf()
                 viewModel.resetCardsList()
             },
 
             onApplyFilters = {
                 viewModel.setCardsByTags()
-            }
+            },
+            buttonStates = buttonStates
         )
 
         if (noResults) {
