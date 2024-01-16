@@ -192,7 +192,7 @@ fun AppNavigation() {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screens.SearchScreen.name,
+            startDestination = Screens.Onboarding.name,
             modifier = Modifier
                 .padding(paddingValues)
         ) {
