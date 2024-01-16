@@ -69,9 +69,8 @@ fun RecipeImage(
     recipeId: Int,
     imageUrl: String,
     onNavigateToRecipe: (Int) -> Unit,
-    //onFavoriteButtonClicked: (RecipeCard) -> Unit,
     cardFormat: CardFormats,
-    sizeFraction: Float = 1f
+    modifier: Modifier = Modifier.fillMaxWidth()
 
 ) {
     val aspectRatioImg: Float = when (cardFormat) {
@@ -81,7 +80,7 @@ fun RecipeImage(
     }
 
     Box(
-        Modifier.fillMaxWidth(sizeFraction)
+        modifier = modifier
     ) {
         AsyncImage(
             model = imageUrl,

@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -30,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -276,7 +278,6 @@ fun RecipeCardListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            //.padding(16.dp)
             .clickable {
                 onNavigateToRecipe(recipeCard.id)
             },
@@ -294,7 +295,9 @@ fun RecipeCardListItem(
                 imageUrl = recipeCard.thumbnail_url,
                 onNavigateToRecipe = onNavigateToRecipe,
                 cardFormat = CardFormats.SQUARE,
-                sizeFraction = 0.35f
+                modifier = Modifier
+                    .fillMaxWidth(0.35f)
+                    .clip(RoundedCornerShape(8.dp))
             )
             Spacer(Modifier.width(16.dp))
             Text(
