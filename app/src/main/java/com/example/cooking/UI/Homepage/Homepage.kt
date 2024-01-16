@@ -307,7 +307,6 @@ fun RecipeCardListItem(
 
         }
         FavButton(
-            sizeFraction = 0.35f,
             recipeCard = recipeCard,
             isFavorite = recipeCard.isFavorite,
             onFavoriteButtonClicked = { onFavoriteButtonClicked(recipeCard) }

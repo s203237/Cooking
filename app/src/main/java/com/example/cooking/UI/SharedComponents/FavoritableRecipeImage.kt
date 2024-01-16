@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -76,7 +77,7 @@ fun RecipeImage(
     val aspectRatioImg: Float = when (cardFormat) {
         CardFormats.SQUARE -> 1f
         CardFormats.LANDSCAPE -> 2f
-        CardFormats.PORTRAIT -> 0.92f
+        CardFormats.PORTRAIT -> 0.9f
     }
 
     Box(
@@ -100,7 +101,6 @@ fun RecipeImage(
 }
 @Composable
 fun FavButton(
-    sizeFraction: Float = 0.15f,
     isFavorite: Boolean,
     recipeCard: RecipeCard,
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
@@ -109,7 +109,8 @@ fun FavButton(
 
     Box(
         modifier = Modifier
-            .fillMaxWidth(sizeFraction)
+            .width(50.dp)
+            //.fillMaxWidth(0.35f)
             .aspectRatio(1f)
             .background(
                 color = MaterialTheme.colorScheme.primary,
