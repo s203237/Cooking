@@ -9,16 +9,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.cooking.UI.Favorite.FavoritesScreenViewModel
-
 
 @Composable
 fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
     val viewModel: HomePageViewModel = viewModel()
     val collections by viewModel.recipeCollections.collectAsState()
     val dailyRecipe by viewModel.dailyRecipe.collectAsState()
-    val favoritesViewModel: FavoritesScreenViewModel = viewModel()
+    //val favoritesViewModel: FavoritesScreenViewModel = viewModel()
     //val favorites by favoritesViewModel.favorites.collectAsState()
+    //val favoritesDataSource = DependencyProvider.favoritesDataSource
 
     scrollableList(
             modifier = Modifier
@@ -30,7 +29,7 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
             dailyRecipe = dailyRecipe,
             listOfCollections = collections,
             onNavigateToRecipe = onNavigateToRecipe,
-            onFavoriteButtonClicked = favoritesViewModel::onFavoriteButtonClicked
+            onFavoriteButtonClicked = viewModel::onFavoriteButtonClicked
 
     )
 

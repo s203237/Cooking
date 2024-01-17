@@ -1,5 +1,6 @@
 package com.example.cooking.UI.Homepage
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
