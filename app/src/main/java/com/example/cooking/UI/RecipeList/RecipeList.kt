@@ -58,13 +58,17 @@ fun RecipeList(
         /* modifier = Modifier
         .background(color = Color(0xFFFFFBEF))*/
     ) {
-
-        LazyColumn {
-            items(recipeCards) { recipe ->
-                RecipeItem(recipe, onNavigateToRecipe, onFavoriteButtonClicked)
-                println("Composed recipe item")
+        if(!recipeCards.isEmpty()) {
+            LazyColumn {
+                items(recipeCards) { recipe ->
+                    RecipeItem(recipe, onNavigateToRecipe, onFavoriteButtonClicked)
+                    println("Composed recipe item")
+                }
             }
+        } else{
+            Text(text = "No recipe found")
         }
+            
     }
 }
 @Composable
