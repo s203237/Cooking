@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cooking.R
@@ -78,23 +77,6 @@ fun PrepTab(recipe: Recipe) {
 
 @Composable
 private fun StepsList(list: List<Instructions>) {
-//    list.forEachIndexed { index, item ->
-//        val stepCount = index + 1
-//        Text(
-//            text = "Step $stepCount" ,
-//            fontWeight = FontWeight.Bold,
-//            fontSize = 16.sp,
-//        )
-//        Text(
-//            text = item,
-//            fontSize = 16.sp,
-//            modifier = Modifier
-//                .padding(
-//                    bottom = 16.dp
-//                )
-//        )
-//    }
-
     list.forEach { item ->
         Text(text =  "• ${item.display_text}",
             fontSize = 16.sp,

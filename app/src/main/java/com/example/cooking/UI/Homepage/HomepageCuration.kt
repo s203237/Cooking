@@ -27,23 +27,7 @@ class HomepageCuration {
         "sandwich"
     )
 
-    private val collectionListTypes = listOf (
-        ListType.VERTICAL,
-        ListType.HORIZONTAL,
-        ListType.HORIZONTAL,
-        ListType.CARD,
-        ListType.VERTICAL,
-        ListType.HORIZONTAL
-    )
-
     fun getCollectionsCount(): Int {
         return collectionNames.size;
-    }
-    fun loadCollectionNames(): List<String> {
-        return collectionNames
-    }
-
-    fun loadListTypes(): List<ListType> {
-        return collectionListTypes
     }
 }

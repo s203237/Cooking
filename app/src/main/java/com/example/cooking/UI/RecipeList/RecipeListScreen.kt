@@ -51,14 +51,9 @@ fun ListAllRecipesScreen(
     }
     val noResults by viewModel.noResults.collectAsState()
     val cards by viewModel.recipeCards.collectAsState()
-    //val filters by viewModel.filters.collectAsState()
-    //val isSelected by viewModel.isSelected.collectAsState()
-    //val buttonStates by viewModel.buttonStates.collectAsState()
     var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
     Column {
         FilterMenu(
-            // filtersList = filters,
-            // buttonStates = buttonStates,
             onSelect = { isSelected, tag ->
                 buttonStates = buttonStates.toMutableMap().apply { put(tag, isSelected) }
                 viewModel.toggleFilter(isSelected, tag)

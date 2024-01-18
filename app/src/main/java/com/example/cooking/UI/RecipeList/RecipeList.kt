@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 package com.example.cooking.UI.RecipeList
-
-//import com.example.cooking.data.remote.mock_datasource.RecipeData
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -54,10 +52,7 @@ fun RecipeList(
     onFavoriteButtonClicked: (RecipeCard) -> Unit,
     modifier: Modifier
 ) {
-    Column(
-        /* modifier = Modifier
-        .background(color = Color(0xFFFFFBEF))*/
-    ) {
+    Column {
         if(!recipeCards.isEmpty()) {
             LazyColumn {
                 items(recipeCards) { recipe ->
@@ -102,16 +97,14 @@ fun RecipeItem(
 }
 @Composable
 fun FilterMenu(
-    //filtersList: Set<String>,
-    //buttonStates: Map<Int, Boolean>,
     onSelect: (Boolean,String) -> Unit,
     onResetFilters: () -> Unit,
     onApplyFilters: () -> Unit,
     buttonStates: Map<String, Boolean>
 ) {
     var isVisible by remember { mutableStateOf(false) }
-    //var buttonStates by remember { mutableStateOf<Map<String, Boolean>>(mapOf()) }
-    Box(
+
+     Box(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.background)
             .fillMaxWidth()
@@ -219,21 +212,15 @@ fun DisplayActionButtons(
 
 @Composable
 fun CreateFilterButton(
-    //id: Int,
     label: String,
     tagName: String,
-    //buttonStates: Map<Int, Boolean>,
     isSelected: Boolean,
     onSelect: (Boolean, String) -> Unit
 ) {
     Box{
         //var selected by rememberSaveable { mutableStateOf(false) }
         Button(
-            onClick = {
-                //selected = !selected
-                //onSelect(selected, tagName)
-                onSelect(!isSelected, tagName)
-            },
+            onClick = { onSelect(!isSelected, tagName) },
             colors = if (isSelected) getAccentButtonColors() else getDefaultButtonColors()
         ) {
             Text(text = label)
@@ -273,24 +260,3 @@ fun LazyVerticalGridDemo() {
         }
     }
 }
-
-/*
-@Preview
-@Composable
-fun PreviewRecipeList(){
-    val modifier = Modifier
-        .padding(
-            start = 16.dp,
-            end = 16.dp
-        )
-        .background(color = MaterialTheme.colorScheme.background)
-        .fillMaxWidth()
-
-    val recipeCards = loadTestCardsWithTags()
-    CookingTheme {
-        RecipeList(recipeCards, onNavigateToRecipe = {}, modifier = modifier)
-    }
-
-}
-
-*/

@@ -45,8 +45,8 @@ class RecipeListViewModel: ViewModel() {
 
     private val _unfilteredRecipeCards = MutableStateFlow<List<RecipeCard>>(emptyList())
 
-   /* private val _filters = MutableStateFlow<Set<String>>(emptySet())
-    val filters = _filters.asStateFlow()*/
+    /* private val _filters = MutableStateFlow<Set<String>>(emptySet())
+     val filters = _filters.asStateFlow()*/
     private val filters = mutableSetOf<String>()
 
     private val _buttonStates = MutableStateFlow((1..getFiltersList().size).associateWith { false })
@@ -98,49 +98,36 @@ class RecipeListViewModel: ViewModel() {
     fun resetCardsList(){
         filters.clear()
         _recipeCards.value = _unfilteredRecipeCards.value
-        /*_tagsList.value = emptySet()
-        buttonStates.mapValues{ (_,_) -> false }
-        _recipeCards.value = _unfilteredRecipeCards.value*/
     }
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-              _collectionName.dropWhile { it.isEmpty() }.collect{newCollectionName ->
-                  val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(
+            _collectionName.dropWhile { it.isEmpty() }.collect{newCollectionName ->
+                val cardDtoList = DependencyProvider.recipeCollectionRepo.fetchData(
                     FetchParameters(
                         id = newCollectionName
                     )
                 ).results
-                  val recipeCards = createCardsFromDto(cardDtoList)
-                  _noResults.value = recipeCards.isEmpty()
-                  favoritesDataSource
-                      .getFavorites()
-                      .collect { favorites ->
-                          val cardListForFavMapping = _recipeCards.value.ifEmpty { recipeCards }
-                          _recipeCards.value = cardListForFavMapping.map { card ->
-                               RecipeCard(
-                                  id = card.id,
-                                  name = card.name,
-                                  thumbnail_url = card.thumbnail_url,
-                                  tags = card.tags,
-                                  isFavorite = favorites.any { it.id == card.id }
-                              )
-                          }
-                      }
-
-                //_recipeCards.value = recipeCards
+                val recipeCards = createCardsFromDto(cardDtoList)
+                _noResults.value = recipeCards.isEmpty()
+                favoritesDataSource
+                    .getFavorites()
+                    .collect { favorites ->
+                        val cardListForFavMapping = _recipeCards.value.ifEmpty { recipeCards }
+                        _recipeCards.value = cardListForFavMapping.map { card ->
+                            RecipeCard(
+                                id = card.id,
+                                name = card.name,
+                                thumbnail_url = card.thumbnail_url,
+                                tags = card.tags,
+                                isFavorite = favorites.any { it.id == card.id }
+                            )
+                        }
+                    }
             }
 
         }
 
-      /*  viewModelScope.launch(Dispatchers.IO) {
-            _buttonId.collect { buttonId ->
-                val updatedMap = mapOf(
-                    buttonId to false
-                )
-                _buttonStates.value = updatedMap
-            }
-        }*/
     }
 
 }

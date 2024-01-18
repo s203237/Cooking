@@ -95,9 +95,6 @@ private fun DisplayRecipeInfo(recipe: Recipe) {
     )
 
     Column {
-       // val prepTime =  formatTime(recipe.timeToCook.prepTime)
-       // val cookingTime = formatTime(recipe.timeToCook.cookTime)
-
         InfoRowWithIcons(
             icon1 = painterResource(id = R.drawable.outline_timer_24),
             infoType1 = "PREP", infoVal1 = recipe.prep_time_minutes.toString(),

@@ -91,7 +91,6 @@ fun RecipeImage(
                 .aspectRatio(aspectRatioImg)
                 .clickable {
                     onNavigateToRecipe(recipeId)
-                    //onFavoriteButtonClicked
                 },
             contentScale = ContentScale.Crop,
 

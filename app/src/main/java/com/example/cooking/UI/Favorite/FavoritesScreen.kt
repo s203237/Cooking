@@ -12,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -30,13 +29,6 @@ fun FavoritesScreen(onNavigateToRecipe:(Int)->Unit) {
 
     )
     val favoritesViewModel: FavoritesScreenViewModel = viewModel()
-
-   /* LaunchedEffect(key1 = collectionName){
-        viewModel.updateCollectionName(collectionName)
-    }
-
-
-    */
 
     val recipes by favoritesViewModel.favorites.collectAsState(emptyList())
     RecipeList(

@@ -1,6 +1,4 @@
 package com.example.cooking.UI.RecipePage
-
-//import com.example.cooking.data.remote.mock_datasource.RecipeData
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -52,26 +50,12 @@ fun RecipePage(
             )
             ImageWithFavIcon(
                 recipeCard,
-                /*onNavigateToRecipe = { recipeId ->
-                    navController.navigate(route = "Screens.RecipeItem.name/$recipeId")
-                } ,*/
                 onNavigateToRecipe = {},
                 onFavoriteButtonClicked = {onFavoriteButtonClicked(recipeCard) },
                 cardFormat = CardFormats.PORTRAIT
             )
             TabLayout(recipe = recipe)
         }
-       /* ImageWithFavIcon(recipe = recipe)
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            TabLayout(recipe = recipe)
-        }*/
-
-
-
     }
 }
 
@@ -120,10 +104,3 @@ fun TabLayout(recipe: Recipe) {
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun PreviewRecipePage() {
-//    val recipeList = RecipeData().loadRecipes()
-//    RecipePage(recipe = recipeList[2])
-//}

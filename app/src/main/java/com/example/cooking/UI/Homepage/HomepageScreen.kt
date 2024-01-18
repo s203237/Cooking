@@ -16,8 +16,6 @@ fun HomepageScreen(onNavigateToRecipe: (Int) -> Unit){
     val viewModel: HomePageViewModel = viewModel()
     val collections by viewModel.recipeCollections.collectAsState()
     val dailyRecipe by viewModel.dailyRecipe.collectAsState()
-   // val favoritesViewModel: FavoritesScreenViewModel = viewModel()
-    //val favorites by favoritesViewModel.favorites.collectAsState()
 
     scrollableList(
             modifier = Modifier
