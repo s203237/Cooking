@@ -1,5 +1,6 @@
 package com.example.cooking.UI.RecipeList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cooking.DependencyProvider
@@ -128,6 +129,16 @@ class RecipeListViewModel: ViewModel() {
 
         }
 
+    }
+    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                favoritesDataSource.toggleFavorite(recipeCard)
+                // refreshFavorites() // Refresh the favorites list after toggling the status
+            } catch (e: Exception) {
+                Log.e("FavoritesScreenViewModel", "Error toggling favorite: $e")
+            }
+        }
     }
 
 }

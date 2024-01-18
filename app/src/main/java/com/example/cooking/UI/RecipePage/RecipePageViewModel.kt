@@ -8,13 +8,10 @@ import com.example.cooking.DependencyProvider.favoritesDataSource
 import com.example.cooking.data.remote.FetchParameters
 import com.example.cooking.model.Recipe
 import com.example.cooking.model.RecipeCard
-import com.example.cooking.model.RecipeCollection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
@@ -73,6 +70,17 @@ class RecipePageViewModel: ViewModel() {
                 }
 
         }
+
+    fun onFavoriteButtonClicked(recipeCard: RecipeCard) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                favoritesDataSource.toggleFavorite(recipeCard)
+
+            } catch (e: Exception) {
+                Log.e("FavoritesScreenViewModel", "Error toggling favorite: $e")
+            }
+        }
+    }
 
 }
 
